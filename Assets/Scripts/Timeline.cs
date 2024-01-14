@@ -8,6 +8,7 @@ public class Timeline : IService
     public const int START_YEAR = 1600;
     public const int START_MONTH = 1;
     public const int START_DAY = 1;
+    public const float DAY_IN_REALTIME = 0.1f;
 
     private static readonly DateTime START_DATE = new DateTime(START_YEAR, START_MONTH, START_DAY);
     
@@ -18,7 +19,7 @@ public class Timeline : IService
     {
         Now = START_DATE;
         TimelineEvents = new();
-        ServiceLocator.GetService<Ticker>().AddTickable(MoveToNextDay, 0.1f);
+        ServiceLocator.GetService<Ticker>().AddTickable(MoveToNextDay, DAY_IN_REALTIME);
     }
 
     public void AddTimelineEvent(Action callback, DateTime eventTime) => TimelineEvents.Enqueue(callback, eventTime);
