@@ -57,7 +57,7 @@ namespace Services
         
         public UIDriver(UIRoot root) : base(root)
         {
-            ServiceLocator.RegisterService(this);
+            ServiceLocator.RegisterAsService(this);
             pointerData = new PointerEventData(EventSystem.current);
             Root = root.transform;
             

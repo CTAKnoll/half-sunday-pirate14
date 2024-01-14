@@ -36,7 +36,7 @@ namespace Services
             return serviceExists;
         }
         
-        public static void RegisterService<T>(T serviceObj) where T: class, IService
+        public static void RegisterAsService<T>(T serviceObj) where T: class, IService
         {
             ServiceCache.Add(typeof(T), serviceObj);
         }

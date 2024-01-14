@@ -8,19 +8,26 @@ public class Timeline : IService
     public const int START_YEAR = 1600;
     public const int START_MONTH = 1;
     public const int START_DAY = 1;
+
+    private static readonly DateTime START_DATE = new DateTime(START_YEAR, START_MONTH, START_DAY);
     
-    public DateTime Now;
+    public static DateTime Now;
     private PriorityQueue<Action, DateTime> TimelineEvents;
     
     public Timeline()
     {
-        Now = new DateTime(START_YEAR, START_MONTH, START_DAY);
+        Now = START_DATE;
         TimelineEvents = new();
         ServiceLocator.GetService<Ticker>().AddTickable(MoveToNextDay, 0.1f);
     }
 
     public void AddTimelineEvent(Action callback, DateTime eventTime) => TimelineEvents.Enqueue(callback, eventTime);
 
+    public static DateTime FromStart(int years, int months, int days = 0) =>
+        START_DATE.AddYears(years).AddMonths(months).AddDays(days);
+    public static DateTime FromNow(int years, int months, int days = 0) =>
+        Now.AddYears(years).AddMonths(months).AddDays(days);`
+    
     private void MoveToNextDay()
     {
         Now = Now.AddDays(1);
