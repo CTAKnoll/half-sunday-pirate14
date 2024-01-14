@@ -26,7 +26,7 @@ public class Timeline : IService
     public static DateTime FromStart(int years, int months, int days = 0) =>
         START_DATE.AddYears(years).AddMonths(months).AddDays(days);
     public static DateTime FromNow(int years, int months, int days = 0) =>
-        Now.AddYears(years).AddMonths(months).AddDays(days);`
+        Now.AddYears(years).AddMonths(months).AddDays(days);
     
     private void MoveToNextDay()
     {
