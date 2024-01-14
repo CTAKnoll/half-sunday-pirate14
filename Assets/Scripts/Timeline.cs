@@ -37,7 +37,7 @@ public class Timeline : IService
     private void TryDequeueTimelineEvent()
     {
         TimelineEvents.TryPeek(out Action callback, out DateTime eventTime);
-        if (eventTime >= Now)
+        if (eventTime <= Now)
         {
             TimelineEvents.Dequeue();
             callback.Invoke();
