@@ -41,6 +41,7 @@ public class Timeline : IService
         {
             TimelineEvents.Dequeue();
             callback.Invoke();
+            TryDequeueTimelineEvent();
         }
     }
 }
