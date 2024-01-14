@@ -28,7 +28,9 @@ namespace Services
         {
             bool serviceExists = ServiceCache.TryGetValue(typeof(T), out IService iService);
             if (iService != null)
+            {
                 service = (T) iService;
+            }
             else
                 service = null;
             return serviceExists;
