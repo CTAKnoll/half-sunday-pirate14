@@ -1,8 +1,193 @@
 ﻿title: Start
 ---
-This is a test yarn script
--> Wowie
--> Meh
--> Waga baga bobo
 
 ===
+
+title: MamboConcert
+---
+// Event? Narrator?
+A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide flowers to the event?
+    // commenting out if else, to not break things, because we don't have a tulip variable yet
+    // <<if $tulips < 100>>
+    -> Provide 100 tulips
+        // some nonsense like current tulip price (in guilders) times 100 and add that to their bank
+        Musician: Thanks!
+    -> Don't provide tulips
+        Musician: Darn, at least I've still got Monica by my side.
+    // <<else>>
+    -> That's a dumb name for a song. You'll never get any tulips out of me.
+        Musician: Harsh
+===
+
+// would be cool to do colored text, bold, shaking text, rainbow colored text, other visual gags or ways to make the text visually interesting
+
+
+// Set Historical Events 
+
+
+
+
+
+
+
+
+
+
+
+
+// News Tickers
+// sounds like a joke or reference copout but nice if some at least make sense or are funny without knowing the reference 
+
+
+title: NewsTickerRoundEarth
+---
+// when was Galileo and all that?
+Round Earth theory quickly squashed using facts and logic
+===
+
+title: NewsTickerDoorOpen
+---
+They left the door open for scribe's room. The scribe was sick today. I can just write anything here and they'll publish it. Greetings Mother! 
+===
+
+
+title: NewsTickerNothingInterestingHappenedToday
+---
+Nothing interesting happened today, or yesterday come to think of it. Is the age we live in just boring?
+===
+
+title: NewsTickerBoredApeClub
+---
+// or be worth it in the long run? are a long term investment?
+Uninterested monkeys added to local zoo. General reception has been poor but zookeeper assures residents they will improve with time.
+===
+
+title: NewsTickerNSync
+---
+Dutch investors are all in sync and suggest you buy, buy, buy. 
+===
+
+title: NewsTickerSuperlative
+---
+// find town name, Town's local
+Local seamstress voted most likely to die during childbirth.
+===
+
+title: NewsTickerCowSpots
+---
+// find town name, Town's 
+Local farmer discovers their cow sets new record for number of spots.
+===
+
+title: NewsTickerRainForecast
+---
+// find town name, Town's 
+One Dutch unit of rain expected this upcoming April. 
+===
+
+
+title: NewsTickerBallAndCup
+---
+// could also be wheel and stick game
+Newer version of ball and cup game not backwards compatible. 
+===
+
+title: NewsTickerChickenCrossingRoad
+---
+Local chicken crosses run, reason unknown.
+===
+
+title: NewsTickerHilariousPun
+---
+Rascally schoolchildren invent new game "Dutch Dutch Goose"
+===
+
+title: NewsTickerYetAnotherHilariousPun
+---
+// need another town name
+New Peter Pan theme park opens up in called "Nether Netherland".
+===
+
+
+title: NewsTickerIstanbulWasConstantinople
+---
+// full parody song probably out of scope
+Netherlands was Holland now it's Netherlands, not Holland.
+===
+
+
+title: NewsTickerFlag
+---
+// suck it frenchies
+Dutch flag the first and most famous country flag to be red, white, and blue. 
+===
+
+title: NewsTickerJumpman
+---
+Dutchman, Dutchman, Dutchman, Dutch boys up to something.  
+===
+
+title: NewsTickerWindmillWoodchuck
+---
+When wind mills the grain when will Mills wind up with a few mills?   
+===
+
+title: NewsTickerElements
+---
+Wind - mills, earth - thousands.  
+===
+
+
+title: NewsTickerHolland
+---
+Holland undergoes brief spider infestation which are a real menace. 
+===
+
+
+title: NewsTickerNeighborCountries
+---
+New German Prime Minister assures citizes that the Dutch stops here, amid border disputes. 
+===
+
+title: NewsTickerToungeTwister
+---
+Holland's Paul Finn gets ahauled in after causing a brall at the Jahl's ball. 
+===
+
+
+title: NewsTickerMetaJoke
+---
+This tulip stuff is kinda crazy, huh?
+===
+
+title: NewsTickerBarista
+---
+Barista convicted for using performance enhancing mugs
+=== 
+
+title: NewsTickerDaniel
+---
+// could add the sweary
+Dang Daniel, back at it again with the white clogs.
+=== 
+
+// personal pop ups
+
+// tickers - news and jokes
+// events - personal and general
+// 15 years over 15 minutes - 5 second long loops
+// ticker every ten seconds - can have some repeats - 80 ish
+// events - depends on how many unique (20-30 across both categories), may need more if not all seen within a given run 
+
+
+
+title: Conclusion
+---
+THE END
+
+Also this is based on a real events. Like this really happened. No really.
+// potential for Ferris Bueller end reference here but I think it's probably better without it
+===
+
+
+
