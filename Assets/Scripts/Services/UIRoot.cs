@@ -1,5 +1,3 @@
-using UI.Mission;
-using UI.Model.Templates;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -18,17 +16,12 @@ namespace Services
         public InputActionReference altHold;
         public InputActionReference scroll;
         public InputActionReference back;
-
-        public MissionSelectorTemplate MissionSelectorPrefabDEBUG;
-
+        
         private UIDriver Controller;
 
-        // The UIRoot inverts the normal controller/view power balance because it needs to bootstrap the UI system
         public void Awake()
         { 
             Controller = new UIDriver(this);
-            
-            Controller.AddChild(new MissionSelectorController(MissionSelectorPrefabDEBUG, transform));
         }
     }
 }
