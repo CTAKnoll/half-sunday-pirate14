@@ -17,7 +17,10 @@ namespace UI.Plants
         public TulipController(TulipView view, TulipData data) : base(view)
         {
             Data = data;
-            UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag);
+            Model.ScreenPos = View.transform.position;
+            Model.Color = data.Color;
+            UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
+            UpdateViewAtEndOfFrame();
         }
 
         private void OnHoldStarted()
@@ -38,7 +41,7 @@ namespace UI.Plants
             {
                 if (contr is PlotController plot)
                 {
-                    // Activate the data, then pass it to the plot
+                    plot.PlantTulip(Data);
                 }
 
                 if (contr is SimpleBucketController bucket)

@@ -6,6 +6,7 @@ namespace Plants
 {
     public class TulipData : Plantable
     {
+        private Timeline Timeline; 
         public enum TulipKind
         {
             SolidColor,
@@ -15,8 +16,14 @@ namespace Plants
         {
             Bulb, 
             Planted,
+            Shoot,
+            Bud,
+            Bloom,
             FullBloom,
+            Overripe,
             Dead,
+            Choking,
+            Picked
         }
 
         public Color Color { get; }
@@ -30,17 +37,33 @@ namespace Plants
             Color = color;
             Kind = kind;
             Stage = TulipStage.Bulb;
+
+            Timeline = ServiceLocator.GetService<Timeline>();
         }
         
-        public void ScheduleAdvanceStage(DateTime time)
+        public void Plant()
         {
-            ServiceLocator.GetService<Timeline>().AddTimelineEvent(AdvanceStage, time);
+            // The bloom is planted
+            AdvanceStage(); 
+            
+            // schedule the next few stages
+            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 1)); //shoot
+            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 2)); //bud
+            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 3)); //bloom
+            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 4)); //fullbloom
+            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 5)); //overripe
+            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 6)); //dead
         }
 
         private void AdvanceStage()
         {
-            if (Stage != TulipStage.Dead)
+            if (Stage < TulipStage.Dead)
                 Stage = (TulipStage)((int) Stage + 1);
+        }
+
+        public override string ToString()
+        {
+            return $"{Color.ToString()}\n{Enum.GetName(typeof(TulipStage), Stage)}\n{Enum.GetName(typeof(TulipKind), Kind)}";
         }
     }
 }

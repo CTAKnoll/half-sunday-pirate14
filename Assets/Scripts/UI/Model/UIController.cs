@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Services;
 using UI.Model;
 using UnityEngine;
+using Utils;
 
 // use this where the view isnt intended to change, or isnt a ui in the traditional sense (like root)
 // you almost always want the other class
@@ -100,6 +101,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
 
     protected ControllerDatabase ControllerDb;
     protected UIDriver UiDriver;
+    protected Ticker Ticker;
     protected TView View { get; private set; }
     protected TModel Model;
 
@@ -131,6 +133,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
             Debug.LogError($"InputService not found when instantiating {GetType()}");
 
         ControllerDb = ServiceLocator.GetService<ControllerDatabase>();
+        Ticker = ServiceLocator.GetService<Ticker>();
     }
 
     protected void UpdateViewAtEndOfFrame()
@@ -169,7 +172,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     public virtual void Close()
     {
         CloseChildren();
-        LogicalParent.RemoveChild(this);
+        LogicalParent?.RemoveChild(this);
         UiDriver.UnregisterForAll(View);
         View.Destroy();
     }
