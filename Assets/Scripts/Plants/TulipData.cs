@@ -1,6 +1,7 @@
 ﻿using System;
 using Services;
 using UnityEngine;
+using Utils;
 
 namespace Plants
 {
@@ -30,7 +31,8 @@ namespace Plants
         public TulipKind Kind { get; }
         public TulipStage Stage { get; private set; }
 
-        public bool CanHarvest => Stage == TulipStage.FullBloom;
+        public bool IsPlanted => Stage != TulipStage.Bulb;
+        public bool CanHarvest => Stage.IsOneOf(TulipStage.Bloom, TulipStage.FullBloom, TulipStage.Overripe);
 
         public TulipData(Color color, TulipKind kind)
         { 
@@ -44,7 +46,7 @@ namespace Plants
         public void Plant()
         {
             // The bloom is planted
-            AdvanceStage(); 
+            AdvanceStage();
             
             // schedule the next few stages
             Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 1)); //shoot
@@ -59,7 +61,11 @@ namespace Plants
         {
             if (Stage < TulipStage.Dead)
                 Stage = (TulipStage)((int) Stage + 1);
+            if (Stage > TulipStage.Dead)
+                Stage = (TulipStage)((int) Stage - 1);
         }
+        
+        
 
         public override string ToString()
         {
