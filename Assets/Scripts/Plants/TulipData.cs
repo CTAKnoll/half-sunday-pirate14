@@ -1,15 +1,18 @@
 ﻿using System;
 using Services;
+using UI.Containers;
+using UI.Plants;
 using UnityEngine;
 using Utils;
 
 namespace Plants
 {
-    public class TulipData : Plantable
+    public class TulipData : Plantable, Containable<TulipData, TulipController>
     {
         private Timeline Timeline; 
         public enum TulipKind
         {
+            Empty,
             SolidColor,
         }
 
@@ -34,6 +37,7 @@ namespace Plants
         public bool IsPlanted => Stage != TulipStage.Bulb;
         public bool CanHarvest => Stage.IsOneOf(TulipStage.Bloom, TulipStage.FullBloom, TulipStage.Overripe);
 
+        public static TulipData Empty = new (Color.clear, TulipKind.Empty);
         public TulipData(Color color, TulipKind kind)
         { 
             Color = color;
@@ -64,8 +68,12 @@ namespace Plants
             if (Stage > TulipStage.Dead)
                 Stage = (TulipStage)((int) Stage - 1);
         }
-        
-        
+
+        public TulipController Serve()
+        {
+            // TODO: Use templates to create a Tulip this way
+            return new TulipController(new TulipView(), this);
+        }
 
         public override string ToString()
         {
