@@ -5,6 +5,17 @@
 
 ===
 
+
+
+
+
+// Variables:
+// $bank_balance
+// $total_tulips
+// $red_tulips
+// 
+
+
 title: MamboConcert
 ---
 // Event? Narrator?
@@ -20,6 +31,7 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
     // <<else>>
     -> That's a dumb name for a song. You'll never get any tulips out of me.
         Musician: Harsh
+    // <<endif>>
 ===
 
 
@@ -46,6 +58,42 @@ A tall pale thin man in a tweed jacket sporting a curled brown mustache approach
 // funeral (I'm sorry for your loss package or I'm really sorry for your loss package; maybe better to make it like "I lost a loved one" and "I lost a person I truly and deeply loved" which costs more as if that's how it works), 
 
 
+title: PotentiallyCrazyGuy
+---
+Off in the distance you see a crazed man frantically running out you and yelling.
+    -> Run away
+    -> Wait and see what he wants 
+        Potentially Crazy Man: I am a tango dancer and I lose the rose I hold in my teeth while dancing. I am about to compete and I need a red tulip!
+            //<<if $red_tulips < 1>>
+                //<<jump NotEnoughTulips>>
+            //<<else>>
+                -> Sell one red tulip at 10 times market price
+                    THANK YOU!!!!!
+                    // $red_tulips -= 1
+                    // bank_balance += red_tulips_market_price * 10
+                -> Sell one red tulip at 100 times market price
+                    Thanks!
+                    // red_tulips -= 1
+                    // bank_balance += red_tulips_market_price * 100
+                -> Don't sell him a red tulip
+            //<<endif>>
+===
+
+title: TulipTony
+---
+Tulip Tony who lives a stone throwy from the town crony says your tulips are phony. 
+
+10 customers return their tulips. 
+
+// 10 customers return a random number of tulips so your tulip inventory goes up by that amount but you have to refund them so you pay them current market price (likely at a loss)
+    -> I hate Tulip Tony
+===
+
+title: TulipBandit
+---
+The town's tulip bandit steals some of your tulip inventory
+    -> Curse you tulip bandit!
+===
 
 
 title: TravelingShipguy
@@ -82,10 +130,14 @@ An older strange looking gentleman approaches you. He is haggard in appearance a
 
 
 
-// potential titles 
+// potential titles - could have
 // tulip czar, botanist, tulip enjoyer, tulip enthusiast, druid of the netherlands
 // holland and pollen kinda rhyme, do something with this - The King Pollen of Holland? I think the Pollen of Holland is funny but maybe too nonsensical
 // during this flower power hour 
+
+
+// not sure how we trigger the safety net, if total tulips < 1 and bank balance <= 0?
+
 
 title: SafetyNetNoTulipFarmerLeftBehind
 ---
@@ -93,6 +145,10 @@ title: SafetyNetNoTulipFarmerLeftBehind
 // you tulipless virgin
 // italian mafia offers your an absurdly predatory loan - another anacronistic thing because itlaian mafia probably didn't exist but it's funny so I'll allow it 
 ===
+
+
+
+
 
 title: TravelingClownFirstMeeting
 ---
@@ -148,7 +204,7 @@ title: TravelingClownSecondMeeting
                 Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
     <<else>>
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
-
+    <<endif>>
 
 // if else depending on if you let him spray you or not; clownspray1 == true; make sure to set earlier, check space adventure thing for example I believe TKTK
 
@@ -209,12 +265,44 @@ title: TravelingRick
 
 // would be cool to do colored text, bold, shaking text, rainbow colored text, other visual gags or ways to make the text visually interesting
 
+// Monopoly style / inspired incidents
+
+title: TownListener
+---
+Tulip farming is much more difficult than you thought it would be. Pay 200 guilders to the town listener while you complain.
+// bank_balance -= 200 guilders
+    -> I was told this tulips would be easy money
+===
+
+title: MostTulipyTulip
+---
+Your tulip wins the coveted "Most Tulipy Tulip" award. Collect the 500 guilders prize.
+    // bank_balance += 500 guilders
+    -> Yes!
+    -> Wait, what?
+        Don't look a gift horse in the mouth, tulip farmer 
+===
+
+title: HouseBurnsDown
+---
+Your house burned down due to a ill-thought out candle juggling competition. Collect 200 guilders from the insurance company
+    // bank_balance += 200
+===
+
+title: Doping
+---
+The local authorities discover that you have been using steroids. Pay the  300 guilders fine
+===
 
 // Set Historical Events - figure out gameplay impact, certain tulips no longer available for the time being 
 
     // the merchant now sells this type of bulb
 
 
+title: NotEnoughTulips
+---
+You do not have enough tulips.
+===
 
 
 
@@ -223,7 +311,9 @@ title: TravelingRick
 
 
 
-// News Tickers
+
+
+// Marquees
 // also do we want periods at the end of the news tickers, I'm leaning towards no because I believe that is the norm even if it is a sentence, I could be wrong though
 // sounds like a joke or reference copout but nice if some at least make sense or are funny without knowing the reference 
 
@@ -387,6 +477,17 @@ title: NewsTickerJoker
 It's not about the money counter it's about sending a message, with tulips, yeah
 ===
 
+title: NewsTickerTightLippedTulipThief
+---
+Tight-lipped tulip thief doesn't give two licks whose two tulips he too lifts
+===
+
+title: NewsTickerQuickShoutout
+---
+Her ye! Her ye! It is this humble scribes honor to announce the birth of the honorable princess Christina from the Royal Family Applegate 
+// or Applegate Royal Family?
+// or Royal Family of House Applegate?
+===
 
 // dril candle memes 2000 guilders on tulips
 
@@ -407,7 +508,7 @@ title: DutchCityJoke3
 Province competition in North Holland looking for the best city with two verbs gives Heerhugowaard what is now the Heerhugowaard award
 ===
 
-// Pott's pots pouts when tots draw lots of spots (motts?) 
+// Pott's pots pouts when tots draw lots of spots (motts?) // despite a lack of thoughts
 
 
 title: DutchCityJoke4
