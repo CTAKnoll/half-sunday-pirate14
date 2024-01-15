@@ -1,7 +1,8 @@
 public abstract class UIView<TModel> : UIInteractable where TModel : struct, IUIModel
 {
+    public UIInteractable interactable => this;
     public bool IsDestroyed { get; private set; }
-    
+
     public void Destroy()
     {
         gameObject.SetActive(false);

@@ -51,7 +51,7 @@ namespace Services
 
         private InputDevice currentInputDevice;
         public UIInputMode InputMode;
-        public Transform Root;
+        public UIRoot Root => View;
 
         private const string GAMEPAD_CONTROL_GROUP = "Gamepad";
         
@@ -59,8 +59,7 @@ namespace Services
         {
             ServiceLocator.RegisterAsService(this);
             pointerData = new PointerEventData(EventSystem.current);
-            Root = root.transform;
-            
+
             root.point.action.performed += OnPointerMove;
             root.tap.action.performed += OnTap;
             root.hold.action.performed += ToggleHold;
@@ -86,7 +85,6 @@ namespace Services
                 Cursor.visible = true;
             }
         }
-        
 
         public void RegisterForTap(UIInteractable target, Action onClick)
         {
@@ -328,7 +326,8 @@ namespace Services
         }
     }
 
-    public struct HoldData
+    public interface InteractionData { }
+    public struct HoldData : InteractionData
     {
         public Action OnHoldStart;
         public Action OnHoldFrame;
@@ -344,7 +343,7 @@ namespace Services
         }
     }
 
-    public struct FocusData
+    public struct FocusData : InteractionData
     {
         public Action OnFocusStart;
         public Action OnFocusEnd;
@@ -358,7 +357,7 @@ namespace Services
         }
     }
 
-    public struct ScrollData
+    public struct ScrollData : InteractionData
     {
         public Action OnScrollUp;
         public Action OnScrollDown;

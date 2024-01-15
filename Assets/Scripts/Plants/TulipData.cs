@@ -26,7 +26,7 @@ namespace Plants
         public bool CanHarvest => Stage == TulipStage.FullBloom;
 
         public TulipData(Color color, TulipKind kind)
-        {
+        { 
             Color = color;
             Kind = kind;
             Stage = TulipStage.Bulb;

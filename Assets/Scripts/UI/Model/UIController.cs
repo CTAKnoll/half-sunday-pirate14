@@ -12,7 +12,9 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     
     protected HashSet<IUIController> Children = new();
     protected UIActiveMutex ActivityMutex;
+    
     protected UIDriver UiDriver;
+    protected ControllerDatabase ControllerDb;
     protected TStaticView View { get; private set; }
 
     public bool IsActiveUI => ActivityMutex != null || LogicalParent is { IsActiveUI: true };
@@ -22,18 +24,22 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     {
         GetServices();
         View = view;
+        ControllerDb.Register(View, this);
     }
     
     public UIController(UIViewTemplate<TStaticView> template, Transform parent)
     {
         GetServices();
         View = GameObject.Instantiate(template.Prefab, parent == null ? UiDriver.Root.transform : parent);
+        ControllerDb.Register(View, this);
     }
     
     private void GetServices()
     {
         if (GetType() != typeof(UIDriver) && !ServiceLocator.TryGetService(out UiDriver))
             Debug.LogError($"InputService not found when instantiating {GetType()}");
+        
+        ControllerDb = ServiceLocator.GetService<ControllerDatabase>();
     }
     
     public virtual void Show()
@@ -91,6 +97,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     
     protected HashSet<IUIController> Children = new();
     protected UIActiveMutex ActivityMutex;
+
+    protected ControllerDatabase ControllerDb;
     protected UIDriver UiDriver;
     protected TView View { get; private set; }
     protected TModel Model;
@@ -102,6 +110,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     {
         GetServices();
         View = view;
+        
+        ControllerDb.Register(View, this);
         Model = model;
         View.UpdateViewWithModel(Model);
     }
@@ -109,6 +119,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     {
         GetServices();
         View = GameObject.Instantiate(template.Prefab, parent == null ? UiDriver.Root.transform : parent);
+        
+        ControllerDb.Register(View, this);
         Model = model;
         View.UpdateViewWithModel(Model);
     }
@@ -117,6 +129,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     {
         if (!ServiceLocator.TryGetService(out UiDriver))
             Debug.LogError($"InputService not found when instantiating {GetType()}");
+
+        ControllerDb = ServiceLocator.GetService<ControllerDatabase>();
     }
 
     protected void UpdateViewAtEndOfFrame()
