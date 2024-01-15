@@ -1,6 +1,8 @@
 ﻿title: Start
 ---
 
+// terminology: pop up -> incident; news marquee ticker thing -> marquee
+
 ===
 
 title: MamboConcert
@@ -11,6 +13,7 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
     // <<if $tulips < 100>>
     -> Provide 100 tulips
         // some nonsense like current tulip price (in guilders) times 100 and add that to their bank
+        // $tulips -= 100
         Musician: Thanks!
     -> Don't provide tulips
         Musician: Darn, at least I've still got Monica by my side.
@@ -19,12 +22,197 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
         Musician: Harsh
 ===
 
+
+title: TravelingTrader
+---
+
+A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
+
+"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
+
+// and benar EU4 mod for reference - lava rising
+
+// programming wise we may not want to hard code these and just have the two asking prices tulip_color_rate * 1.5 and by 3 multiplied by the amount of tulips they ask for which could also be random
+
+// could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
+// also probably need to factor in the stock ticker / market here
+    -> Ask for 200 guilders 
+    -> Ask for 100 guilders
+    // -> Give them 50 tulips for free; would be nice to have third option maybe
+===
+
+
+// Ideas for why people would need to buy tulips - it's ye olden times and everyone smells, spruce up house, quincenera, baptism, birthday, 
+// funeral (I'm sorry for your loss package or I'm really sorry for your loss package; maybe better to make it like "I lost a loved one" and "I lost a person I truly and deeply loved" which costs more as if that's how it works), 
+
+
+
+
+title: TravelingShipguy
+---
+
+A seabattered ship can be seen off in the distance. It flies the Spanish flag and arrives at port and only a few men get off the boat. 
+
+A weary Spanish sailor approaches you. He wears an elegant red and gold tunic with fine linen trowsers. Addorned on his head is a black morion with a bright red feather atop. He is accompanied by two Spanish knights in full armor.  
+
+// I'm unsure programmatically and with regard to Yarn, Unity etc how we can distinguish narration from dialogue spoken to the player
+
+
+"Greetings merchant, I have sailed long and far from Spain in search of flowers worthy of our Queens garden and bouqests. Do you possess anything that could rise and be presented before her royal highness?"
+
+// programming wise we may not want to hard code these and just have the two asking prices tulip_color_rate * 1.5 and by 3 multiplied by the amount of tulips they ask for 
+// could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
+    -> Ask for 200 guilders 
+    -> Ask for 100 guilders
+    -> Give them 50 tulips for free
+===
+
+
+title: ThisIsNotADril
+---
+An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
+
+"Hello, I spent two thousand guilders on tulips last month and my wife is mad at me. Could I please buy 200 tulips so I can make it up to her and say I'm sorry?"
+
+    -> Sure! 
+        // $tulips -= 200
+        // money += price for given tulip type * 200
+    -> I don't think this will help your situation (Refuse)
+===
+
+
+
+// potential titles 
+// tulip czar, botanist, tulip enjoyer, tulip enthusiast, druid of the netherlands
+// holland and pollen kinda rhyme, do something with this - The King Pollen of Holland? I think the Pollen of Holland is funny but maybe too nonsensical
+// during this flower power hour 
+
+title: SafetyNetNoTulipFarmerLeftBehind
+---
+
+// you tulipless virgin
+// italian mafia offers your an absurdly predatory loan - another anacronistic thing because itlaian mafia probably didn't exist but it's funny so I'll allow it 
+===
+
+title: TravelingClownFirstMeeting
+---
+// I would like wacky colors and text effects if possible for his dialogue
+// Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
+// blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
+// flumpy, boppy, bingy, winky, tinky, 
+// do we want a Team Rocket Rival tulip farmer that comes and taunts you?
+HELLO! I am Lester the Jester! You seem like an enterprising and learned type of individual. You also appear to be quite busy and have your hands full of more than just those tulips you are carrying. It is important in life to stop and smell the roses sometimes. Would you like to smell the rose on my jacket?
+    -> Smell his flower
+        In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you drop your tulips and stumble back, crushing them beneath your feet. (Lose 10 tulips)
+        // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
+        // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
+        "Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around"
+        // set clownspray1 to true
+
+        <<set $clownspray1 to true>>
+    -> Don't smell his flower
+        Awww, you're no fun.
+        // $clownsadness = true // jk might not need to tbh
+    
+===
+
+
+// semi obscure Simpsons reference
+title: FlowersByIrene
+---
+A short red-headed woman in billowy green gown and with a white neck frill approaches you. 
+
+"Hello sir, my name is Irene and I am opening a flower shop. Could I buy some tulips?"
+
+    -> Sell 20 tulips
+        // tulips -= 20
+        // bank += 20 * current tulip price of type sold
+    -> Sell 50 tulips
+        // she doesn't have enough money and finds you to be a greedy vendor and leaves; other incidents could work the opposite although then that just seems random if there is no strategy, hmmm, maybe narrative clue on who you can and cannot upsell
+    -> Refuse to sell her any tulips
+    // could have haggle / lie mechanic when it comes to price
+===
+
+
+title: TravelingClownSecondMeeting
+---
+
+// I would like wacky colors and text effects if possible for his dialogue
+    <<if $clownspray1 == true>>
+        Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?
+            -> Smell flower
+                <<set $clownspray2 to true>>
+                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your tulips in anger (Lose 5 tulips) // at your own foolishness
+                // <<$tulips -= 5>> 
+            -> Don't smell flower
+                Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
+    <<else>>
+        // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
+
+
+// if else depending on if you let him spray you or not; clownspray1 == true; make sure to set earlier, check space adventure thing for example I believe TKTK
+
+// Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
+
+===
+
+title: TravelingClownThirdMeeting
+---
+// I would like wacky colors and text effects if possible for his dialogue
+// Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
+// blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
+// flumpy, boppy, bingy, winky, tinky, 
+// do we want a Team Rocket Rival tulip farmer that comes and taunts you?
+HELLO! I am Lester the Jester! You seem like an enterprising and learned type of individual. You also appear to be quite busy and have your hands full of more than just those tulips you are carrying. It is important in life to stop and smell the roses sometimes. Would you like to smell the rose on my jacket?
+    -> Smell his flower
+        In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you drop your tulips and stumble back, crushing them beneath your feet. (Lose 10 tulips)
+        // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
+        // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
+        "Hey you're a real sport you know that! Hey maybe next time something good will happen. Well, see ya around"
+    -> Don't smell his flower
+        Awww, you're no fun.
+        // $clownsadness = true 
+    
+===
+
+title: LocalBoy
+---
+
+Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his partents said. "Mark has always been a very dull and thick boy" said his father, "I am very disappointed in him." he continued. "Mark is gifted in other areas" claims his mother but she did not provide any actual examples. Stay tuned for further updates.
+// maybe option is why is that an award, who votes for this, what are the criteria
+    -> Ok
+        // $tulips -= 1
+        Offer one tulip to the unlucky parents. (Give 1 tulip)
+    -> Wait, what?
+        Oh yeah Amsterdam conducts an annual census to determine who the dumbest child in the city. 
+        -> Oh, ok
+        -> That does not make any sense
+            Well it is part of Dutch culture so maybe you should be a bit more openminded and embrace this part of your heritage and community. 
+            -> Alright
+            -> Okay! I'm sorry
+                Are you actually sorry or are you just saying that?
+                    -> I'm actually sorry
+                        // $tulips -= 1
+                        Offer one tulip to show that you are really sorry (Give 1 tulip)
+                    -> No, I was just trying to appease you
+                        // $tulips -= 5
+                        Now you actually do feel bad (Give 5 tulip)
+===
+
+
+
+// idk if I want the limerick to be a news ticker or event, leaning towards event because lends itself for readibility, would be too long on ticker
+title: TravelingRick
+---
+    
+===
+
 // would be cool to do colored text, bold, shaking text, rainbow colored text, other visual gags or ways to make the text visually interesting
 
 
-// Set Historical Events 
+// Set Historical Events - figure out gameplay impact, certain tulips no longer available for the time being 
 
-
+    // the merchant now sells this type of bulb
 
 
 
@@ -36,6 +224,7 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
 
 
 // News Tickers
+// also do we want periods at the end of the news tickers, I'm leaning towards no because I believe that is the norm even if it is a sentence, I could be wrong though
 // sounds like a joke or reference copout but nice if some at least make sense or are funny without knowing the reference 
 
 
@@ -53,48 +242,48 @@ They left the door open for scribe's room. The scribe was sick today. I can just
 
 title: NewsTickerNothingInterestingHappenedToday
 ---
-Nothing interesting happened today, or yesterday come to think of it. Is the age we live in just boring?
+Nothing interesting happened today, or yesterday come to think of it. Is the age we live in just boring? I fear for tomorrow
 ===
 
 title: NewsTickerBoredApeClub
 ---
 // or be worth it in the long run? are a long term investment?
-Uninterested monkeys added to local zoo. General reception has been poor but zookeeper assures residents they will improve with time.
+Uninterested monkeys added to local zoo. General reception has been poor but zookeeper assures residents they will improve with time
 ===
 
 title: NewsTickerNSync
 ---
-Dutch investors are all in sync and suggest you buy, buy, buy. 
+Dutch investors are all in sync and suggest you buy, buy, buy 
 ===
 
 title: NewsTickerSuperlative
 ---
 // find town name, Town's local
-Local seamstress voted most likely to die during childbirth.
+Local seamstress voted most likely to die during childbirth
 ===
 
 title: NewsTickerCowSpots
 ---
 // find town name, Town's 
-Local farmer discovers their cow sets new record for number of spots.
+Local farmer discovers their cow sets new record for number of spots
 ===
 
 title: NewsTickerRainForecast
 ---
 // find town name, Town's 
-One Dutch unit of rain expected this upcoming April. 
+One Dutch unit of rain expected this upcoming April 
 ===
 
 
 title: NewsTickerBallAndCup
 ---
 // could also be wheel and stick game
-Newer version of ball and cup game not backwards compatible. 
+Newer version of ball and cup game not backwards compatible 
 ===
 
 title: NewsTickerChickenCrossingRoad
 ---
-Local chicken crosses run, reason unknown.
+Local chicken crosses run, reason unknown
 ===
 
 title: NewsTickerHilariousPun
@@ -105,26 +294,26 @@ Rascally schoolchildren invent new game "Dutch Dutch Goose"
 title: NewsTickerYetAnotherHilariousPun
 ---
 // need another town name
-New Peter Pan theme park opens up in called "Nether Netherland".
+New Peter Pan theme park opens up in called "Nether Netherland"
 ===
 
 
 title: NewsTickerIstanbulWasConstantinople
 ---
-// full parody song probably out of scope
-Netherlands was Holland now it's Netherlands, not Holland.
+// full parody song probably out of scope but too short and it may not make sense, hmmmmmm
+Netherlands was Holland now it's Netherlands, not Holland
 ===
 
 
 title: NewsTickerFlag
 ---
 // suck it frenchies
-Dutch flag the first and most famous country flag to be red, white, and blue. 
+Dutch flag the first and most famous country flag to be red, white, and blue 
 ===
 
 title: NewsTickerJumpman
 ---
-Dutchman, Dutchman, Dutchman, Dutch boys up to something.  
+Dutchman, Dutchman, Dutchman, Dutch boys up to something  
 ===
 
 title: NewsTickerWindmillWoodchuck
@@ -134,24 +323,24 @@ When wind mills the grain when will Mills wind up with a few mills?
 
 title: NewsTickerElements
 ---
-Wind - mills, earth - thousands.  
+Wind - mills, earth - thousands  
 ===
 
 
 title: NewsTickerHolland
 ---
-Holland undergoes brief spider infestation which are a real menace. 
+Holland undergoes brief spider infestation which are a real menace 
 ===
 
 
 title: NewsTickerNeighborCountries
 ---
-New German Prime Minister assures citizes that the Dutch stops here, amid border disputes. 
+New German Prime Minister assures citizes that the Dutch stops here, amid border disputes 
 ===
 
 title: NewsTickerToungeTwister
 ---
-Holland's Paul Finn gets ahauled in after causing a brall at the Jahl's ball. 
+Holland's Paul Saul gets hauled in after causing a brawl at the Jahl's ball 
 ===
 
 
@@ -168,8 +357,75 @@ Barista convicted for using performance enhancing mugs
 title: NewsTickerDaniel
 ---
 // could add the sweary
-Dang Daniel, back at it again with the white clogs.
+Dang Daniel, back at it again with the white clogs
 === 
+
+
+title: NewsTickerIHateMyLife
+---
+I hate my life
+=== 
+
+title: NewsTickerMyQuillWasStuck
+---
+// or like printing press, other old time typographic or whatever the word is, maybe funnier if nothing to do with old time printing press
+aaaaaaaaaaaaaaaaaaaaa sorry my quill was stuck
+===
+
+title: NewsTickerBand
+---
+I was in a band called Tulip Mania
+===
+
+title: NewsTickerOttomanEmpire
+---
+Dutch diplomats and ambassors continue to bump their shins while traveling to the Ottoman Empire 
+===
+
+title: NewsTickerJoker
+---
+It's not about the money counter it's about sending a message, with tulips, yeah
+===
+
+
+// dril candle memes 2000 guilders on tulips
+
+title: DutchCityJoke1
+---
+// or could "When polling citizens about the cities in Drenthe, reporter told to stop Assen"
+I don't know what the fifth city in Drenthe is, stop Assen.
+===
+
+title: DutchCityJoke2
+---
+Voorst city in Gelderland still being disputed
+===
+
+
+title: DutchCityJoke3
+---
+Province competition in North Holland looking for the best city with two verbs gives Heerhugowaard what is now the Heerhugowaard award
+===
+
+// Pott's pots pouts when tots draw lots of spots (motts?) 
+
+
+title: DutchCityJoke4
+---
+An outbreak of weeds within Thorn proving hard to remove
+===
+
+title: DutchCityJoke5
+---
+When asked to describe their mother's parenting style by using only a city name, a child says "Maastricht"
+===
+
+title: DutchCityJoke6
+---
+North Holland basketball Haarlem Gloobetrotters takes the Netherlands by storm with their talented feats of athleticism
+===
+
+// these legumes joke maybe or maybe subvert into leg um me walnuts or something idk
 
 // personal pop ups
 
@@ -181,6 +437,13 @@ Dang Daniel, back at it again with the white clogs.
 
 
 
+// Misc phrases to go somewhere
+
+
+// Buy bulbs? Buy bulk!
+
+
+
 title: Conclusion
 ---
 THE END
@@ -188,6 +451,3 @@ THE END
 Also this is based on a real events. Like this really happened. No really.
 // potential for Ferris Bueller end reference here but I think it's probably better without it
 ===
-
-
-
