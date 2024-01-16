@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8d8a564731c484fb00bf1893fe7399, type: 3}
   m_Name: TulipTemplate
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 4997620587237211492, guid: bb8654ff07e15cd4789375f33c0652d7, type: 3}
