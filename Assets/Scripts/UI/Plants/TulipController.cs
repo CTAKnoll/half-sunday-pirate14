@@ -76,15 +76,25 @@ namespace UI.Plants
                 {
                     // Give the data to the bucket, just like with plot
                 }
-                else if (contr is BulbInventoryController inventory) // we're dropping on the inventory
+                else if (contr is BulbInventoryController bulbInventory) // we're dropping on the inventory
                 {
-                    if (!ShopCheck()) // you cant purchase
+                    if (!bulbInventory.Server.HasEmpty() || !ShopCheck()) // you cant purchase
                     {
                         ReturnToOrigin();
                         return;
                     }
-                    inventory.AddItem(Data);
-                    Consumed?.Invoke(this, inventory);
+                    bulbInventory.AddItem(Data);
+                    Consumed?.Invoke(this, bulbInventory);
+                }
+                else if (contr is TulipInventoryController tulipInventory) // we're dropping on the inventory
+                {
+                    if (!tulipInventory.Server.HasEmpty() || !ShopCheck()) // you cant purchase
+                    {
+                        ReturnToOrigin();
+                        return;
+                    }
+                    tulipInventory.AddItem(Data);
+                    Consumed?.Invoke(this, tulipInventory);
                 }
                 
                 Close();
