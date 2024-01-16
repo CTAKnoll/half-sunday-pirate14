@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 572ca6c9ed6e4386acb66aac57028102, type: 3}
-  m_Name: ButtonTemplate
+  m_Script: {fileID: 11500000, guid: bc8d8a564731c484fb00bf1893fe7399, type: 3}
+  m_Name: TulipTemplate
   m_EditorClassIdentifier: 
-  Prefab: {fileID: -8654646667132009470, guid: 26f97a68298b7de4c94d9bface4d5614, type: 3}
+  Prefab: {fileID: 0}

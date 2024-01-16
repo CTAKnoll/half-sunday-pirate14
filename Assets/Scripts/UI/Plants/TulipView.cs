@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Plants
@@ -12,6 +13,11 @@ namespace UI.Plants
         {
             transform.position = model.ScreenPos;
             TulipIcon.color = model.Color;
+        }
+
+        public string ToString(TulipModel model)
+        {
+            return $"Pos:{transform.position} LocalPos:{transform.localPosition} ModelPos:{model.ScreenPos}";
         }
     }
 }

@@ -2,7 +2,12 @@ using UnityEngine;
 
 namespace UI.Model
 {
-    public class UIViewTemplate<TView> : ScriptableObject where TView : UIInteractable
+    public class UIViewTemplateBase : ScriptableObject
+    {
+        
+    }
+    
+    public class UIViewTemplate<TView> : UIViewTemplateBase  where TView : UIInteractable
     {
         public TView Prefab;
     }

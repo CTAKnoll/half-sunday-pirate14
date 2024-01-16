@@ -1,4 +1,5 @@
 ﻿using UI.Model;
+using UnityEngine;
 
 namespace UI.Containers
 {
@@ -7,6 +8,6 @@ namespace UI.Containers
                                             where TServedUI: IUIController
     {
         static T Empty { get; }
-        TServedUI Serve();
+        TServedUI Serve(Transform position);
     }
 }

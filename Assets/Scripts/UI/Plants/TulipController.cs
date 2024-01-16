@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Plants;
+using UI.Containers;
 using UI.Model;
+using UI.Model.Templates;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,10 +17,10 @@ namespace UI.Plants
         private Vector3 DragOffset;
         private Vector3 InitialPosition;
 
-        public TulipController(TulipView view, TulipData data) : base(view)
+        public TulipController(TulipTemplate template, Transform parent, TulipData data) : base(template, parent)
         {
             Data = data;
-            Model.ScreenPos = View.transform.position;
+            Model.ScreenPos = parent.transform.position;
             Model.Color = data.Color;
             UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
             UpdateViewAtEndOfFrame();
@@ -37,23 +40,53 @@ namespace UI.Plants
 
         private void OnHoldEnded()
         {
+            void ReturnToOrigin()
+            {
+                Model.ScreenPos = InitialPosition;
+                UpdateViewAtEndOfFrame();
+            }
+
+            bool ShopCheck()
+            {
+                if (Data.OwnedByPlayer) return true;
+                return Purchase();
+            }
+            
             if (IsOverBucket(out Bucket consumer) && ControllerDb.GetControllerFromView(consumer.interactable, out IUIController contr))
             {
-                if (contr is PlotController plot)
+                if (contr is PlotController plot) // we're dropping on a plot
                 {
+                    if (Data.Stage != TulipData.TulipStage.Bulb)
+                    {
+                        throw new Exception("How did you do this?!");
+                    }
+                    if (plot.IsPlanted || !ShopCheck()) // you cant grow there, or you cant purchase
+                    {
+                        ReturnToOrigin();
+                        return;
+                    }
+                    
                     plot.PlantTulip(Data);
                 }
-
-                if (contr is SimpleBucketController bucket)
+                else if (contr is SimpleBucketController bucket) // we're dropping on a simple bucket
                 {
-                    // Give the data to the plot
+                    // Give the data to the bucket, just like with plot
                 }
+                else if (contr is InventoryController inventory) // we're dropping on the inventory
+                {
+                    if (!ShopCheck()) // you cant purchase
+                    {
+                        ReturnToOrigin();
+                        return;
+                    }
+                    // Add TulipData to this inventory
+                }
+                
                 Close();
             }
             else
             {
-                Model.ScreenPos = InitialPosition;
-                UpdateViewAtEndOfFrame();
+                ReturnToOrigin();
             }
         }
         
@@ -72,6 +105,11 @@ namespace UI.Plants
                     return true;
             }
             return false;
+        }
+
+        private bool Purchase()
+        {
+            return true;
         }
     }
 }

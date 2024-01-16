@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Services;
 using UI.Containers;
 using UI.Plants;
@@ -9,7 +11,24 @@ namespace Plants
 {
     public class TulipData : Plantable, Containable<TulipData, TulipController>
     {
-        private Timeline Timeline; 
+        private Timeline Timeline;
+
+        public enum TulipColor
+        {
+            Green,
+            Red,
+            Blue,
+            Random,
+            Empty
+        }
+
+        private static Dictionary<TulipColor, Color> ColorMapping = new Dictionary<TulipColor, Color>
+        {
+            [TulipColor.Red] = Color.red,
+            [TulipColor.Blue] = Color.blue,
+            [TulipColor.Green] = Color.green,
+        };
+        
         public enum TulipKind
         {
             Empty,
@@ -30,19 +49,30 @@ namespace Plants
             Picked
         }
 
+        public enum TulipOwner
+        {
+            Player,
+            Shop
+        }
+
         public Color Color { get; }
         public TulipKind Kind { get; }
         public TulipStage Stage { get; private set; }
+        
+        public TulipOwner Owner { get; private set; }
 
+        public bool UseBulbIcon => Stage == TulipStage.Bulb;
+        public bool OwnedByPlayer => Owner == TulipOwner.Player;
         public bool IsPlanted => Stage != TulipStage.Bulb;
         public bool CanHarvest => Stage.IsOneOf(TulipStage.Bloom, TulipStage.FullBloom, TulipStage.Overripe);
 
-        public static TulipData Empty = new (Color.clear, TulipKind.Empty);
-        public TulipData(Color color, TulipKind kind)
+        public static TulipData Empty = new (TulipColor.Empty, TulipKind.Empty);
+        public TulipData(TulipColor color, TulipKind kind)
         { 
-            Color = color;
+            Color = AssignColor(color);
             Kind = kind;
             Stage = TulipStage.Bulb;
+            Owner = TulipOwner.Shop;
 
             Timeline = ServiceLocator.GetService<Timeline>();
         }
@@ -61,6 +91,21 @@ namespace Plants
             Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 6)); //dead
         }
 
+        private Color AssignColor(TulipColor color)
+        {
+            if (color == TulipColor.Random)
+            {
+                System.Random rnd = new ();
+                int randIndex = rnd.Next(ColorMapping.Values.Count);
+                return ColorMapping.Values.ToList()[randIndex];
+            }
+            if (color == TulipColor.Empty)
+            {
+                return Color.clear;
+            }
+            return ColorMapping[color];
+        }
+
         private void AdvanceStage()
         {
             if (Stage < TulipStage.Dead)
@@ -69,10 +114,9 @@ namespace Plants
                 Stage = (TulipStage)((int) Stage - 1);
         }
 
-        public TulipController Serve()
+        public TulipController Serve(Transform parent)
         {
-            // TODO: Use templates to create a Tulip this way
-            return new TulipController(new TulipView(), this);
+            return new TulipController(ServiceLocator.GetService<TemplateServer>().Tulip, parent, this);
         }
 
         public override string ToString()
