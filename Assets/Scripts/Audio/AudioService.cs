@@ -30,7 +30,7 @@ namespace Services
             
             var source = _audioSources[(int)sound.channel];
 
-            source.clip = sound.clip;
+            source.clip = sound.GetClip();
             source.volume = sound.volume;
             source.loop = sound.loop;
             source.Play();
@@ -43,7 +43,7 @@ namespace Services
 
             var source = _audioSources[(int)sound.channel];
 
-            source.PlayOneShot(sound.clip, sound.volume);
+            source.PlayOneShot(sound.GetClip(), sound.volume);
         }
 
         public enum Channel

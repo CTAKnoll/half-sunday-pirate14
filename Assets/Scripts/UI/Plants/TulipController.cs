@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Plants;
+using Services;
 using UI.Containers;
 using UI.Model;
 using UI.Model.Templates;
@@ -19,7 +20,8 @@ namespace UI.Plants
 
         private Vector3 DragOffset;
         private Vector3 InitialPosition;
-        
+
+        private AudioService _audio;
         public TulipController(TulipTemplate template, Transform parent, TulipData data) : base(template, parent)
         {
             Data = data;
@@ -27,12 +29,15 @@ namespace UI.Plants
             Model.Color = data.Color;
             UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
             UpdateViewAtEndOfFrame();
+            _audio = ServiceLocator.GetService<AudioService>();
         }
         
         private void OnHoldStarted()
         {
             InitialPosition = View.transform.position;
             DragOffset = InitialPosition - UiDriver.PointerPosition;
+
+            _audio.PlayOneShot(View.sfx_pick_up);
         }
 
         private void OnDrag()
@@ -47,6 +52,7 @@ namespace UI.Plants
             {
                 Model.ScreenPos = InitialPosition;
                 UpdateViewAtEndOfFrame();
+                _audio.PlayOneShot(View.sfx_plant_failed);
             }
 
             bool ShopCheck()

@@ -100,6 +100,7 @@ MonoBehaviour:
   - {fileID: 6719073967637022377}
   - {fileID: 6695811242163324084}
   - {fileID: 3908291881300614975}
+  sfx_place_item: {fileID: 11400000, guid: 1b9affc7b541b5c40b550bcc32ce75b7, type: 2}
 --- !u!1001 &804479552375640201
 PrefabInstance:
   m_ObjectHideFlags: 0

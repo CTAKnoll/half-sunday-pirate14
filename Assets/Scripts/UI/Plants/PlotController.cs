@@ -1,4 +1,5 @@
 ﻿using Plants;
+using Services;
 using Unity.VisualScripting;
 
 namespace UI.Plants
@@ -7,6 +8,8 @@ namespace UI.Plants
     {
         private TulipData Tulip;
         public bool IsPlanted => Tulip != null;
+
+        private AudioService _audio;
         
         public PlotController(PlotView view) : base(view)
         {
@@ -14,6 +17,7 @@ namespace UI.Plants
             Model.DebugText = "UNPLANTED";
             Ticker.AddTickable(ModifyDisplay, 0.1f);
             UpdateViewAtEndOfFrame();
+            _audio = ServiceLocator.GetService<AudioService>();
         }
 
         public void OnClick()
@@ -36,6 +40,8 @@ namespace UI.Plants
             Tulip = tulip;
             Tulip.OnDeath += () => Tulip = null;
             tulip.Plant();
+
+            _audio.PlayOneShot(View.sfx_planted);
         }
     }
 }

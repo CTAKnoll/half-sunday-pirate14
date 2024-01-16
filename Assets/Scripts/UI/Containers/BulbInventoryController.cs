@@ -11,16 +11,19 @@ namespace UI.Containers
 
         private Inventory.FilterFunction BulbInventoryFunction = data => data.OwnedByPlayer && data.UseBulbIcon;
 
+        private AudioService _audio;
         public BulbInventoryController(InventoryView view) : base(view)
         {
             ServiceLocator.RegisterAsService(this);
             Server = new Inventory(BulbInventoryFunction, View.InventorySlots);
+            _audio = ServiceLocator.GetService<AudioService>();
         }
 
         public void AddItem(TulipData data)
         {
             var newTulip = Server.AddItem(data);
             newTulip.Consumed += OnInventoryItemConsumed;
+            _audio.PlayOneShot(View.sfx_place_item);
         }
 
         private void OnInventoryItemConsumed(TulipController tulip, IUIController consumer)

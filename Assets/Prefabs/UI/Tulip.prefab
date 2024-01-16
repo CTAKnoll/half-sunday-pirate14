@@ -90,3 +90,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority: 2
   TulipIcon: {fileID: 5422511489868522943}
+  sfx_pick_up: {fileID: 11400000, guid: 94d7f385f79cc4c41a70b66a59ba3f9e, type: 2}
+  sfx_plant_failed: {fileID: 11400000, guid: 7340452a98a75624ea4aab5a5c67cce3, type: 2}

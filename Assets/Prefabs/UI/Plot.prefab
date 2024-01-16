@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Priority: 2
   DebugTextbox: {fileID: 1515650228234469041}
+  sfx_planted: {fileID: 11400000, guid: 97928e31ddd42c646808c394ecfae3bd, type: 2}
 --- !u!222 &1498577487999892385
 CanvasRenderer:
   m_ObjectHideFlags: 0

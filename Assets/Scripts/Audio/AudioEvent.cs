@@ -7,8 +7,13 @@ using UnityEngine.Audio;
 [CreateAssetMenu(menuName = "Audio/Audio Event")]
 public class AudioEvent : ScriptableObject
 {
-    public AudioClip clip;
-    public virtual AudioClip[] GetClips() => new AudioClip[] { clip };
+    [SerializeField]
+    private AudioClip _clip;
+
+    public virtual AudioClip GetClip()
+    {
+        return _clip;
+    }
 
     public bool loop;
 
@@ -16,14 +21,5 @@ public class AudioEvent : ScriptableObject
     public float volume = 1;
     public AudioMixerGroup mixerGroup;
     public AudioService.Channel channel;
-
-}
-
-[CreateAssetMenu(menuName = "Audio/Audio Multi Event")]
-public class AudioMultiEvent : AudioEvent
-{
-    public AudioClip[] AudioClips;
-    new public AudioClip clip => AudioClips[0];
-    public override AudioClip[] GetClips() => AudioClips;
 
 }
