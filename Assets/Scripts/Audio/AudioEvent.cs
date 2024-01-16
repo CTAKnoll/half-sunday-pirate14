@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 public class AudioEvent : ScriptableObject
 {
     public AudioClip clip;
+    public virtual AudioClip[] GetClips() => new AudioClip[] { clip };
 
     public bool loop;
 
@@ -16,11 +17,13 @@ public class AudioEvent : ScriptableObject
     public AudioMixerGroup mixerGroup;
     public AudioService.Channel channel;
 
-    [Min(1)]
-    [Tooltip("This is the maximum number of times this sound can be played concurrently before culled")]
-    public int maxConcurrent = 10;
+}
 
-    [Min(0f)]
-    [Tooltip("After this event has been triggerd, it cannot be triggered again until after this interval expires")]
-    public float minInterval = 0f;
+[CreateAssetMenu(menuName = "Audio/Audio Multi Event")]
+public class AudioMultiEvent : AudioEvent
+{
+    public AudioClip[] AudioClips;
+    new public AudioClip clip => AudioClips[0];
+    public override AudioClip[] GetClips() => AudioClips;
+
 }
