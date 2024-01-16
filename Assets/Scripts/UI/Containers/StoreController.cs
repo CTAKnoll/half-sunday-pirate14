@@ -1,4 +1,6 @@
-﻿using Plants;
+﻿using System.IO.Pipes;
+using Plants;
+using UI.Model;
 using UI.Plants;
 
 namespace UI.Containers
@@ -12,15 +14,30 @@ namespace UI.Containers
         public StoreController(StoreView view) : base(view)
         {
             Server = new Store(StoreInventoryFunction, View.StoreSlots);
+            Ticker.AddTickable(RefreshStore, 10f, true);
             RefreshStore();
         }
 
         private void RefreshStore()
         {
+            UnityEngine.Debug.Log("Refreshing!");
             while (Server.HasEmpty())
             {
-                Server.AddItem(new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.SolidColor));
+                var newTulip = Server.AddItem(new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.SolidColor));
+                newTulip.Consumed += OnStoreItemConsumed;
             }
+        }
+
+        private void OnStoreItemConsumed(TulipController tulip, IUIController consumer)
+        {
+            UnityEngine.Debug.Log(Server.Count);
+            Server.RemoveItem(tulip);
+            UnityEngine.Debug.Log(Server.Count);
+        }
+
+        private void Debug()
+        {
+            UnityEngine.Debug.Log(Server.Count);
         }
     }
 }

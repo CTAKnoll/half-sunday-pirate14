@@ -15,6 +15,29 @@ namespace UI.Containers
         private Transform[] Owners;
 
         public virtual int MaxSize => 3;
+        
+        public int Count 
+        {
+            get
+            {
+                int total = 0;
+                for (int i = 0; i < MaxSize; i++)
+                {
+                    if (Elements[i] != TulipData.Empty)
+                    {
+                        if (Controllers[i] == null)
+                            throw new Exception("ContainerServer out of sync!");
+                        total++;
+                    }
+                    else
+                    {
+                        if (Controllers[i] != null)
+                            throw new Exception("ContainerServer out of sync!");
+                    }
+                }
+                return total;
+            }
+        }
 
         public delegate bool FilterFunction(TulipData toAdd);
         private FilterFunction Filter;
@@ -44,6 +67,7 @@ namespace UI.Containers
             {
                 if (Elements[i] == TulipData.Empty)
                 {
+                    Debug.Log($"Serving {i} {toAdd}");
                     Elements[i] = toAdd;
                     Controllers[i] = toAdd.Serve(Owners[i]);
                     return Controllers[i];
@@ -60,6 +84,15 @@ namespace UI.Containers
             Elements[index] = TulipData.Empty;
             Controllers[index].Close();
             Controllers[index] = null;
+        }
+        
+        public bool RemoveItem(TulipController controller)
+        {
+            int index = Array.IndexOf(Controllers, controller);
+            if (index == -1) return false;
+            Elements[index] = TulipData.Empty;
+            Controllers[index] = null;
+            return true;
         }
         
         public bool IsEmpty(int index) => Elements[index] == TulipData.Empty;

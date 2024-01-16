@@ -1,5 +1,4 @@
 ﻿using UI.Model;
-using UnityEngine;
 
 namespace UI.Containers
 {
@@ -9,10 +8,11 @@ namespace UI.Containers
                                             where TContainable: Containable<TContainable, TServedUI>
     {
         int MaxSize { get; }
+        int Count { get; }
         TServedUI AddItem(TContainable toAdd);
         TServedUI GetItem(int index);
         void RemoveItem(int index);
-
+        bool RemoveItem(TServedUI controller);
         bool IsEmpty(int index);
         bool HasEmpty();
     }

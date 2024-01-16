@@ -116,6 +116,7 @@ namespace Plants
 
         public TulipController Serve(Transform parent)
         {
+            Debug.Log($"Serving Tulip at {parent.name}");
             return new TulipController(ServiceLocator.GetService<TemplateServer>().Tulip, parent, this);
         }
 

@@ -11,6 +11,9 @@ namespace UI.Plants
 {
     public class TulipController : UIController<TulipView, TulipModel>, UIPlantable, BucketConsumable
     {
+
+        public event Action<TulipController, IUIController> Consumed;
+        
         private TulipData Data;
         Plantable UIPlantable.PlantingData => Data;
 
@@ -67,6 +70,7 @@ namespace UI.Plants
                     }
                     
                     plot.PlantTulip(Data);
+                    Consumed?.Invoke(this, plot);
                 }
                 else if (contr is SimpleBucketController bucket) // we're dropping on a simple bucket
                 {
