@@ -21,6 +21,7 @@ namespace UI.Plants
             if (IsPlanted && Tulip.CanHarvest)
             {
                 Tulip.Harvest();
+                Tulip = null;
             }
         }
 
