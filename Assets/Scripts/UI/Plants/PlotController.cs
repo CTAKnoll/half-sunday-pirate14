@@ -10,6 +10,7 @@ namespace UI.Plants
         public PlotController(PlotView view) : base(view)
         {
             Model.DebugText = "UNPLANTED";
+            Ticker.AddTickable(ModifyDisplay, 0.1f, true);
             UpdateViewAtEndOfFrame();
         }
 
@@ -22,7 +23,7 @@ namespace UI.Plants
         public void PlantTulip(TulipData tulip)
         {
             Tulip = tulip;
-            Ticker.AddTickable(ModifyDisplay, 0.1f, true);
+            Tulip.OnDeath += () => Tulip = null;
             tulip.Plant();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Services;
 using UI.Containers;
 using UI.Plants;
@@ -67,6 +68,9 @@ namespace Plants
         public bool CanHarvest => Stage.IsOneOf(TulipStage.Bloom, TulipStage.FullBloom, TulipStage.Overripe);
 
         public static TulipData Empty = new (TulipColor.Empty, TulipKind.Empty);
+
+        public Action OnDeath;
+        
         public TulipData(TulipColor color, TulipKind kind)
         { 
             Color = AssignColor(color);
@@ -89,6 +93,7 @@ namespace Plants
             Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 4)); //fullbloom
             Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 5)); //overripe
             Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 6)); //dead
+            Timeline.AddTimelineEvent(Cleanup, Timeline.FromNow(0, 7)); // kill self
         }
 
         private Color AssignColor(TulipColor color)
@@ -112,6 +117,11 @@ namespace Plants
                 Stage = (TulipStage)((int) Stage + 1);
             if (Stage > TulipStage.Dead)
                 Stage = (TulipStage)((int) Stage - 1);
+        }
+
+        private void Cleanup()
+        {
+            OnDeath?.Invoke();
         }
 
         public TulipController Serve(Transform parent)
