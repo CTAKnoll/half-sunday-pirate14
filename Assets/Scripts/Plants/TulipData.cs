@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Services;
 using UI.Containers;
 using UI.Plants;
@@ -23,11 +22,18 @@ namespace Plants
             Empty
         }
 
-        private static Dictionary<TulipColor, Color> ColorMapping = new Dictionary<TulipColor, Color>
+        private static Dictionary<TulipColor, Color> TulipColorToColorMapping = new Dictionary<TulipColor, Color>
         {
             [TulipColor.Red] = Color.red,
             [TulipColor.Blue] = Color.blue,
             [TulipColor.Green] = Color.green,
+        };
+        
+        private static Dictionary<Color, string> ColorToStringMapping = new Dictionary<Color, string>
+        {
+            [Color.red] = "Red",
+            [Color.blue] = "Blue",
+            [Color.green] = "Green",
         };
         
         public enum TulipKind
@@ -60,7 +66,7 @@ namespace Plants
         public TulipKind Kind { get; }
         public TulipStage Stage { get; private set; }
         
-        public TulipOwner Owner { get; private set; }
+        public TulipOwner Owner { get; set; }
 
         public bool UseBulbIcon => Stage == TulipStage.Bulb;
         public bool OwnedByPlayer => Owner == TulipOwner.Player;
@@ -70,6 +76,8 @@ namespace Plants
         public static TulipData Empty = new (TulipColor.Empty, TulipKind.Empty);
 
         public Action OnDeath;
+
+        public TulipInventoryController TulipInventory;
         
         public TulipData(TulipColor color, TulipKind kind)
         { 
@@ -79,6 +87,7 @@ namespace Plants
             Owner = TulipOwner.Shop;
 
             Timeline = ServiceLocator.GetService<Timeline>();
+            ServiceLocator.TryGetService(out TulipInventory);
         }
         
         public void Plant()
@@ -87,13 +96,22 @@ namespace Plants
             AdvanceStage();
             
             // schedule the next few stages
-            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 1)); //shoot
-            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 2)); //bud
-            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 3)); //bloom
-            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 4)); //fullbloom
-            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 5)); //overripe
-            Timeline.AddTimelineEvent(AdvanceStage, Timeline.FromNow(0, 6)); //dead
-            Timeline.AddTimelineEvent(Cleanup, Timeline.FromNow(0, 7)); // kill self
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1)); //shoot
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 2)); //bud
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 3)); //bloom
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 4)); //fullbloom
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 5)); //overripe
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 6)); //dead
+            Timeline.AddTimelineEvent(this, Cleanup, Timeline.FromNow(0, 7)); // kill self
+        }
+
+        public void Harvest()
+        {
+            if (TulipInventory == null)
+                throw new Exception("Expected TulipInventory to exist!");
+            
+            Timeline.RemoveAllEvents(this);
+            TulipInventory.AddItem(this);
         }
 
         private Color AssignColor(TulipColor color)
@@ -101,14 +119,14 @@ namespace Plants
             if (color == TulipColor.Random)
             {
                 System.Random rnd = new ();
-                int randIndex = rnd.Next(ColorMapping.Values.Count);
-                return ColorMapping.Values.ToList()[randIndex];
+                int randIndex = rnd.Next(TulipColorToColorMapping.Values.Count);
+                return TulipColorToColorMapping.Values.ToList()[randIndex];
             }
             if (color == TulipColor.Empty)
             {
                 return Color.clear;
             }
-            return ColorMapping[color];
+            return TulipColorToColorMapping[color];
         }
 
         private void AdvanceStage()
@@ -121,6 +139,7 @@ namespace Plants
 
         private void Cleanup()
         {
+            Timeline.RemoveAllEvents(this);
             OnDeath?.Invoke();
         }
 
@@ -132,7 +151,7 @@ namespace Plants
 
         public override string ToString()
         {
-            return $"{Color.ToString()}\n{Enum.GetName(typeof(TulipStage), Stage)}\n{Enum.GetName(typeof(TulipKind), Kind)}";
+            return $"{ColorToStringMapping[Color]}\n{Enum.GetName(typeof(TulipStage), Stage)}\n{Enum.GetName(typeof(TulipKind), Kind)}";
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Utils
             MainThread = ServiceLocator.GetService<MainThreadScheduler>();
         }
 
-        public void AddTickable(Action func, float rateInSeconds, bool executeInMainThread = false)
+        public void AddTickable(Action func, float rateInSeconds, bool executeInMainThread = true)
         {
             Timer t = new Timer(rateInSeconds * 1000);
             t.Elapsed += (_, _) =>

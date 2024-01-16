@@ -37,7 +37,7 @@ namespace UI.Containers
             }
         }
 
-            public delegate bool FilterFunction(TulipData toAdd);
+        public delegate bool FilterFunction(TulipData toAdd);
         private FilterFunction Filter;
         
         public Inventory(FilterFunction filterFunc, List<UIInteractable> owners)
@@ -79,7 +79,6 @@ namespace UI.Containers
         public void RemoveItem(int index)
         {
             Elements[index] = TulipData.Empty;
-            Controllers[index].Close();
             Controllers[index] = null;
         }
         

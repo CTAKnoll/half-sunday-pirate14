@@ -1,4 +1,5 @@
 ﻿using Plants;
+using Unity.VisualScripting;
 
 namespace UI.Plants
 {
@@ -9,9 +10,18 @@ namespace UI.Plants
         
         public PlotController(PlotView view) : base(view)
         {
+            UiDriver.RegisterForTap(View, OnClick);
             Model.DebugText = "UNPLANTED";
-            Ticker.AddTickable(ModifyDisplay, 0.1f, true);
+            Ticker.AddTickable(ModifyDisplay, 0.1f);
             UpdateViewAtEndOfFrame();
+        }
+
+        public void OnClick()
+        {
+            if (IsPlanted && Tulip.CanHarvest)
+            {
+                Tulip.Harvest();
+            }
         }
 
         public void ModifyDisplay()

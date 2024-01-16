@@ -82,7 +82,6 @@ namespace UI.Containers
         public void RemoveItem(int index)
         {
             Elements[index] = TulipData.Empty;
-            Controllers[index].Close();
             Controllers[index] = null;
         }
         

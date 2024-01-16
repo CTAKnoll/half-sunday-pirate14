@@ -2,7 +2,7 @@
 
 namespace UI.Containers
 {
-    public class TMPStore : MonoBehaviour
+    public class StoreTuner : MonoBehaviour
     {
         public StoreView storeView;
         public void Start()

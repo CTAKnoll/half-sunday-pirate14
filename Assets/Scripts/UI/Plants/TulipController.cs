@@ -19,7 +19,7 @@ namespace UI.Plants
 
         private Vector3 DragOffset;
         private Vector3 InitialPosition;
-
+        
         public TulipController(TulipTemplate template, Transform parent, TulipData data) : base(template, parent)
         {
             Data = data;
@@ -28,7 +28,7 @@ namespace UI.Plants
             UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
             UpdateViewAtEndOfFrame();
         }
-
+        
         private void OnHoldStarted()
         {
             InitialPosition = View.transform.position;
@@ -76,14 +76,15 @@ namespace UI.Plants
                 {
                     // Give the data to the bucket, just like with plot
                 }
-                else if (contr is InventoryController inventory) // we're dropping on the inventory
+                else if (contr is BulbInventoryController inventory) // we're dropping on the inventory
                 {
                     if (!ShopCheck()) // you cant purchase
                     {
                         ReturnToOrigin();
                         return;
                     }
-                    // Add TulipData to this inventory
+                    inventory.AddItem(Data);
+                    Consumed?.Invoke(this, inventory);
                 }
                 
                 Close();
@@ -113,6 +114,7 @@ namespace UI.Plants
 
         private bool Purchase()
         {
+            Data.Owner = TulipData.TulipOwner.Player;
             return true;
         }
     }
