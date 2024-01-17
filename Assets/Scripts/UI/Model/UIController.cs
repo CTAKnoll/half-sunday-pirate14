@@ -127,7 +127,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         View.UpdateViewWithModel(Model);
     }
 
-    private void GetServices()
+    protected virtual void GetServices()
     {
         if (!ServiceLocator.TryGetService(out UiDriver))
             Debug.LogError($"InputService not found when instantiating {GetType()}");

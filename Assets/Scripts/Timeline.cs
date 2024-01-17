@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Services;
+using Unity.Collections;
+using Unity.VisualScripting.FullSerializer;
+using UnityEngine;
 using Utils;
 
 public class Timeline : IService
@@ -10,10 +14,10 @@ public class Timeline : IService
     public const int START_DAY = 1;
     public const float DAY_IN_REALTIME = 0.1f;
 
-    private static readonly DateTime START_DATE = new DateTime(START_YEAR, START_MONTH, START_DAY);
+    private static readonly DateTime START_DATE = new (START_YEAR, START_MONTH, START_DAY);
     
     public static DateTime Now;
-    private PriorityQueue<Action, DateTime> TimelineEvents;
+    private PriorityQueue<(object, Action), DateTime> TimelineEvents;
     
     public Timeline()
     {
@@ -22,7 +26,22 @@ public class Timeline : IService
         ServiceLocator.GetService<Ticker>().AddTickable(MoveToNextDay, DAY_IN_REALTIME);
     }
 
-    public void AddTimelineEvent(Action callback, DateTime eventTime) => TimelineEvents.Enqueue(callback, eventTime);
+    public void AddTimelineEvent(object owner, Action callback, DateTime eventTime) => TimelineEvents.Enqueue((owner, callback), eventTime);
+
+    public void RemoveAllEvents(object owner)
+    {
+        List<(object, Action)> toDequeue = new();
+        foreach(var timeEvent in TimelineEvents.UnorderedItems)
+        {
+            if(timeEvent.Element.Item1.Equals(owner))
+                toDequeue.Add(timeEvent.Element);
+        }
+
+        foreach (var removeEvent in toDequeue)
+        {
+            TimelineEvents.Remove(removeEvent, out _, out _);
+        }
+    }
 
     public static DateTime FromStart(int years, int months, int days = 0) =>
         START_DATE.AddYears(years).AddMonths(months).AddDays(days);
@@ -37,10 +56,10 @@ public class Timeline : IService
 
     private void TryDequeueTimelineEvent()
     {
-        if (TimelineEvents.TryPeek(out Action callback, out DateTime eventTime) && eventTime <= Now)
+        if (TimelineEvents.TryPeek(out (object, Action) payload, out DateTime eventTime) && eventTime <= Now)
         {
             TimelineEvents.Dequeue();
-            callback.Invoke();
+            payload.Item2.Invoke();
             TryDequeueTimelineEvent();
         }
     }

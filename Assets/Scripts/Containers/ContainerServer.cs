@@ -8,7 +8,12 @@ namespace UI.Containers
                                             where TContainable: Containable<TContainable, TServedUI>
     {
         int MaxSize { get; }
-        int AddItem(TContainable toAdd);
-        bool RemoveItem(int index);
+        int Count { get; }
+        TServedUI AddItem(TContainable toAdd);
+        TServedUI GetItem(int index);
+        void RemoveItem(int index);
+        bool RemoveItem(TServedUI controller);
+        bool IsEmpty(int index);
+        bool HasEmpty();
     }
 }

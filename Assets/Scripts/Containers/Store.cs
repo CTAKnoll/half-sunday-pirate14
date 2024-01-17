@@ -4,24 +4,61 @@ using System.Linq;
 using Plants;
 using Services;
 using UI.Plants;
+using UnityEngine;
 
 namespace UI.Containers
 {
     public class Store : IService, ContainerServer<TulipData, TulipController>
     {
-        public List<TulipData> Elements;
+        private TulipData[] Elements;
+        private TulipController[] Controllers;
+        private Transform[] Owners;
+
         public virtual int MaxSize => 3;
+        
+        public int Count 
+        {
+            get
+            {
+                int total = 0;
+                for (int i = 0; i < MaxSize; i++)
+                {
+                    if (Elements[i] != TulipData.Empty)
+                    {
+                        if (Controllers[i] == null)
+                            throw new Exception("ContainerServer out of sync!");
+                        total++;
+                    }
+                    else
+                    {
+                        if (Controllers[i] != null)
+                            throw new Exception("ContainerServer out of sync!");
+                    }
+                }
+                return total;
+            }
+        }
 
         public delegate bool FilterFunction(TulipData toAdd);
         private FilterFunction Filter;
         
-        public Store(FilterFunction filterFunc)
+        public Store(FilterFunction filterFunc, List<UIInteractable> owners)
         {
-            Elements = new(Enumerable.Repeat(TulipData.Empty, MaxSize));
+            Elements = new TulipData[MaxSize];
+            Controllers = new TulipController[MaxSize];
+            
+            Owners = new Transform[MaxSize];
+            for (int i = 0; i < MaxSize; i++)
+            {
+                Elements[i] = TulipData.Empty;
+                Controllers[i] = null;
+                Owners[i] = owners[i].transform;
+            }
+            
             Filter = filterFunc;
         }
 
-        public int AddItem(TulipData toAdd)
+        public TulipController AddItem(TulipData toAdd)
         {
             if (!Filter(toAdd))
                 throw new ArgumentException($"Added TulipData did not match filter function! Data: {toAdd}");
@@ -30,19 +67,34 @@ namespace UI.Containers
             {
                 if (Elements[i] == TulipData.Empty)
                 {
+                    Debug.Log($"Serving {i} {toAdd}");
                     Elements[i] = toAdd;
-                    return i;
+                    Controllers[i] = toAdd.Serve(Owners[i]);
+                    return Controllers[i];
                 }
             }
 
-            throw new IndexOutOfRangeException("All elements of Inventory are already full!");
+            throw new IndexOutOfRangeException("All elements of Store are already full!");
         }
 
-        public bool RemoveItem(int index)
+        public TulipController GetItem(int index) => Controllers[index];
+
+        public void RemoveItem(int index)
         {
-            var tmp = Elements[index];
             Elements[index] = TulipData.Empty;
-            return tmp == TulipData.Empty;
+            Controllers[index] = null;
         }
+        
+        public bool RemoveItem(TulipController controller)
+        {
+            int index = Array.IndexOf(Controllers, controller);
+            if (index == -1) return false;
+            Elements[index] = TulipData.Empty;
+            Controllers[index] = null;
+            return true;
+        }
+        
+        public bool IsEmpty(int index) => Elements[index] == TulipData.Empty;
+        public bool HasEmpty() => Elements.Contains(TulipData.Empty);
     }
 }
