@@ -542,10 +542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98d6722d60b047a3a48764819fd9ffe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryView: {fileID: 7330060737268222361}
---- !u!114 &7330060737268222361 stripped
+  InventoryView: {fileID: 741870650778243577}
+--- !u!114 &741870650778243577 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1918686070222116178, guid: 9a9a2744fe53237459b7135c5a5b77a4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8454020501857209650, guid: 9a9a2744fe53237459b7135c5a5b77a4, type: 3}
   m_PrefabInstance: {fileID: 9158370798300126411}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
