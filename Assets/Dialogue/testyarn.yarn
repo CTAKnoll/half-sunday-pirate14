@@ -1,6 +1,9 @@
 ﻿title: Start
 ---
 
+// set scene, rich royal guy who hears rumors of the rising tulip craze and decide to try your hand at it and make a greenhouse
+
+
 // terminology: pop up -> incident; news marquee ticker thing -> marquee
 
 ===
@@ -12,53 +15,63 @@
 // Variables:
 // $bank_balance
 // $total_tulips
-// $red_tulips
-// 
+
+
+
+title: TulipCompetition
+---
+// Needs: $player_tulip_type (what they submitted by dragging into box), $competitor_tulip_type1 (can be literally anything, does not have to have ever been in market), $competitor_tulip_type2
+
+$player_tulip_type finished first
+$competitor_tulip_type1 finished second
+$competitor_tulip_type2 finished third
+===
+
+// incident thematically and gameplay wise - not personal 
+// encourage the gamba
 
 
 title: MamboConcert
 ---
-// Event? Narrator?
-A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide flowers to the event?
-    // commenting out if else, to not break things, because we don't have a tulip variable yet
-    // <<if $tulips < 100>>
-    -> Provide 100 tulips
-        // some nonsense like current tulip price (in guilders) times 100 and add that to their bank
-        // $tulips -= 100
-        Musician: Thanks!
-    -> Don't provide tulips
-        Musician: Darn, at least I've still got Monica by my side.
-    // <<else>>
+// Needs: $random_tulip_type
+A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide $random_tulip_type tulips to the event?
+    -> Provide tulips
+        Musician: Thanks! (Market price for $random_tulip_type increases by 25%)
     -> That's a dumb name for a song. You'll never get any tulips out of me.
-        Musician: Harsh
-    // <<endif>>
+        Musician: Darn, at least I've still got Monica by my side.
 ===
 
 title: DanceBall
 ---
-// Needs: random tulip color, $random_tulip_color_tulips
+// identifiers: color, kind, stage, owner
+// kind - spotted, striped, etc 
+// Needs: $tulip_type, $rival_tulip_type
+// could also do just do color, kind, or type difference - king wore blue  
 
-You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest $random_tulip_color tulip on the lapel of your broadbrimmed black hat. 
+// asked about tulip: praise mine and diss anothers 
+
+You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest $tulip_type tulip on the lapel of your broadbrimmed black hat. 
     -> Jump into middle of the circle and wow the onlookers with your dance moves
-        The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising (Price of $random_tulip_color increases by 20%)
-    -> Talk to the gentleman standing in the corner
-        You speak to the gentleman who hates attending balls as his wife always wants to dance with him and he does not like dancing which makes her made. You suggest that a few tulips would cheer her up. (Sell 10 * $random_tulip_color)
-        // need $random_tulip_color_tulips (balance)
-    -> Trash talk the man currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
-        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of $random_tulip_color decreases by 20%)
+        The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising (Price of $tulip_type increases by 20%)
+    -> Trash talk the man with a $rival_tulip_type on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
+        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of $rival_tulip_type decreases by 20%)
             -> Double down
-                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of $random_tulip_color decreases by 5%)
+                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of $rival_tulip_type decreases by 5%)
                 // tempting to add a triple down option but probably best to not 
             -> Apologize
-                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of $random_tulip_color increases by 5%)
+                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of $rival_tulip_type increases by 5%)
 ===
 
 title: TravelingTrader
 ---
+// Needs: $market_price 
 
 A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
 
 "Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
+// how much are $random_tulip_type tulips worth?
+
+
 
 // and benar EU4 mod for reference - lava rising
 
@@ -66,9 +79,10 @@ A tall pale thin man in a tweed jacket sporting a curled brown mustache approach
 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
 // also probably need to factor in the stock ticker / market here
-    -> Ask for 200 guilders 
-    -> Ask for 100 guilders
-    // -> Give them 50 tulips for free; would be nice to have third option maybe
+    -> 2 * $market_price (Increase market price of $random_tulip_type by 10%)
+    -> 4 * $market_price (Increase market price of $random_tulip_type by 20%)
+        // 25 chance to fail for 2 times markup, 50% chance to fail for 4 times markup 
+    -> $market_price (Increase market price of $random_tulip_type by 5%)
 ===
 
 
@@ -76,49 +90,76 @@ A tall pale thin man in a tweed jacket sporting a curled brown mustache approach
 // funeral (I'm sorry for your loss package or I'm really sorry for your loss package; maybe better to make it like "I lost a loved one" and "I lost a person I truly and deeply loved" which costs more as if that's how it works), 
 
 
+
+
+title: RainForecast
+---
+// Needs: all_tulips_market_price
+One Dutch unit of rain expected this upcoming April
+// One Dutch unit of liquid measures worth of rain?
+    -> Ok (All tulips increase in market price by 3%)
+    // $all_tulips_market_price += 3%
+===
+
+title: WinterSnap
+---
+// Needs: $all_tulips_market_price
+An unexpectedly cold winter freeze kills many farmers tulip crops. Since you have a greenhouse, none of your inventory is affected. The price of all tulips has increased by 3%
+    -> Finally someting separating the poor tulip farmers from the smart tulip farmers
+    // $all_tulips_market_price += 3%
+===
+
+
+
 title: PotentiallyCrazyGuy
 ---
+// $red_tulips, $red_tulips_market_price
 Off in the distance you see a crazed man frantically running out you and yelling.
     -> Run away
     -> Wait and see what he wants 
-        Potentially Crazy Man: I am a tango dancer and I lose the rose I hold in my teeth while dancing. I am about to compete and I need a red tulip!
-            //<<if $red_tulips < 1>>
-                //<<jump NotEnoughTulips>>
-            //<<else>>
-                -> Sell one red tulip at 10 times market price
-                    THANK YOU!!!!!
-                    // $red_tulips -= 1
-                    // bank_balance += red_tulips_market_price * 10
-                -> Sell one red tulip at 100 times market price
-                    Thanks!
-                    // red_tulips -= 1
-                    // bank_balance += red_tulips_market_price * 100
+        Potentially Crazy Man: I am a tango dancer and I lost the rose I hold in my teeth while dancing. I am about to compete and I need a red tulip!
+            //<<if $red_tulips >= 1>>
+                -> Give him one red tulip 
+                    THANK YOU!!!!! (Red tulip price increases by 5% due to the publicity)
+                    // $red_tulips_market_price += 5%
+                    // idk if it is *= .05 or += 5% 
                 -> Don't sell him a red tulip
+            //<<else>>
+                You do not have any red tulips
             //<<endif>>
 ===
 
 title: TulipTony
 ---
-// need: random tulip color 
+// Need: $random_tulip_color, $random_tulip_color_market_price
 
 Tulip Tony who lives a stone throwy from the town crony says all $random_tulip_color tulips are phony. 
-
     -> I hate Tulip Tony (Price of $random_tulip_color tulips decreases by 30%)
+    // $random_tulip_color_market_price -= 30%
 ===
 
 title: TulipBandit
 ---
-The town's tulip bandit steals some of your tulip inventory
-    -> Curse you tulip bandit!
+// $random_tulip_kind, $random_tulip_kind_market_price
+The town's tulip bandit goes on a stealing spree, taking $random_tulip_kind tulips from all the farmers
+    -> Curse you tulip bandit! (Market price of $random_tulip_kind tulips increases by 15%)
+    // $random_tulip_kind_market_price += 15%
 ===
 
-// another tulip bandit encounter could be he steals 30 green tulips assuming you have any 
+title: NewsTickerNSync
+---
+// Needs: $fever_meter
+Dutch investors are all in sync and suggest you buy, buy, buy 
+    -> Catchy
+// $fever_meter += 5%
+===
 
+
+
+// TKTK - introduce a new tulip maybe?
 
 
 // dance option - show off X tulip, diss Y tulip, 
-// TKTK make sure all variables at runtime 
-
 
 title: TravelingShipguy
 ---
@@ -260,7 +301,9 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
 title: LocalBoy
 ---
 
-Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his partents said. "Mark has always been a very dull and thick boy" said his father, "I am very disappointed in him." he continued. "Mark is gifted in other areas" claims his mother but she did not provide any actual examples. Stay tuned for further updates.
+Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his partents said. "Mark has always been a very dull and thick boy" said his father, "I am very disappointed in him." he continued. "Mark is gifted in other areas" claims his mother but she did not provide any actual examples. Stay tuned for further updates. 
+
+
 // maybe option is why is that an award, who votes for this, what are the criteria
     -> Ok
         // $tulips -= 1
@@ -269,7 +312,7 @@ Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his pa
         Oh yeah Amsterdam conducts an annual census to determine who the dumbest child in the city. 
         -> Oh, ok
         -> That does not make any sense
-            Well it is part of Dutch culture so maybe you should be a bit more openminded and embrace this part of your heritage and community. 
+            Well it is part of Dutch culture so maybe you should be a bit more open minded and embrace this part of your heritage and community. 
             -> Alright
             -> Okay! I'm sorry
                 Are you actually sorry or are you just saying that?
@@ -302,12 +345,18 @@ Tulip farming is much more difficult than you thought it would be. Pay 200 guild
 
 title: MostTulipyTulip
 ---
-Your tulip wins the coveted "Most Tulipy Tulip" award. Collect the 500 guilders prize.
-    // bank_balance += 500 guilders
+// $random_tulip_type, $random_tulip_type_market_price
+Your $random_tulip_type tulip wins the coveted "Most Tulipy Tulip" award. It increases in market price by 10%
     -> Yes!
     -> Wait, what?
         Don't look a gift horse in the mouth, tulip farmer 
+    // $random_tulip_type_market_price += 10%
 ===
+
+
+
+
+
 
 title: HouseBurnsDown
 ---
@@ -317,7 +366,9 @@ Your house burned down due to a ill-thought out candle juggling competition. Col
 
 title: Doping
 ---
-The local authorities discover that you have been using steroids. Pay the  300 guilders fine
+// Needs: $random_tulip_type, $random_tulip_type_market_price
+The local authorities discover that you have been using steroids. Your famous $random_tulip_type decreases in value due to your reputational damage.
+    // $random_tulip_type_market_price -= 10%
 ===
 
 // Set Historical Events - figure out gameplay impact, certain tulips no longer available for the time being 
@@ -367,10 +418,7 @@ title: NewsTickerBoredApeClub
 Uninterested monkeys added to local zoo. General reception has been poor but zookeeper assures residents they will improve with time
 ===
 
-title: NewsTickerNSync
----
-Dutch investors are all in sync and suggest you buy, buy, buy 
-===
+
 
 title: NewsTickerSuperlative
 ---
@@ -384,11 +432,8 @@ title: NewsTickerCowSpots
 Local farmer discovers their cow sets new record for number of spots
 ===
 
-title: NewsTickerRainForecast
----
-// find town name, Town's 
-One Dutch unit of rain expected this upcoming April 
-===
+
+
 
 
 title: NewsTickerBallAndCup
@@ -563,6 +608,9 @@ North Holland basketball Haarlem Gloobetrotters takes the Netherlands by storm w
 // events - depends on how many unique (20-30 across both categories), may need more if not all seen within a given run 
 
 
+// TKTK Marquees to write
+// Johan Windmill 
+// Composer 
 
 // Misc phrases to go somewhere
 
