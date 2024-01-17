@@ -63,7 +63,7 @@ namespace UI.Plants
                 plot = PlotControllers[Random.Next(PlotControllers.Count)];
             }
             plot.PlantWeed(new WeedData());
-            //StartCoroutine(WaitForNextWeed());
+            StartCoroutine(WaitForNextWeed());
         }
     }
 }
