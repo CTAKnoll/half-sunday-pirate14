@@ -123,65 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &821398694
-GameObject:
+--- !u!1001 &185655328
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 821398697}
-  - component: {fileID: 821398696}
-  - component: {fileID: 821398695}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &821398695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821398694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7cc5f8d65284c8cb4469b83b4891cf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SimpleButton: {fileID: 11400000, guid: 6ee01f69ae09ac945a6b3dcacaf1192c, type: 2}
-  Tulip: {fileID: 11400000, guid: fe73de5f7d5e41740828b164a440eebb, type: 2}
---- !u!114 &821398696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821398694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a86a2e1ece68477e923b859a62a2e8f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &821398697
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821398694}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 440.18024, y: 308.8306, z: -2.7095773}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 440.18024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 308.8306
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.7095773
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303028183763259958, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247576464803227961, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
+      propertyPath: m_Name
+      value: Managers
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e151652463b42f9439c4ef8bf5832a5b, type: 3}
 --- !u!1001 &1444482792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -467,4 +465,4 @@ SceneRoots:
   - {fileID: 1908296969}
   - {fileID: 1444482792}
   - {fileID: 7257193167256435153}
-  - {fileID: 821398697}
+  - {fileID: 185655328}
