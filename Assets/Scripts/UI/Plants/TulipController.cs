@@ -48,61 +48,28 @@ namespace UI.Plants
 
         private void OnHoldEnded()
         {
-            void ReturnToOrigin()
-            {
-                Model.ScreenPos = InitialPosition;
-                UpdateViewAtEndOfFrame();
-                _audio.PlayOneShot(View.sfx_plant_failed);
-            }
-
-            bool ShopCheck()
-            {
-                if (Data.OwnedByPlayer) return true;
-                return Purchase();
-            }
-            
             if (IsOverBucket(out Bucket consumer) && ControllerDb.GetControllerFromView(consumer.interactable, out IUIController contr))
             {
                 if (contr is PlotController plot) // we're dropping on a plot
                 {
-                    if (Data.Stage != TulipData.TulipStage.Bulb)
-                    {
-                        throw new Exception("How did you do this?!");
-                    }
-                    if (plot.IsPlanted || !ShopCheck()) // you cant grow there, or you cant purchase
-                    {
-                        ReturnToOrigin();
+                    if (!ConsumedByPlot(plot))
                         return;
-                    }
-                    
-                    plot.PlantTulip(Data);
-                    Consumed?.Invoke(this, plot);
                 }
-                else if (contr is SimpleBucketController bucket) // we're dropping on a simple bucket
+                else if (contr is TulipInteractionController bucket) // we're dropping on a simple bucket
                 {
-                    // Give the data to the bucket, just like with plot
+                    if (!ConsumedByTulipInteraction(bucket))
+                        return;
                 }
                 else if (contr is BulbInventoryController bulbInventory) // we're dropping on the inventory
                 {
-                    if (!bulbInventory.Server.HasEmpty() || !ShopCheck()) // you cant purchase
-                    {
-                        ReturnToOrigin();
+                    if (!ConsumedByBulbInventory(bulbInventory))
                         return;
-                    }
-                    bulbInventory.AddItem(Data);
-                    Consumed?.Invoke(this, bulbInventory);
                 }
                 else if (contr is TulipInventoryController tulipInventory) // we're dropping on the inventory
                 {
-                    if (!tulipInventory.Server.HasEmpty() || !ShopCheck()) // you cant purchase
-                    {
-                        ReturnToOrigin();
+                    if (!ConsumedByTulipInventory(tulipInventory))
                         return;
-                    }
-                    tulipInventory.AddItem(Data);
-                    Consumed?.Invoke(this, tulipInventory);
                 }
-                
                 Close();
             }
             else
@@ -127,9 +94,76 @@ namespace UI.Plants
             }
             return false;
         }
+        
+        private void ReturnToOrigin()
+        {
+            Model.ScreenPos = InitialPosition;
+            UpdateViewAtEndOfFrame();
+            _audio.PlayOneShot(View.sfx_plant_failed);
+        }
+
+        private bool ShopCheck()
+        {
+            if (Data.OwnedByPlayer) return true;
+            return Purchase();
+        }
+
+        private bool ConsumedByPlot(PlotController plot)
+        {
+            if (Data.Stage != TulipData.TulipStage.Bulb)
+            {
+                throw new Exception("How did you do this?!");
+            }
+            if (plot.IsPlanted || !ShopCheck()) // you cant grow there, or you cant purchase
+            {
+                ReturnToOrigin();
+                return false;
+            }
+                    
+            plot.PlantTulip(Data);
+            Consumed?.Invoke(this, plot);
+            return true;
+        }
+
+        private bool ConsumedByBulbInventory(BulbInventoryController bulbInventory)
+        {
+            if (!bulbInventory.BulbInventoryFunction(Data) || !bulbInventory.Server.HasEmpty() || !ShopCheck()) 
+            {
+                ReturnToOrigin();
+                return false;
+            }
+            bulbInventory.AddItem(Data);
+            Consumed?.Invoke(this, bulbInventory);
+            return true;
+        }
+
+        private bool ConsumedByTulipInventory(TulipInventoryController tulipInventory)
+        {
+            if (!tulipInventory.PickedInventoryFunction(Data) || !tulipInventory.Server.HasEmpty() || !ShopCheck()) 
+            {
+                ReturnToOrigin();
+                return false;
+            }
+            tulipInventory.AddItem(Data);
+            Consumed?.Invoke(this, tulipInventory);
+            return true;
+        }
+
+        private bool ConsumedByTulipInteraction(TulipInteractionController interaction)
+        {
+            if (!(Data.Stage == TulipData.TulipStage.Picked) || !Data.OwnedByPlayer || !interaction.FireInteraction(Data))
+            {
+                ReturnToOrigin();
+                return false;
+            }
+            Consumed?.Invoke(this, interaction);
+            return true;
+        }
 
         private bool Purchase()
         {
+            if (!Economy.BuyTulip(Data))
+                return false;
             Data.Owner = TulipData.TulipOwner.Player;
             return true;
         }

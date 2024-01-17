@@ -18,6 +18,7 @@ public class Timeline : IService
     
     public static DateTime Now;
     private PriorityQueue<(object, Action), DateTime> TimelineEvents;
+    public event Action<DateTime> DateChanged;
     
     public Timeline()
     {
@@ -51,6 +52,7 @@ public class Timeline : IService
     private void MoveToNextDay()
     {
         Now = Now.AddDays(1);
+        DateChanged?.Invoke(Now);
         TryDequeueTimelineEvent();
     }
 

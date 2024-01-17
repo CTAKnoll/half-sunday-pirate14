@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Services;
 using UI.Model;
+using UI.Stonks;
 using UnityEngine;
 using Utils;
 
@@ -102,6 +103,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     protected ControllerDatabase ControllerDb;
     protected UIDriver UiDriver;
     protected Ticker Ticker;
+    protected Timeline Timeline;
+    protected Economy Economy;
     protected TView View { get; private set; }
     protected TModel Model;
 
@@ -134,6 +137,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
 
         ControllerDb = ServiceLocator.GetService<ControllerDatabase>();
         Ticker = ServiceLocator.GetService<Ticker>();
+        Timeline = ServiceLocator.GetService<Timeline>();
+        Economy = ServiceLocator.GetService<Economy>();
     }
 
     protected void UpdateViewAtEndOfFrame()

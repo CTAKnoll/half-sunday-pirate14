@@ -109,7 +109,8 @@ namespace Plants
         {
             if (TulipInventory == null)
                 throw new Exception("Expected TulipInventory to exist!");
-            
+
+            Stage = TulipStage.Picked;
             Timeline.RemoveAllEvents(this);
             TulipInventory.AddItem(this);
         }
