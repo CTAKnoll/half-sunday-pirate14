@@ -9,7 +9,7 @@ namespace UI.Containers
     {
         public ContainerServer<TulipData, TulipController> Server { get; }
 
-        private Inventory.FilterFunction PickedInventoryFunction = data => data.OwnedByPlayer && !data.UseBulbIcon;
+        public Inventory.FilterFunction PickedInventoryFunction = data => data.OwnedByPlayer && !data.UseBulbIcon;
 
         private AudioService _audio;
         public TulipInventoryController(InventoryView view) : base(view)

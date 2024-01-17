@@ -8,7 +8,7 @@ namespace UI.Containers
     {
         public ContainerServer<TulipData, TulipController> Server { get; }
 
-        private Store.FilterFunction StoreInventoryFunction = data => !data.OwnedByPlayer && data.UseBulbIcon;
+        public Store.FilterFunction StoreInventoryFunction = data => !data.OwnedByPlayer && data.UseBulbIcon;
 
         public StoreController(StoreView view) : base(view)
         {

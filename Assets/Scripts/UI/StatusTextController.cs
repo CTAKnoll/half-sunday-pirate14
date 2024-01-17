@@ -1,6 +1,4 @@
 ﻿using System;
-using UnityEngine;
-
 namespace UI
 {
     public class StatusTextController : UIController<StatusTextView, StatusTextModel>
@@ -12,7 +10,6 @@ namespace UI
             Model.FundsText = "$" + Economy.Funds;
             Timeline.DateChanged += UpdateDate;
             Economy.FundsChanged += UpdateFunds;
-            Debug.Log("YOOOOO");
         }
 
         private void UpdateDate(DateTime newDate)

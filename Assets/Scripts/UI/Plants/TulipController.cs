@@ -127,7 +127,7 @@ namespace UI.Plants
 
         private bool ConsumedByBulbInventory(BulbInventoryController bulbInventory)
         {
-            if (!bulbInventory.Server.HasEmpty() || !ShopCheck()) // you cant purchase
+            if (!bulbInventory.BulbInventoryFunction(Data) || !bulbInventory.Server.HasEmpty() || !ShopCheck()) 
             {
                 ReturnToOrigin();
                 return false;
@@ -139,7 +139,7 @@ namespace UI.Plants
 
         private bool ConsumedByTulipInventory(TulipInventoryController tulipInventory)
         {
-            if (!tulipInventory.Server.HasEmpty() || !ShopCheck()) // you cant purchase
+            if (!tulipInventory.PickedInventoryFunction(Data) || !tulipInventory.Server.HasEmpty() || !ShopCheck()) 
             {
                 ReturnToOrigin();
                 return false;
