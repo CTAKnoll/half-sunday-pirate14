@@ -314,7 +314,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 44
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -341,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 1908296966}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -42.2, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -355,17 +355,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1918200932497405525, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -72
+    - target: {fileID: 1650255299263696405, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1918200932497405525, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 56.133
+    - target: {fileID: 2829546229678134359, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829546229678134359, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4588198649087406160, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938274013225919541, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938274013225919541, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 61.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938274013225919541, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 56.567
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221320358326902320, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221320358326902320, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221320358326902320, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -266.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221320358326902320, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -207.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6230302839287094082, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1908296968}
+    - target: {fileID: 6230302839287094082, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6230302839287094082, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -401,6 +441,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005541255856507632, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005541255856507632, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005541255856507632, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005541255856507632, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9005541255856507632, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
