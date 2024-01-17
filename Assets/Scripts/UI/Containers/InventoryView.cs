@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UI.Plants;
+using UnityEngine;
 
 namespace UI.Containers
 {
@@ -7,6 +8,11 @@ namespace UI.Containers
     {
         public List<UIInteractable> InventorySlots;
         public AudioEvent sfx_place_item;
+
+        public void Start()
+        {
+            Debug.Log(name + " " + transform.position);
+        }
         public override void UpdateViewWithModel(InventoryModel model)
         {
             

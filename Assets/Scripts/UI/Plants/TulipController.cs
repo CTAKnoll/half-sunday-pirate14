@@ -7,6 +7,7 @@ using UI.Model;
 using UI.Model.Templates;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace UI.Plants
 {
@@ -50,23 +51,28 @@ namespace UI.Plants
         {
             if (IsOverBucket(out Bucket consumer) && ControllerDb.GetControllerFromView(consumer.interactable, out IUIController contr))
             {
+                Debug.Log(0);
                 if (contr is PlotController plot) // we're dropping on a plot
                 {
+                    Debug.Log(1);
                     if (!ConsumedByPlot(plot))
                         return;
                 }
                 else if (contr is TulipInteractionController bucket) // we're dropping on a simple bucket
                 {
+                    Debug.Log(2);
                     if (!ConsumedByTulipInteraction(bucket))
                         return;
                 }
                 else if (contr is BulbInventoryController bulbInventory) // we're dropping on the inventory
                 {
+                    Debug.Log(3);
                     if (!ConsumedByBulbInventory(bulbInventory))
                         return;
                 }
                 else if (contr is TulipInventoryController tulipInventory) // we're dropping on the inventory
                 {
+                    Debug.Log(4);
                     if (!ConsumedByTulipInventory(tulipInventory))
                         return;
                 }
@@ -74,6 +80,7 @@ namespace UI.Plants
             }
             else
             {
+                Debug.Log(5);
                 ReturnToOrigin();
             }
         }
@@ -82,9 +89,8 @@ namespace UI.Plants
         {
             consumer = null;
             PointerEventData pointerData = new PointerEventData(EventSystem.current);
-            pointerData.position = View.transform.position;
+            pointerData.position = Pointer.current.position.value;
             List<RaycastResult> results = new();
-            
             UiDriver.Root.raycaster.Raycast(pointerData, results);
             foreach (RaycastResult result in results)
             {

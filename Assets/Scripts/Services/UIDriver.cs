@@ -167,7 +167,7 @@ namespace Services
             UnregisterForAltHold(target);
         }
 
-        private UIInteractable RayCastToFindObjectAtMouse()
+        public UIInteractable RayCastToFindObjectAtMouse()
         {
             List<RaycastResult> results = new();
             UIInteractable castTarget = null;
@@ -244,7 +244,7 @@ namespace Services
                 nextElement = RayCastToFindObjectAtMouse();
             }
 
-            pointerData.position  = Mouse.current.position.ReadValue(); // return the pointer to sanity
+            pointerData.position  = Pointer.current.position.ReadValue(); // return the pointer to sanity
             if (nextElement != null)
                 ActiveObject = nextElement;
         }
