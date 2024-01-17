@@ -30,6 +30,22 @@ namespace Utils
             t.Enabled = true;
             Timers.Add(func, t);
         }
+        
+        public void AddTrigger(Action func, float timeInSeconds, bool executeInMainThread = true)
+        {
+            Timer t = new Timer(timeInSeconds * 1000);
+            t.Elapsed += (_, _) =>
+            {
+                t.Dispose();
+                Timers.Remove(func);
+                
+                if (executeInMainThread)
+                    MainThread.ExecuteInUpdate(func);
+                else func.Invoke();
+            };
+            t.Enabled = true;
+            Timers.Add(func, t);
+        }
 
         public bool RemoveTickable(Action func)
         {

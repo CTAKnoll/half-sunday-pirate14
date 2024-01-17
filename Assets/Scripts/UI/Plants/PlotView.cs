@@ -7,6 +7,11 @@ namespace UI.Plants
     [Serializable]
     public class PlotView : UIView<PlotModel>, Bucket
     {
+        public PlotView AboveLinkedPlot;
+        public PlotView BelowLinkedPlot;
+        public PlotView LeftLinkedPlot;
+        public PlotView RightLinkedPlot;
+        
         public TextMeshProUGUI DebugTextbox;
         public AudioEvent sfx_planted;
 

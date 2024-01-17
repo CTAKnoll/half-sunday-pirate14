@@ -75,7 +75,7 @@ namespace Plants
 
         public static TulipData Empty = new (TulipColor.Empty, TulipKind.Empty);
 
-        public Action OnDeath;
+        public event Action OnDeath;
 
         public TulipInventoryController TulipInventory;
         
