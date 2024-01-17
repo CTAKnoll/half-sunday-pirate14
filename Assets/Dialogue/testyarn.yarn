@@ -34,6 +34,24 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
     // <<endif>>
 ===
 
+title: DanceBall
+---
+// Needs: random tulip color, $random_tulip_color_tulips
+
+You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest $random_tulip_color tulip on the lapel of your broadbrimmed black hat. 
+    -> Jump into middle of the circle and wow the onlookers with your dance moves
+        The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising (Price of $random_tulip_color increases by 20%)
+    -> Talk to the gentleman standing in the corner
+        You speak to the gentleman who hates attending balls as his wife always wants to dance with him and he does not like dancing which makes her made. You suggest that a few tulips would cheer her up. (Sell 10 * $random_tulip_color)
+        // need $random_tulip_color_tulips (balance)
+    -> Trash talk the man currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
+        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of $random_tulip_color decreases by 20%)
+            -> Double down
+                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of $random_tulip_color decreases by 5%)
+                // tempting to add a triple down option but probably best to not 
+            -> Apologize
+                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of $random_tulip_color increases by 5%)
+===
 
 title: TravelingTrader
 ---
@@ -54,7 +72,7 @@ A tall pale thin man in a tweed jacket sporting a curled brown mustache approach
 ===
 
 
-// Ideas for why people would need to buy tulips - it's ye olden times and everyone smells, spruce up house, quincenera, baptism, birthday, 
+// Ideas for why people would need to buy tulips - it's ye olden times and everyone smells, spruce up house, quincenera, baptism, birthday, coronation
 // funeral (I'm sorry for your loss package or I'm really sorry for your loss package; maybe better to make it like "I lost a loved one" and "I lost a person I truly and deeply loved" which costs more as if that's how it works), 
 
 
@@ -81,12 +99,11 @@ Off in the distance you see a crazed man frantically running out you and yelling
 
 title: TulipTony
 ---
-Tulip Tony who lives a stone throwy from the town crony says your tulips are phony. 
+// need: random tulip color 
 
-10 customers return their tulips. 
+Tulip Tony who lives a stone throwy from the town crony says all $random_tulip_color tulips are phony. 
 
-// 10 customers return a random number of tulips so your tulip inventory goes up by that amount but you have to refund them so you pay them current market price (likely at a loss)
-    -> I hate Tulip Tony
+    -> I hate Tulip Tony (Price of $random_tulip_color tulips decreases by 30%)
 ===
 
 title: TulipBandit
@@ -94,6 +111,13 @@ title: TulipBandit
 The town's tulip bandit steals some of your tulip inventory
     -> Curse you tulip bandit!
 ===
+
+// another tulip bandit encounter could be he steals 30 green tulips assuming you have any 
+
+
+
+// dance option - show off X tulip, diss Y tulip, 
+// TKTK make sure all variables at runtime 
 
 
 title: TravelingShipguy
@@ -147,7 +171,9 @@ title: SafetyNetNoTulipFarmerLeftBehind
 ===
 
 
+// fever meter go up, price go up, etc 
 
+// incidents are mostly a means of market changing
 
 
 title: TravelingClownFirstMeeting
@@ -484,7 +510,7 @@ Tight-lipped tulip thief doesn't give two licks whose two tulips he too lifts
 
 title: NewsTickerQuickShoutout
 ---
-Her ye! Her ye! It is this humble scribes honor to announce the birth of the honorable princess Christina from the Royal Family Applegate 
+Hear ye! Hear ye! It is this humble scribes honor to announce the birth of the honorable princess Christina from the Royal Family Applegate 
 // or Applegate Royal Family?
 // or Royal Family of House Applegate?
 ===
