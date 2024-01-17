@@ -16,8 +16,8 @@ namespace UI.Plants
             UiDriver.RegisterForTap(View, OnClick);
             Model.DebugText = "UNPLANTED";
             Ticker.AddTickable(ModifyDisplay, 0.1f);
-            UpdateViewAtEndOfFrame();
             _audio = ServiceLocator.GetService<AudioService>();
+            UpdateViewAtEndOfFrame();
         }
 
         public void OnClick()
