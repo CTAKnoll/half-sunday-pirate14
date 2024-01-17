@@ -55,8 +55,14 @@ namespace UI.Plants
             TryPlaceNewWeed();
         }
 
-        private void TryPlaceNewWeed()  
+        private void TryPlaceNewWeed()
         {
+            if (PlotControllers.All(plot => plot.IsWeeded))
+            {
+                StartCoroutine(WaitForNextWeed());
+                return; // all plots are weeded, my work here is done
+            }
+                
             PlotController plot = PlotControllers[Random.Next(PlotControllers.Count)];
             while (plot.IsWeeded)
             {
