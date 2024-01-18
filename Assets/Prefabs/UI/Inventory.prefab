@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -6.79}
-  m_SizeDelta: {x: 100, y: 415.274}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 110, y: 370}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2030093589444550586
 CanvasRenderer:
@@ -97,6 +97,7 @@ MonoBehaviour:
   - {fileID: 1898421095621012527}
   sfx_place_item: {fileID: 11400000, guid: 1b9affc7b541b5c40b550bcc32ce75b7, type: 2}
   AllowStacking: 1
+  Stage: 0
 --- !u!1 &9180551309988138453
 GameObject:
   m_ObjectHideFlags: 0
