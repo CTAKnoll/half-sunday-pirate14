@@ -437,9 +437,9 @@ You do not have enough tulips.
 
 
 
-title: 30YearsWar 
-// Date: May 23 1618
+title: 30YearsWar
 ---
+// Date: May 23 1618
 // Needs: $all_tulips_market_price
 Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate.
     -> That does not sound good. (Market price for all tulips has decreased by 2%)
