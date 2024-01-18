@@ -89,7 +89,9 @@ A tall pale thin man in a tweed jacket sporting a curled brown mustache approach
 // Ideas for why people would need to buy tulips - it's ye olden times and everyone smells, spruce up house, quincenera, baptism, birthday, coronation
 // funeral (I'm sorry for your loss package or I'm really sorry for your loss package; maybe better to make it like "I lost a loved one" and "I lost a person I truly and deeply loved" which costs more as if that's how it works), 
 
-
+// Specific historically accurate or influenced general incidents
+// A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy.
+// A rival tulip farmer debuts his new tulip breed at the pub, sparking an increase in demand for it. 
 
 
 title: RainForecast
@@ -113,7 +115,7 @@ An unexpectedly cold winter freeze kills many farmers tulip crops. Since you hav
 
 title: PotentiallyCrazyGuy
 ---
-// $red_tulips, $red_tulips_market_price
+// Need: $red_tulips, $red_tulips_market_price
 Off in the distance you see a crazed man frantically running out you and yelling.
     -> Run away
     -> Wait and see what he wants 
@@ -127,6 +129,19 @@ Off in the distance you see a crazed man frantically running out you and yelling
             //<<else>>
                 You do not have any red tulips
             //<<endif>>
+===
+
+
+
+// Petal to the Metal - Blacksmith Gardening Enthusiast Convention
+
+
+//
+title: NewTulipDrops1
+---
+// Need: $new_random_tulip_type
+The Netherlands top tulipologists have created a new type of tulip: $new_random_tulip_type
+// ideally this should be weighted to show up on the market soon after this incident
 ===
 
 title: TulipTony
@@ -184,7 +199,8 @@ A weary Spanish sailor approaches you. He wears an elegant red and gold tunic wi
 title: ThisIsNotADril
 ---
 An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
-
+// An older strange looking gentleman spent 2,000 guilders on $random_tulip_type. 
+// 
 "Hello, I spent two thousand guilders on tulips last month and my wife is mad at me. Could I please buy 200 tulips so I can make it up to her and say I'm sorry?"
 
     -> Sure! 
@@ -300,14 +316,12 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
 
 title: LocalBoy
 ---
-
+// Needs: $random_tulip_color, $random_tulip_color_market_price
 Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his partents said. "Mark has always been a very dull and thick boy" said his father, "I am very disappointed in him." he continued. "Mark is gifted in other areas" claims his mother but she did not provide any actual examples. Stay tuned for further updates. 
 
-
-// maybe option is why is that an award, who votes for this, what are the criteria
+Mark is notorious for eating $random_tulip_color tulips and some believe this to be the cause of his stupidity. (Market price of $random_tulip_color decreases by 10%)
+// $random_tulip_color_market_price -= 10%
     -> Ok
-        // $tulips -= 1
-        Offer one tulip to the unlucky parents. (Give 1 tulip)
     -> Wait, what?
         Oh yeah Amsterdam conducts an annual census to determine who the dumbest child in the city. 
         -> Oh, ok
@@ -315,13 +329,6 @@ Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his pa
             Well it is part of Dutch culture so maybe you should be a bit more open minded and embrace this part of your heritage and community. 
             -> Alright
             -> Okay! I'm sorry
-                Are you actually sorry or are you just saying that?
-                    -> I'm actually sorry
-                        // $tulips -= 1
-                        Offer one tulip to show that you are really sorry (Give 1 tulip)
-                    -> No, I was just trying to appease you
-                        // $tulips -= 5
-                        Now you actually do feel bad (Give 5 tulip)
 ===
 
 
@@ -343,25 +350,47 @@ Tulip farming is much more difficult than you thought it would be. Pay 200 guild
     -> I was told this tulips would be easy money
 ===
 
+
+
 title: MostTulipyTulip
 ---
 // $random_tulip_type, $random_tulip_type_market_price
 Your $random_tulip_type tulip wins the coveted "Most Tulipy Tulip" award. It increases in market price by 10%
     -> Yes!
     -> Wait, what?
-        Don't look a gift horse in the mouth, tulip farmer 
+        Don't look a gift horse in the mouth, tulip person 
     // $random_tulip_type_market_price += 10%
 ===
 
+title: ComissionArtistTulipBook
+---
+// Need: $random_tulip_type, $random_tulip_type2, $random_tulip_type3,
+You comission a local artist to render one of your tulips, likely increasing its market value
+    -> $random_tulip_type
+        The market price of $random_tulip_type has increased by 15%
+        // $random_tulip_type += 15%
+    -> $random_tulip_type2
+        The market price of $random_tulip_type2 has increased by 15%
+        // $random_tulip_type2 += 15%
+    -> $random_tulip_type3
+        The market price of $random_tulip_type3 has increased by 15%
+        // $random_tulip_type3 += 15%
+===
 
-
-
-
+// other threats/incidents: voles, aphids, virus causes rare tulip type to bloom
 
 title: HouseBurnsDown
 ---
 Your house burned down due to a ill-thought out candle juggling competition. Collect 200 guilders from the insurance company
     // bank_balance += 200
+===
+
+title: RareTulipType
+---
+// Needs: new_random_tulip_type
+A different tulip type than the one you planted has sprouted from one of your tulips. Theories behind this phenomen include divine intervention, magic, a virus spread by rodents, and by soaking the bulbs in red wine. 
+// add this too the merchant inventory and/or the economy market idk 
+// create new_random_tulip_type
 ===
 
 title: Doping
@@ -371,19 +400,42 @@ The local authorities discover that you have been using steroids. Your famous $r
     // $random_tulip_type_market_price -= 10%
 ===
 
-// Set Historical Events - figure out gameplay impact, certain tulips no longer available for the time being 
-
-    // the merchant now sells this type of bulb
-
-
 title: NotEnoughTulips
 ---
 You do not have enough tulips.
 ===
 
+// Set Historical Events - figure out gameplay impact, certain tulips no longer available for the time being 
+
+    // the merchant now sells this type of bulb
 
 
 
+
+title: 30YearsWar 
+// Date: May 23 1618
+---
+// Needs: $all_tulips_market_price
+Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate.
+    -> That does not sound good. (Market price for all tulips has decreased by 2%)
+    // $all_tulips_market_price -= 2%
+===
+
+title: BubbleAboutToBurst
+// Date: February 1637
+---
+During a recent tulip bulb auction at a pub, no one bid on one of the tulips (Market price tulips decrease 3%)
+    -> I'm sure prices will bounce back
+// $all_tulips_market_price -= 3%
+===
+
+title: BubbleIsBurstingAndPeopleAreTicked
+// Date: Sometime around / after February 1637
+---
+Artists have drawn paintings depicting tulip farmers and traders as monkeys (Market price tulips decrease 5%)
+    -> I'm sure prices will bounce back
+// $all_tulips_market_price -= 3%
+===
 
 
 
@@ -558,6 +610,11 @@ title: NewsTickerQuickShoutout
 Hear ye! Hear ye! It is this humble scribes honor to announce the birth of the honorable princess Christina from the Royal Family Applegate 
 // or Applegate Royal Family?
 // or Royal Family of House Applegate?
+===
+
+title: NewsTickerJohnCalvin
+---
+Rembrandt painting of John Calvin urinating to be auctioned off next month. 
 ===
 
 // dril candle memes 2000 guilders on tulips
