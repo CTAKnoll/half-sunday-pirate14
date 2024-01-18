@@ -1,5 +1,6 @@
 ﻿using DefaultNamespace;
 using Services;
+using UnityEngine;
 
 namespace UI.Core
 {
@@ -7,6 +8,7 @@ namespace UI.Core
     {
         public MoveToIconController(MoveToIconView view, GameStateManager.GameState goTo, float time) : base(view)
         {
+            Debug.Log("MAMAMAMA");
             UiDriver.RegisterForTap(View, () => ServiceLocator.GetService<GameStateManager>().PanToState(goTo, time));
         }
     }

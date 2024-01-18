@@ -44,6 +44,7 @@ namespace DefaultNamespace
 
         public void PanToState(GameState state, float seconds = 0f)
         {
+            Debug.Log("ZEZEZEZE");
             Vector3 endStateLoc = FocusPoints[state].transform.position;
             Vector2 startPos = new Vector2(Camera.transform.position.x, Camera.transform.position.y);
             Vector2 endPos = new Vector2(endStateLoc.x, endStateLoc.y);
