@@ -22,16 +22,15 @@ namespace UI.Containers
             GeneratedStage = stage;
         }
 
-        public void UpdateSlot(TulipData.TulipVarietal tulipType, int number)
+        public void UpdateSlot(Inventory.InventoryStack invStack)
         {
-            Debug.Log(number);
-            Stacks = AllowStacking ? number : Math.Max(number, 1);
+            Stacks = AllowStacking ? invStack.Count : Math.Max(invStack.Count, 1);
             Model.Stacks = Stacks;
             Model.AllowStacking = AllowStacking;
             Tulip?.Close();
-            if (tulipType != null)
+            if (invStack.Varietal != null)
             {
-                Tulip = AddChild(new TulipData(tulipType, GeneratedStage, TulipData.TulipOwner.Player).Serve(View.transform));
+                Tulip = AddChild(new TulipData(invStack.Varietal, GeneratedStage, TulipData.TulipOwner.Player).Serve(View.transform));
                 Tulip.Consumed += ConsumeFunction;
             }
             UpdateViewAtEndOfFrame();
