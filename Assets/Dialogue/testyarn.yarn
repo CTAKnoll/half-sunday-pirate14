@@ -62,11 +62,7 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 //---
 // Needs: $market_price 
 
-<<<<<<< Updated upstream
-//A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
-=======
 // A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
->>>>>>> Stashed changes
 
 //"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
 // how much are $random_tulip_type tulips worth?
@@ -214,7 +210,7 @@ A weary Spanish sailor approaches you. He wears an elegant red and gold tunic wi
         -> Refuse
     //<<else>>
     //<<jump NotEnoughTulips>>
-    <<endif>>
+    //<<endif>>
 ===
 
 
