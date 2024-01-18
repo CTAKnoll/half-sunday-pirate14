@@ -21,7 +21,7 @@
 title: TulipCompetition
 ---
 // Needs: $player_tulip_type (what they submitted by dragging into box), $competitor_tulip_type1 (can be literally anything, does not have to have ever been in market), $competitor_tulip_type2
-
+// this is not technically an incident but we need verbiage for it
 $player_tulip_type finished first
 $competitor_tulip_type1 finished second
 $competitor_tulip_type2 finished third
@@ -62,13 +62,13 @@ You are attending a local ball when a dance circle forms on the dance floor. You
                 You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of $rival_tulip_type increases by 5%)
 ===
 
-title: TravelingTrader
----
+//title: TravelingTrader
+//---
 // Needs: $market_price 
 
-A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
+//A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
 
-"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
+//"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
 // how much are $random_tulip_type tulips worth?
 
 
@@ -79,11 +79,11 @@ A tall pale thin man in a tweed jacket sporting a curled brown mustache approach
 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
 // also probably need to factor in the stock ticker / market here
-    -> 2 * $market_price (Increase market price of $random_tulip_type by 10%)
-    -> 4 * $market_price (Increase market price of $random_tulip_type by 20%)
+    //-> 2 * $market_price (Increase market price of $random_tulip_type by 10%)
+    //-> 4 * $market_price (Increase market price of $random_tulip_type by 20%)
         // 25 chance to fail for 2 times markup, 50% chance to fail for 4 times markup 
-    -> $market_price (Increase market price of $random_tulip_type by 5%)
-===
+    //-> $market_price (Increase market price of $random_tulip_type by 5%)
+//===
 
 
 // Ideas for why people would need to buy tulips - it's ye olden times and everyone smells, spruce up house, quincenera, baptism, birthday, coronation
