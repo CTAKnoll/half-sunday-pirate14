@@ -8,10 +8,6 @@
 
 ===
 
-
-
-
-
 // Variables:
 // $bank_balance
 // $total_tulips
@@ -66,12 +62,14 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 //---
 // Needs: $market_price 
 
+<<<<<<< Updated upstream
 //A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
+=======
+// A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
+>>>>>>> Stashed changes
 
 //"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
 // how much are $random_tulip_type tulips worth?
-
-
 
 // and benar EU4 mod for reference - lava rising
 
@@ -90,8 +88,25 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 // funeral (I'm sorry for your loss package or I'm really sorry for your loss package; maybe better to make it like "I lost a loved one" and "I lost a person I truly and deeply loved" which costs more as if that's how it works), 
 
 // Specific historically accurate or influenced general incidents
-// A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy.
-// A rival tulip farmer debuts his new tulip breed at the pub, sparking an increase in demand for it. 
+// A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy. - drafted
+// A rival tulip farmer debuts his new tulip breed at the pub, sparking an increase in demand for it. - drafted
+
+title: TravelingCalvinists
+---
+// Needs: $random_tulip_type, $random_tulip_type_market_price
+A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy.
+    -> Sure, here you go (Market price for $random_tulip_type increases by 10%)
+    // $random_tulip_type_market_price += 10%
+===
+
+title: RivalTulipFarmerMerchantEtc
+---
+// Needs: $new_random_tulip_type, $new_random_tulip_type_market_price
+A rival tulip merchant debuts his new tulip breed at the pub, sparking an increase in demand for it.
+    -> What a jerk ($new_random_tulip_type market price increases by 20%)
+// ideally this should be weighted to show up on the market soon after this incident
+// $new_random_tulip_type_market_price += 20%
+===
 
 
 title: RainForecast
@@ -107,7 +122,7 @@ title: WinterSnap
 ---
 // Needs: $all_tulips_market_price
 An unexpectedly cold winter freeze kills many farmers tulip crops. Since you have a greenhouse, none of your inventory is affected. The price of all tulips has increased by 3%
-    -> Finally someting separating the poor tulip farmers from the smart tulip farmers
+    -> Finally someting separating the poor tulip farmers from the smart tulip farmers (All tulips market price increases by 3%)
     // $all_tulips_market_price += 3%
 ===
 
@@ -126,8 +141,9 @@ Off in the distance you see a crazed man frantically running out you and yelling
                     // $red_tulips_market_price += 5%
                     // idk if it is *= .05 or += 5% 
                 -> Don't sell him a red tulip
+                    I'm doomed, my life is over
             //<<else>>
-                You do not have any red tulips
+                <<jump NotEnoughTulips>>
             //<<endif>>
 ===
 
@@ -139,9 +155,11 @@ Off in the distance you see a crazed man frantically running out you and yelling
 //
 title: NewTulipDrops1
 ---
-// Need: $new_random_tulip_type
+// Need: $new_random_tulip_type, $new_random_tulip_type_market_price
 The Netherlands top tulipologists have created a new type of tulip: $new_random_tulip_type
+    -> I gotta get in on this ($new_random_tulip_type market price increases by 30%)
 // ideally this should be weighted to show up on the market soon after this incident
+// $new_random_tulip_type_market_price += 30%
 ===
 
 title: TulipTony
@@ -178,7 +196,7 @@ Dutch investors are all in sync and suggest you buy, buy, buy
 
 title: TravelingShipguy
 ---
-
+// Needs:  $random_tulip_kind, $random_tulip_kind_market_price
 A seabattered ship can be seen off in the distance. It flies the Spanish flag and arrives at port and only a few men get off the boat. 
 
 A weary Spanish sailor approaches you. He wears an elegant red and gold tunic with fine linen trowsers. Addorned on his head is a black morion with a bright red feather atop. He is accompanied by two Spanish knights in full armor.  
@@ -186,27 +204,34 @@ A weary Spanish sailor approaches you. He wears an elegant red and gold tunic wi
 // I'm unsure programmatically and with regard to Yarn, Unity etc how we can distinguish narration from dialogue spoken to the player
 
 
-"Greetings merchant, I have sailed long and far from Spain in search of flowers worthy of our Queens garden and bouqests. Do you possess anything that could rise and be presented before her royal highness?"
+"Greetings tulip merchant, I have sailed long and far from Spain in search of flowers worthy of our Queens garden and bouqests. Do you possess anything that could rise and be presented before her royal highness?"
 
 // programming wise we may not want to hard code these and just have the two asking prices tulip_color_rate * 1.5 and by 3 multiplied by the amount of tulips they ask for 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
-    -> Ask for 200 guilders 
-    -> Ask for 100 guilders
-    -> Give them 50 tulips for free
+    //<<if $random_tulip_kind >=0>>
+        -> Provide $random_tulip_kind (Increase $random_tulip_kind_market_price by 15%)
+        // $random_tulip_kind_market_price += 15%
+        -> Refuse
+    //<<else>>
+    //<<jump NotEnoughTulips>>
+    <<endif>>
 ===
 
 
 title: ThisIsNotADril
 ---
-An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
-// An older strange looking gentleman spent 2,000 guilders on $random_tulip_type. 
+// Needs: $random_tulip_type, $random_tulip_type_market_price
+// An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
+An older strange looking gentleman spent 2,000 guilders on $random_tulip_type last month. Many speculate he will spend as much, if not more, next month.
+    -> That's a lot of tulips (The market price of $random_tulip_type increases by 20%)
+    // $random_tulip_type_market_price += 20%
 // 
-"Hello, I spent two thousand guilders on tulips last month and my wife is mad at me. Could I please buy 200 tulips so I can make it up to her and say I'm sorry?"
+// "Hello, I spent two thousand guilders on tulips last month and my wife is mad at me. Could I please buy 200 tulips so I can make it up to her and say I'm sorry?"
 
-    -> Sure! 
+    //-> Sure! 
         // $tulips -= 200
         // money += price for given tulip type * 200
-    -> I don't think this will help your situation (Refuse)
+    //-> I don't think this will help your situation (Refuse)
 ===
 
 
@@ -257,20 +282,20 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
 
 
 // semi obscure Simpsons reference
-title: FlowersByIrene
----
-A short red-headed woman in billowy green gown and with a white neck frill approaches you. 
+//title: FlowersByIrene
+//---
+//A short red-headed woman in billowy green gown and with a white neck frill approaches you. 
 
-"Hello sir, my name is Irene and I am opening a flower shop. Could I buy some tulips?"
+//"Hello sir, my name is Irene and I am opening a flower shop. Could I buy some tulips?"
 
-    -> Sell 20 tulips
+    //-> Sell 20 tulips
         // tulips -= 20
         // bank += 20 * current tulip price of type sold
-    -> Sell 50 tulips
+    //-> Sell 50 tulips
         // she doesn't have enough money and finds you to be a greedy vendor and leaves; other incidents could work the opposite although then that just seems random if there is no strategy, hmmm, maybe narrative clue on who you can and cannot upsell
-    -> Refuse to sell her any tulips
+    //-> Refuse to sell her any tulips
     // could have haggle / lie mechanic when it comes to price
-===
+//===
 
 
 title: TravelingClownSecondMeeting
@@ -343,12 +368,12 @@ title: TravelingRick
 
 // Monopoly style / inspired incidents
 
-title: TownListener
----
-Tulip farming is much more difficult than you thought it would be. Pay 200 guilders to the town listener while you complain.
+//title: TownListener
+//---
+//Tulip farming is much more difficult than you thought it would be. Pay 200 guilders to the town listener while you complain.
 // bank_balance -= 200 guilders
-    -> I was told this tulips would be easy money
-===
+//    -> I was told this tulips would be easy money
+//===
 
 
 
@@ -379,11 +404,11 @@ You comission a local artist to render one of your tulips, likely increasing its
 
 // other threats/incidents: voles, aphids, virus causes rare tulip type to bloom
 
-title: HouseBurnsDown
----
-Your house burned down due to a ill-thought out candle juggling competition. Collect 200 guilders from the insurance company
+//title: HouseBurnsDown
+//---
+//Your house burned down due to a ill-thought out candle juggling competition. Collect 200 guilders from the insurance company
     // bank_balance += 200
-===
+//===
 
 title: RareTulipType
 ---
