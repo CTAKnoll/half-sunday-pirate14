@@ -1,4 +1,5 @@
-﻿using UI.Model;
+﻿using System;
+using UI.Model;
 
 namespace UI.Containers
 {
@@ -9,10 +10,10 @@ namespace UI.Containers
     {
         int MaxSize { get; }
         int Count { get; }
-        TServedUI AddItem(TContainable toAdd);
+        TServedUI AddItem(TContainable toAdd, Action<TServedUI, IUIController> consumeCallback);
         TServedUI GetItem(int index);
         void RemoveItem(int index);
-        bool RemoveItem(TServedUI controller);
+        bool RemoveItem(TServedUI controller, int amount = 1);
         bool IsEmpty(int index);
         bool HasEmpty();
     }

@@ -7,7 +7,7 @@ namespace UI.Stonks
 {
     public class Economy : IService
     {
-        private float StartingFunds = 10;
+        private float StartingFunds = 100;
         public float Funds { get; private set; }
 
         public event Action<float> FundsChanged;

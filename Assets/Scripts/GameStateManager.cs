@@ -8,11 +8,13 @@ namespace DefaultNamespace
     [RequireComponent(typeof(Camera))]
     public class GameStateManager : MonoBehaviour, IService
     {
-        public float CameraZ = -10;
+        public AnimationCurve TransitionCurve;
         public GameObject GardenFocus;
         public GameObject StonkFocus;
         public GameObject CreditsFocus;
         public GameObject TitleFocus;
+        
+        public float CameraZ = -10;
 
         private Camera Camera;
         
@@ -54,7 +56,7 @@ namespace DefaultNamespace
             while (currentTime < seconds)
             {
                 currentTime += Time.deltaTime;
-                Vector2 currentPos = Vector2.Lerp(startPos, endPos, currentTime / seconds);
+                Vector2 currentPos = Vector2.LerpUnclamped(startPos, endPos, TransitionCurve.Evaluate(currentTime / seconds));
                 Camera.transform.position = new Vector3(currentPos.x, currentPos.y, CameraZ);
                 yield return null;
             }

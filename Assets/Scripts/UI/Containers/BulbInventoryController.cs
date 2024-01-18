@@ -2,32 +2,31 @@
 using Services;
 using UI.Model;
 using UI.Plants;
+using UnityEngine;
 
 namespace UI.Containers
 {
-    public class BulbInventoryController : UIController<InventoryView, InventoryModel>, Container<TulipData, TulipController>, IService
+    public class BulbInventoryController : UIController<InventoryView, InventoryModel>, Container<TulipData.TulipVarietal, TulipController>, IService
     {
-        public ContainerServer<TulipData, TulipController> Server { get; }
-
-        public Inventory.FilterFunction BulbInventoryFunction = data => data.UseBulbIcon;
-
+        public ContainerServer<TulipData.TulipVarietal, TulipController> Server { get; }
+        
         private AudioService _audio;
         public BulbInventoryController(InventoryView view) : base(view)
         {
             ServiceLocator.RegisterAsService(this);
-            Server = new Inventory(BulbInventoryFunction, View.InventorySlots);
+            Server = new Inventory(View.SlotControllers);
             _audio = ServiceLocator.GetService<AudioService>();
         }
 
         public void AddItem(TulipData data)
         {
-            var newTulip = Server.AddItem(data);
-            newTulip.Consumed += OnInventoryItemConsumed;
+            Server.AddItem(data.Varietal, OnInventoryItemConsumed);
             _audio.PlayOneShot(View.sfx_place_item);
         }
 
         private void OnInventoryItemConsumed(TulipController tulip, IUIController consumer)
         {
+            Debug.Log("tryme");
             Server.RemoveItem(tulip);
         }
     }

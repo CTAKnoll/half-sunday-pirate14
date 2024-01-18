@@ -62,12 +62,45 @@ namespace Plants
             Shop
         }
 
+        public class TulipVarietal : Containable<TulipVarietal, TulipController>
+        {
+            public Color Color;
+            public TulipKind Kind;
+
+            public bool Equals(TulipVarietal t)
+            {
+                return Color == t.Color && Kind == t.Kind;
+            }
+
+            public TulipController Serve(Transform parent)
+            {
+                return new TulipData(this).Serve(parent);
+            }
+        }
+
         public Color Color { get; }
         public TulipKind Kind { get; }
         public TulipStage Stage { get; private set; }
         
         public TulipOwner Owner { get; set; }
 
+        private TulipVarietal _varietal;
+        public TulipVarietal Varietal
+        {
+            get
+            {
+                if (_varietal == null)
+                {
+                    _varietal = new TulipVarietal
+                    {
+                        Color = Color,
+                        Kind = Kind,
+                    };
+                }
+                return _varietal;
+            }
+        }
+        
         public bool UseBulbIcon => Stage == TulipStage.Bulb;
         public bool OwnedByPlayer => Owner == TulipOwner.Player;
         public bool IsPlanted => Stage != TulipStage.Bulb;
@@ -79,13 +112,24 @@ namespace Plants
 
         public TulipInventoryController TulipInventory;
         
-        public TulipData(TulipColor color, TulipKind kind)
+        public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
         { 
             Color = AssignColor(color);
             Kind = kind;
-            Stage = TulipStage.Bulb;
-            Owner = TulipOwner.Shop;
+            Stage = stage;
+            Owner = owner;
 
+            Timeline = ServiceLocator.GetService<Timeline>();
+            ServiceLocator.TryGetService(out TulipInventory);
+        }
+
+        public TulipData(TulipVarietal ofKind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
+        {
+            Color = ofKind.Color;
+            Kind = ofKind.Kind;
+            Stage = stage;
+            Owner = owner;
+            
             Timeline = ServiceLocator.GetService<Timeline>();
             ServiceLocator.TryGetService(out TulipInventory);
         }

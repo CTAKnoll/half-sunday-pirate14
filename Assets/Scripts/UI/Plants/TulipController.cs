@@ -16,7 +16,7 @@ namespace UI.Plants
 
         public event Action<TulipController, IUIController> Consumed;
         
-        private TulipData Data;
+        public readonly TulipData Data;
         Plantable UIPlantable.PlantingData => Data;
 
         private Vector3 DragOffset;
@@ -51,28 +51,23 @@ namespace UI.Plants
         {
             if (IsOverBucket(out Bucket consumer) && ControllerDb.GetControllerFromView(consumer.interactable, out IUIController contr))
             {
-                Debug.Log(0);
                 if (contr is PlotController plot) // we're dropping on a plot
                 {
-                    Debug.Log(1);
                     if (!ConsumedByPlot(plot))
                         return;
                 }
                 else if (contr is TulipInteractionController bucket) // we're dropping on a simple bucket
                 {
-                    Debug.Log(2);
                     if (!ConsumedByTulipInteraction(bucket))
                         return;
                 }
                 else if (contr is BulbInventoryController bulbInventory) // we're dropping on the inventory
                 {
-                    Debug.Log(3);
                     if (!ConsumedByBulbInventory(bulbInventory))
                         return;
                 }
                 else if (contr is TulipInventoryController tulipInventory) // we're dropping on the inventory
                 {
-                    Debug.Log(4);
                     if (!ConsumedByTulipInventory(tulipInventory))
                         return;
                 }
@@ -80,7 +75,6 @@ namespace UI.Plants
             }
             else
             {
-                Debug.Log(5);
                 ReturnToOrigin();
             }
         }
@@ -133,7 +127,7 @@ namespace UI.Plants
 
         private bool ConsumedByBulbInventory(BulbInventoryController bulbInventory)
         {
-            if (!bulbInventory.BulbInventoryFunction(Data) || !bulbInventory.Server.HasEmpty() || !ShopCheck()) 
+            if (!bulbInventory.Server.HasEmpty() || !ShopCheck()) 
             {
                 ReturnToOrigin();
                 return false;
@@ -145,7 +139,7 @@ namespace UI.Plants
 
         private bool ConsumedByTulipInventory(TulipInventoryController tulipInventory)
         {
-            if (!tulipInventory.PickedInventoryFunction(Data) || !tulipInventory.Server.HasEmpty() || !ShopCheck()) 
+            if (!tulipInventory.Server.HasEmpty() || !ShopCheck()) 
             {
                 ReturnToOrigin();
                 return false;

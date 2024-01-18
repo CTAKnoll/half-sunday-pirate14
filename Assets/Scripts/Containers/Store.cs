@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Plants;
 using Services;
+using UI.Model;
 using UI.Plants;
 using UnityEngine;
 
@@ -58,18 +60,19 @@ namespace UI.Containers
             Filter = filterFunc;
         }
 
-        public TulipController AddItem(TulipData toAdd)
+        public TulipController AddItem(TulipData toAdd, [CanBeNull] Action<TulipController, IUIController> onConsumed)
         {
             if (!Filter(toAdd))
                 throw new ArgumentException($"Added TulipData did not match filter function! Data: {toAdd}");
             
             for (int i = 0; i < MaxSize; i++)
             {
-                if (Elements[i] == TulipData.Empty)
+                if (Elements[i].Equals(TulipData.Empty))
                 {
                     Debug.Log($"Serving {i} {toAdd}");
                     Elements[i] = toAdd;
                     Controllers[i] = toAdd.Serve(Owners[i]);
+                    Controllers[i].Consumed += onConsumed;
                     return Controllers[i];
                 }
             }
@@ -85,7 +88,7 @@ namespace UI.Containers
             Controllers[index] = null;
         }
         
-        public bool RemoveItem(TulipController controller)
+        public bool RemoveItem(TulipController controller, int amount = 1)
         {
             int index = Array.IndexOf(Controllers, controller);
             if (index == -1) return false;

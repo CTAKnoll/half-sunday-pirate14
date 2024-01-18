@@ -5,24 +5,21 @@ using UI.Plants;
 
 namespace UI.Containers
 {
-    public class TulipInventoryController : UIController<InventoryView, InventoryModel>, Container<TulipData, TulipController>, IService
+    public class TulipInventoryController : UIController<InventoryView, InventoryModel>, Container<TulipData.TulipVarietal, TulipController>, IService
     {
-        public ContainerServer<TulipData, TulipController> Server { get; }
-
-        public Inventory.FilterFunction PickedInventoryFunction = data => data.OwnedByPlayer && !data.UseBulbIcon;
-
+        public ContainerServer<TulipData.TulipVarietal, TulipController> Server { get; }
+        
         private AudioService _audio;
         public TulipInventoryController(InventoryView view) : base(view)
         {
             ServiceLocator.RegisterAsService(this);
-            Server = new Inventory(PickedInventoryFunction, View.InventorySlots);
+            Server = new Inventory(View.SlotControllers);
             _audio = ServiceLocator.GetService<AudioService>();
         }
 
         public void AddItem(TulipData data)
         {
-            var newTulip = Server.AddItem(data);
-            newTulip.Consumed += OnStoreItemConsumed;
+            Server.AddItem(data.Varietal, OnStoreItemConsumed);
             _audio.PlayOneShot(View.sfx_place_item);
         }
 

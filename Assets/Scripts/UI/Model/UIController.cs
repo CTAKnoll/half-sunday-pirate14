@@ -110,6 +110,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
 
     public bool IsActiveUI => ActivityMutex != null || LogicalParent is { IsActiveUI: true };
     private bool ModelDirty = false;
+    public UIInteractable interactable => View.interactable;
 
     public UIController(TView view, TModel model = default)
     {
@@ -176,6 +177,9 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     
     public virtual void Close()
     {
+        if (View.IsDestroyed)
+            return;
+        
         CloseChildren();
         LogicalParent?.RemoveChild(this);
         UiDriver.UnregisterForAll(View);

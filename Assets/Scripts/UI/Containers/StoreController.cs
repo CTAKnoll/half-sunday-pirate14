@@ -1,6 +1,7 @@
 ﻿using Plants;
 using UI.Model;
 using UI.Plants;
+using UnityEngine;
 
 namespace UI.Containers
 {
@@ -21,8 +22,8 @@ namespace UI.Containers
         {
             while (Server.HasEmpty())
             {
-                var newTulip = Server.AddItem(new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.SolidColor));
-                newTulip.Consumed += OnStoreItemConsumed;
+                Debug.Log("Maybe here?");
+                Server.AddItem(new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.SolidColor), OnStoreItemConsumed);
             }
         }
 

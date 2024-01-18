@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Plants;
+using UI.Model;
 using UI.Plants;
 using UnityEngine;
+using static Plants.TulipData;
 
 namespace UI.Containers
 {
-    public class Inventory : ContainerServer<TulipData, TulipController>
+    public class Inventory : ContainerServer<TulipVarietal, TulipController>
     {
-        private TulipData[] Elements;
-        private TulipController[] Controllers;
-        private Transform[] Owners;
+        private TulipVarietal[] Elements;
+        private InventorySlotController[] Owners;
         public virtual int MaxSize => 5;
+        public virtual int PageSize => 5;
 
         public int Count 
         {
@@ -21,15 +22,15 @@ namespace UI.Containers
                 int total = 0;
                 for (int i = 0; i < MaxSize; i++)
                 {
-                    if (Elements[i] != TulipData.Empty)
+                    if (Elements[i].Kind != TulipKind.Empty)
                     {
-                        if (Controllers[i] == null)
+                        if (Owners[i].IsEmpty)
                             throw new Exception("ContainerServer out of sync!");
                         total++;
                     }
                     else
                     {
-                        if (Controllers[i] != null)
+                        if (!Owners[i].IsEmpty)
                             throw new Exception("ContainerServer out of sync!");
                     }
                 }
@@ -37,61 +38,70 @@ namespace UI.Containers
             }
         }
 
-        public delegate bool FilterFunction(TulipData toAdd);
-        private FilterFunction Filter;
-        
-        public Inventory(FilterFunction filterFunc, List<UIInteractable> owners)
+        public Inventory(List<InventorySlotController> owners)
         {
-            Elements = new TulipData[MaxSize];
-            Controllers = new TulipController[MaxSize];
-            
-            Owners = new Transform[MaxSize];
+            Elements = new TulipVarietal[MaxSize];
+            Owners = new InventorySlotController[MaxSize];
             for (int i = 0; i < MaxSize; i++)
             {
-                Elements[i] = TulipData.Empty;
-                Controllers[i] = null;
-                Owners[i] = owners[i].transform;
+                Elements[i] = null;
+                Owners[i] = owners[i];
             }
-            
-            Filter = filterFunc;
         }
         
-        public TulipController AddItem(TulipData toAdd)
+        public TulipController AddItem(TulipVarietal toAdd, Action<TulipController, IUIController> onConsumed)
         {
-            if (!Filter(toAdd))
-                throw new ArgumentException($"Added TulipData did not match filter function! Data: {toAdd}");
-            
-            for (int i = 0; i < MaxSize; i++)
+            for (int i = 0; i < MaxSize; i++) // look for stack first
             {
-                if (Elements[i] == TulipData.Empty)
+                if (Elements[i]?.Equals(toAdd) ?? false)
+                {
+                    Owners[i].ConsumeFunction = onConsumed;
+                    Owners[i].UpdateSlot(toAdd, Owners[i].Stacks + 1);
+                    return Owners[i].Tulip;
+                }
+            }
+            for (int i = 0; i < MaxSize; i++) // look for first empty
+            {
+                if (Elements[i] == null)
                 {
                     Elements[i] = toAdd;
-                    Controllers[i] = toAdd.Serve(Owners[i]);
-                    return Controllers[i];
+                    Owners[i].ConsumeFunction = onConsumed;
+                    Owners[i].UpdateSlot(toAdd, 1);
+                    return Owners[i].Tulip;
                 }
             }
 
             throw new IndexOutOfRangeException("All elements of Inventory are already full!");
         }
         
-        public TulipController GetItem(int index) => Controllers[index];
+        public TulipController GetItem(int index) => Owners[index].Tulip;
 
         public void RemoveItem(int index)
         {
-            Elements[index] = TulipData.Empty;
-            Controllers[index] = null;
+            Elements[index] = null;
+            Owners[index].UpdateSlot(null, 0);
         }
         
-        public bool RemoveItem(TulipController controller)
+        public bool RemoveItem(TulipController controller, int amount = 1)
         {
-            int index = Array.IndexOf(Controllers, controller);
+            Debug.Log("hihii");
+            int index = Array.IndexOf(Owners.Select(owner => owner.Tulip).ToArray(), controller);
             if (index == -1) return false;
-            Elements[index] = TulipData.Empty;
-            Controllers[index] = null;
+            int finalAmt = Owners[index].Stacks - amount;
+            if (finalAmt <= 0)
+            {
+                Debug.Log("hoihi");
+                Elements[index] = null;
+                Owners[index].UpdateSlot(null, 0);
+            }
+            else
+            {
+                Owners[index].UpdateSlot(Owners[index].Tulip.Data.Varietal, finalAmt);
+            }
             return true;
         }
 
-        public bool IsEmpty(int index) => Elements[index] == TulipData.Empty;
-        public bool HasEmpty() => Elements.Contains(TulipData.Empty);
+        public bool IsEmpty(int index) => Elements[index] == null;
+        public bool HasEmpty() => Elements.Contains(null);
     }
 }
