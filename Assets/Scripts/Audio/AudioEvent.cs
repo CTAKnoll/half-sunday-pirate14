@@ -22,4 +22,9 @@ public class AudioEvent : ScriptableObject
     public AudioMixerGroup mixerGroup;
     public AudioService.Channel channel;
 
+    [Header("Pitch")]
+    public bool randomizePitch = false;
+    [Range(0, 0.5f)]
+    public float pitchVariance = 0;
+
 }

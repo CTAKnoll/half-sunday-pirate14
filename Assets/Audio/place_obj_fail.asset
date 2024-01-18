@@ -17,3 +17,5 @@ MonoBehaviour:
   volume: 1
   mixerGroup: {fileID: 0}
   channel: 0
+  randomizePitch: 1
+  pitchVariance: 0.036

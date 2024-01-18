@@ -33,6 +33,10 @@ namespace Services
             source.clip = sound.GetClip();
             source.volume = sound.volume;
             source.loop = sound.loop;
+            if(sound.randomizePitch)
+            {
+                source.pitch += UnityEngine.Random.Range(-1 * sound.pitchVariance, sound.pitchVariance);
+            }
             source.Play();
         }
 
@@ -42,6 +46,10 @@ namespace Services
                 return;
 
             var source = _audioSources[(int)sound.channel];
+            if (sound.randomizePitch)
+            {
+                source.pitch += UnityEngine.Random.Range(-1 * sound.pitchVariance, sound.pitchVariance);
+            }
 
             source.PlayOneShot(sound.GetClip(), sound.volume);
         }
