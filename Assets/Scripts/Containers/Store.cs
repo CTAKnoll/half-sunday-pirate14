@@ -40,11 +40,9 @@ namespace UI.Containers
                 return total;
             }
         }
-
-        public delegate bool FilterFunction(TulipData toAdd);
-        private FilterFunction Filter;
         
-        public Store(FilterFunction filterFunc, List<UIInteractable> owners)
+        
+        public Store(List<UIInteractable> owners)
         {
             Elements = new TulipData[MaxSize];
             Controllers = new TulipController[MaxSize];
@@ -56,20 +54,14 @@ namespace UI.Containers
                 Controllers[i] = null;
                 Owners[i] = owners[i].transform;
             }
-            
-            Filter = filterFunc;
         }
 
         public TulipController AddItem(TulipData toAdd, [CanBeNull] Action<TulipController, IUIController> onConsumed)
         {
-            if (!Filter(toAdd))
-                throw new ArgumentException($"Added TulipData did not match filter function! Data: {toAdd}");
-            
             for (int i = 0; i < MaxSize; i++)
             {
                 if (Elements[i].Equals(TulipData.Empty))
                 {
-                    Debug.Log($"Serving {i} {toAdd}");
                     Elements[i] = toAdd;
                     Controllers[i] = toAdd.Serve(Owners[i]);
                     Controllers[i].Consumed += onConsumed;
@@ -88,9 +80,9 @@ namespace UI.Containers
             Controllers[index] = null;
         }
         
-        public bool RemoveItem(TulipController controller, int amount = 1)
+        public bool RemoveItem(TulipData item, int amount = 1)
         {
-            int index = Array.IndexOf(Controllers, controller);
+            int index = Array.IndexOf(Controllers.Select(controller => controller?.Data).ToArray(), item);
             if (index == -1) return false;
             Elements[index] = TulipData.Empty;
             Controllers[index] = null;

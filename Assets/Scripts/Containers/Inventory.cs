@@ -70,7 +70,8 @@ namespace UI.Containers
                 if (Elements[i].Varietal?.Equals(toAdd) ?? false)
                 {
                     Owners[i].ConsumeFunction = onConsumed;
-                    Owners[i].UpdateSlot(new InventoryStack(toAdd, Owners[i].Stacks + 1));
+                    Elements[i] = new InventoryStack(toAdd, Owners[i].Stacks + 1);
+                    Owners[i].UpdateSlot(Elements[i]);
                     return Owners[i].Tulip;
                 }
             }
@@ -80,7 +81,7 @@ namespace UI.Containers
                 {
                     Elements[i] = new InventoryStack(toAdd, 1);
                     Owners[i].ConsumeFunction = onConsumed;
-                    Owners[i].UpdateSlot(new InventoryStack(toAdd, 1));
+                    Owners[i].UpdateSlot(Elements[i]);
                     return Owners[i].Tulip;
                 }
             }
@@ -97,23 +98,21 @@ namespace UI.Containers
             Collapse();
         }
         
-        public bool RemoveItem(TulipController controller, int amount = 1)
+        public bool RemoveItem(TulipVarietal item, int amount = 1)
         {
-            Debug.Log("hihii");
-            int index = Array.IndexOf(Owners.Select(owner => owner.Tulip).ToArray(), controller);
+            int index = Array.IndexOf(Owners.Select(owner => owner.Tulip?.Data.Varietal).ToArray(), item);
             if (index == -1) return false;
             int finalAmt = Owners[index].Stacks - amount;
             if (finalAmt <= 0)
             {
-                Debug.Log("hoihi");
                 Elements[index] = new InventoryStack(null, 0);
-                Owners[index].UpdateSlot(new InventoryStack(null, 0));
             }
             else
             {
-                Owners[index].UpdateSlot(new InventoryStack(Owners[index].Tulip.Data.Varietal, finalAmt));
+                Elements[index] = new InventoryStack(Owners[index].Tulip.Data.Varietal, finalAmt);
             }
 
+            Owners[index].UpdateSlot(Elements[index]);
             Collapse();
             return true;
         }

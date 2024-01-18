@@ -25,7 +25,7 @@ namespace UI.Containers
 
         private void OnStoreItemConsumed(TulipController tulip, IUIController consumer)
         {
-            Server.RemoveItem(tulip);
+            Server.RemoveItem(tulip.Data.Varietal);
         }
     }
 }
