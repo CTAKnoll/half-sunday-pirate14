@@ -684,9 +684,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 172278555379857}
-  node1: MamboConcert
-  node2: DanceBall
-  node3: TravelingCalvinists
+  _incidents:
+  - nodeName: MamboConcert
+    monthsAfterStart: 3
+  - nodeName: DanceBall
+    monthsAfterStart: 10
+  - nodeName: TravelingCalvinists
+    monthsAfterStart: 20
 --- !u!114 &172278555379857
 MonoBehaviour:
   m_ObjectHideFlags: 0
