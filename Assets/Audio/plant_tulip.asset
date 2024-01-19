@@ -17,6 +17,8 @@ MonoBehaviour:
   volume: 1
   mixerGroup: {fileID: 0}
   channel: 0
+  randomizePitch: 1
+  pitchVariance: 0.010862129
   AudioClips:
   - {fileID: 8300000, guid: b6ce4c0efcb1d5543826525f466ca470, type: 3}
   - {fileID: 8300000, guid: 337814583f72fcc4dbf977a54a86d1c2, type: 3}
