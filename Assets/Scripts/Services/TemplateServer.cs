@@ -10,6 +10,7 @@ namespace Services
     {
         public SimpleButtonTemplate SimpleButton;
         public TulipTemplate Tulip;
+        public TulipEconomyLineTemplate TulipEconomyLine;
 
         public Dictionary<Type, UIViewTemplateBase> TemplateMapping;
 
@@ -20,6 +21,7 @@ namespace Services
             {
                 [typeof(SimpleButtonTemplate)] = SimpleButton,
                 [typeof(TulipTemplate)] = Tulip,
+                [typeof(TulipEconomyLineTemplate)] = TulipEconomyLine,
             };
         }
 

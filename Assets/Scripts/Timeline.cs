@@ -29,6 +29,15 @@ public class Timeline : IService
 
     public void AddTimelineEvent(object owner, Action callback, DateTime eventTime) => TimelineEvents.Enqueue((owner, callback), eventTime);
 
+    public void AddRecurring(object owner, Action callback, TimeSpan span)
+    {
+        TimelineEvents.Enqueue((owner, () =>
+        {
+            callback();
+            AddRecurring(owner, callback, span);
+        }), FromNow(span));
+    }
+
     public void RemoveAllEvents(object owner)
     {
         List<(object, Action)> toDequeue = new();
@@ -48,6 +57,7 @@ public class Timeline : IService
         START_DATE.AddYears(years).AddMonths(months).AddDays(days);
     public static DateTime FromNow(int years, int months, int days = 0) =>
         Now.AddYears(years).AddMonths(months).AddDays(days);
+    public static DateTime FromNow(TimeSpan span) => Now + span;
     
     private void MoveToNextDay()
     {

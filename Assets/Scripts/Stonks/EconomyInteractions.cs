@@ -2,7 +2,7 @@ using System;
 using Plants;
 using Services;
 using UI.Plants;
-using UI.Stonks;
+using Stonks;
 using UnityEngine;
 
 public class EconomyInteractions : MonoBehaviour

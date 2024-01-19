@@ -6,7 +6,7 @@ using Services;
 using UnityEngine;
 using Random = System.Random;
 
-namespace UI.Stonks
+namespace Stonks
 {
     public class TulipEconomy
     {
@@ -35,7 +35,6 @@ namespace UI.Stonks
                 InflationMult = (float) Math.Pow(YEARLY_INFLATION, (Timeline.Now - Timeline.START_DATE).Days / 365f);
                 MarketMult = 1;
                 IncidentModifiers = new();
-                CreationDate = Timeline.Now;
             }
 
             public PriceSnapshot(PriceSnapshot previous, float multiplier)
@@ -44,21 +43,17 @@ namespace UI.Stonks
                 InflationMult = (float) Math.Pow(YEARLY_INFLATION, (Timeline.Now - Timeline.START_DATE).Days / 365f);
                 MarketMult = previous.MarketMult * multiplier;
                 IncidentModifiers = previous.IncidentModifiers.Where(modifier => modifier.ExpirationDate >= Timeline.Now).ToList();
-                CreationDate = Timeline.Now;
-                
-                Debug.Log($"New Delicious Price! {Price}");
             }
 
             public readonly List<IncidentModifier> IncidentModifiers;
-            public readonly DateTime CreationDate;
             public float Price => BasePrice * InflationMult * MarketMult *
                                   IncidentModifiers.Aggregate(1f, (current, next) => current * next.ModifierAmt);
         }
 
 
         public static readonly float BASE_TULIP_PRICE = 10f;
-        public Stack<PriceSnapshot> PriceHistory;
-        public float Price => PriceHistory.Peek().Price;
+        public SortedList<DateTime, PriceSnapshot> PriceHistory;
+        public float Price => PriceHistory.Last().Value.Price;
         public TulipData.TulipVarietal Varietal;
         
         private Random Random;
@@ -71,19 +66,19 @@ namespace UI.Stonks
             PriceHistory = new();
             Varietal = varietal;
             
-            PriceHistory.Push(new PriceSnapshot(BASE_TULIP_PRICE));
+            PriceHistory.Add(Timeline.Now, new PriceSnapshot(BASE_TULIP_PRICE));
             Timeline.AddTimelineEvent(this, ModifyPrice, Timeline.FromNow(0, 0, 3));
         }
 
         public void AddIncidentModifier(float mult, DateTime expiration)
         {
-            PriceHistory.Peek().IncidentModifiers.Add(new IncidentModifier(mult, expiration));
+            PriceHistory.Last().Value.IncidentModifiers.Add(new IncidentModifier(mult, expiration));
         }
 
         private void ModifyPrice()
         {
             float modifier = Random.Next(9900, 10100) / 10000f;
-            PriceHistory.Push(new PriceSnapshot(PriceHistory.Peek(), modifier));
+            PriceHistory.Add(Timeline.Now, new PriceSnapshot(PriceHistory.Last().Value, modifier));
             Timeline.AddTimelineEvent(this, ModifyPrice, Timeline.FromNow(0, 0, 3));
         }
         

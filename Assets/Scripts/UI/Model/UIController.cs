@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Services;
 using UI.Model;
-using UI.Stonks;
+using Stonks;
 using UnityEngine;
 using Utils;
 
@@ -128,7 +128,6 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         
         ControllerDb.Register(View, this);
         Model = model;
-        View.UpdateViewWithModel(Model);
     }
 
     protected virtual void GetServices()
