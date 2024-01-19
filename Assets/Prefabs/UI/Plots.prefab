@@ -29,21 +29,21 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4182367401928872369}
-  - {fileID: 4812358945580657755}
-  - {fileID: 1727021974431877959}
-  - {fileID: 528906408692519986}
-  - {fileID: 5931364167340612048}
-  - {fileID: 5845131590798636229}
-  - {fileID: 5928059717981225967}
-  - {fileID: 5964652792204649897}
   - {fileID: 1868116904991187245}
-  - {fileID: 6237542186648290339}
-  - {fileID: 7597093817590905358}
+  - {fileID: 5845131590798636229}
+  - {fileID: 1727021974431877959}
   - {fileID: 5562037628018733318}
-  - {fileID: 4854917029407286951}
-  - {fileID: 5952954298648767447}
   - {fileID: 573923528121263158}
+  - {fileID: 5964652792204649897}
+  - {fileID: 5931364167340612048}
+  - {fileID: 4812358945580657755}
+  - {fileID: 7597093817590905358}
+  - {fileID: 5952954298648767447}
+  - {fileID: 5928059717981225967}
+  - {fileID: 528906408692519986}
+  - {fileID: 4182367401928872369}
+  - {fileID: 6237542186648290339}
+  - {fileID: 4854917029407286951}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -79,9 +79,9 @@ MonoBehaviour:
   - {fileID: 4355791923858301213}
   - {fileID: 3283094000933678189}
   - {fileID: 8711154193700627340}
-  NoWeedsModifier: 0.5
-  MinTimeWithWeeds: 3
-  MaxTimeWithWeeds: 3
+  NoWeedsModifier: 0.05
+  MinTimeWithWeeds: 120
+  MaxTimeWithWeeds: 120
 --- !u!1001 &732496961687764815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -172,8 +172,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 4
+      value: Plot 3-2
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 3266924037163762773}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 3261363372764388970}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 4978729403742869003}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -285,8 +297,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 15
+      value: Plot 1-5
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 3612611742979307196}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 3283094000933678189}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -398,8 +418,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 9
+      value: Plot 1-1
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 3302392937846956563}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 3318260994080338815}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -511,8 +539,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 3
+      value: Plot 1-3
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 3318260994080338815}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 4456925407589182433}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 3612611742979307196}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -624,8 +664,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 1
+      value: Plot 3-3
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 8666558930397008776}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 4456925407589182433}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 2991220763621147545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -737,8 +789,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 12
+      value: Plot 1-4
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 7558550527886773501}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 1620324373847375284}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 8711154193700627340}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -850,8 +914,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 13
+      value: Plot 3-5
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 2991220763621147545}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 3283094000933678189}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -963,8 +1035,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 2
+      value: Plot 2-3
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 3261363372764388970}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 7558550527886773501}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 4978729403742869003}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 1620324373847375284}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1076,8 +1164,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 10
+      value: Plot 3-4
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 4978729403742869003}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 1620324373847375284}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 4355791923858301213}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1189,8 +1289,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 6
+      value: Plot 1-2
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 7421407242087360151}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 3261363372764388970}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 7558550527886773501}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1302,8 +1414,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 5
+      value: Plot 2-2
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 3302392937846956563}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 3318260994080338815}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 8666558930397008776}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 4456925407589182433}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1415,8 +1543,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 7
+      value: Plot 3-1
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 3302392937846956563}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 8666558930397008776}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1528,8 +1664,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 8
+      value: Plot 2-1
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 7421407242087360151}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 3266924037163762773}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 3261363372764388970}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1641,8 +1789,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 14
+      value: Plot 2-5
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 1620324373847375284}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 8711154193700627340}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 4355791923858301213}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1754,8 +1914,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2834953355880290263, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
       propertyPath: m_Name
-      value: Plot 11
+      value: Plot 2-4
       objectReference: {fileID: 0}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: LeftLinkedPlot
+      value: 
+      objectReference: {fileID: 4456925407589182433}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: AboveLinkedPlot
+      value: 
+      objectReference: {fileID: 3612611742979307196}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: BelowLinkedPlot
+      value: 
+      objectReference: {fileID: 2991220763621147545}
+    - target: {fileID: 8245975971895585991, guid: a13f3a3efa2455e4e9279d3e34d274e6, type: 3}
+      propertyPath: RightLinkedPlot
+      value: 
+      objectReference: {fileID: 3283094000933678189}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

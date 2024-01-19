@@ -20,6 +20,9 @@ namespace Services
 
         public bool GetControllerFromView(UIInteractable view, out IUIController result)
         {
+            result = null;
+            if (view == null)
+                return false;
             return Mapping.TryGetValue(view, out result);
         }
     }

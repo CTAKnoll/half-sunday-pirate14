@@ -13,6 +13,7 @@ namespace Plants
         }
 
         public event Action OnDeath;
+        public event Action OnSpreading;
         public WeedStage Stage;
         public int Health;
 
@@ -33,8 +34,14 @@ namespace Plants
         public void Damage()
         {
             Health -= 1;
+            Timeline.AddTimelineEvent(this, Heal, Timeline.FromNow(0, 1, 15));
             if (Health <= 0)
                 Cleanup();
+        }
+
+        public void Heal()
+        {
+            Health += 1;
         }
         
         private void Cleanup()
@@ -47,6 +54,8 @@ namespace Plants
         {
             if (Stage < WeedStage.Spreading)
                 Stage = (WeedStage)((int) Stage + 1);
+            if (Stage == WeedStage.Spreading)
+                OnSpreading?.Invoke();
         }
 
         public override string ToString()
