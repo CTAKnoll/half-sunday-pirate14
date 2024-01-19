@@ -75,9 +75,16 @@ namespace UI.Plants
         public void PlantTulip(TulipData tulip)
         {
             Tulip = tulip;
-            Tulip.OnDeath += () => Tulip = null;
+            Tulip.OnDeath += () =>
+            {
+                Tulip = null;
+                Model.TulipShowing = false;
+                UpdateViewAtEndOfFrame();
+            };
+            Tulip.StageChanged += UpdateTulipVisual;
             tulip.Plant();
 
+            UpdateTulipVisual();
             _audio.PlayOneShot(View.sfx_planted);
         }
 
@@ -85,16 +92,35 @@ namespace UI.Plants
         {
             Weed = weed;
             Weed.OnSpreading += SpreadWeeds;
+            Weed.OnStageChanged += UpdateWeedVisual;
             Weed.OnDeath += () =>
             {
                 Weed = null;
                 SpreadDirection = PlotSpreadDirection.NotSpreading;
+                Model.WeedShowing = false;
+                UpdateViewAtEndOfFrame();
             };
+            
             weed.Plant();
+            UpdateWeedVisual();
+        }
+
+        private void UpdateTulipVisual()
+        {
+            Model.TulipShowing = IsPlanted;
+            Model.TulipImage = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(Tulip.Stage);
+            UpdateViewAtEndOfFrame();
+        }
+        
+        private void UpdateWeedVisual()
+        {
+            Model.WeedShowing = IsWeeded;
+            Model.WeedImage = ServiceLocator.GetService<WeedArtServer>().GetBaseSprite(Weed.Stage);
+            UpdateViewAtEndOfFrame();
         }
         
         // Note: This is ass
-        public void SpreadWeeds()
+        private void SpreadWeeds()
         {
             System.Random gen = new System.Random();
             Array directions = Enum.GetValues(typeof(PlotSpreadDirection));
@@ -102,7 +128,7 @@ namespace UI.Plants
             PlotController contr;
             while (!DirectionalPlots.TryGetValue(SpreadDirection, out contr) || contr == null || contr.IsWeeded)
             {
-                if (DirectionalPlots.Values.All(plot => plot.IsWeeded))
+                if (DirectionalPlots.Values.All(plot => plot?.IsWeeded ?? true))
                     break;
                 SpreadDirection = (PlotSpreadDirection) directions.GetValue(gen.Next(directions.Length));
             }

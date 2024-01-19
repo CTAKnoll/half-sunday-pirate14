@@ -46,11 +46,12 @@ namespace Plants
         {
             Bulb, 
             Planted,
+            Sprout,
             Shoot,
             Bud,
             Bloom,
             FullBloom,
-            Overripe,
+            OverBloom,
             Dead,
             Choking,
             Picked
@@ -104,11 +105,12 @@ namespace Plants
         public bool UseBulbIcon => Stage == TulipStage.Bulb;
         public bool OwnedByPlayer => Owner == TulipOwner.Player;
         public bool IsPlanted => Stage != TulipStage.Bulb;
-        public bool CanHarvest => Stage.IsOneOf(TulipStage.Bloom, TulipStage.FullBloom, TulipStage.Overripe);
+        public bool CanHarvest => Stage.IsOneOf(TulipStage.Bloom, TulipStage.FullBloom, TulipStage.OverBloom);
 
         public static TulipData Empty = new (TulipColor.Empty, TulipKind.Empty);
 
         public event Action OnDeath;
+        public event Action StageChanged;
 
         public TulipInventoryController TulipInventory;
         
@@ -140,6 +142,7 @@ namespace Plants
             AdvanceStage();
             
             // schedule the next few stages
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1)); //sprout
             Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1)); //shoot
             Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 2)); //bud
             Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 3)); //bloom
@@ -180,6 +183,7 @@ namespace Plants
                 Stage = (TulipStage)((int) Stage + 1);
             if (Stage > TulipStage.Dead)
                 Stage = (TulipStage)((int) Stage - 1);
+            StageChanged?.Invoke();
         }
 
         private void Cleanup()

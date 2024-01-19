@@ -14,6 +14,7 @@ namespace Plants
 
         public event Action OnDeath;
         public event Action OnSpreading;
+        public event Action OnStageChanged;
         public WeedStage Stage;
         public int Health;
 
@@ -56,6 +57,7 @@ namespace Plants
                 Stage = (WeedStage)((int) Stage + 1);
             if (Stage == WeedStage.Spreading)
                 OnSpreading?.Invoke();
+            OnStageChanged?.Invoke();
         }
 
         public override string ToString()

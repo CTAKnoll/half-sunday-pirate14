@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Plants;
 using Services;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace UI.Stonks
         private float StartingFunds = 100;
         public float Funds { get; private set; }
 
+        public Dictionary<TulipData.TulipVarietal, TulipEconomy> TulipEconomyData;
         public event Action<float> FundsChanged;
         public Economy()
         {
