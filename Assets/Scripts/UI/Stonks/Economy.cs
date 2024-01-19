@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Plants;
 using Services;
-using UnityEngine;
+using static Plants.TulipData;
 
 namespace UI.Stonks
 {
@@ -11,11 +11,15 @@ namespace UI.Stonks
         private float StartingFunds = 100;
         public float Funds { get; private set; }
 
-        public Dictionary<TulipData.TulipVarietal, TulipEconomy> TulipEconomyData;
+        public Dictionary<TulipVarietal, TulipEconomy> TulipEconomyData;
         public event Action<float> FundsChanged;
         public Economy()
         {
             Funds = StartingFunds;
+            TulipEconomyData = new();
+
+            TulipVarietal redPlain = new TulipVarietal(TulipColor.Red, TulipKind.SolidColor);
+            TulipEconomyData.Add(redPlain, new TulipEconomy(redPlain));
         }
 
         public bool BuyTulip(TulipData data)
@@ -30,7 +34,6 @@ namespace UI.Stonks
 
         public bool SellTulip(TulipData data)
         {
-            Debug.Log("SELLING");
             Funds += 10;
             FundsChanged?.Invoke(Funds);
             return true;

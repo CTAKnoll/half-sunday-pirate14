@@ -68,6 +68,18 @@ namespace Plants
             public Color Color;
             public TulipKind Kind;
 
+            public TulipVarietal(TulipColor color, TulipKind kind)
+            {
+                Color = AssignColor(color);
+                Kind = kind;
+            }
+            
+            public TulipVarietal(Color color, TulipKind kind)
+            {
+                Color = color;
+                Kind = kind;
+            }
+
             public bool Equals(TulipVarietal t)
             {
                 return Color == t.Color && Kind == t.Kind;
@@ -78,7 +90,7 @@ namespace Plants
                 return new TulipData(this).Serve(parent);
             }
         }
-
+        
         public Color Color { get; }
         public TulipKind Kind { get; }
         public TulipStage Stage { get; private set; }
@@ -92,11 +104,7 @@ namespace Plants
             {
                 if (_varietal == null)
                 {
-                    _varietal = new TulipVarietal
-                    {
-                        Color = Color,
-                        Kind = Kind,
-                    };
+                    _varietal = new TulipVarietal(Color, Kind);
                 }
                 return _varietal;
             }
@@ -162,7 +170,7 @@ namespace Plants
             TulipInventory.AddItem(this);
         }
 
-        private Color AssignColor(TulipColor color)
+        protected static Color AssignColor(TulipColor color)
         {
             if (color == TulipColor.Random)
             {
