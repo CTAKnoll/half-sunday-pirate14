@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Plants;
 using Services;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 using static Plants.TulipData;
 
@@ -24,7 +25,12 @@ namespace Stonks
 
             TulipVarietal redPlain = new TulipVarietal(TulipColor.Red, TulipKind.SolidColor);
             TulipEconomyData.Add(redPlain, new TulipEconomy(redPlain));
-            VarietalAdded?.Invoke(redPlain);
+            
+            TulipVarietal greenPlain = new TulipVarietal(TulipColor.Green, TulipKind.SolidColor);
+            TulipEconomyData.Add(greenPlain, new TulipEconomy(greenPlain));
+            
+            TulipVarietal bluePlain = new TulipVarietal(TulipColor.Blue, TulipKind.SolidColor);
+            TulipEconomyData.Add(bluePlain, new TulipEconomy(bluePlain));
         }
 
         public SortedList<DateTime, TulipEconomy.PriceSnapshot> GetPriceData(TulipVarietal varietal, DateTime start, DateTime end)
@@ -32,7 +38,11 @@ namespace Stonks
             return new SortedList<DateTime, TulipEconomy.PriceSnapshot>(TulipEconomyData[varietal].PriceHistory
                 .Where(elem => elem.Key >= start && elem.Key <= end)
                 .ToDictionary(kv => kv.Key, kv => kv.Value));
+        }
 
+        public float GetCurrentPrice(TulipVarietal varietal)
+        {
+            return TulipEconomyData[varietal].Price;
         }
 
         public bool BuyTulip(TulipData data)
@@ -47,9 +57,14 @@ namespace Stonks
 
         public bool SellTulip(TulipData data)
         {
-            Funds += 10;
+            Funds += RoundToTwoDecimalPlaces(GetCurrentPrice(data.Varietal));
             FundsChanged?.Invoke(Funds);
             return true;
+        }
+
+        private float RoundToTwoDecimalPlaces(float num)
+        {
+            return (int)(num * 100) / 100f;
         }
     }
 }

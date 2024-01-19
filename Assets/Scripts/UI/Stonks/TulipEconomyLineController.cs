@@ -11,18 +11,18 @@ namespace UI.Stonks
         private Vector3 upperLeftBound;
         private Vector3 upperRightBound;
         private Vector3 lowerLeftBound;
-        private Vector3 lowerRightBound;
             
-        public TulipEconomyLineController(TulipEconomyLineTemplate template, RectTransform parent) : base(template, parent)
+        public TulipEconomyLineController(TulipEconomyLineTemplate template, RectTransform parent, Color color) : base(template, parent)
         {
             Model.RecentPrices = new();
+            Model.LineColor = color;
+            Debug.Log(Model.LineColor);
+            
             var bounds = new Vector3[4];
             parent.GetWorldCorners(bounds);
-
             lowerLeftBound = bounds[0];
             upperLeftBound = bounds[1];
             upperRightBound = bounds[2];
-            lowerRightBound = bounds[3];
         }
 
         public void BuildLine(List<TulipEconomy.PriceSnapshot> snapshots, float min, float max)
@@ -39,7 +39,7 @@ namespace UI.Stonks
                 points.Add(new Vector3(currX, yValue, GraphLineZ));
                 currX += xDistance;
             }
-
+            
             Model.RecentPrices = points;
             UpdateViewAtEndOfFrame();
         }
