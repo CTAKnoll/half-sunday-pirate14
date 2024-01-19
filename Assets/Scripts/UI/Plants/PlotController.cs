@@ -63,6 +63,7 @@ namespace UI.Plants
             {
                 Tulip.Harvest();
                 Tulip = null;
+                UpdateTulipVisual();
             }
         }
 
@@ -108,7 +109,8 @@ namespace UI.Plants
         private void UpdateTulipVisual()
         {
             Model.TulipShowing = IsPlanted;
-            Model.TulipImage = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(Tulip.Stage);
+            if(IsPlanted)
+                Model.TulipImage = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(Tulip.Stage);
             UpdateViewAtEndOfFrame();
         }
         

@@ -44,7 +44,6 @@ namespace UI.Stonks
             foreach (var line in StonkLines)
             {
                 var history = Economy.GetPriceData(line.Key, Timeline.Now - Reachback, Timeline.Now).Values.ToList();
-                Debug.Log(history.Count);
                 var localMin = history.Aggregate(float.MaxValue, (curr, next) => next.Price < curr ? next.Price : curr);
                 var localMax = history.Aggregate(float.MinValue, (curr, next) => next.Price > curr ? next.Price : curr);
                 min = Mathf.Min(min, localMin);

@@ -16,7 +16,6 @@ namespace UI.Stonks
         {
             Model.RecentPrices = new();
             Model.LineColor = color;
-            Debug.Log(Model.LineColor);
             
             var bounds = new Vector3[4];
             parent.GetWorldCorners(bounds);
