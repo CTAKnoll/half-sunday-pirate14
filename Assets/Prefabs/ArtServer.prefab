@@ -52,6 +52,7 @@ MonoBehaviour:
   Bloom: {fileID: 21300000, guid: 965760aa027f91742b3788e146fa9f35, type: 3}
   Fullbloom: {fileID: 21300000, guid: ea563dc035fe38b45850256b2be60ffe, type: 3}
   Overbloom: {fileID: 21300000, guid: adbac0933305b764d9887c37c1bacfe7, type: 3}
+  Choking: {fileID: 21300000, guid: b5bce50a4e60b6c4289c1d4534dbadd9, type: 3}
   Dead: {fileID: 21300000, guid: b5bce50a4e60b6c4289c1d4534dbadd9, type: 3}
 --- !u!114 &856565907619830258
 MonoBehaviour:

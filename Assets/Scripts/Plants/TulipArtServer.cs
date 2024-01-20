@@ -15,6 +15,7 @@ namespace Plants
         public Sprite Bloom;
         public Sprite Fullbloom;
         public Sprite Overbloom;
+        public Sprite Choking;
         public Sprite Dead;
 
         private Dictionary<TulipStage, Sprite> BaseImageServer;
@@ -31,6 +32,7 @@ namespace Plants
                 [TulipStage.Bloom] = Bloom,
                 [TulipStage.FullBloom] = Fullbloom,
                 [TulipStage.OverBloom] = Overbloom,
+                [TulipStage.Choking] = Choking,
                 [TulipStage.Dead] = Dead,
             };
         }
