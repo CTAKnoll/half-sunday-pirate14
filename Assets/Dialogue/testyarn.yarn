@@ -58,8 +58,8 @@ You are attending a local ball when a dance circle forms on the dance floor. You
                 You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of {rival_tulip_type()} increases by 5%)
 ===
 
-title: TravelingTrader
----
+// title: TravelingTrader
+// ---
 // Needs: $random_tulip_type, random_tulip_type_market_price 
 
 // A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
@@ -80,7 +80,7 @@ title: TravelingTrader
     //-> 4 * $market_price (Increase market price of $random_tulip_type by 20%)
         // 25 chance to fail for 2 times markup, 50% chance to fail for 4 times markup 
     //-> $market_price (Increase market price of $random_tulip_type by 5%)
-===
+// ===
 
 
 // Ideas for why people would need to buy tulips - it's ye olden times and everyone smells, spruce up house, quincenera, baptism, birthday, coronation
@@ -480,7 +480,7 @@ Artists have drawn paintings depicting tulip farmers and traders as monkeys (Mar
 <<if $supersecretclownending>>
     <<jump SuperSecretClownEnding>>
 <<else>>
-
+    // hopefully this can be empty
 <<endif>>
 ===
 
@@ -755,6 +755,10 @@ There's a sale at Penny's!
 // or: There's a sale at Penny's clothing store!
 ===
 
+title: HiKitboga
+---
+Crazed women sentenced to five years in jail after bringing a six layer dip to a seven layer dip party
+===
 
 
 // Rumors
@@ -784,9 +788,14 @@ title: RainbowTulip
 Rumors of a legendary rainbow tulip continue to spread. Urban legend or bourbon wedge end? Only time will tell
 ===
 
-title: HiKitboga
+title: InsaneJesterPosse
 ---
-Crazed women sentenced to five years in jail after bringing a six layer dip to a seven layer dip party
+Rumors speak of a strange group of jesters roaming the streets and singing strange songs
+===
+
+title: LesterTheJester
+---
+Lester the Jester inherits large bounty of wealth, the source of which is unknown. My money is on jester magic.
 ===
 
 // these legumes joke maybe or maybe subvert into leg um me walnuts or something idk
