@@ -206,7 +206,7 @@ A weary Spanish sailor approaches you. He wears an elegant red and gold tunic wi
 
 // programming wise we may not want to hard code these and just have the two asking prices tulip_color_rate * 1.5 and by 3 multiplied by the amount of tulips they ask for 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
-    //<<if $random_tulip_kind >=0>>
+    //<<if {random_tulip_kind()} >=0>>
         -> Provide {random_tulip_kind()} (Increase {random_tulip_kind_market_price()} by 15%)
         // {random_tulip_kind_market_price()} += 15%
         -> Refuse
@@ -263,14 +263,15 @@ title: SafetyNetNoTulipFarmerLeftBehind
 
 title: TravelingClownFirstMeeting
 ---
-// I would like wacky colors and text effects if possible for his dialogue
+// I would like wacky colors and text effects if possible for his dialogue - especially the HELLO
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
 // blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
 // flumpy, boppy, bingy, winky, tinky, 
 // do we want a Team Rocket Rival tulip farmer that comes and taunts you?
 HELLO! I am Lester the Jester! You seem like an enterprising and learned type of individual. You also appear to be quite busy and have your hands full of more than just those tulips you are carrying. It is important in life to stop and smell the roses sometimes. Would you like to smell the rose on my jacket?
     -> Smell his flower
-        In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you drop your tulips and stumble back, crushing them beneath your feet. (Lose 10 tulips)
+        In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you stumble back and fall onto a pile of your  {random_tulip_type()} tulips, crushing them. News quickly spreads of this extremely embarrassing encounter. (Market price of {random_tulip_type()} decreaes by 5%)
+        // random_tulip_type_market_price -= 5%
         // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
         // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
         "Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around"
@@ -308,11 +309,16 @@ title: TravelingClownSecondMeeting
         Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?
             -> Smell flower
                 <<set $clownspray2 to true>>
-                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your tulips in anger (Lose 5 tulips) // at your own foolishness
-                // <<$tulips -= 5>> 
+                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {random_tulip_type()} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 5%.
+                random_tulip_type_market_price -= 5%
             -> Don't smell flower
                 Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
     <<else>>
+        Alright surely this time you will smell my rose, right?
+            -> Yes
+                You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
+            -> No
+                Well you stick to your convinctions, I'll give you that. 
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
     <<endif>>
 
@@ -329,15 +335,24 @@ title: TravelingClownThirdMeeting
 // blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
 // flumpy, boppy, bingy, winky, tinky, 
 // do we want a Team Rocket Rival tulip farmer that comes and taunts you?
-HELLO! I am Lester the Jester! You seem like an enterprising and learned type of individual. You also appear to be quite busy and have your hands full of more than just those tulips you are carrying. It is important in life to stop and smell the roses sometimes. Would you like to smell the rose on my jacket?
-    -> Smell his flower
-        In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you drop your tulips and stumble back, crushing them beneath your feet. (Lose 10 tulips)
-        // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
-        // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
-        "Hey you're a real sport you know that! Hey maybe next time something good will happen. Well, see ya around"
-    -> Don't smell his flower
-        Awww, you're no fun.
-        // $clownsadness = true 
+// I would like wacky colors and text effects if possible for his dialogue
+    <<if $clownspray2 == true>>
+        Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?
+            -> Smell flower
+                <<set $clownspray3 to true>>
+                <<set $supersecretclownending to true>>
+                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {random_tulip_type()} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 5%.
+                random_tulip_type_market_price -= 5%
+            -> Don't smell flower
+                Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
+    <<else>>
+        Alright surely this time you will smell my rose, right?
+            -> Yes
+                You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
+            -> No
+                Well you stick to your convinctions, I'll give you that. 
+        // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
+    <<endif>>
     
 ===
 
@@ -462,9 +477,24 @@ title: BubbleIsBurstingAndPeopleAreTicked
 Artists have drawn paintings depicting tulip farmers and traders as monkeys (Market price tulips decrease 5%)
     -> I'm sure prices will bounce back
 // {all_tulips_market_price()} -= 3%
+<<if $supersecretclownending>>
+    <<jump SuperSecretClownEnding>>
+<<else>>
+
+<<endif>>
 ===
 
-
+title: SuperSecretClownEnding
+---
+// Needs: bank_balance() and total_owned_tulips_market_price() 
+While the quiet murmurs of the market crashing are slowly growing in volume, you sit in a fine leatherchair contemplating your options. Suddenly you hear a knock at the door. 
+    -> Answer the door
+        HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value.
+            -> Alright, thank you
+                // bank_balance() += total_owned_tulips_market_price() 
+            -> Nah, I'm good
+    -> Ignore them, you have more presssing matters at hand
+===
 
 
 
@@ -754,7 +784,10 @@ title: RainbowTulip
 Rumors of a legendary rainbow tulip continue to spread. Urban legend or bourbon wedge end? Only time will tell
 ===
 
-
+title: HiKitboga
+---
+Crazed women sentenced to five years in jail after bringing a six layer dip to a seven layer dip party
+===
 
 // these legumes joke maybe or maybe subvert into leg um me walnuts or something idk
 
