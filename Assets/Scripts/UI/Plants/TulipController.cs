@@ -8,6 +8,7 @@ using UI.Model.Templates;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Scripting;
 
 namespace UI.Plants
 {
@@ -44,6 +45,7 @@ namespace UI.Plants
         private void OnDrag()
         {
             Model.ScreenPos = UiDriver.PointerPosition + DragOffset;
+            Debug.Log($"{UiDriver.PointerPosition} {DragOffset} {Model.ScreenPos} {View.transform.position}");
             UpdateViewAtEndOfFrame();
         }
 
@@ -151,7 +153,8 @@ namespace UI.Plants
 
         private bool ConsumedByTulipInteraction(TulipInteractionController interaction)
         {
-            if (!(Data.Stage == TulipData.TulipStage.Picked) || !Data.OwnedByPlayer || !interaction.FireInteraction(Data))
+            Debug.Log($"{Data.Stage != TulipData.TulipStage.Picked} {!Data.OwnedByPlayer}");
+            if (Data.Stage != TulipData.TulipStage.Picked || !Data.OwnedByPlayer || !interaction.FireInteraction(Data))
             {
                 ReturnToOrigin();
                 return false;

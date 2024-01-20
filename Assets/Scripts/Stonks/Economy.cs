@@ -5,6 +5,7 @@ using System.Linq;
 using Plants;
 using Services;
 using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 using static Plants.TulipData;
 
@@ -42,6 +43,7 @@ namespace Stonks
 
         public float GetCurrentPrice(TulipVarietal varietal)
         {
+            Debug.Log(varietal.Color + " " + varietal.Kind);
             return TulipEconomyData[varietal].Price;
         }
 

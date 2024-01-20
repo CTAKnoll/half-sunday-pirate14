@@ -51,10 +51,14 @@ namespace UI.Stonks
                 histories.Add(line.Key, history);
             }
 
+            Model.MinValue = min;
+            Model.MaxValue = max;
+            
             foreach (var line in StonkLines)
             {
                 line.Value.BuildLine(histories[line.Key], min, max);
             }
+            UpdateViewAtEndOfFrame();
         }
     }
 }

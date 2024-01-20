@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ namespace Services
 {
     public class UIRoot : UIInteractable
     {
+        [SerializeField] public Camera MainCamera;
         public  GraphicRaycaster raycaster;
         public PlayerInput input;
         
@@ -16,7 +18,7 @@ namespace Services
         public InputActionReference altHold;
         public InputActionReference scroll;
         public InputActionReference back;
-        
+
         private UIDriver Controller;
 
         public void Awake()

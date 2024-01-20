@@ -93,7 +93,7 @@ namespace UI.Plants
         {
             Weed = weed;
             Weed.OnSpreading += SpreadWeeds;
-            Weed.OnStageChanged += UpdateWeedVisual;
+            Weed.OnStageChanged += HandleWeedStage;
             Weed.OnDeath += () =>
             {
                 Weed = null;
@@ -119,6 +119,15 @@ namespace UI.Plants
             Model.WeedShowing = IsWeeded;
             Model.WeedImage = ServiceLocator.GetService<WeedArtServer>().GetBaseSprite(Weed.Stage);
             UpdateViewAtEndOfFrame();
+        }
+
+        private void HandleWeedStage()
+        {
+            if ((int)Weed.Stage == (int)WeedData.WeedStage.Mature)
+            {
+                Tulip?.ChokeWithWeed(Weed);
+            }
+            UpdateWeedVisual();
         }
         
         // Note: This is ass

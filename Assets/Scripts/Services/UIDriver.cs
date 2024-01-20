@@ -196,6 +196,7 @@ namespace Services
         private void OnPointerMove(InputAction.CallbackContext context)
         {
             pointerData.position = context.ReadValue<Vector2>();
+            
             if(InputMode == UIInputMode.Pointer)
                 ActiveObject = RayCastToFindObjectAtMouse();
         }

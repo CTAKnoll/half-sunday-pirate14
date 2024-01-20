@@ -80,9 +80,20 @@ namespace Plants
                 Kind = kind;
             }
 
+            public override bool Equals(object o)
+            {
+                if (o is not TulipVarietal varietal) return false;
+                return Equals(varietal);
+            }
+
             public bool Equals(TulipVarietal t)
             {
                 return Color == t.Color && Kind == t.Kind;
+            }
+
+            public override int GetHashCode()
+            {
+                return HashCode.Combine(Color, Kind);
             }
 
             public TulipController Serve(Transform parent)
@@ -151,13 +162,6 @@ namespace Plants
             
             // schedule the next few stages
             Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1)); //sprout
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1)); //shoot
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 2)); //bud
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 3)); //bloom
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 4)); //fullbloom
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 5)); //overripe
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 6)); //dead
-            Timeline.AddTimelineEvent(this, Cleanup, Timeline.FromNow(0, 7)); // kill self
         }
 
         public void Harvest()
@@ -191,6 +195,30 @@ namespace Plants
                 Stage = (TulipStage)((int) Stage + 1);
             if (Stage > TulipStage.Dead)
                 Stage = (TulipStage)((int) Stage - 1);
+            
+            if(Stage == TulipStage.Dead)
+                Timeline.AddTimelineEvent(this, Cleanup, Timeline.FromNow(0, 1)); // remove self
+            else
+                Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1));
+
+            StageChanged?.Invoke();
+        }
+        
+        public void ChokeWithWeed(WeedData weed)
+        {
+            Timeline.RemoveAllEvents(this);
+            TulipStage currStage = Stage;
+            weed.OnDeath += () =>
+            {
+                if (this == null || Stage == TulipStage.Dead)
+                    return;
+                
+                Timeline.RemoveAllEvents(this);
+                Stage = currStage;
+                Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1));
+            };
+            Stage =  TulipStage.Choking;
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1));
             StageChanged?.Invoke();
         }
 
