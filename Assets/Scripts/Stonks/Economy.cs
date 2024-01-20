@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Plants;
 using Services;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using Utils;
 using static Plants.TulipData;
 
 namespace Stonks
@@ -59,14 +57,11 @@ namespace Stonks
 
         public bool SellTulip(TulipData data)
         {
-            Funds += RoundToTwoDecimalPlaces(GetCurrentPrice(data.Varietal));
+            Funds += GetCurrentPrice(data.Varietal).RoundToDecimalPlaces(2);
             FundsChanged?.Invoke(Funds);
             return true;
         }
 
-        private float RoundToTwoDecimalPlaces(float num)
-        {
-            return (int)(num * 100) / 100f;
-        }
+        
     }
 }

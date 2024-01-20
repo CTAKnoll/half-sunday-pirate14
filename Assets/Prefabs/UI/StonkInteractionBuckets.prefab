@@ -70,6 +70,10 @@ PrefabInstance:
       propertyPath: m_text
       value: To Competition
       objectReference: {fileID: 0}
+    - target: {fileID: 7000881428959629297, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c6ee2c62b36bb0641817369243da053a, type: 3}
     - target: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -187,6 +191,10 @@ PrefabInstance:
       propertyPath: m_text
       value: To Garden
       objectReference: {fileID: 0}
+    - target: {fileID: 7000881428959629297, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c6ee2c62b36bb0641817369243da053a, type: 3}
     - target: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -300,6 +308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SellButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7000881428959629297, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c6ee2c62b36bb0641817369243da053a, type: 3}
     - target: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

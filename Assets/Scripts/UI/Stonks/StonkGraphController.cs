@@ -6,6 +6,7 @@ using Services;
 using Stonks;
 using UI.Model.Templates;
 using UnityEngine;
+using Utils;
 
 namespace UI.Stonks
 {
@@ -51,8 +52,8 @@ namespace UI.Stonks
                 histories.Add(line.Key, history);
             }
 
-            Model.MinValue = min;
-            Model.MaxValue = max;
+            Model.MinValue = min.RoundToDecimalPlaces(2);
+            Model.MaxValue = max.RoundToDecimalPlaces(2);
             
             foreach (var line in StonkLines)
             {
