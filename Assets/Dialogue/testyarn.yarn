@@ -18,9 +18,9 @@ title: TulipCompetition
 ---
 // Needs: $player_tulip_type (what they submitted by dragging into box), $competitor_tulip_type1 (can be literally anything, does not have to have ever been in market), $competitor_tulip_type2
 
-$player_tulip_type finished first
-$competitor_tulip_type1 finished second
-$competitor_tulip_type2 finished third
+{player_tulip_type()} finished first
+{competitor_tulip_type1()} finished second
+{competitor_tulip_type2()} finished third
 ===
 
 // incident thematically and gameplay wise - not personal 
@@ -30,9 +30,9 @@ $competitor_tulip_type2 finished third
 title: MamboConcert
 ---
 // Needs: $random_tulip_type
-A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide $random_tulip_type tulips to the event?
+A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide {random_tulip_type()} tulips to the event?
     -> Provide tulips
-        Musician: Thanks! (Market price for $random_tulip_type increases by 25%)
+        Musician: Thanks! (Market price for {random_tulip_type()} increases by 25%)
     -> That's a dumb name for a song. You'll never get any tulips out of me.
         Musician: Darn, at least I've still got Monica by my side.
 ===
@@ -41,33 +41,33 @@ title: DanceBall
 ---
 // identifiers: color, kind, stage, owner
 // kind - spotted, striped, etc 
-// Needs: $tulip_type, $rival_tulip_type
+// Needs: $random_tulip_type, $rival_tulip_type
 // could also do just do color, kind, or type difference - king wore blue  
 
 // asked about tulip: praise mine and diss anothers 
 
-You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest $tulip_type tulip on the lapel of your broadbrimmed black hat. 
+You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {random_tulip_type()} tulip on the lapel of your broadbrimmed black hat. 
     -> Jump into middle of the circle and wow the onlookers with your dance moves
-        The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising (Price of $tulip_type increases by 20%)
-    -> Trash talk the man with a $rival_tulip_type on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
-        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of $rival_tulip_type decreases by 20%)
+        The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising (Price of {random_tulip_type()} increases by 20%)
+    -> Trash talk the man with a {rival_tulip_type()} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
+        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of {rival_tulip_type()} decreases by 20%)
             -> Double down
-                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of $rival_tulip_type decreases by 5%)
+                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of {rival_tulip_type()} decreases by 5%)
                 // tempting to add a triple down option but probably best to not 
             -> Apologize
-                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of $rival_tulip_type increases by 5%)
+                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of {rival_tulip_type()} increases by 5%)
 ===
 
 title: TravelingTrader
 ---
-// Needs: $market_price 
+// Needs: $random_tulip_type, random_tulip_type_market_price 
 
 // A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
 
 // A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
 
 
-"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
+//"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
 // how much are $random_tulip_type tulips worth?
 
 // and benar EU4 mod for reference - lava rising
@@ -76,10 +76,10 @@ title: TravelingTrader
 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
 // also probably need to factor in the stock ticker / market here
-    -> 2 * $market_price (Increase market price of $random_tulip_type by 10%)
-    -> 4 * $market_price (Increase market price of $random_tulip_type by 20%)
+    //-> 2 * $market_price (Increase market price of $random_tulip_type by 10%)
+    //-> 4 * $market_price (Increase market price of $random_tulip_type by 20%)
         // 25 chance to fail for 2 times markup, 50% chance to fail for 4 times markup 
-    -> $market_price (Increase market price of $random_tulip_type by 5%)
+    //-> $market_price (Increase market price of $random_tulip_type by 5%)
 ===
 
 
@@ -94,7 +94,7 @@ title: TravelingCalvinists
 ---
 // Needs: $random_tulip_type, $random_tulip_type_market_price
 A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy.
-    -> Sure, here you go (Market price for $random_tulip_type increases by 10%)
+    -> Sure, here you go (Market price for {random_tulip_type()} increases by 10%)
     // $random_tulip_type_market_price += 10%
 ===
 
@@ -102,7 +102,7 @@ title: RivalTulipFarmerMerchantEtc
 ---
 // Needs: $new_random_tulip_type, $new_random_tulip_type_market_price
 A rival tulip merchant debuts his new tulip breed at the pub, sparking an increase in demand for it.
-    -> What a jerk ($new_random_tulip_type market price increases by 20%)
+    -> What a jerk ({new_random_tulip_type()} market price increases by 20%)
 // ideally this should be weighted to show up on the market soon after this incident
 // $new_random_tulip_type_market_price += 20%
 ===
@@ -114,7 +114,7 @@ title: RainForecast
 One Dutch unit of rain expected this upcoming April
 // One Dutch unit of liquid measures worth of rain?
     -> Ok (All tulips increase in market price by 3%)
-    // $all_tulips_market_price += 3%
+    // {all_tulips_market_price()} += 3%
 ===
 
 title: WinterSnap
@@ -219,6 +219,11 @@ A weary Spanish sailor approaches you. He wears an elegant red and gold tunic wi
 
 title: ThisIsNotADril
 ---
+// $random_tulip_type = $random_tulip_type()
+// Bob now sells {random_tulip_type()} <- use this format for functions
+// <<if random_tulip_type()>>
+// color, kind, => 
+
 // Needs: $random_tulip_type, $random_tulip_type_market_price
 // An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
 An older strange looking gentleman spent 2,000 guilders on $random_tulip_type last month. Many speculate he will spend as much, if not more, next month.
