@@ -9,5 +9,14 @@ namespace UI.Plants
         public bool WeedShowing;
         public Sprite TulipImage;
         public Sprite WeedImage;
+
+        public bool WeedAlertUp;
+        public Sprite WeedAlertUpImage;
+        public bool WeedAlertDown;
+        public Sprite WeedAlertDownImage;
+        public bool WeedAlertLeft;
+        public Sprite WeedAlertLeftImage;
+        public bool WeedAlertRight;
+        public Sprite WeedAlertRightImage;
     }
 }

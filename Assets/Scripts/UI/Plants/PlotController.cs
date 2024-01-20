@@ -4,6 +4,7 @@ using System.Linq;
 using Plants;
 using Services;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace UI.Plants
 {
@@ -38,6 +39,16 @@ namespace UI.Plants
             Model.DebugText = "UNPLANTED\nUNWEEDED";
             Ticker.AddTickable(ModifyDisplay, 0.1f);
             _audio = ServiceLocator.GetService<AudioService>();
+
+            var weedServer = ServiceLocator.TryGetService<WeedArtServer>(out var weedServ) ? weedServ : null;
+            if (weedServer != null)
+            {
+                Model.WeedAlertUpImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Up);
+                Model.WeedAlertDownImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Down);
+                Model.WeedAlertLeftImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Left);
+                Model.WeedAlertRightImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Right);
+            }
+
             UpdateViewAtEndOfFrame();
         }
 
@@ -98,7 +109,13 @@ namespace UI.Plants
             {
                 Weed = null;
                 SpreadDirection = PlotSpreadDirection.NotSpreading;
+                
                 Model.WeedShowing = false;
+                Model.WeedAlertUp = false;
+                Model.WeedAlertDown = false;
+                Model.WeedAlertLeft = false;
+                Model.WeedAlertRight = false;
+                
                 UpdateViewAtEndOfFrame();
             };
             
@@ -117,7 +134,10 @@ namespace UI.Plants
         private void UpdateWeedVisual()
         {
             Model.WeedShowing = IsWeeded;
-            Model.WeedImage = ServiceLocator.GetService<WeedArtServer>().GetBaseSprite(Weed.Stage);
+            if (IsWeeded)
+            {
+                Model.WeedImage = ServiceLocator.GetService<WeedArtServer>().GetBaseSprite(Weed.Stage);
+            }
             UpdateViewAtEndOfFrame();
         }
 
@@ -143,9 +163,19 @@ namespace UI.Plants
                     break;
                 SpreadDirection = (PlotSpreadDirection) directions.GetValue(gen.Next(directions.Length));
             }
+
+            switch (SpreadDirection)
+            {
+                case PlotSpreadDirection.Up: Model.WeedAlertUp = true; break;
+                case PlotSpreadDirection.Down: Model.WeedAlertDown = true; break;
+                case PlotSpreadDirection.Left: Model.WeedAlertLeft = true; break;
+                case PlotSpreadDirection.Right: Model.WeedAlertRight = true; break;
+            }
             
             if(!contr?.IsWeeded ?? false)
                 Timeline.AddTimelineEvent(Weed,  PlantAndSpread, Timeline.FromNow(0, 2));
+            
+            UpdateViewAtEndOfFrame();
         }
 
         private void PlantAndSpread()

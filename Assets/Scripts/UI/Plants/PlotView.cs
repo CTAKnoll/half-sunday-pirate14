@@ -12,6 +12,11 @@ namespace UI.Plants
         public PlotView BelowLinkedPlot;
         public PlotView LeftLinkedPlot;
         public PlotView RightLinkedPlot;
+
+        public Image AboveWeedAlert;
+        public Image BelowWeedAlert;
+        public Image LeftWeedAlert;
+        public Image RightWeedAlert;
         
         public TextMeshProUGUI DebugTextbox;
         
@@ -27,6 +32,11 @@ namespace UI.Plants
             WeedImage.gameObject.SetActive(model.WeedShowing);
             TulipImage.sprite = model.TulipImage;
             WeedImage.sprite = model.WeedImage;
+            
+            AboveWeedAlert.gameObject.SetActive(model.WeedAlertUp && AboveLinkedPlot != null);
+            BelowWeedAlert.gameObject.SetActive(model.WeedAlertDown && BelowLinkedPlot != null);
+            LeftWeedAlert.gameObject.SetActive(model.WeedAlertLeft && LeftLinkedPlot != null);
+            RightWeedAlert.gameObject.SetActive(model.WeedAlertRight && RightLinkedPlot != null);
         }
     }
 }
