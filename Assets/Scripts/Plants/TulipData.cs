@@ -161,7 +161,7 @@ namespace Plants
             AdvanceStage();
             
             // schedule the next few stages
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1)); //sprout
+            Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(30)); //schedule growing
         }
 
         public void Harvest()
@@ -195,11 +195,13 @@ namespace Plants
                 Stage = (TulipStage)((int) Stage + 1);
             if (Stage > TulipStage.Dead)
                 Stage = (TulipStage)((int) Stage - 1);
-            
-            if(Stage == TulipStage.Dead)
+
+            if (Stage == TulipStage.Dead)
+            {
+                Timeline.RemoveAllEvents(this);
                 Timeline.AddTimelineEvent(this, Cleanup, Timeline.FromNow(0, 1)); // remove self
-            else
-                Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1));
+            }
+            
 
             StageChanged?.Invoke();
         }
@@ -215,7 +217,7 @@ namespace Plants
                 
                 Timeline.RemoveAllEvents(this);
                 Stage = currStage;
-                Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1));
+                Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(30));
             };
             Stage =  TulipStage.Choking;
             Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1));

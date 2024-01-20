@@ -31,6 +31,9 @@ namespace UI.Plants
         private Dictionary<PlotSpreadDirection, PlotController> DirectionalPlots;
 
         private AudioService _audio;
+
+        private WeedArtServer WeedArtServer;
+        private TulipArtServer TulipArtServer;
         
         public PlotController(PlotView view) : base(view)
         {
@@ -40,13 +43,15 @@ namespace UI.Plants
             Ticker.AddTickable(ModifyDisplay, 0.1f);
             _audio = ServiceLocator.GetService<AudioService>();
 
-            var weedServer = ServiceLocator.TryGetService<WeedArtServer>(out var weedServ) ? weedServ : null;
-            if (weedServer != null)
+            ServiceLocator.TryGetService(out WeedArtServer);
+            ServiceLocator.TryGetService(out TulipArtServer);
+            Debug.Log(WeedArtServer == null);
+            if (WeedArtServer != null)
             {
-                Model.WeedAlertUpImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Up);
-                Model.WeedAlertDownImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Down);
-                Model.WeedAlertLeftImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Left);
-                Model.WeedAlertRightImage = weedServer.GetSpreadSprite(PlotSpreadDirection.Right);
+                Model.WeedAlertUpImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Up);
+                Model.WeedAlertDownImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Down);
+                Model.WeedAlertLeftImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Left);
+                Model.WeedAlertRightImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Right);
             }
 
             UpdateViewAtEndOfFrame();
@@ -127,7 +132,7 @@ namespace UI.Plants
         {
             Model.TulipShowing = IsPlanted;
             if(IsPlanted)
-                Model.TulipImage = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(Tulip.Stage);
+                Model.TulipImage = TulipArtServer.GetBaseSprite(Tulip.Stage);
             UpdateViewAtEndOfFrame();
         }
         
@@ -136,7 +141,7 @@ namespace UI.Plants
             Model.WeedShowing = IsWeeded;
             if (IsWeeded)
             {
-                Model.WeedImage = ServiceLocator.GetService<WeedArtServer>().GetBaseSprite(Weed.Stage);
+                Model.WeedImage = WeedArtServer.GetBaseSprite(Weed.Stage);
             }
             UpdateViewAtEndOfFrame();
         }

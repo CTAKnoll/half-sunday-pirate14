@@ -20,7 +20,7 @@ namespace Plants
 
         private Dictionary<TulipStage, Sprite> BaseImageServer;
 
-        protected void Start()
+        protected void Awake()
         {
             ServiceLocator.RegisterAsService(this);
             BaseImageServer = new Dictionary<TulipStage, Sprite>

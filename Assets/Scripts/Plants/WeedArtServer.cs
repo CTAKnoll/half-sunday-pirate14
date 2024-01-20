@@ -20,7 +20,7 @@ namespace Plants
         private Dictionary<WeedStage, Sprite> BaseImageServer;
         private Dictionary<PlotController.PlotSpreadDirection, Sprite> SpreadServer;
 
-        protected void Start()
+        protected void Awake()
         {
             ServiceLocator.RegisterAsService(this);
             BaseImageServer = new Dictionary<WeedStage, Sprite>
