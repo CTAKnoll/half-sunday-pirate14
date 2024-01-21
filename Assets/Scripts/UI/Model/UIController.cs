@@ -103,6 +103,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
 
     protected ControllerDatabase ControllerDb;
     protected UIDriver UiDriver;
+    protected Camera MainCamera;
     protected Ticker Ticker;
     protected Timeline Timeline;
     protected Economy Economy;
@@ -118,7 +119,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     {
         GetServices();
         View = view;
-        
+        MainCamera = Camera.main;
+
         ControllerDb.Register(View, this);
         Model = model;
         View.UpdateViewWithModel(Model);
@@ -127,7 +129,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     {
         GetServices();
         View = GameObject.Instantiate(template.Prefab, parent == null ? UiDriver.Root.transform : parent);
-        
+        MainCamera = Camera.main;
+
         ControllerDb.Register(View, this);
         Model = model;
     }

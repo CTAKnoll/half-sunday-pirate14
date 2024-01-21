@@ -38,14 +38,14 @@ namespace UI.Plants
         private void OnHoldStarted()
         {
             InitialPosition = View.transform.position;
-            DragOffset = InitialPosition - UiDriver.PointerPosition;
+            DragOffset = InitialPosition - MainCamera.ScreenToWorldPoint(UiDriver.PointerPosition);
 
             _audio.PlayOneShot(View.sfx_pick_up);
         }
 
         private void OnDrag()
         {
-            Model.ScreenPos = UiDriver.PointerPosition + DragOffset;
+            Model.ScreenPos = MainCamera.ScreenToWorldPoint(UiDriver.PointerPosition) + DragOffset;
             Debug.Log($"{UiDriver.PointerPosition} {DragOffset} {Model.ScreenPos} {View.transform.position}");
             UpdateViewAtEndOfFrame();
         }
