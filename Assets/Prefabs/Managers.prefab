@@ -60,3 +60,4 @@ MonoBehaviour:
   SimpleButton: {fileID: 11400000, guid: 6ee01f69ae09ac945a6b3dcacaf1192c, type: 2}
   Tulip: {fileID: 11400000, guid: fe73de5f7d5e41740828b164a440eebb, type: 2}
   TulipEconomyLine: {fileID: 11400000, guid: 62b4b3811b3de79479756abb7a83b9f6, type: 2}
+  Tooltip: {fileID: 11400000, guid: 532a9b21cdccf9142ae0234850bb2ec1, type: 2}

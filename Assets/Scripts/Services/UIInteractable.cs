@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class UIInteractable : MonoBehaviour
 {
     public bool Active = true;
+    public string TooltipText;
     
     public enum UIInteractionPriority
     {

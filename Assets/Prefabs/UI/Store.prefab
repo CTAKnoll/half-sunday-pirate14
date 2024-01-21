@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 125}
+  m_AnchoredPosition: {x: -10.2, y: 125}
   m_SizeDelta: {x: 640, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8903850995206368067
@@ -86,6 +86,8 @@ GameObject:
   - component: {fileID: 5698237255239351882}
   - component: {fileID: 6554538957828693340}
   - component: {fileID: 2705210748799157171}
+  - component: {fileID: 7374112624845200815}
+  - component: {fileID: 2620715938341429597}
   m_Layer: 5
   m_Name: StoreBackground
   m_TagString: Untagged
@@ -151,6 +153,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7374112624845200815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971529503487895043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3550c5e82e944758a2459f0ca837799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: This is the store, where you can purchase tulip bulbs. You can drag
+    them to your inventory, or straight to a plot!
+  Priority: 2
+  StoreSlots:
+  - {fileID: 3124757971404962164}
+  - {fileID: 5029131113744830245}
+  - {fileID: 6666286028504728603}
+--- !u!114 &2620715938341429597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971529503487895043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb83f667099a40c88c8df2e7023c54aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storeView: {fileID: 7374112624845200815}
+  storeModel:
+    test: 
 --- !u!1 &8314920901923080763
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,8 +197,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6231475597365497907}
-  - component: {fileID: 4675320695687066565}
-  - component: {fileID: 5218414283051427975}
   m_Layer: 5
   m_Name: Store
   m_TagString: Untagged
@@ -192,36 +227,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4675320695687066565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8314920901923080763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3550c5e82e944758a2459f0ca837799, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Priority: 2
-  StoreSlots:
-  - {fileID: 3124757971404962164}
-  - {fileID: 5029131113744830245}
-  - {fileID: 6666286028504728603}
---- !u!114 &5218414283051427975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8314920901923080763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb83f667099a40c88c8df2e7023c54aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  storeView: {fileID: 4675320695687066565}
 --- !u!1001 &158641048490405922
 PrefabInstance:
   m_ObjectHideFlags: 0

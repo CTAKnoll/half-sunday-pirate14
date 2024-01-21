@@ -11,27 +11,11 @@ namespace Services
         public SimpleButtonTemplate SimpleButton;
         public TulipTemplate Tulip;
         public TulipEconomyLineTemplate TulipEconomyLine;
-
-        public Dictionary<Type, UIViewTemplateBase> TemplateMapping;
-
+        public TooltipTemplate Tooltip;
+        
         protected void Awake()
         {
             ServiceLocator.RegisterAsService(this);
-            TemplateMapping = new()
-            {
-                [typeof(SimpleButtonTemplate)] = SimpleButton,
-                [typeof(TulipTemplate)] = Tulip,
-                [typeof(TulipEconomyLineTemplate)] = TulipEconomyLine,
-            };
-        }
-
-        public T GetTemplate<T>() where T : UIViewTemplateBase
-        {
-            if (TemplateMapping.TryGetValue(typeof(T), out UIViewTemplateBase template))
-            {
-                return (T)template;
-            }
-            throw new KeyNotFoundException();
         }
     }
 }
