@@ -6,6 +6,7 @@ using UI.Containers;
 using UI.Plants;
 using UnityEngine;
 using Utils;
+using Yarn.Unity;
 
 namespace Plants
 {
@@ -67,6 +68,16 @@ namespace Plants
         {
             public Color Color;
             public TulipKind Kind;
+
+            [YarnFunction("random_tulip_type")]
+            public static string GetRandomTulip()
+            {
+                var rnd = new System.Random();
+                int randIdx = rnd.Next(TulipColorToColorMapping.Keys.Count);
+
+                var tulipColor = TulipColorToColorMapping.Keys.ToList()[randIdx];
+                return Enum.GetName(typeof(TulipColor), tulipColor);
+            }
 
             public TulipVarietal(TulipColor color, TulipKind kind)
             {
