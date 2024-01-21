@@ -9,43 +9,48 @@ namespace Core
 {
     public class FeverMode : MonoBehaviour, IService
     {
-        public SmartNumber Progress;
-        public SmartNumber Storage;
+        public SmartNumber Awareness;
+        public SmartNumber FeverLevel;
 
         [SerializeField] private Image ProgressBarImage;
         
         private int FillPropertyID = Shader.PropertyToID("_Fill");
         private Timeline timeline;
+
+        public float DailyMaxNaturalIncrease = 0.005f;
+        public float DailyMaxNaturalDecrease = -0.003f;
         
-        public void Start()
+        public void Awake()
         {
             ServiceLocator.RegisterAsService(this);
             timeline = ServiceLocator.GetService<Timeline>();
 
-            Progress = new SmartNumber(0f);
-            Progress.AddTrigger(1f, Rollover);
+            Awareness = new SmartNumber(0f);
+            Awareness.AddTrigger(1f, Rollover);
 
-            Storage = new SmartNumber(0f);
+            FeverLevel = new SmartNumber(0f);
             
             timeline.AddRecurring(this, Tick, TimeSpan.FromDays(1));
         }
 
         public void Rollover()
         {
-            Storage += 1f;
-            Progress.SetQuietly(0f);
+            while (Awareness.Value >= 1)
+            {
+                FeverLevel += 1f;
+                Awareness.SetQuietly(Awareness.Value - 1);
+            }
         }
 
         public void Tick()
         {
-            Progress += 0.01f;
-            Debug.Log(Progress.Value);
+            Awareness += FloatExtensions.RandomBetween(DailyMaxNaturalDecrease, DailyMaxNaturalIncrease);
             UpdateProgressBar();
         }
 
         private void UpdateProgressBar()
         {
-            ProgressBarImage.GetComponent<Image>().material.SetFloat(FillPropertyID, Progress.Value);
+            ProgressBarImage.GetComponent<Image>().material.SetFloat(FillPropertyID, Awareness.Value);
         }
     }
 }

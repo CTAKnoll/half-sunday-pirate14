@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Utils
 {
@@ -9,6 +10,13 @@ namespace Utils
         {
             double multiplier = Math.Pow(10, places);
             return (int)(num * multiplier) / (float) multiplier;
+        }
+
+        public static float RandomBetween(float min, float max)
+        {
+            Random random = new Random();
+            var value = random.Next(1000000);
+            return Mathf.Lerp(min, max, value / 1000000f);
         }
     }
 }

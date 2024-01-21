@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core;
 using Plants;
 using Services;
 using UnityEngine;
@@ -15,8 +16,11 @@ namespace Stonks
         public float Funds { get; private set; }
 
         public Dictionary<TulipVarietal, TulipEconomy> TulipEconomyData;
+        
         public event Action<float> FundsChanged;
         public event Action<TulipVarietal> VarietalAdded;
+        public event Action<TulipVarietal> SentToGarden;
+        
         public Economy()
         {
             Funds = StartingFunds;
@@ -41,8 +45,12 @@ namespace Stonks
 
         public float GetCurrentPrice(TulipVarietal varietal)
         {
-            Debug.Log(varietal.Color + " " + varietal.Kind);
             return TulipEconomyData[varietal].Price;
+        }
+
+        public float GetAveragePrice()
+        {
+            return TulipEconomyData.Average(data => data.Value.Price);
         }
 
         public bool BuyTulip(TulipData data)
@@ -62,6 +70,14 @@ namespace Stonks
             return true;
         }
 
+        public bool SendTulipToGarden(TulipData data, float mod)
+        {
+            var price =GetCurrentPrice(data.Varietal);
+            var normalized = price / GetAveragePrice();
+            ServiceLocator.GetService<FeverMode>().Awareness.Value += normalized * mod;
+            SentToGarden?.Invoke(data.Varietal);
+            return true;
+        }
         
     }
 }
