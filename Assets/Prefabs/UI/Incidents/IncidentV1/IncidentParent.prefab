@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5286564447399072544}
-  - component: {fileID: 908842574227998705}
   - component: {fileID: 2292231710653178462}
   - component: {fileID: 6079112422578018987}
   - component: {fileID: 8626343758483481596}
+  - component: {fileID: 4629975155247361118}
   m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
@@ -43,41 +43,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 342, y: 131.4485}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &908842574227998705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514444724969632151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddcdd604a328c4ab296f048eb7b3a925, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 2292231710653178462}
-  useFadeEffect: 1
-  fadeInTime: 0.25
-  fadeOutTime: 0.05
-  lineText: {fileID: 1997923597696599826}
-  showCharacterNameInLineView: 0
-  characterNameText: {fileID: 0}
-  characterNameContainer: {fileID: 0}
-  useTypewriterEffect: 1
-  onCharacterTyped:
-    m_PersistentCalls:
-      m_Calls: []
-  onPauseStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  onPauseEnded:
-    m_PersistentCalls:
-      m_Calls: []
-  typewriterEffectSpeed: 120
-  continueButton: {fileID: 5794953206994838623}
-  holdTime: 1
-  autoAdvance: 0
-  palette: {fileID: 0}
 --- !u!225 &2292231710653178462
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -136,6 +101,42 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4629975155247361118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514444724969632151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f01a601411ecd746981316dd99812c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionsListView: {fileID: 7915991586315063530}
+  canvasGroup: {fileID: 2292231710653178462}
+  useFadeEffect: 1
+  fadeInTime: 0.25
+  fadeOutTime: 0.05
+  lineText: {fileID: 1997923597696599826}
+  showCharacterNameInLineView: 1
+  characterNameText: {fileID: 0}
+  characterNameContainer: {fileID: 0}
+  useTypewriterEffect: 1
+  onCharacterTyped:
+    m_PersistentCalls:
+      m_Calls: []
+  onPauseStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onPauseEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  typewriterEffectSpeed: 120
+  continueButton: {fileID: 2274317621393375434}
+  holdTime: 1
+  autoAdvance: 0
+  palette: {fileID: 0}
 --- !u!1 &1969549943332758270
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +522,7 @@ MonoBehaviour:
   yarnProject: {fileID: 7545569452688597077, guid: 501ac3828f0148b4d95bbb8d7523e223, type: 3}
   _variableStorage: {fileID: 0}
   dialogueViews:
-  - {fileID: 908842574227998705}
+  - {fileID: 4629975155247361118}
   - {fileID: 7915991586315063530}
   startNode: LocalBoy
   startAutomatically: 0
@@ -684,8 +685,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 908842574227998705}
-        m_TargetAssemblyTypeName: Yarn.Unity.LineView, YarnSpinner.Unity
+      - m_Target: {fileID: 4629975155247361118}
+        m_TargetAssemblyTypeName: LineViewAndOptions, Assembly-CSharp
         m_MethodName: OnContinueClicked
         m_Mode: 1
         m_Arguments:
