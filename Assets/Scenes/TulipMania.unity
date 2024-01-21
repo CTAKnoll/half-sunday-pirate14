@@ -455,6 +455,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2829546229678134359, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -268.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829546229678134359, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 57.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3694492835836877202, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -467,17 +475,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5938274013225919541, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938274013225919541, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+    - target: {fileID: 6137150182898153523, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 61.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938274013225919541, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 56.567
+      value: -310
       objectReference: {fileID: 0}
     - target: {fileID: 6230302839287094082, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_Camera
@@ -510,6 +510,10 @@ PrefabInstance:
     - target: {fileID: 7971068591655109180, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_text
       value: Incident description
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959962861237208079, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 330.5
       objectReference: {fileID: 0}
     - target: {fileID: 9005541255856507632, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_Pivot.x
