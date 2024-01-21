@@ -38,6 +38,7 @@ namespace Core
         public void Tick()
         {
             Progress += 0.01f;
+            Debug.Log(Progress.Value);
             UpdateProgressBar();
         }
 

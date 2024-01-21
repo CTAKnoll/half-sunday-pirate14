@@ -54,11 +54,11 @@ Shader "TulipMania/TriColorFill"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                float isFilled = step(i.uv.y, _Fill);
+                float isFilled = step(i.uv.x, _Fill);
                 float bottomThird = step(i.uv.x, .33);
                 float middleThird = step(.33, i.uv.x) * step(i.uv.x, .67);
                 float topThird = step(.67, i.uv.x);
-                fixed4 col = (1 - isFilled) * _BackgroundColor + bottomThird * _BotFillColor + middleThird * _MidFillColor + topThird * _TopFillColor;
+                fixed4 col = (1 - isFilled) * _BackgroundColor + isFilled * (bottomThird * _BotFillColor + middleThird * _MidFillColor + topThird * _TopFillColor);
                 return col;
             }
             ENDCG
