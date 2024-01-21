@@ -17,6 +17,9 @@ namespace Plants
         public Sprite Overbloom;
         public Sprite Choking;
         public Sprite Dead;
+        
+        public Sprite Bulb;
+        public Sprite Picked;
 
         private Dictionary<TulipStage, Sprite> BaseImageServer;
 
@@ -25,6 +28,7 @@ namespace Plants
             ServiceLocator.RegisterAsService(this);
             BaseImageServer = new Dictionary<TulipStage, Sprite>
             {
+                [TulipStage.Bulb] = Bulb,
                 [TulipStage.Planted] = Planted,
                 [TulipStage.Sprout] = Sprout,
                 [TulipStage.Shoot] = Shoot,
@@ -34,6 +38,7 @@ namespace Plants
                 [TulipStage.OverBloom] = Overbloom,
                 [TulipStage.Choking] = Choking,
                 [TulipStage.Dead] = Dead,
+                [TulipStage.Picked] = Picked,
             };
         }
 

@@ -26,8 +26,8 @@ namespace UI.Containers
         
         private InventoryStack[] Elements;
         private InventorySlotController[] Owners;
-        public virtual int MaxSize => 5;
-        public virtual int PageSize => 5;
+        public virtual int MaxSize => 6;
+        public virtual int PageSize => 6;
 
         public int Count 
         {

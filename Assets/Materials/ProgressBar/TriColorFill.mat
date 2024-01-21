@@ -7,8 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ProgressBarFill
+  m_Name: TriColorFill
   m_Shader: {fileID: 4800000, guid: 5bdcaae2975b6da4291deb1877175385, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,6 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -39,11 +42,14 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _Fill: 3517.84
+    - _Fill: 0.33999994
     m_Colors:
-    - _BackgroundColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _BackgroundColor: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+    - _BotFillColor: {r: 0, g: 0.45518732, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _FillColor: {r: 0, g: 1, b: 0.002824545, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _MidFillColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TopFillColor: {r: 1, g: 0.510552, b: 0, a: 1}
   m_BuildTextureStacks: []

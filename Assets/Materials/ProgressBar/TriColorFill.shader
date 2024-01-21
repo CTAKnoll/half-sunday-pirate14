@@ -1,11 +1,13 @@
-Shader "IdleGame/ProgressBarFill"
+Shader "TulipMania/TriColorFill"
 {
     Properties
     {
         _MainTex("Texture", 2D) = "gray" {}
         _Fill("Fill", float) = 0
         _BackgroundColor("Background Color", Color) = (.5, .5, .5, 1)
-        _FillColor("Fill Color", Color) = (0, 0, 1, 1)
+        _TopFillColor("Top Fill Color", Color) = (0, 0, 1, 1)
+        _MidFillColor("Middle Fill Color", Color) = (0, 0, 1, 1)
+        _BotFillColor("Bottom Fill Color", Color) = (0, 0, 1, 1)
     }
     SubShader
     {
@@ -38,7 +40,9 @@ Shader "IdleGame/ProgressBarFill"
             
             float _Fill;
             float4 _BackgroundColor;
-            float4 _FillColor;
+            float4 _TopFillColor;
+            float4 _MidFillColor;
+            float4 _BotFillColor;
 
             v2f vert (appdata v)
             {
@@ -51,7 +55,10 @@ Shader "IdleGame/ProgressBarFill"
             fixed4 frag(v2f i) : SV_Target
             {
                 float isFilled = step(i.uv.y, _Fill);
-                fixed4 col = (1 - isFilled) * _BackgroundColor + (isFilled) * _FillColor;
+                float bottomThird = step(i.uv.x, .33);
+                float middleThird = step(.33, i.uv.x) * step(i.uv.x, .67);
+                float topThird = step(.67, i.uv.x);
+                fixed4 col = (1 - isFilled) * _BackgroundColor + bottomThird * _BotFillColor + middleThird * _MidFillColor + topThird * _TopFillColor;
                 return col;
             }
             ENDCG

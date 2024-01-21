@@ -14,6 +14,7 @@ namespace UI.Plants
         public override void UpdateViewWithModel(TulipModel model)
         {
             transform.position = model.ScreenPos;
+            TulipIcon.sprite = model.IconSprite;
             TulipIcon.color = model.Color;
         }
 
