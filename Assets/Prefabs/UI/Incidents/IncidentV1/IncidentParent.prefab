@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfdba20267c69047bfae188a7663e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 172278555379857}
+  Dialogue: {fileID: 172278555379857}
   _incidents:
   - nodeName: MamboConcert
     monthsAfterStart: 3

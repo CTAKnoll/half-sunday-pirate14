@@ -16,6 +16,13 @@ namespace UI.Containers
             RefreshStore();
         }
 
+        public StoreController(StoreView view, StoreModel model) : base(view, model)
+        {
+            Server = new Store(View.StoreSlots);
+            Ticker.AddTickable(RefreshStore, 10f);
+            RefreshStore();
+        }
+
         private void RefreshStore()
         {
             while (Server.HasEmpty())

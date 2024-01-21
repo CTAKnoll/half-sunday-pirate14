@@ -92,6 +92,7 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     }
 }
 
+[System.Serializable]
 public abstract class UIController<TView, TModel> : IUIController where TView : UIView<TModel> 
                                                                   where TModel : struct, IUIModel
 {
@@ -106,6 +107,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     protected Timeline Timeline;
     protected Economy Economy;
     protected TView View { get; private set; }
+    [SerializeField]
     protected TModel Model;
 
     public bool IsActiveUI => ActivityMutex != null || LogicalParent is { IsActiveUI: true };

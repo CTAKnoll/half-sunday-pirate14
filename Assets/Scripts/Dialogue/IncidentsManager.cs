@@ -4,19 +4,21 @@ using UnityEngine;
 using Services;
 using Yarn.Unity;
 
-public class IncidentsManager : MonoBehaviour
+public class IncidentsManager : MonoBehaviour, IService
 {
     private Timeline _timeline;
-    [SerializeField]
-    private DialogueRunner _dialogue;
+
+    public DialogueRunner Dialogue;
 
     [SerializeField]
     private IncidentTimeline[] _incidents;
 
+    public event System.Action<string> spawnedIncident;
 
     // Start is called before the first frame update
     void Awake()
     {
+        ServiceLocator.RegisterAsService(this);
         _timeline = ServiceLocator.GetService<Timeline>();
     }
 
@@ -24,8 +26,13 @@ public class IncidentsManager : MonoBehaviour
     {
         foreach(var inc in _incidents)
         {
-            _timeline.AddTimelineEvent(this, () => _dialogue.StartDialogue(inc.nodeName), Timeline.FromStart(0, inc.monthsAfterStart));
+            _timeline.AddTimelineEvent(this, () => SpawnIncident(inc.nodeName), Timeline.FromStart(0, inc.monthsAfterStart));
         }
+    }
+
+    void SpawnIncident(string incYarnNode)
+    {
+        spawnedIncident?.Invoke(incYarnNode);
     }
 
     [System.Serializable]
