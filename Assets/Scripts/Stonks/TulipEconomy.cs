@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Plants;
 using Services;
-using UnityEngine;
+using Utils;
 using Random = System.Random;
 
 namespace Stonks
 {
     public class TulipEconomy
     {
+        public static float TickMinimum = 0.99f;
+        public static float TickMaximum = 1.01f;
+        
         public struct IncidentModifier
         {
             public float ModifierAmt;
@@ -77,8 +80,8 @@ namespace Stonks
 
         private void ModifyPrice()
         {
-            float modifier = Random.Next(9900, 10100) / 10000f;
-            PriceHistory.Add(Timeline.Now, new PriceSnapshot(PriceHistory.Last().Value, modifier));
+            PriceHistory.Add(Timeline.Now, new PriceSnapshot(PriceHistory.Last().Value, 
+                FloatExtensions.RandomBetween(TickMinimum, TickMaximum)));
             Timeline.AddTimelineEvent(this, ModifyPrice, Timeline.FromNow(0, 0, 3));
         }
         

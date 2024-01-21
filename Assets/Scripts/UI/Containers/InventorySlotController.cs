@@ -2,7 +2,6 @@
 using Plants;
 using UI.Model;
 using UI.Plants;
-using UnityEngine;
 
 namespace UI.Containers
 {

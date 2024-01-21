@@ -26,8 +26,9 @@ namespace UI.Containers
         
         private InventoryStack[] Elements;
         private InventorySlotController[] Owners;
-        public virtual int MaxSize => 6;
-        public virtual int PageSize => 6;
+
+        private int _maxSize = 6;
+        public virtual int MaxSize => _maxSize;
 
         public int Count 
         {
@@ -52,13 +53,17 @@ namespace UI.Containers
             }
         }
 
-        public Inventory(List<InventorySlotController> owners)
+        public Inventory(List<InventorySlotController> owners, int capacity = -1)
         {
+            if (capacity != -1) // resize if needed
+                _maxSize = capacity;
+            
             Elements = new InventoryStack[MaxSize];
             Owners = new InventorySlotController[MaxSize];
             for (int i = 0; i < MaxSize; i++)
             {
                 Elements[i] = new InventoryStack(null, 0);
+                Debug.Log(Owners[i] + " " + owners[i]);
                 Owners[i] = owners[i];
             }
         }

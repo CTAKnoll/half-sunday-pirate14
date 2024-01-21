@@ -176,7 +176,7 @@ namespace Services
             {
                 // this should be done with a layer, but then I would need a physics raycaster?
                 UIInteractable resultObj = result.gameObject.GetComponent<UIInteractable>();
-                if (resultObj != null) 
+                if (resultObj != null && resultObj.Active) 
                 {
                     castTarget = RaycastResolutionFunction(castTarget, resultObj) ? castTarget : resultObj;
                 }
