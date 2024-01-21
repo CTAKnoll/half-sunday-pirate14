@@ -7,7 +7,7 @@ using Utils;
 
 namespace Core
 {
-    public class ProgressBar : MonoBehaviour
+    public class FeverMode : MonoBehaviour, IService
     {
         public SmartNumber Progress;
         public SmartNumber Storage;
@@ -19,6 +19,7 @@ namespace Core
         
         public void Start()
         {
+            ServiceLocator.RegisterAsService(this);
             timeline = ServiceLocator.GetService<Timeline>();
 
             Progress = new SmartNumber(0f);
