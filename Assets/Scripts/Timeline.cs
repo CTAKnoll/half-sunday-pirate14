@@ -26,7 +26,7 @@ public class Timeline : IService
         Now = START_DATE;
         TimelineEvents = new();
         ServiceLocator.GetService<Ticker>().AddTickable(MoveToNextDay, DAY_IN_REALTIME);
-        AddTimelineEvent(this, CrashTheMarket, FromNow(1, 0));
+        AddTimelineEvent(this, CrashTheMarket, FromNow(20, 0));
     }
 
     public void AddTimelineEvent(object owner, Action callback, DateTime eventTime) => TimelineEvents.Enqueue((owner, callback), eventTime);

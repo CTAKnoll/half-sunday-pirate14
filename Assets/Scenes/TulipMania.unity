@@ -252,6 +252,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1748431948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2945119931577610023, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+  m_PrefabInstance: {fileID: 7257193167256435153}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1908296966
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +585,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5931795795815816295, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: PickedInventoryTarget
+      value: 
+      objectReference: {fileID: 1748431948}
     - target: {fileID: 6230302839287094082, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_Camera
       value: 

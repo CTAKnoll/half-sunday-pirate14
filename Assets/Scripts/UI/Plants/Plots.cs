@@ -19,6 +19,7 @@ namespace UI.Plants
         public float NoWeedsModifier = 1;
         public float MinTimeWithWeeds = 20;
         public float MaxTimeWithWeeds = 40;
+        public GameObject PickedInventoryTarget;
         
         private bool AnyWeeded => PlotControllers.Any(plot => plot.IsWeeded);
         

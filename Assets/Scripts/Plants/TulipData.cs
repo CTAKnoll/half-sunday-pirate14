@@ -177,8 +177,7 @@ namespace Plants
 
         public void Harvest()
         {
-            if (TulipInventory == null)
-                throw new Exception("Expected TulipInventory to exist!");
+            ServiceLocator.TryGetService(out TulipInventory);
 
             Stage = TulipStage.Picked;
             Timeline.RemoveAllEvents(this);

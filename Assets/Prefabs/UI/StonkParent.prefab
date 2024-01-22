@@ -30,6 +30,7 @@ RectTransform:
   m_Children:
   - {fileID: 3384874211038460003}
   - {fileID: 266840745273552517}
+  - {fileID: 7659212139855437873}
   - {fileID: 592343157316100082}
   - {fileID: 7291062188602070373}
   - {fileID: 1336001972479440545}
@@ -158,6 +159,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8255022042012521696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7659212139855437873}
+  m_Layer: 5
+  m_Name: PickedTulipTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7659212139855437873
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8255022042012521696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2740650338050293704}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -274.2, y: 157.7}
+  m_SizeDelta: {x: 19.5493, y: 19.5493}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1099560439376461013
 PrefabInstance:
   m_ObjectHideFlags: 0

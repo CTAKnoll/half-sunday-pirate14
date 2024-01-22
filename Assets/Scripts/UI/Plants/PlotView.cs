@@ -21,6 +21,7 @@ namespace UI.Plants
         
         public Image TulipImage;
         public Image WeedImage;
+        public Image PickedTulipImage;
         
         public AudioEvent sfx_planted;
 
@@ -31,6 +32,13 @@ namespace UI.Plants
             WeedImage.gameObject.SetActive(model.WeedShowing);
             TulipImage.sprite = model.TulipImage;
             WeedImage.sprite = model.WeedImage;
+                
+            PickedTulipImage.gameObject.SetActive(model.PickedIconVisible);
+            if (model.PickedIconVisible)
+            {
+                PickedTulipImage.sprite = model.PickedIconImage;
+                PickedTulipImage.gameObject.transform.position = model.PickedIconPos;
+            }
             
             AboveWeedAlert.gameObject.SetActive(model.WeedAlertUp && AboveLinkedPlot != null);
             BelowWeedAlert.gameObject.SetActive(model.WeedAlertDown && BelowLinkedPlot != null);

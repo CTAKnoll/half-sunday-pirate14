@@ -10,6 +10,10 @@ namespace UI.Plants
         public Sprite TulipImage;
         public Sprite WeedImage;
 
+        public bool PickedIconVisible;
+        public Sprite PickedIconImage;
+        public Vector3 PickedIconPos;
+
         public bool WeedAlertUp;
         public Sprite WeedAlertUpImage;
         public bool WeedAlertDown;

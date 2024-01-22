@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Plants;
@@ -14,6 +15,9 @@ namespace UI.Plants
         private WeedData Weed;
         private Coroutine SpreadingCoroutine;
         public bool IsPlanted => Tulip != null;
+        
+        private float FlyCompletion = 0;
+        private Vector3 PickedInitialPos;
         public bool IsWeeded => Weed != null;
 
         public bool IsSpreading => IsWeeded && Weed.Stage == WeedData.WeedStage.Spreading;
@@ -34,9 +38,11 @@ namespace UI.Plants
 
         private WeedArtServer WeedArtServer;
         private TulipArtServer TulipArtServer;
+        private Plots Plots;
         
         public PlotController(PlotView view) : base(view)
         {
+            ServiceLocator.TryGetService(out Plots);
             Ticker.AddTrigger(GetPlotConnections, 0.1f);
             UiDriver.RegisterForTap(View, OnClick);
             Model.DebugText = "UNPLANTED\nUNWEEDED";
@@ -53,6 +59,10 @@ namespace UI.Plants
                 Model.WeedAlertLeftImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Left);
                 Model.WeedAlertRightImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Right);
             }
+
+            Model.PickedIconVisible = false;
+            PickedInitialPos = View.PickedTulipImage.gameObject.transform.position;
+            Model.PickedIconPos = PickedInitialPos;
 
             UpdateViewAtEndOfFrame();
         }
@@ -78,8 +88,7 @@ namespace UI.Plants
             else if (IsPlanted && Tulip.CanHarvest && !IsWeeded)
             {
                 Tulip.Harvest();
-                Tulip = null;
-                UpdateTulipVisual();
+                View.StartCoroutine(FlyAwayTulip());
             }
         }
 
@@ -100,7 +109,6 @@ namespace UI.Plants
             };
             Tulip.StageChanged += UpdateTulipVisual;
             tulip.Plant();
-
             UpdateTulipVisual();
             _audio.PlayOneShot(View.sfx_planted);
         }
@@ -128,11 +136,32 @@ namespace UI.Plants
             UpdateWeedVisual();
         }
 
+        private IEnumerator FlyAwayTulip()
+        {
+            FlyCompletion = 0f;
+            Model.TulipShowing = false;
+            Model.PickedIconVisible = true;
+            Model.PickedIconImage = TulipArtServer.GetBaseSprite(Tulip.Stage);
+            while (FlyCompletion <= 1f)
+            {
+                FlyCompletion += .02f;
+                Model.PickedIconPos = Vector3.Lerp(PickedInitialPos,
+                    Plots.PickedInventoryTarget.gameObject.transform.position, FlyCompletion);
+                yield return null;
+            }
+            FlyCompletion = 0;
+            Model.PickedIconPos = PickedInitialPos;
+            Model.PickedIconVisible = false;
+            Tulip = null;
+        }
+
         private void UpdateTulipVisual()
         {
-            Model.TulipShowing = IsPlanted;
-            if(IsPlanted)
+            Model.TulipShowing = IsPlanted && FlyCompletion == 0;
+            if (Model.TulipShowing)
+            {
                 Model.TulipImage = TulipArtServer.GetBaseSprite(Tulip.Stage);
+            }
             UpdateViewAtEndOfFrame();
         }
         
