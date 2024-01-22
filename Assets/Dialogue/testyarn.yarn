@@ -810,6 +810,65 @@ title: RainbowTulip
 Rumors of a legendary rainbow tulip continue to spread. Urban legend or bourbon wedge end? Only time will tell
 ===
 
+title: Clogs 
+---
+The other day someone traded the clogs on their feet for a tulip bulb.
+===
+
+title: CaskOfWine 
+---
+A entire cask of wine was traded for a single tulip bulb the other day.
+===
+
+
+
+// timing may an issue here, ideally don't want these to start for at least the first five minutes for narrative / thematically sense although it would make some sense to sprinkle throughout as foreshadowing
+
+// doing a few from first person, fits rumor theme if people are saying this and we are hearing them, could swap fairly easily but thinks flows better and works better first person
+title: UnhingedRumor1
+---
+I would slap my own grandmother for a tulip bulb
+===
+
+title: UnhingedRumor2
+---
+I would beg, borrow, and steal to get a tulip given the opportunity. 
+===
+
+title: UnhingedRumor3
+---
+I have done things to get tulips I dare not repeat. 
+===
+
+title: UnhingedRumor4
+---
+Every time I close my eyes I can hear the screams of that poor tulip farmer. I did what I had to do.
+===
+
+title: UnhingedRumor5
+---
+What good does it do to gain a tulip bulp if you lose your soul in the process?
+===
+
+title: UnhingedRumor6
+---
+My neighbor's sixth son tried to stop me from taking some of their tulip bulbs inventory. Let's just say there are five children in the family now.
+===
+
+title: UnhingedRumor7
+---
+I will give you my first born grandchild for a rare tulip bulb.
+===
+
+
+
+// Programmatic Rumor Template
+// {dutch_first_name()}
+// [first_name] [last_name] has named their new tulip after their [random_noun], how [random adjective]!
+
+
+
+
 
 
 // these legumes joke maybe or maybe subvert into leg um me walnuts or something idk
