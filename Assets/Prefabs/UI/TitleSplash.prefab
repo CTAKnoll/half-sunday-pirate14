@@ -259,6 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7d027479f04e438f762fb26d53e75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
   Priority: 3
 --- !u!114 &6833938676817003186
 MonoBehaviour:
