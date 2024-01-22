@@ -245,6 +245,8 @@ Dutch investors are all in sync and suggest you buy, buy, buy Fever meter at
 title: TravelingShipguy
 ---
 // Needs:  $random_tulip_kind, $random_tulip_kind_market_price
+<<set $random_kind_ship = random_tulip_kind()>>
+<<set $random_kind_ship_price = get_market_price("{$random_kind_ship} tulip")>>
 A seabattered ship can be seen off in the distance. It flies the Spanish flag and arrives at port and only a few men get off the boat. 
 
 A weary Spanish sailor approaches you. He wears an elegant red and gold tunic with fine linen trowsers. Addorned on his head is a black morion with a bright red feather atop. He is accompanied by two Spanish knights in full armor.  
@@ -258,6 +260,7 @@ A weary Spanish sailor approaches you. He wears an elegant red and gold tunic wi
     //<<if {random_tulip_kind()} >=0>>
         -> Provide {random_tulip_kind()} (Increase {random_tulip_kind_market_price()} by 15%)
         // {random_tulip_kind_market_price()} += 15%
+        <<set $random_kind_ship_price = get_market_price("{$random_kind_ship} tulip") * .15>>
         -> Refuse
     //<<else>>
     //<<jump NotEnoughTulips>>
@@ -272,10 +275,14 @@ title: ThisIsNotADril
 // <<if random_tulip_type()>>
 // color, kind, => 
 
+<<set $dril_tulip = random_tulip_type()>>
+<<set $dril_price = get_market_price({$dril_tulip})>>
+
 // Needs: $random_tulip_type, $random_tulip_type_market_price
 // An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
 An older strange looking gentleman spent 2,000 guilders on {random_tulip_type()} last month. Many speculate he will spend as much, if not more, next month.
     -> That's a lot of tulips (The market price of {random_tulip_type()} increases by 20%)
+    <<set $dril_price += (get_market_price({$dril_tulip}) * .20)>>
     // {random_tulip_type_market_price()} += 20%
 // 
 // "Hello, I spent two thousand guilders on tulips last month and my wife is mad at me. Could I please buy 200 tulips so I can make it up to her and say I'm sorry?"
@@ -314,13 +321,17 @@ title: TravelingClownFirstMeeting
 ---
 // I would like wacky colors and text effects if possible for his dialogue - especially the HELLO
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
+
+<<set $clown_tulip1 = random_tulip_type()>>
+<<set $clown_price1 = get_market_price({$clown_tulip1})>>
 // blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
 // flumpy, boppy, bingy, winky, tinky, 
 // do we want a Team Rocket Rival tulip farmer that comes and taunts you?
 HELLO! I am Lester the Jester! You seem like an enterprising and learned type of individual. You also appear to be quite busy and have your hands full of more than just those tulips you are carrying. It is important in life to stop and smell the roses sometimes. Would you like to smell the rose on my jacket?
     -> Smell his flower
-        In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you stumble back and fall onto a pile of your  {random_tulip_type()} tulips, crushing them. News quickly spreads of this extremely embarrassing encounter. (Market price of {random_tulip_type()} decreaes by 5%)
+        In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you stumble back and fall onto a pile of your {$clown_tulip1} tulips, crushing them. News quickly spreads of this extremely embarrassing encounter. (Market price of {$clown_tulip1} decreaes by 5%)
         // random_tulip_type_market_price -= 5%
+        <<set $clown_price1 -= (get_market_price({$clown_tulip1}) * .05)>>
         // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
         // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
         "Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around"
@@ -912,6 +923,15 @@ title: UnhingedRumor8
 Man trades the right to name his next son for a tulip bulb.
 ===
 
+title: UnhingedRumor9
+---
+I dreamt of tulips last night. I think I am losing my mind.
+===
+
+title: UnhingedRumor10
+---
+Should I tell my wife I spent our last guilders on a Tulip future?
+===
 
 // Programmatic Rumor Template
 // {dutch_first_name()}
