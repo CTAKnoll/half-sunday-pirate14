@@ -16,7 +16,8 @@ namespace Stonks
         public float Funds { get; private set; }
 
         public Dictionary<TulipVarietal, TulipEconomy> TulipEconomyData;
-        
+
+        public bool FilterToOwned = false;
         public event Action<float> FundsChanged;
         public event Action<TulipVarietal> VarietalAdded;
         public event Action<TulipVarietal> SentToGarden;
@@ -78,6 +79,11 @@ namespace Stonks
             ServiceLocator.GetService<FeverMode>().Awareness.Value += normalized * mod;
             SentToGarden?.Invoke(data.Varietal);
             return true;
+        }
+
+        public void FilterToOwnedTulips(bool doFilter)
+        {
+            FilterToOwned = doFilter;
         }
 
         private void CrashTheMarket()

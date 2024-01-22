@@ -4,9 +4,11 @@ using System.Linq;
 using Plants;
 using Services;
 using Stonks;
+using UI.Containers;
 using UI.Model.Templates;
 using UnityEngine;
 using Utils;
+using Yarn;
 
 namespace UI.Stonks
 {
@@ -14,9 +16,10 @@ namespace UI.Stonks
     {
         public TimeSpan Reachback = TimeSpan.FromDays(180);
         public Dictionary<TulipData.TulipVarietal, TulipEconomyLineController> StonkLines;
+        private TulipInventoryController TulipInventory;
 
         private TulipEconomyLineTemplate Template;
-        
+
         public StonkGraphController(StonkGraphView view) : base(view)
         {
             StonkLines = new();
@@ -39,6 +42,9 @@ namespace UI.Stonks
 
         private void UpdateLineRenderers()
         {
+            if(TulipInventory == null)
+                ServiceLocator.TryGetService(out TulipInventory);
+            
             Dictionary<TulipData.TulipVarietal, List<TulipEconomy.PriceSnapshot>> histories = new();
             float min = float.MaxValue;
             float max = float.MinValue;
@@ -57,7 +63,8 @@ namespace UI.Stonks
             
             foreach (var line in StonkLines)
             {
-                line.Value.BuildLine(histories[line.Key], min, max);
+                bool visibleNow = !Economy.FilterToOwned || TulipInventory.HasItem(line.Key);
+                line.Value.BuildLine(histories[line.Key], min, max, visibleNow);
             }
             UpdateViewAtEndOfFrame();
         }

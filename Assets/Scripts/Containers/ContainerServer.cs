@@ -12,6 +12,7 @@ namespace UI.Containers
         int Count { get; }
         TServedUI AddItem(TContainable toAdd, Action<TServedUI, IUIController> consumeCallback);
         TServedUI GetItem(int index);
+        bool HasItem(TContainable item);
         void RemoveItem(int index);
         bool RemoveItem(TContainable item, int amount = 1);
         bool IsEmpty(int index);

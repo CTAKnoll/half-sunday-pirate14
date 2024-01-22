@@ -96,6 +96,11 @@ namespace UI.Containers
         
         public TulipController GetItem(int index) => Owners[index].Tulip;
 
+        public bool HasItem(TulipVarietal variety)
+        {
+            return Elements.Any(elem => elem.Varietal?.Equals(variety) ?? false);
+        }
+
         public void RemoveItem(int index)
         {
             Elements[index] = null;

@@ -23,6 +23,11 @@ namespace UI.Containers
             _audio.PlayOneShot(View.sfx_place_item);
         }
 
+        public bool HasItem(TulipData.TulipVarietal varietal)
+        {
+            return Server.HasItem(varietal);
+        }
+
         private void OnStoreItemConsumed(TulipController tulip, IUIController consumer)
         {
             Server.RemoveItem(tulip.Data.Varietal);

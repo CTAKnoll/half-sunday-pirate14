@@ -24,8 +24,12 @@ namespace UI.Stonks
             upperRightBound = bounds[2];
         }
 
-        public void BuildLine(List<TulipEconomy.PriceSnapshot> snapshots, float min, float max)
+        public void BuildLine(List<TulipEconomy.PriceSnapshot> snapshots, float min, float max, bool visible)
         {
+            View.gameObject.SetActive(visible);
+            if (!visible)
+                return;
+            
             var xDistance = (upperRightBound - upperLeftBound).magnitude / snapshots.Count;
             var minY = lowerLeftBound.y;
             var maxY = upperLeftBound.y;
