@@ -34,10 +34,15 @@ Congratulations! Your tulip finished in {get_player_place()} place!
 title: MamboConcert
 ---
 // Needs: $random_tulip_type
-<<declare $random_tulip_mambo = random_tulip_type()>>
+// $random_tulip_mambo = random_tulip_type()
+// example from docs: <<set $numberOfSidesInASquare = $numberOfSidesInATriangle + 1>>
+<<set $random_tulip_mambo = random_tulip_type()>>
+<<set $mambo_market_price = get_market_price($random_tulip_mambo)>>
 A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide {random_tulip_mambo} tulips to the event?
     -> Provide tulips
         Musician: Thanks! (Market price for $random_tulip_mambo increases by 25%)
+        // fairly certain this will work math / percentage-wise but well want to double check, stackoverflow suggets: https://stackoverflow.com/questions/24655474/how-to-compute-a-percentage-increase-decrease-multiplier-in-python-without-if-st
+        // <<set $mambo_market_price += get_market_price($random_tulip_mambo) * .25>>
     -> That's a dumb name for a song. You'll never get any tulips out of me.
         Musician: Darn, at least I've still got Monica by my side.
 ===
