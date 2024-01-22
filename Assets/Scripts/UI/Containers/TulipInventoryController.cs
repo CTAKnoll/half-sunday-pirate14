@@ -1,11 +1,13 @@
 ﻿using Plants;
 using Services;
+using UI.Dialogue;
 using UI.Model;
 using UI.Plants;
+using Yarn.Unity;
 
 namespace UI.Containers
 {
-    public class TulipInventoryController : UIController<InventoryView, InventoryModel>, Container<TulipData.TulipVarietal, TulipController>, IService
+    public class TulipInventoryController : UIController<InventoryView, InventoryModel>, Container<TulipData.TulipVarietal, TulipController>, IService, IYarnFunctionProvider
     {
         public ContainerServer<TulipData.TulipVarietal, TulipController> Server { get; }
         
@@ -15,6 +17,8 @@ namespace UI.Containers
             ServiceLocator.RegisterAsService(this);
             Server = new Inventory(View.SlotControllers);
             _audio = ServiceLocator.GetService<AudioService>();
+            var inc = ServiceLocator.GetService<IncidentsManager>();
+            InitYarnFunctions(inc.Dialogue);
         }
 
         public void AddItem(TulipData data)
@@ -31,6 +35,11 @@ namespace UI.Containers
         private void OnStoreItemConsumed(TulipController tulip, IUIController consumer)
         {
             Server.RemoveItem(tulip.Data.Varietal);
+        }
+
+        public void InitYarnFunctions(DialogueRunner dialogueRunner)
+        {
+            dialogueRunner.AddFunction("get_num_tulips", () => { return Server.Count; });
         }
     }
 }

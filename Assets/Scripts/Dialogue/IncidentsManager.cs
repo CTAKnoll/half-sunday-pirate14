@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Services;
 using Yarn.Unity;
+using UI.Dialogue;
 
 public class IncidentsManager : MonoBehaviour, IService
 {
     private Timeline _timeline;
 
-    public DialogueRunner Dialogue;
+    [field: SerializeField]
+    public DialogueRunner Dialogue { get; set; }
 
     [SerializeField]
     private IncidentTimeline[] _incidents;

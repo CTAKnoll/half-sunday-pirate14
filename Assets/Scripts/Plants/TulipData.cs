@@ -4,6 +4,7 @@ using System.Linq;
 using Services;
 using Stonks;
 using UI.Containers;
+using UI.Dialogue;
 using UI.Plants;
 using UnityEngine;
 using Utils;
@@ -11,7 +12,7 @@ using Yarn.Unity;
 
 namespace Plants
 {
-    public class TulipData : Plantable, Containable<TulipData, TulipController>
+    public class TulipData : Plantable, Containable<TulipData, TulipController>, IYarnFunctionProvider
     {
         private Timeline Timeline;
 
@@ -219,11 +220,15 @@ namespace Plants
         public TulipInventoryController TulipInventory;
         private Economy Economy;
 
-        private static bool _initialized;
+        private static bool _yarnInitialized;
         
         protected TulipData()
-        {
-            InitYarnFunctions();
+        {            
+            if(_yarnInitialized) 
+                return;
+
+            var dialogueRunner = ServiceLocator.GetService<IncidentsManager>().Dialogue;
+            InitYarnFunctions(dialogueRunner);
         }
 
         public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop) : this()
@@ -254,12 +259,8 @@ namespace Plants
             ServiceLocator.TryGetService(out TulipInventory);
         }
 
-        protected static void InitYarnFunctions()
+        public void InitYarnFunctions(DialogueRunner dialogueRunner)
         {
-            if(_initialized) 
-                return;
-
-            var dialogueRunner = ServiceLocator.GetService<IncidentsManager>().Dialogue;
 
             dialogueRunner.AddFunction("random_tulip", TulipVarietal.GetRandomSeenTulip);
             dialogueRunner.AddFunction("random_tulip_type", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[0]; });
@@ -269,7 +270,7 @@ namespace Plants
             dialogueRunner.AddFunction("new_random_tulip_type", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[0]; });
             dialogueRunner.AddFunction("new_random_tulip_color", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[1]; });
 
-            _initialized = true;
+            _yarnInitialized = true;
         }
         
         public void Plant()
