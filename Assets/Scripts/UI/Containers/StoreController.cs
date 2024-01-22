@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Plants;
 using Services;
 using UI.Core;
@@ -20,6 +21,13 @@ namespace UI.Containers
             Ottoman,
             Morocco
         }
+
+        public Dictionary<MerchantOrigin, TulipData.TulipKind> Preferences = new()
+        {
+            [MerchantOrigin.Ottoman] = TulipData.TulipKind.Spotted,
+            [MerchantOrigin.Venice] = TulipData.TulipKind.Fancy,
+            [MerchantOrigin.Morocco] = TulipData.TulipKind.Striped,
+        };
 
         public MerchantOrigin ShopOrigin;
 

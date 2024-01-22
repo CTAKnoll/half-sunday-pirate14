@@ -90,7 +90,14 @@ namespace Plants
                     break;
             }
 
-            return ServiceLocator.GetService<ChromaKeyer>().ChromaKey(blob.Serve(stage), GetKeyValues(), blob.GetKeyValues());
+            Sprite image = blob.Serve(stage);
+            if (image == null)
+            {
+                Debug.LogWarning("TulipArtServer :: Returned a null sprite! I hope the plain fallback works...");
+                image = Plain.Serve(stage);
+            }
+
+            return ServiceLocator.GetService<ChromaKeyer>().ChromaKey(image, GetKeyValues(), blob.GetKeyValues());
         }
         
         public Color[] GetKeyValues()

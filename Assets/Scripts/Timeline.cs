@@ -20,13 +20,29 @@ public class Timeline : IService
     private PriorityQueue<(object, Action), DateTime> TimelineEvents;
     public event Action<DateTime> DateChanged;
     public event Action MarketCrashed;
+
+    private Ticker Ticker;
+    private Action DayBreaks;
     
     public Timeline()
     {
         Now = START_DATE;
+        DayBreaks = MoveToNextDay;
         TimelineEvents = new();
-        ServiceLocator.GetService<Ticker>().AddTickable(MoveToNextDay, DAY_IN_REALTIME);
+        Ticker = ServiceLocator.GetService<Ticker>();
         AddTimelineEvent(this, CrashTheMarket, FromNow(20, 0));
+        
+        StartTheWorld(); // TODO: Move this to clicking the start button
+    }
+
+    public void StartTheWorld()
+    {
+        Ticker.AddTickable(DayBreaks, DAY_IN_REALTIME);
+    }
+
+    public void StopTheWorld()
+    {
+        Ticker.RemoveTickable(DayBreaks);
     }
 
     public void AddTimelineEvent(object owner, Action callback, DateTime eventTime) => TimelineEvents.Enqueue((owner, callback), eventTime);

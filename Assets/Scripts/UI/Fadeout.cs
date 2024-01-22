@@ -10,10 +10,13 @@ public class Fadeout : MonoBehaviour, IService
     public event Action EndTheWorld;
     public int DaysUntilAlphaStart;
     public float AlphaIncreasePerDay;
+
+    private Timeline Timeline;
     
     void Start()
     {
         ServiceLocator.RegisterAsService(this);
+        Timeline = ServiceLocator.GetService<Timeline>();
         ChangeAlpha(Overlay, 0);
         Overlay.gameObject.SetActive(false);
         ServiceLocator.GetService<Timeline>().MarketCrashed += StartFadeOut;
@@ -29,8 +32,8 @@ public class Fadeout : MonoBehaviour, IService
     private void StartFadeOut()
     {
         Overlay.gameObject.SetActive(true);
-        ServiceLocator.GetService<Timeline>().AddTimelineEvent(this, 
-            () => ServiceLocator.GetService<Timeline>().AddRecurring(this, IncreaseAlpha, TimeSpan.FromDays(1)), 
+        Timeline.AddTimelineEvent(this, 
+            () => Timeline.AddRecurring(this, IncreaseAlpha, TimeSpan.FromDays(1)), 
             Timeline.FromNow(TimeSpan.FromDays(DaysUntilAlphaStart)));
     }
 
@@ -38,7 +41,9 @@ public class Fadeout : MonoBehaviour, IService
     {
         if (Overlay.color.a >= .999f)
         {
-            ServiceLocator.GetService<Timeline>().RemoveAllEvents(this);
+            Timeline.RemoveAllEvents(this);
+            Timeline.StopTheWorld();
+            
             EndTheWorld?.Invoke();
             ServiceLocator.GetService<GameStateManager>().PanToState(GameStateManager.GameState.Credits);
             Overlay.gameObject.SetActive(false);
