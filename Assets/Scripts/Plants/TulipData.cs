@@ -263,11 +263,11 @@ namespace Plants
         {
 
             dialogueRunner.AddFunction("random_tulip", TulipVarietal.GetRandomSeenTulip);
-            dialogueRunner.AddFunction("random_tulip_type", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[0]; });
+            dialogueRunner.AddFunction("random_tulip_kind", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[0]; });
             dialogueRunner.AddFunction("random_tulip_color", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[1]; });
 
             dialogueRunner.AddFunction("new_random_tulip", TulipVarietal.GetRandomUnseenTulip);
-            dialogueRunner.AddFunction("new_random_tulip_type", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[0]; });
+            dialogueRunner.AddFunction("new_random_tulip_kind", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[0]; });
             dialogueRunner.AddFunction("new_random_tulip_color", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[1]; });
 
             _yarnInitialized = true;

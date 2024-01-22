@@ -6,6 +6,7 @@ using Plants;
 using Services;
 using UnityEngine;
 using Utils;
+using Yarn.Unity;
 using static Plants.TulipData;
 
 namespace Stonks
@@ -34,6 +35,7 @@ namespace Stonks
                 
             Funds = StartingFunds;
             TulipEconomyData = new();
+            ServiceLocator.RegisterAsService(this);
             ServiceLocator.GetService<Timeline>().MarketCrashed += CrashTheMarket;
         }
 
@@ -47,8 +49,8 @@ namespace Stonks
         private static void InitYarnFunctions(Economy economy)
         {
             var dialogueRunner = ServiceLocator.GetService<IncidentsManager>().Dialogue;
-            dialogueRunner.AddFunction("avg_tulip_price", economy.GetAveragePrice);
-            dialogueRunner.AddFunction<string, string, float>("get_market_price", economy.GetCurrentPrice);
+            dialogueRunner.AddFunction("avg_tulip_price", () => economy.GetAveragePrice());
+            //dialogueRunner.AddFunction<string, string, float>("get_market_price", (kind,color) => economy.GetCurrentPriceFromName(kind,color));
         }
 
         public float GetCurrentPrice(TulipVarietal varietal)
@@ -56,15 +58,18 @@ namespace Stonks
             return TulipEconomyData[varietal].Price;
         }
 
-        public float GetCurrentPrice(string kindName, string colorName)
+        [YarnFunction("get_market_price")]
+        public static float GetCurrentPriceFromName(string kindName, string colorName)
         {
+            var economy = ServiceLocator.GetService<Economy>();
+
             TulipKind kind = Enum.Parse<TulipKind>(kindName);
             Color color = ColorToStringMapping
                 .First
                 ((kvp) => { return kvp.Value.ToLower().Equals(colorName.ToLower()); })
                 .Key;
 
-            return TulipEconomyData[new TulipVarietal(color, kind)].Price;
+            return economy.TulipEconomyData[new TulipVarietal(color, kind)].Price;
         }
 
         public float GetAveragePrice()
