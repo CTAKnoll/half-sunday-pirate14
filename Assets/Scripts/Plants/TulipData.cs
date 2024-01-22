@@ -86,11 +86,8 @@ namespace Plants
             public Color Color;
             public TulipKind Kind;
 
-            [YarnFunction("random_tulip_type")]
-<<<<<<< Updated upstream
             //NOTE ::: This could generate a tulip that has never been seen before, and will add it to the economy
             // use sparingly
-=======
             public static string GetRandomTulipKind()
             {
                 var rnd = new System.Random();
@@ -99,8 +96,7 @@ namespace Plants
 
                 return kinds[randIdx];
             }
-            [YarnFunction("random_tulip_color")]
->>>>>>> Stashed changes
+
             public static string GetRandomTulip()
             {
                 TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
@@ -178,8 +174,15 @@ namespace Plants
 
         public TulipInventoryController TulipInventory;
         private Economy Economy;
+
+        private static bool _initialized;
         
-        public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
+        protected TulipData()
+        {
+            InitYarnFunctions();
+        }
+
+        public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop) : this()
         { 
             Color = AssignColor(color);
             Kind = kind;
@@ -193,7 +196,7 @@ namespace Plants
             ServiceLocator.TryGetService(out TulipInventory);
         }
 
-        public TulipData(TulipVarietal ofKind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
+        public TulipData(TulipVarietal ofKind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop) : this()
         {
             Color = ofKind.Color;
             Kind = ofKind.Kind;
@@ -205,6 +208,17 @@ namespace Plants
             
             Timeline = ServiceLocator.GetService<Timeline>();
             ServiceLocator.TryGetService(out TulipInventory);
+        }
+
+        protected static void InitYarnFunctions()
+        {
+            if(_initialized) 
+                return;
+
+            var dialogueRunner = ServiceLocator.GetService<IncidentsManager>().Dialogue;
+
+            dialogueRunner.AddFunction("random_tulip_type", TulipVarietal.GetRandomTulipKind);
+            dialogueRunner.AddFunction("random_tulip_color", TulipVarietal.GetRandomSeenTulip);
         }
         
         public void Plant()
