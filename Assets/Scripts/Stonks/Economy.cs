@@ -13,7 +13,7 @@ namespace Stonks
     public class Economy : IService
     {
 
-        public Economy Main { get; private set; }
+        public static Economy Main { get; private set; }
         private float StartingFunds = 100;
         public float Funds { get; private set; }
 
