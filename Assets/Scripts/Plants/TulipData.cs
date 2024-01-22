@@ -43,6 +43,14 @@ namespace Plants
             [Color.magenta] = "Magenta",
         };
         
+        private static Dictionary<TulipKind, string> KindToStringMapping = new Dictionary<TulipKind, string>
+        {
+            [TulipKind.Plain] = "Plain",
+            [TulipKind.Fancy] = "Fancy",
+            [TulipKind.Spotted] = "Spotted",
+            [TulipKind.Striped] = "Striped",
+        };
+        
         public enum TulipKind
         {
             Plain,
@@ -81,11 +89,8 @@ namespace Plants
             [YarnFunction("random_tulip_type")]
             public static string GetRandomTulip()
             {
-                var rnd = new System.Random();
-                int randIdx = rnd.Next(TulipColorToColorMapping.Keys.Count);
-
-                var tulipColor = TulipColorToColorMapping.Keys.ToList()[randIdx];
-                return Enum.GetName(typeof(TulipColor), tulipColor);
+                TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
+                return $"{KindToStringMapping[random.Kind]} {ColorToStringMapping[random.Color]}";
             }
 
             public TulipVarietal(TulipColor color, TulipKind kind)
