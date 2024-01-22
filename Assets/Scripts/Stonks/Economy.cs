@@ -25,6 +25,7 @@ namespace Stonks
         {
             Funds = StartingFunds;
             TulipEconomyData = new();
+            ServiceLocator.GetService<Timeline>().MarketCrashed += CrashTheMarket;
 
             TulipVarietal redPlain = new TulipVarietal(TulipColor.Red, TulipKind.SolidColor);
             TulipEconomyData.Add(redPlain, new TulipEconomy(redPlain));
@@ -77,6 +78,12 @@ namespace Stonks
             ServiceLocator.GetService<FeverMode>().Awareness.Value += normalized * mod;
             SentToGarden?.Invoke(data.Varietal);
             return true;
+        }
+
+        private void CrashTheMarket()
+        {
+            TulipEconomy.TickMinimum = 0.8f;
+            TulipEconomy.TickMaximum = 0.95f;
         }
         
     }

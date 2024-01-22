@@ -19,12 +19,14 @@ public class Timeline : IService
     public static DateTime Now;
     private PriorityQueue<(object, Action), DateTime> TimelineEvents;
     public event Action<DateTime> DateChanged;
+    public event Action MarketCrashed;
     
     public Timeline()
     {
         Now = START_DATE;
         TimelineEvents = new();
         ServiceLocator.GetService<Ticker>().AddTickable(MoveToNextDay, DAY_IN_REALTIME);
+        AddTimelineEvent(this, CrashTheMarket, FromNow(1, 0));
     }
 
     public void AddTimelineEvent(object owner, Action callback, DateTime eventTime) => TimelineEvents.Enqueue((owner, callback), eventTime);
@@ -74,5 +76,10 @@ public class Timeline : IService
             payload.Item2.Invoke();
             TryDequeueTimelineEvent();
         }
+    }
+
+    private void CrashTheMarket()
+    {
+        MarketCrashed?.Invoke();
     }
 }
