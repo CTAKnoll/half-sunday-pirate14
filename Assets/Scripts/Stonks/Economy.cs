@@ -48,11 +48,23 @@ namespace Stonks
         {
             var dialogueRunner = ServiceLocator.GetService<IncidentsManager>().Dialogue;
             dialogueRunner.AddFunction("avg_tulip_price", economy.GetAveragePrice);
+            dialogueRunner.AddFunction<string, string, float>("get_market_price", economy.GetCurrentPrice);
         }
 
         public float GetCurrentPrice(TulipVarietal varietal)
         {
             return TulipEconomyData[varietal].Price;
+        }
+
+        public float GetCurrentPrice(string kindName, string colorName)
+        {
+            TulipKind kind = Enum.Parse<TulipKind>(kindName);
+            Color color = ColorToStringMapping
+                .First
+                ((kvp) => { return kvp.Value.ToLower().Equals(colorName.ToLower()); })
+                .Key;
+
+            return TulipEconomyData[new TulipVarietal(color, kind)].Price;
         }
 
         public float GetAveragePrice()

@@ -34,7 +34,7 @@ namespace Plants
             [TulipColor.Magenta] = Color.magenta,
         };
         
-        private static Dictionary<Color, string> ColorToStringMapping = new Dictionary<Color, string>
+        public readonly static Dictionary<Color, string> ColorToStringMapping = new Dictionary<Color, string>
         {
             [Color.red] = "Red",
             [Color.blue] = "Blue",
