@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Services;
+using Stonks;
 using UI.Containers;
 using UI.Plants;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Plants
             Green,
             Red,
             Blue,
+            Yellow,
+            Magenta,
             Random,
             Empty
         }
@@ -28,6 +31,8 @@ namespace Plants
             [TulipColor.Red] = Color.red,
             [TulipColor.Blue] = Color.blue,
             [TulipColor.Green] = Color.green,
+            [TulipColor.Yellow] = Color.yellow,
+            [TulipColor.Magenta] = Color.magenta,
         };
         
         private static Dictionary<Color, string> ColorToStringMapping = new Dictionary<Color, string>
@@ -35,6 +40,8 @@ namespace Plants
             [Color.red] = "Red",
             [Color.blue] = "Blue",
             [Color.green] = "Green",
+            [Color.yellow] = "Yellow",
+            [Color.magenta] = "Magenta",
         };
         
         public enum TulipKind
@@ -143,6 +150,7 @@ namespace Plants
         public event Action StageChanged;
 
         public TulipInventoryController TulipInventory;
+        private Economy Economy;
         
         public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
         { 
@@ -150,6 +158,9 @@ namespace Plants
             Kind = kind;
             Stage = stage;
             Owner = owner;
+
+            Economy = ServiceLocator.GetService<Economy>();
+            Economy.EnsureVarietal(this);
 
             Timeline = ServiceLocator.GetService<Timeline>();
             ServiceLocator.TryGetService(out TulipInventory);
@@ -161,6 +172,9 @@ namespace Plants
             Kind = ofKind.Kind;
             Stage = stage;
             Owner = owner;
+            
+            Economy = ServiceLocator.GetService<Economy>();
+            Economy.EnsureVarietal(this);
             
             Timeline = ServiceLocator.GetService<Timeline>();
             ServiceLocator.TryGetService(out TulipInventory);

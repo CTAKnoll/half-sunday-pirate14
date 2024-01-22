@@ -1,10 +1,9 @@
-﻿using Plants;
+﻿using System;
+using Plants;
 using Services;
 using UI.Core;
 using UI.Model;
 using UI.Plants;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace UI.Containers
 {
@@ -15,10 +14,20 @@ namespace UI.Containers
         private TemplateServer TemplateServer;
         private TooltipController Tooltip;
 
+        public enum MerchantOrigin
+        {
+            Venice,
+            Ottoman,
+            Morocco
+        }
+
+        public MerchantOrigin ShopOrigin;
+
         public StoreController(StoreView view, StoreModel model) : base(view, model)
         {
             Server = new Store(View.StoreSlots);
-            Ticker.AddTickable(RefreshStore, 10f);
+            Timeline.AddRecurring(this, RefreshStore, TimeSpan.FromDays(100));
+            Timeline.AddRecurring(this, ChangeMerchant, TimeSpan.FromDays(365));
             UiDriver.RegisterForFocus(View, CreateTooltip, DestroyTooltip);
             RefreshStore();
         }
@@ -37,12 +46,25 @@ namespace UI.Containers
             Tooltip = null;
         }
 
+        public void ChangeMerchant()
+        {
+            //Server.Clear
+            //Change Merchant Type
+            RefreshStore();
+        }
+
         private void RefreshStore()
         {
             while (Server.HasEmpty())
             {
-                Server.AddItem(new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.SolidColor), OnStoreItemConsumed);
+                TulipData data = GenerateTulipOfMerchantType();
+                Server.AddItem(data, OnStoreItemConsumed);
             }
+        }
+
+        private TulipData GenerateTulipOfMerchantType()
+        {
+            return new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.SolidColor);
         }
 
         private void OnStoreItemConsumed(TulipController tulip, IUIController consumer)

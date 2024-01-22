@@ -27,15 +27,6 @@ namespace Stonks
             Funds = StartingFunds;
             TulipEconomyData = new();
             ServiceLocator.GetService<Timeline>().MarketCrashed += CrashTheMarket;
-
-            TulipVarietal redPlain = new TulipVarietal(TulipColor.Red, TulipKind.SolidColor);
-            TulipEconomyData.Add(redPlain, new TulipEconomy(redPlain));
-            
-            TulipVarietal greenPlain = new TulipVarietal(TulipColor.Green, TulipKind.SolidColor);
-            TulipEconomyData.Add(greenPlain, new TulipEconomy(greenPlain));
-            
-            TulipVarietal bluePlain = new TulipVarietal(TulipColor.Blue, TulipKind.SolidColor);
-            TulipEconomyData.Add(bluePlain, new TulipEconomy(bluePlain));
         }
 
         public SortedList<DateTime, TulipEconomy.PriceSnapshot> GetPriceData(TulipVarietal varietal, DateTime start, DateTime end)
@@ -84,6 +75,15 @@ namespace Stonks
         public void FilterToOwnedTulips(bool doFilter)
         {
             FilterToOwned = doFilter;
+        }
+
+        public void EnsureVarietal(TulipData data)
+        {
+            if (!TulipEconomyData.ContainsKey(data.Varietal))
+            {
+                TulipEconomyData.Add(data.Varietal, new TulipEconomy(data.Varietal));
+                VarietalAdded?.Invoke(data.Varietal);
+            }
         }
 
         private void CrashTheMarket()
