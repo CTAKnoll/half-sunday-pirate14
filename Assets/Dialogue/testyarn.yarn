@@ -37,12 +37,12 @@ title: MamboConcert
 // $random_tulip_mambo = random_tulip_type()
 // example from docs: <<set $numberOfSidesInASquare = $numberOfSidesInATriangle + 1>>
 <<set $random_tulip_mambo = random_tulip_type()>>
-<<set $mambo_market_price = get_market_price($random_tulip_mambo)>>
-A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide {random_tulip_mambo} tulips to the event?
+<<set $mambo_market_price = get_market_price({$random_tulip_mambo})>>
+A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide {$random_tulip_mambo} tulips to the event?
     -> Provide tulips
-        Musician: Thanks! (Market price for $random_tulip_mambo increases by 25%)
+        Musician: Thanks! (Market price for {$random_tulip_mambo} increases by 25%)
         // fairly certain this will work math / percentage-wise but well want to double check, stackoverflow suggets: https://stackoverflow.com/questions/24655474/how-to-compute-a-percentage-increase-decrease-multiplier-in-python-without-if-st
-        // <<set $mambo_market_price += get_market_price($random_tulip_mambo) * .25>>
+        <<set $mambo_market_price += get_market_price({$random_tulip_mambo}) * .25>>
     -> That's a dumb name for a song. You'll never get any tulips out of me.
         Musician: Darn, at least I've still got Monica by my side.
 ===
@@ -57,17 +57,24 @@ title: DanceBall
 // asked about tulip: praise mine and diss anothers 
 
 // Functions: get_market_price(random_tulip_player_dance)
-
-You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {random_tulip_type()} tulip on the lapel of your broadbrimmed black hat. 
+<<set $random_tulip_dance_ball = random_tulip_type()>>
+<<set $random_tulip_dance_ball_price = get_market_price({$random_tulip_player_dance})>>
+<<set $random_tulip_dance_ball_rival = random_tulip_type()>>
+<<set $rival_tulip_price = get_market_price({$random_tulip_dance_ball_price})>>
+You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {$random_tulip_dance_ball} tulip on the lapel of your broadbrimmed black hat. 
     -> Jump into middle of the circle and wow the onlookers with your dance moves
-        The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising (Price of {random_tulip_type()} increases by 20%)
-    -> Trash talk the man with a {rival_tulip_type()} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
-        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of {rival_tulip_type()} decreases by 20%)
+        The entire crowd is quite impressed with your mastery of the art of dance. This p0roved to be excellent advertising (Price of {$random_tulip_dance_ball} increases by 20%)
+        <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>>
+    -> Trash talk the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
+        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of {$random_tulip_dance_ball_rival} decreases by 20%)
+        <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>>
             -> Double down
-                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of {rival_tulip_type()} decreases by 5%)
+                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of {$random_tulip_dance_ball_rival} decreases by 5%)
                 // tempting to add a triple down option but probably best to not 
+                <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .05>>
             -> Apologize
-                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of {rival_tulip_type()} increases by 5%)
+                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of {$random_tulip_dance_ball_rival} increases by 5%)
+                <<set $rival_tulip_price += get_market_price({$random_tulip_dance_ball_rival}) * .05>>
 ===
 
 // title: TravelingTrader
@@ -105,9 +112,12 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 title: TravelingCalvinists
 ---
 // Needs: $random_tulip_type, $random_tulip_type_market_price
+<<set $calvin_tulip = random_tulip_type()>>
+<<set $calvin_price = get_market_price({$calvin_tulip})>>
 A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy.
-    -> Sure, here you go (Market price for {random_tulip_type()} increases by 10%)
-    // $random_tulip_type_market_price += 10%
+    -> Sure, here you go (Market price for {$calvin_tulip} increases by 10%)
+    <<set $calvin_price += (get_market_price({$calvin_tulip}) * .10)>>
+    -> Nope, I got nothing for you
 ===
 
 title: RivalTulipFarmerMerchantEtc
@@ -825,6 +835,11 @@ title: CaskOfWine
 A entire cask of wine was traded for a single tulip bulb the other day.
 ===
 
+title: MerchantRobbed 
+---
+A tulip merchant was robbed the other day for all the inventory on their person which many to be of quite a substainal value 
+===
+
 
 
 // timing may an issue here, ideally don't want these to start for at least the first five minutes for narrative / thematically sense although it would make some sense to sprinkle throughout as foreshadowing
@@ -865,6 +880,10 @@ title: UnhingedRumor7
 I will give you my first born grandchild for a rare tulip bulb.
 ===
 
+title: UnhingedRumor8
+---
+Man trades the right to name his next son for a tulip bulb.
+===
 
 
 // Programmatic Rumor Template
