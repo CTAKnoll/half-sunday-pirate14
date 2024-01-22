@@ -15,6 +15,7 @@ namespace Core
         [SerializeField] private Image ProgressBarImage;
         
         private int FillPropertyID = Shader.PropertyToID("_Fill");
+        Material mat;
         private Timeline timeline;
 
         public float DailyMaxNaturalIncrease = 0.005f;
@@ -31,6 +32,10 @@ namespace Core
             FeverLevel = new SmartNumber(0f);
             
             timeline.AddRecurring(this, Tick, TimeSpan.FromDays(1));
+            var img =  ProgressBarImage.GetComponent<Image>();
+            mat = Instantiate(ProgressBarImage.GetComponent<Image>().material);
+            mat.CopyPropertiesFromMaterial(ProgressBarImage.GetComponent<Image>().material);
+            img.material = mat;
         }
 
         public void Rollover()
