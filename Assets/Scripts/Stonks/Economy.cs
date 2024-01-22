@@ -82,8 +82,8 @@ namespace Stonks
 
         private void CrashTheMarket()
         {
-            TulipEconomy.TickMinimum = 0.8f;
-            TulipEconomy.TickMaximum = 0.95f;
+            TulipEconomy.TickMinimum = 0.9f;
+            TulipEconomy.TickMaximum = 0.98f;
         }
         
     }
