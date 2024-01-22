@@ -87,6 +87,8 @@ namespace Plants
             public TulipKind Kind;
 
             [YarnFunction("random_tulip_type")]
+            //NOTE ::: This could generate a tulip that has never been seen before, and will add it to the economy
+            // use sparingly
             public static string GetRandomTulip()
             {
                 TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
