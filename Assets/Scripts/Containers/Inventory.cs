@@ -37,7 +37,7 @@ namespace UI.Containers
                 int total = 0;
                 for (int i = 0; i < MaxSize; i++)
                 {
-                    if (Elements[i].Varietal.Kind != TulipKind.Empty)
+                    if (Elements[i].Varietal != null)
                     {
                         if (Owners[i].IsEmpty)
                             throw new Exception("ContainerServer out of sync!");

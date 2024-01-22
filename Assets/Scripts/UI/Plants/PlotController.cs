@@ -141,7 +141,7 @@ namespace UI.Plants
             FlyCompletion = 0f;
             Model.TulipShowing = false;
             Model.PickedIconVisible = true;
-            Model.PickedIconImage = TulipArtServer.GetBaseSprite(Tulip.Stage);
+            Model.PickedIconImage = TulipArtServer.GetBaseSprite(Tulip.Varietal, Tulip.Stage);
             while (FlyCompletion <= 1f)
             {
                 FlyCompletion += .02f;
@@ -160,7 +160,7 @@ namespace UI.Plants
             Model.TulipShowing = IsPlanted && FlyCompletion == 0;
             if (Model.TulipShowing)
             {
-                Model.TulipImage = TulipArtServer.GetBaseSprite(Tulip.Stage);
+                Model.TulipImage = TulipArtServer.GetBaseSprite(Tulip.Varietal, Tulip.Stage);
             }
             UpdateViewAtEndOfFrame();
         }

@@ -25,7 +25,7 @@ namespace UI.Containers
                 int total = 0;
                 for (int i = 0; i < MaxSize; i++)
                 {
-                    if (Elements[i] != TulipData.Empty)
+                    if (Elements[i] != null)
                     {
                         if (Controllers[i] == null)
                             throw new Exception("ContainerServer out of sync!");
@@ -50,7 +50,7 @@ namespace UI.Containers
             Owners = new Transform[MaxSize];
             for (int i = 0; i < MaxSize; i++)
             {
-                Elements[i] = TulipData.Empty;
+                Elements[i] = null;
                 Controllers[i] = null;
                 Owners[i] = owners[i].transform;
             }
@@ -60,7 +60,7 @@ namespace UI.Containers
         {
             for (int i = 0; i < MaxSize; i++)
             {
-                if (Elements[i].Equals(TulipData.Empty))
+                if (Elements[i] == null)
                 {
                     Elements[i] = toAdd;
                     Controllers[i] = toAdd.Serve(Owners[i]);
@@ -81,7 +81,7 @@ namespace UI.Containers
 
         public void RemoveItem(int index)
         {
-            Elements[index] = TulipData.Empty;
+            Elements[index] = null;
             Controllers[index] = null;
         }
         
@@ -89,12 +89,12 @@ namespace UI.Containers
         {
             int index = Array.IndexOf(Controllers.Select(controller => controller?.Data).ToArray(), item);
             if (index == -1) return false;
-            Elements[index] = TulipData.Empty;
+            Elements[index] = null;
             Controllers[index] = null;
             return true;
         }
         
-        public bool IsEmpty(int index) => Elements[index] == TulipData.Empty;
-        public bool HasEmpty() => Elements.Contains(TulipData.Empty);
+        public bool IsEmpty(int index) => Elements[index] == null;
+        public bool HasEmpty() => Elements.Contains(null);
     }
 }

@@ -64,7 +64,7 @@ namespace UI.Containers
 
         private TulipData GenerateTulipOfMerchantType()
         {
-            return new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.SolidColor);
+            return new TulipData(TulipData.TulipColor.Random, TulipData.TulipKind.Plain);
         }
 
         private void OnStoreItemConsumed(TulipController tulip, IUIController consumer)

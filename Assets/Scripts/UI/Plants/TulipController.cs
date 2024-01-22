@@ -29,7 +29,7 @@ namespace UI.Plants
             Data = data;
             Model.ScreenPos = parent.transform.position;
             Model.Color = data.Color;
-            Model.IconSprite = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(data.Stage);
+            Model.IconSprite = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(data.Varietal, data.Stage);
             UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
             UpdateViewAtEndOfFrame();
             _audio = ServiceLocator.GetService<AudioService>();

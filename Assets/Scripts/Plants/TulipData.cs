@@ -22,8 +22,7 @@ namespace Plants
             Blue,
             Yellow,
             Magenta,
-            Random,
-            Empty
+            Random
         }
 
         private static Dictionary<TulipColor, Color> TulipColorToColorMapping = new Dictionary<TulipColor, Color>
@@ -46,8 +45,11 @@ namespace Plants
         
         public enum TulipKind
         {
-            Empty,
-            SolidColor,
+            Plain,
+            Fancy,
+            Spotted,
+            Striped,
+            Random
         }
 
         public enum TulipStage
@@ -143,9 +145,7 @@ namespace Plants
         public bool OwnedByPlayer => Owner == TulipOwner.Player;
         public bool IsPlanted => Stage != TulipStage.Bulb;
         public bool CanHarvest => Stage.IsOneOf(TulipStage.Bloom, TulipStage.FullBloom, TulipStage.OverBloom);
-
-        public static TulipData Empty = new (TulipColor.Empty, TulipKind.Empty);
-
+        
         public event Action OnDeath;
         public event Action StageChanged;
 
@@ -206,11 +206,16 @@ namespace Plants
                 int randIndex = rnd.Next(TulipColorToColorMapping.Values.Count);
                 return TulipColorToColorMapping.Values.ToList()[randIndex];
             }
-            if (color == TulipColor.Empty)
-            {
-                return Color.clear;
-            }
             return TulipColorToColorMapping[color];
+        }
+        
+        protected static TulipKind AssignKind(TulipKind kind)
+        {
+            if (kind != TulipKind.Random)
+                return kind;
+            System.Random rnd = new ();
+            int randIndex = rnd.Next(TulipColorToColorMapping.Values.Count - 1);
+            return (TulipKind) Enum.GetValues(typeof(TulipKind)).GetValue(randIndex);
         }
 
         private void AdvanceStage()
