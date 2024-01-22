@@ -25,6 +25,7 @@ namespace Core
         {
             ServiceLocator.RegisterAsService(this);
             timeline = ServiceLocator.GetService<Timeline>();
+            var incManager = ServiceLocator.GetService<IncidentsManager>();
 
             Awareness = new SmartNumber(0f);
             Awareness.AddTrigger(1f, Rollover);
@@ -36,6 +37,8 @@ namespace Core
             mat = Instantiate(ProgressBarImage.GetComponent<Image>().material);
             mat.CopyPropertiesFromMaterial(ProgressBarImage.GetComponent<Image>().material);
             img.material = mat;
+
+            incManager.Dialogue.AddFunction("fever_meter", () => { return Awareness.Value; });
         }
 
         public void Rollover()

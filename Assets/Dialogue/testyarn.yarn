@@ -188,7 +188,7 @@ The town's tulip bandit goes on a stealing spree, taking {random_tulip_kind()} t
 title: NewsTickerNSync
 ---
 // Needs: $fever_meter
-Dutch investors are all in sync and suggest you buy, buy, buy 
+Dutch investors are all in sync and suggest you buy, buy, buy Fever meter at
     -> Catchy
 // {fever_meter()} += 5%
 ===

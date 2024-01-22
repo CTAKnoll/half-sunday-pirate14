@@ -87,8 +87,20 @@ namespace Plants
             public TulipKind Kind;
 
             [YarnFunction("random_tulip_type")]
+<<<<<<< Updated upstream
             //NOTE ::: This could generate a tulip that has never been seen before, and will add it to the economy
             // use sparingly
+=======
+            public static string GetRandomTulipKind()
+            {
+                var rnd = new System.Random();
+                var kinds = Enum.GetNames(typeof(TulipKind));
+                int randIdx = rnd.Next(1,kinds.Length);
+
+                return kinds[randIdx];
+            }
+            [YarnFunction("random_tulip_color")]
+>>>>>>> Stashed changes
             public static string GetRandomTulip()
             {
                 TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
@@ -101,6 +113,7 @@ namespace Plants
                 TulipVarietal randomSeen = keys[new System.Random().Next(keys.Count)];
                 return $"{KindToStringMapping[randomSeen.Kind]} {ColorToStringMapping[randomSeen.Color]}";
             }
+
 
             public TulipVarietal(TulipColor color, TulipKind kind)
             {
