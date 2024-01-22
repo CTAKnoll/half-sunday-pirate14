@@ -94,6 +94,13 @@ namespace Plants
                 TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
                 return $"{KindToStringMapping[random.Kind]} {ColorToStringMapping[random.Color]}";
             }
+            
+            public static string GetRandomSeenTulip()
+            {
+                var keys = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
+                TulipVarietal randomSeen = keys[new System.Random().Next(keys.Count)];
+                return $"{KindToStringMapping[randomSeen.Kind]} {ColorToStringMapping[randomSeen.Color]}";
+            }
 
             public TulipVarietal(TulipColor color, TulipKind kind)
             {
