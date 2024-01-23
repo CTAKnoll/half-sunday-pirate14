@@ -87,7 +87,7 @@ namespace UI.Dialogue
                 // The first available option is selected by default
                 if (optionViewsCreated == 0)
                 {
-                    optionView.Select();
+                    //optionView.Select();
                 }
 
                 optionViewsCreated += 1;
@@ -152,6 +152,8 @@ namespace UI.Dialogue
             OptionView CreateNewOptionView()
             {
                 var optionView = Instantiate(optionViewPrefab);
+                var controller = new OptionController(optionView);
+
                 optionView.transform.SetParent(transform, false);
                 optionView.transform.SetAsLastSibling();
 
