@@ -56,7 +56,7 @@ namespace Core
                 UpdateProgressBar();
                 yield return new WaitForSeconds(0.03f);
             }
-            FeverLevel += 1;
+            FeverLevel.Value += 1;
         }
 
         public void Tick()
