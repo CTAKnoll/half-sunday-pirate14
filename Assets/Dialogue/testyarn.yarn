@@ -1015,6 +1015,20 @@ I will find you.
 // [first_name] [last_name] has named their new tulip after their [random_noun], how [random adjective]!
 
 
+title: ProgrammaticRumor
+---
+<<declare $first_name = "test">>
+<<declare $last_name = "test">>
+<<declare $random_noun = "test">>
+<<declare $random_adjective = "test">>
+
+<<set $first_name = first_name()>>
+<<set $last_name = last_name()>>
+<<set $random_noun = random_noun()>>
+<<set $random_adjective = random_adjective()>>
+
+{$first_name} {$last_name} has named their new tulip after their {$random_noun}, how {$random_adjective}!
+===
 
 
 
