@@ -37,12 +37,12 @@ Congratulations! Your tulip finished in {get_player_place()} place!
 
 title: MamboConcert
 ---
-// Needs: $random_tulip_type
-// $random_tulip_mambo = random_tulip_type()
+// Needs: $random_tulip
+// $random_tulip_mambo = random_tulip()
 // example from docs: <<set $numberOfSidesInASquare = $numberOfSidesInATriangle + 1>>
 <<declare $random_tulip_mambo = "test">>
 <<declare $mambo_market_price = 1>>
-<<set $random_tulip_mambo = random_tulip_type()>>
+<<set $random_tulip_mambo = random_tulip()>>
 //<<set $mambo_market_price = get_market_price({$random_tulip_mambo})>> -- uncomment once get_market_price implemented
 A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide {$random_tulip_mambo} tulips to the event?
     -> Provide tulips
@@ -57,7 +57,7 @@ title: DanceBall
 ---
 // identifiers: color, kind, stage, owner
 // kind - spotted, striped, etc 
-// Needs: $random_tulip_type, $rival_tulip_type
+// Needs: $random_tulip, $rival_tulip_type
 // could also do just do color, kind, or type difference - king wore blue  
 
 // asked about tulip: praise mine and diss anothers 
@@ -67,9 +67,9 @@ title: DanceBall
 <<declare $random_tulip_dance_ball_price = 1>>
 <<declare $random_tulip_dance_ball_rival = "test">>
 <<declare $rival_tulip_price = 1>>
-<<set $random_tulip_dance_ball = random_tulip_type()>>
+<<set $random_tulip_dance_ball = random_tulip()>>
 // <<set $random_tulip_dance_ball_price = get_market_price({$random_tulip_player_dance})>> -- uncomment once get_market_price implemented
-<<set $random_tulip_dance_ball_rival = random_tulip_type()>>
+<<set $random_tulip_dance_ball_rival = random_tulip()>>
 //<<set $rival_tulip_price = get_market_price({$random_tulip_dance_ball_price})>> -- uncomment once get_market_price implemented
 You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {$random_tulip_dance_ball} tulip on the lapel of your broadbrimmed black hat. 
     -> Jump into middle of the circle and wow the onlookers with your dance moves
@@ -89,7 +89,7 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 
 // title: TravelingTrader
 // ---
-// Needs: $random_tulip_type, random_tulip_type_market_price 
+// Needs: $random_tulip, random_tulip_market_price 
 
 // A tall pale thin man in a tweed jacket sporting a curled brown mustache approaches you. He takes off his fine black Tudor flat cap before addressing you. 
 
@@ -97,7 +97,7 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 
 
 //"Greetings honorable purveyor of tulips! I humbly wish to partake in the exchange on currency for your magnificent flowery creations." 
-// how much are $random_tulip_type tulips worth?
+// how much are $random_tulip tulips worth?
 
 // and benar EU4 mod for reference - lava rising
 
@@ -105,10 +105,10 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
 // also probably need to factor in the stock ticker / market here
-    //-> 2 * $market_price (Increase market price of $random_tulip_type by 10%)
-    //-> 4 * $market_price (Increase market price of $random_tulip_type by 20%)
+    //-> 2 * $market_price (Increase market price of $random_tulip by 10%)
+    //-> 4 * $market_price (Increase market price of $random_tulip by 20%)
         // 25 chance to fail for 2 times markup, 50% chance to fail for 4 times markup 
-    //-> $market_price (Increase market price of $random_tulip_type by 5%)
+    //-> $market_price (Increase market price of $random_tulip by 5%)
 // ===
 
 
@@ -121,10 +121,10 @@ You are attending a local ball when a dance circle forms on the dance floor. You
 
 title: TravelingCalvinists
 ---
-// Needs: $random_tulip_type, $random_tulip_type_market_price
+// Needs: $random_tulip, $random_tulip_market_price
 <<declare $calvin_tulip = "test">>
 <<declare $calvin_price = 1>>
-<<set $calvin_tulip = random_tulip_type()>>
+<<set $calvin_tulip = random_tulip()>>
 // <<set $calvin_price = get_market_price({$calvin_tulip})>> -- uncomment once get_market_price implemented
 A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy.
     -> Sure, here you go (Market price for {$calvin_tulip} increases by 10%)
@@ -134,11 +134,11 @@ A group of Calvinists looking to decorate their church ask if you have any beaut
 
 title: RivalTulipFarmerMerchantEtc
 ---
-// Needs: $new_random_tulip_type, $new_random_tulip_type_market_price
+// Needs: $new_random_tulip, $new_random_tulip_market_price
 <<declare $new_tulip = "test">>
 <<declare $new_tulip_price = 10>>
 
-// <<set $new_tulip = new_random_tulip_type()>> -- uncomment once new_random_tulip_type implemented
+// <<set $new_tulip = new_random_tulip()>> -- uncomment once new_random_tulip implemented
 // theoretically it won't have a price yet so we may need to hardcode a default price
 // <<declare $new_tulip_price = 10>>
 //<<set $new_tulip_price = get_market_price({$new_tulip})>> -- uncomment once get_market_price implemented
@@ -146,7 +146,7 @@ A rival tulip merchant debuts his new tulip breed at the pub, sparking an increa
     -> What a jerk ({$new_tulip} market price increases by 20%)
     //<<set $new_tulip_price += (get_market_price({$new_tulip}) * .20)>> -- uncomment once get_market_price implemented
 // ideally this should be weighted to show up on the market soon after this incident
-// $new_random_tulip_type_market_price += 20%
+// $new_random_tulip_market_price += 20%
 ===
 
 
@@ -208,18 +208,18 @@ Off in the distance you see a crazed man frantically running out you and yelling
 //
 title: NewTulipDrops1
 ---
-// Need: $new_random_tulip_type, $new_random_tulip_type_market_price
+// Need: $new_random_tulip, $new_random_tulip_market_price
 <<declare $new_tulip_science = "test">>
 <<declare $new_tulip_science_price = 10>>
-// <<set $new_tulip_science = new_random_tulip_type()>> -- uncomment once new_random_tulip_type implemented
+// <<set $new_tulip_science = new_random_tulip()>> -- uncomment once new_random_tulip implemented
 // theoretically it won't have a price yet so we may need to hardcode a default price
 // <<declare $new_tulip_price = 10>>
 // <<set $new_tulip_science_price = get_market_price({$new_tulip_science_price})>> -- uncomment once get_market_price implemented
-The Netherlands top tulipologists have created a new type of tulip: $new_random_tulip_type
-    //-> I gotta get in on this ({new_random_tulip_type()} market price increases by 30%)
+The Netherlands top tulipologists have created a new type of tulip: $new_random_tulip
+    //-> I gotta get in on this ({new_random_tulip()} market price increases by 30%)
     //<<set $new_tulip_science_price += (get_market_price({$new_tulip_science}) * .30)>> -- uncomment once get_market_price implemented
 // ideally this should be weighted to show up on the market soon after this incident
-// {new_random_tulip_type_market_price()} += 30%
+// {new_random_tulip_market_price()} += 30%
 ===
 
 title: TulipTony
@@ -253,7 +253,7 @@ title: NewsTickerNSync
 // Needs: $fever_meter
 <<declare $current_fever_meter = 0>>
 <<set $current_fever_meter = fever_meter()>>
-Dutch investors are all in sync and suggest you buy, buy, buy Fever meter at
+Dutch investors are all in sync and suggest you buy, buy, buy Fever meter at {$current_fever_meter}!
     -> Catchy
     <<set $current_fever_meter += $current_fever_meter * 0.05>>
 // {fever_meter()} += 5%
@@ -296,21 +296,21 @@ A weary Spanish sailor approaches you. He wears an elegant red and gold tunic wi
 
 title: ThisIsNotADril
 ---
-// $random_tulip_type = $random_tulip_type()
-// Bob now sells {random_tulip_type()} <- use this format for functions
-// <<if random_tulip_type()>>
+// $random_tulip = $random_tulip()
+// Bob now sells {random_tulip()} <- use this format for functions
+// <<if random_tulip()>>
 // color, kind, => 
 <<declare $dril_tulip = "test">>
 <<declare $dril_price = 10>>
-<<set $dril_tulip = random_tulip_type()>>
+<<set $dril_tulip = random_tulip()>>
 //<<set $dril_price = get_market_price($dril_tulip)>>
 
-// Needs: $random_tulip_type, $random_tulip_type_market_price
+// Needs: $random_tulip, $random_tulip_market_price
 // An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
 An older strange looking gentleman spent 2,000 guilders on {$dril_tulip} tulips last month. Many speculate he will spend as much, if not more, next month.
-    -> That's a lot of tulips (The market price of {random_tulip_type()} increases by 20%)
+    -> That's a lot of tulips (The market price of {random_tulip()} increases by 20%)
     //<<set $dril_price += (get_market_price($dril_tulip) * 0.20)>>
-    // {random_tulip_type_market_price()} += 20%
+    // {random_tulip_market_price()} += 20%
 // 
 // "Hello, I spent two thousand guilders on tulips last month and my wife is mad at me. Could I please buy 200 tulips so I can make it up to her and say I'm sorry?"
 
@@ -351,7 +351,7 @@ title: TravelingClownFirstMeeting
 <<declare $clown_tulip1 = "">>
 <<declare $clownspray1 = false>>
 <<declare $clown_price1 = 10>>
-<<set $clown_tulip1 = random_tulip_type()>>
+<<set $clown_tulip1 = random_tulip()>>
 //<<set $clown_price1 = get_market_price($clown_tulip1)>>
 // blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
 // flumpy, boppy, bingy, winky, tinky, 
@@ -359,7 +359,7 @@ title: TravelingClownFirstMeeting
 HELLO! I am Lester the Jester! You seem like an enterprising and learned type of individual. You also appear to be quite busy and have your hands full of more than just those tulips you are carrying. It is important in life to stop and smell the roses sometimes. Would you like to smell the rose on my jacket?
     -> Smell his flower
         In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you stumble back and fall onto a pile of your {$clown_tulip1} tulips, crushing them. News quickly spreads of this extremely embarrassing encounter. (Market price of {$clown_tulip1} decreaes by 5%)
-        // random_tulip_type_market_price -= 5%
+        // random_tulip_market_price -= 5%
         //<<set $clown_price1 -= (get_market_price($clown_tulip1) * 0.05)>>
         // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
         // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
@@ -395,7 +395,7 @@ title: TravelingClownSecondMeeting
 <<declare $clown_tulip2 = "">>
 <<declare $clown_price2 = 10>>
 <<declare $clownspray2 = false>>
-<<set $clown_tulip2 = random_tulip_type()>>
+<<set $clown_tulip2 = random_tulip()>>
 //<<set $clown_price2 = get_market_price($clown_tulip2)>>
 // I would like wacky colors and text effects if possible for his dialogue
     <<if $clownspray1 == true>>
@@ -403,7 +403,7 @@ title: TravelingClownSecondMeeting
             -> Smell flower
                 <<set $clownspray2 to true>>
                 Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {$clown_tulip2} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 3%.
-                //random_tulip_type_market_price -= 5%
+                //random_tulip_market_price -= 5%
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
             -> Don't smell flower
                 Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
@@ -499,43 +499,43 @@ title: TravelingRick
 
 title: MostTulipyTulip
 ---
-// $random_tulip_type, $random_tulip_type_market_price
+// $random_tulip, $random_tulip_market_price
 <<declare $most_tulipy = "test">>
 <<declare $most_tulipy_price = 1>>
-<<set $most_tulipy = random_tulip_type()>>
-Your $random_tulip_type tulip wins the coveted "Most Tulipy Tulip" award. It increases in market price by 10%
+<<set $most_tulipy = random_tulip()>>
+Your $random_tulip tulip wins the coveted "Most Tulipy Tulip" award. It increases in market price by 10%
     -> Yes!
     -> Wait, what?
         Don't look a gift horse in the mouth, tulip person 
     // <<set $mambo_market_price -= get_market_price({$most_tulipy}) * 0.10>>
-    // {random_tulip_type_market_price()} += 10%
+    // {random_tulip_market_price()} += 10%
 ===
 
 title: ComissionArtistTulipBook
 ---
-<<declare $random_tulip_type = "test">>
-<<declare $random_tulip_type_price = 1>>
-<<set $random_tulip_type = random_tulip_type()>>
-<<declare $random_tulip_type1 = "test">>
-<<declare $random_tulip_type1_price = 1>>
-<<set $random_tulip_type1 = random_tulip_type()>>
+<<declare $random_tulip = "test">>
+<<declare $random_tulip_price = 1>>
+<<set $random_tulip = random_tulip()>>
+<<declare $random_tulip1 = "test">>
+<<declare $random_tulip1_price = 1>>
+<<set $random_tulip1 = random_tulip()>>
 <<declare $random_tulip2_type = "test">>
 <<declare $random_tulip2_type_price = 1>>
-<<set $random_tulip_type2 = random_tulip_type()>>
-// Need: $random_tulip_type, $random_tulip_type2, $random_tulip_type3,
+<<set $random_tulip2 = random_tulip()>>
+// Need: $random_tulip, $random_tulip2, $random_tulip3,
 You comission a local artist to render one of your tulips, likely increasing its market value
-    -> $random_tulip_type
-        The market price of $random_tulip_type has increased by 15%
-        // $random_tulip_type += 15%
-        //<<set $random_tulip_type_price += (get_market_price($random_tulip_type) * 0.15)>>
-    -> $random_tulip_type2
-        The market price of $random_tulip_type2 has increased by 15%
-        //<<set $random_tulip_type_price1 += (get_market_price($random_tulip_type1) * 0.15)>>
-        // $random_tulip_type2 += 15%
-    -> $random_tulip_type3
-        The market price of $random_tulip_type3 has increased by 15%
-        //<<set $random_tulip_type_price2 += (get_market_price($random_tulip_type2) * 0.15)>>
-        // $random_tulip_type3 += 15%
+    -> $random_tulip
+        The market price of $random_tulip has increased by 15%
+        // $random_tulip += 15%
+        //<<set $random_tulip_price += (get_market_price($random_tulip) * 0.15)>>
+    -> $random_tulip2
+        The market price of $random_tulip2 has increased by 15%
+        //<<set $random_tulip_price1 += (get_market_price($random_tulip1) * 0.15)>>
+        // $random_tulip2 += 15%
+    -> $random_tulip3
+        The market price of $random_tulip3 has increased by 15%
+        //<<set $random_tulip_price2 += (get_market_price($random_tulip2) * 0.15)>>
+        // $random_tulip3 += 15%
 ===
 
 // other threats/incidents: voles, aphids, virus causes rare tulip type to bloom
@@ -548,21 +548,21 @@ You comission a local artist to render one of your tulips, likely increasing its
 
 title: RareTulipType
 ---
-// Needs: new_random_tulip_type
-A different tulip type, {new_random_tulip_type()} than the one you planted has sprouted from one of your tulips. Theories behind this phenomen include divine intervention, magic, a virus spread by rodents, and by soaking the bulbs in red wine. 
+// Needs: new_random_tulip
+A different tulip type, {new_random_tulip()} than the one you planted has sprouted from one of your tulips. Theories behind this phenomen include divine intervention, magic, a virus spread by rodents, and by soaking the bulbs in red wine. 
 // add this too the merchant inventory and/or the economy market idk 
-// create new_random_tulip_type
+// create new_random_tulip
 ===
 
 title: Doping
 ---
-// Needs: $random_tulip_type, $random_tulip_type_market_price
+// Needs: $random_tulip, $random_tulip_market_price
 <<declare $doping_tulip = "test">>
 <<declare $doping_tulip_price = 1>>
-<<set $doping_tulip = random_tulip_type()>>
+<<set $doping_tulip = random_tulip()>>
 The local authorities discover that you have been using steroids. Your famous {$doping_tulip} decreases in value due to your reputational damage.
     //<<set $doping_tulip_price -= (get_market_price($doping_tulip) * 0.10)>>
-    // {random_tulip_type_market_price()} -= 10%
+    // {random_tulip_market_price()} -= 10%
 ===
 
 title: NotEnoughTulips
