@@ -48,7 +48,7 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
     -> Provide tulips
         Musician: Thanks! (Market price for {$random_tulip_mambo} increases by 25%)
         // fairly certain this will work math / percentage-wise but well want to double check, stackoverflow suggets: https://stackoverflow.com/questions/24655474/how-to-compute-a-percentage-increase-decrease-multiplier-in-python-without-if-st
-        // <<set $mambo_market_price += get_market_price({$random_tulip_mambo}) * .25>> -- uncomment once get_market_price implemented
+        //<<set $mambo_market_price += get_market_price({$random_tulip_mambo}) * .25>> -- uncomment once get_market_price implemented
     -> That's a dumb name for a song. You'll never get any tulips out of me.
         Musician: Darn, at least I've still got Monica by my side.
 ===
@@ -231,7 +231,7 @@ title: TulipTony
 //<<set $random_tulip_color_price = get_market_price("{$random_tulip_color} tulip")>> -- uncomment once get_market_price implemented
 Tulip Tony who lives a stone throwy from the town crony says all {random_tulip_color()} tulips are phony. 
     -> I hate Tulip Tony (Price of {random_tulip_color()} tulips decreases by 30%)
-    //<<set $random_tulip_color_price -= (get_market_price("{$random_tulip_color} tulip") * .30)>> -- uncomment once get_market_price implemented
+    <<set $random_tulip_color_price -= (get_market_price("{$random_tulip_color} tulip") * 0.30)>> -- uncomment once get_market_price implemented
     // {random_tulip_color_market_price()} -= 30%
 ===
 
@@ -269,8 +269,10 @@ Dutch investors are all in sync and suggest you buy, buy, buy Fever meter at
 title: TravelingShipguy
 ---
 // Needs:  $random_tulip_kind, $random_tulip_kind_market_price
+<<declare $random_kind_ship = "test">>
+<<declare $random_kind_ship_price = 10>>
 <<set $random_kind_ship = random_tulip_kind()>>
-<<set $random_kind_ship_price = get_market_price("{$random_kind_ship} tulip")>>
+<<set $random_kind_ship_price = get_market_price("{$random_kind_ship tulip}")>>
 A seabattered ship can be seen off in the distance. It flies the Spanish flag and arrives at port and only a few men get off the boat. 
 
 A weary Spanish sailor approaches you. He wears an elegant red and gold tunic with fine linen trowsers. Addorned on his head is a black morion with a bright red feather atop. He is accompanied by two Spanish knights in full armor.  
@@ -298,13 +300,14 @@ title: ThisIsNotADril
 // Bob now sells {random_tulip_type()} <- use this format for functions
 // <<if random_tulip_type()>>
 // color, kind, => 
-
+<<declare $dril_tulip = "test">>
+<<declare $dril_price = 10>>
 <<set $dril_tulip = random_tulip_type()>>
 <<set $dril_price = get_market_price($dril_tulip)>>
 
 // Needs: $random_tulip_type, $random_tulip_type_market_price
 // An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
-An older strange looking gentleman spent 2,000 guilders on {random_tulip_type()} last month. Many speculate he will spend as much, if not more, next month.
+An older strange looking gentleman spent 2,000 guilders on {$dril_tulip} tulips last month. Many speculate he will spend as much, if not more, next month.
     -> That's a lot of tulips (The market price of {random_tulip_type()} increases by 20%)
     <<set $dril_price += (get_market_price($dril_tulip) * 0.20)>>
     // {random_tulip_type_market_price()} += 20%
@@ -345,7 +348,9 @@ title: TravelingClownFirstMeeting
 ---
 // I would like wacky colors and text effects if possible for his dialogue - especially the HELLO
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
-
+<<declare $clown_tulip1 = "">>
+<<declare $clownspray1 = false>>
+<<declare $clown_price1 = 10>>
 <<set $clown_tulip1 = random_tulip_type()>>
 <<set $clown_price1 = get_market_price($clown_tulip1)>>
 // blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
@@ -387,14 +392,19 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
 
 title: TravelingClownSecondMeeting
 ---
-
+<<declare $clown_tulip2 = "">>
+<<declare $clown_price2 = 10>>
+<<declare $clownspray2 = false>>
+<<set $clown_tulip2 = random_tulip_type()>>
+<<set $clown_price2 = get_market_price($clown_tulip2)>>
 // I would like wacky colors and text effects if possible for his dialogue
     <<if $clownspray1 == true>>
         Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?
             -> Smell flower
                 <<set $clownspray2 to true>>
-                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {random_tulip_type()} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 5%.
-                random_tulip_type_market_price -= 5%
+                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {$clown_tulip2} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 3%.
+                //random_tulip_type_market_price -= 5%
+                <<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
             -> Don't smell flower
                 Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
     <<else>>
@@ -414,6 +424,10 @@ title: TravelingClownSecondMeeting
 
 title: TravelingClownThirdMeeting
 ---
+<<declare $clown_tulip3 = "">>
+<<declare $clown_price3 = 10>>
+<<declare $clownspray3 = false>>
+<<declare $supersecretclownending = false>>
 // I would like wacky colors and text effects if possible for his dialogue
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
 // blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
@@ -425,8 +439,8 @@ title: TravelingClownThirdMeeting
             -> Smell flower
                 <<set $clownspray3 to true>>
                 <<set $supersecretclownending to true>>
-                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {random_tulip_type()} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 5%.
-                random_tulip_type_market_price -= 5%
+                Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {$clown_tulip3} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 3%.
+                <<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
             -> Don't smell flower
                 Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
     <<else>>
@@ -442,10 +456,15 @@ title: TravelingClownThirdMeeting
 
 title: LocalBoy
 ---
+<<declare $dumb_boy_flower_color = "test">>
+<<declare $dumb_boy_flower_color_price = 10>>
+<<set $dumb_boy_flower_color = random_tulip_color()>>
+
 // Needs: $random_tulip_color, $random_tulip_color_market_price
 Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his partents said. "Mark has always been a very dull and thick boy" said his father, "I am very disappointed in him." he continued. "Mark is gifted in other areas" claims his mother but she did not provide any actual examples. Stay tuned for further updates. 
 
-Mark is notorious for eating $random_tulip_color tulips and some believe this to be the cause of his stupidity. (Market price of {random_tulip_color()} decreases by 10%)
+Mark is notorious for eating $random_tulip_color tulips and some believe this to be the cause of his stupidity. (Market price of {$dumb_boy_flower_color} decreases by 10%)
+<<set $dumb_boy_flower_color_price -= (get_market_price("{$dumb_boy_flower_color} tulip") * 0.10)>>
 // {random_tulip_color_market_price()} -= 10%
     -> Ok
     -> Wait, what?
@@ -481,25 +500,41 @@ title: TravelingRick
 title: MostTulipyTulip
 ---
 // $random_tulip_type, $random_tulip_type_market_price
+<<declare $most_tulipy = "test">>
+<<declare $most_tulipy_price = 1>>
+<<set $most_tulipy = random_tulip_type()>>
 Your $random_tulip_type tulip wins the coveted "Most Tulipy Tulip" award. It increases in market price by 10%
     -> Yes!
     -> Wait, what?
         Don't look a gift horse in the mouth, tulip person 
+    // <<set $mambo_market_price -= get_market_price({$most_tulipy}) * 0.10>>
     // {random_tulip_type_market_price()} += 10%
 ===
 
 title: ComissionArtistTulipBook
 ---
+<<declare $random_tulip_type = "test">>
+<<declare $random_tulip_type_price = 1>>
+<<set $random_tulip_type = random_tulip_type()>>
+<<declare $random_tulip_type1 = "test">>
+<<declare $random_tulip_type1_price = 1>>
+<<set $random_tulip_type1 = random_tulip_type()>>
+<<declare $random_tulip2_type = "test">>
+<<declare $random_tulip2_type_price = 1>>
+<<set $random_tulip_type2 = random_tulip_type()>>
 // Need: $random_tulip_type, $random_tulip_type2, $random_tulip_type3,
 You comission a local artist to render one of your tulips, likely increasing its market value
     -> $random_tulip_type
         The market price of $random_tulip_type has increased by 15%
         // $random_tulip_type += 15%
+        <<set $random_tulip_type_price += (get_market_price($random_tulip_type) * 0.15)>>
     -> $random_tulip_type2
         The market price of $random_tulip_type2 has increased by 15%
+        <<set $random_tulip_type_price1 += (get_market_price($random_tulip_type1) * 0.15)>>
         // $random_tulip_type2 += 15%
     -> $random_tulip_type3
         The market price of $random_tulip_type3 has increased by 15%
+        <<set $random_tulip_type_price2 += (get_market_price($random_tulip_type2) * 0.15)>>
         // $random_tulip_type3 += 15%
 ===
 
@@ -522,7 +557,11 @@ A different tulip type, {new_random_tulip_type()} than the one you planted has s
 title: Doping
 ---
 // Needs: $random_tulip_type, $random_tulip_type_market_price
-The local authorities discover that you have been using steroids. Your famous {random_tulip_type()} decreases in value due to your reputational damage.
+<<declare $doping_tulip = "test">>
+<<declare $doping_tulip_price = 1>>
+<<set $doping_tulip = random_tulip_type()>>
+The local authorities discover that you have been using steroids. Your famous {$doping_tulip} decreases in value due to your reputational damage.
+    <<set $doping_tulip_price -= (get_market_price($doping_tulip) * 0.10)>>
     // {random_tulip_type_market_price()} -= 10%
 ===
 
@@ -542,25 +581,34 @@ title: 30YearsWar
 ---
 // Date: May 23 1618
 // Needs: $all_tulips_market_price
+<<declare $all_tulips_price = 1000>>
+<<set $all_tulips_price = all_tulips_market_price()>>
 Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate.
     -> That does not sound good. (Market price for all tulips has decreased by 2%)
     // all_tulips_market_price -= 2%
+    <<set $all_tulips_price -= ($all_tulips_price * 0.02)>>
 ===
 
 title: BubbleAboutToBurst
 // Date: February 1637
 ---
+<<declare $all_tulips_price_prepop = 1000>>
+<<set $all_tulips_prepop_price = all_tulips_market_price()>>
 During a recent tulip bulb auction at a pub, no one bid on one of the tulips (Market price tulips decrease 3%)
     -> I'm sure prices will bounce back
+    <<set $all_tulips_prepop_price -= ($all_tulips_prepop_price * 0.03)>>
 // {all_tulips_market_price()} -= 3%
 ===
 
 title: BubbleIsBurstingAndPeopleAreTicked
 // Date: Sometime around / after February 1637
 ---
+<<declare $all_tulips_price_monkeys = 1000>>
+<<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
 Artists have drawn paintings depicting tulip farmers and traders as monkeys (Market price tulips decrease 5%)
     -> I'm sure prices will bounce back
 // {all_tulips_market_price()} -= 3%
+<<set $all_tulips_price_monkeys_price -= ($all_tulips_price_monkeys_price * 0.03)>>
 <<if $supersecretclownending>>
     <<jump SuperSecretClownEnding>>
 <<else>>
