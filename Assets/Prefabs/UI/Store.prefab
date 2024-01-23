@@ -189,9 +189,9 @@ MonoBehaviour:
   storeView: {fileID: 7374112624845200815}
   storeModel:
     ShopShip: {fileID: 0}
-  MoroccanShip: {fileID: 21300000, guid: e4e004e30f9b21748b492712811e4a77, type: 3}
+  MoroccanShip: {fileID: 21300000, guid: e64109500f3c18941a2fc15670770182, type: 3}
   OttomanShip: {fileID: 21300000, guid: 34acb843e34a67a4fbfabc6044c50d23, type: 3}
-  VenetianShip: {fileID: 21300000, guid: b09784e74242cf049bc9a426075a82a6, type: 3}
+  VenetianShip: {fileID: 21300000, guid: 2dfa724bd11625f4e9369cf7bf51fe64, type: 3}
 --- !u!1 &8314920901923080763
 GameObject:
   m_ObjectHideFlags: 0

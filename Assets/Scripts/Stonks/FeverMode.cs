@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Services;
 using TMPro;
 using UnityEngine;
@@ -12,11 +13,15 @@ namespace Core
         public SmartNumber Awareness;
         public SmartNumber FeverLevel;
 
+        public float ReturnToValue = 0.2f;
+        public float ReturnNumSeconds = 1.5f;
+
         [SerializeField] private Image ProgressBarImage;
         
         private int FillPropertyID = Shader.PropertyToID("_Fill");
         Material mat;
         private Timeline timeline;
+        private IncidentsManager incManager;    
 
         public float DailyMaxNaturalIncrease = 0.005f;
         public float DailyMaxNaturalDecrease = -0.003f;
@@ -24,14 +29,16 @@ namespace Core
         public void Awake()
         {
             ServiceLocator.RegisterAsService(this);
-            timeline = ServiceLocator.GetService<Timeline>();
-            var incManager = ServiceLocator.GetService<IncidentsManager>();
-
             Awareness = new SmartNumber(0f);
-            Awareness.AddTrigger(1f, Rollover);
-
+            Awareness.AddTrigger(1f, () => StartCoroutine(Rollover()));
             FeverLevel = new SmartNumber(0f);
-            
+        }
+
+        protected void Start()
+        {
+            timeline = ServiceLocator.GetService<Timeline>();
+            ServiceLocator.TryGetService(out incManager);
+
             timeline.AddRecurring(this, Tick, TimeSpan.FromDays(1));
             var img =  ProgressBarImage.GetComponent<Image>();
             mat = Instantiate(ProgressBarImage.GetComponent<Image>().material);
@@ -41,13 +48,15 @@ namespace Core
             incManager.Dialogue.AddFunction("fever_meter", () => { return Awareness.Value; });
         }
 
-        public void Rollover()
+        private IEnumerator Rollover()
         {
-            while (Awareness.Value >= 1)
+            while (Awareness.Value > ReturnToValue)
             {
-                FeverLevel += 1f;
-                Awareness.SetQuietly(Awareness.Value - 1);
+                Awareness.SetQuietly(Awareness.Value - 1/((1-ReturnToValue)*30*ReturnNumSeconds));
+                UpdateProgressBar();
+                yield return new WaitForSeconds(0.03f);
             }
+            FeverLevel += 1;
         }
 
         public void Tick()

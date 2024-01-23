@@ -200,4 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46b987b8f5aab04eba13252ab2cd6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReturnToValue: 0.2
+  ReturnNumSeconds: 1.5
   ProgressBarImage: {fileID: 2336476308501352559}
+  DailyMaxNaturalIncrease: 0.005
+  DailyMaxNaturalDecrease: -0.003

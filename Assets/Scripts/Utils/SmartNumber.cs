@@ -38,8 +38,17 @@ namespace Utils
             MainThread = ServiceLocator.GetService<MainThreadScheduler>();
         }
 
-        public static SmartNumber operator +(SmartNumber a, SmartNumber b) => new (a.Value + b.Value, a.Triggers);
-        public static SmartNumber operator +(SmartNumber a, float b) => new (a.Value + b, a.Triggers);
+        public static SmartNumber operator +(SmartNumber a, SmartNumber b)
+        {
+            a.Value += b.Value;
+            return a;
+        }
+
+        public static SmartNumber operator +(SmartNumber a, float b)
+        {
+            a.Value += b;
+            return a;
+        }
         
         public static SmartNumber operator -(SmartNumber a, SmartNumber b) => new (a.Value - b.Value, a.Triggers);
         public static SmartNumber operator -(SmartNumber a, float b) => new (a.Value - b, a.Triggers);
@@ -50,8 +59,8 @@ namespace Utils
         public static SmartNumber operator /(SmartNumber a, SmartNumber b) => new (a.Value / b.Value, a.Triggers);
         public static SmartNumber operator /(SmartNumber a, float b) => new (a.Value / b, a.Triggers);
 
-        public static bool operator ==(SmartNumber a, SmartNumber b) => a.Value == b.Value;
-        public static bool operator !=(SmartNumber a, SmartNumber b) =>  a.Value != b.Value;
+        public static bool operator ==(SmartNumber a, SmartNumber b) => a?.Value == b?.Value;
+        public static bool operator !=(SmartNumber a, SmartNumber b) =>  a?.Value != b?.Value;
 
         public bool TrueEquals(SmartNumber b)
         {

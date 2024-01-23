@@ -24,6 +24,8 @@ namespace Stonks
         public event Action<float> FundsChanged;
         public event Action<TulipVarietal> VarietalAdded;
         public event Action<TulipVarietal> SentToGarden;
+
+        private static IncidentsManager incManager;
         
         public Economy()
         {
@@ -47,8 +49,8 @@ namespace Stonks
 
         private static void InitYarnFunctions(Economy economy)
         {
-            var dialogueRunner = ServiceLocator.GetService<IncidentsManager>().Dialogue;
-            dialogueRunner.AddFunction("avg_tulip_price", () => economy.GetAveragePrice());
+            ServiceLocator.TryGetService(out incManager);
+            incManager.Dialogue.AddFunction("avg_tulip_price", () => economy.GetAveragePrice());
             //dialogueRunner.AddFunction<string, string, float>("get_market_price", (kind,color) => economy.GetCurrentPriceFromName(kind,color));
         }
 

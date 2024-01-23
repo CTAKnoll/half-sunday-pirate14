@@ -401,7 +401,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6101863358419573630, guid: 913c4d788e077e543b72565c73cf1fff, type: 3}
       propertyPath: m_Name
-      value: FadeOutOverlay
+      value: Overlay
       objectReference: {fileID: 0}
     - target: {fileID: 6996965194395134908, guid: 913c4d788e077e543b72565c73cf1fff, type: 3}
       propertyPath: m_Pivot.x

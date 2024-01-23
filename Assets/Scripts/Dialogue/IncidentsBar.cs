@@ -9,10 +9,11 @@ public class IncidentsBar : MonoBehaviour
     [SerializeField]
     private IncidentWidgetView _incidentWidgetPrefab;
     private List<IncidentWidgetController> _controllers = new();
+    private IncidentsManager incManager;
 
     private void Start()
     {
-        var incManager = ServiceLocator.GetService<IncidentsManager>();
+        ServiceLocator.TryGetService(out incManager);
 
         incManager.spawnedIncident += OnSpawnIncident;
     }
