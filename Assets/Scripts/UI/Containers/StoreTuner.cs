@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace UI.Containers
 {
@@ -6,9 +7,20 @@ namespace UI.Containers
     {
         public StoreView storeView;
         public StoreModel storeModel;
+
+        public Sprite MoroccanShip;
+        public Sprite OttomanShip;
+        public Sprite VenetianShip;
+        
         public void Start()
         {
-            _ = new StoreController(storeView, storeModel);
+            var controller = new StoreController(storeView, storeModel);
+            controller.InsertMerchantImages(new Dictionary<StoreController.MerchantOrigin, Sprite>
+            {
+                [StoreController.MerchantOrigin.Ottoman] = OttomanShip,
+                [StoreController.MerchantOrigin.Venice] = VenetianShip,
+                [StoreController.MerchantOrigin.Morocco] = MoroccanShip,
+            });
         }
     }
 }

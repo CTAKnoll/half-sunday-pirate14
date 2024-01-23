@@ -1,8 +1,10 @@
-﻿namespace UI.Containers
+﻿using UnityEngine;
+
+namespace UI.Containers
 {
     [System.Serializable]
     public struct StoreModel : IUIModel
     {
-        public string test;
+        public Sprite ShopShip;
     }
 }
