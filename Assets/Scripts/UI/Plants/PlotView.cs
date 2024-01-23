@@ -1,5 +1,9 @@
-﻿using System;
+﻿using DG.Tweening;
+using DG.Tweening.Plugins.Options;
+using Plants;
+using System;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Plants
@@ -44,6 +48,22 @@ namespace UI.Plants
             BelowWeedAlert.gameObject.SetActive(model.WeedAlertDown && BelowLinkedPlot != null);
             LeftWeedAlert.gameObject.SetActive(model.WeedAlertLeft && LeftLinkedPlot != null);
             RightWeedAlert.gameObject.SetActive(model.WeedAlertRight && RightLinkedPlot != null);
+        }
+
+        public void TweenToInventory(PlotModel Model, Vector3 endPosition, TweenCallback onComplete, float duration = 0.25f)
+        {
+            UpdateViewWithModel(Model);
+            Transform tweenTarget = PickedTulipImage.gameObject.transform;
+
+            Vector3 Getter() => tweenTarget.position;
+            void Setter(Vector3 value) => tweenTarget.position = value;
+
+            DOTween.To(
+                Getter,
+                Setter,
+                endPosition,
+                duration
+                ).OnComplete(onComplete);
         }
     }
 }

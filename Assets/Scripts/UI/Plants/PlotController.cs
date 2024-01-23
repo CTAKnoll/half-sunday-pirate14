@@ -6,6 +6,7 @@ using Plants;
 using Services;
 using UnityEngine;
 using UnityEngine.Scripting;
+using DG.Tweening;
 
 namespace UI.Plants
 {
@@ -88,7 +89,8 @@ namespace UI.Plants
             else if (IsPlanted && Tulip.CanHarvest && !IsWeeded)
             {
                 Tulip.Harvest();
-                View.StartCoroutine(FlyAwayTulip());
+                TulipTween();
+                //View.StartCoroutine(FlyAwayTulip());
             }
         }
 
@@ -134,6 +136,23 @@ namespace UI.Plants
             
             weed.Plant();
             UpdateWeedVisual();
+        }
+
+        private void TulipTween()
+        {
+            var endPos = Plots.PickedInventoryTarget.gameObject.transform.position;
+            Model.TulipShowing = false;
+            Model.PickedIconVisible = true;
+            Model.PickedIconImage = TulipArtServer.GetBaseSprite(Tulip.Varietal, Tulip.Stage);
+
+            void OnTweenComplete()
+            {
+                Model.PickedIconPos = PickedInitialPos;
+                Model.PickedIconVisible = false;
+                Tulip = null;
+            }
+
+            View.TweenToInventory(Model, endPos, OnTweenComplete);
         }
 
         private IEnumerator FlyAwayTulip()
