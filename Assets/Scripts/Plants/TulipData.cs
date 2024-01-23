@@ -15,33 +15,35 @@ namespace Plants
     public class TulipData : Plantable, Containable<TulipData, TulipController>, IYarnFunctionProvider
     {
         private Timeline Timeline;
+        private TulipArtServer ArtServer;
 
         public enum TulipColor
         {
-            Green,
             Red,
+            White,
             Blue,
+            Pink,
             Yellow,
-            Magenta,
+            Purple,
+            PurpleWhite,
+            Sunshine,
+            Tangerine, 
+            Coral,
             Random
         }
 
-        private static Dictionary<TulipColor, Color> TulipColorToColorMapping = new Dictionary<TulipColor, Color>
+        private static Dictionary<TulipColor, string> ColorToStringMapping = new Dictionary<TulipColor, string>
         {
-            [TulipColor.Red] = Color.red,
-            [TulipColor.Blue] = Color.blue,
-            [TulipColor.Green] = Color.green,
-            [TulipColor.Yellow] = Color.yellow,
-            [TulipColor.Magenta] = Color.magenta,
-        };
-        
-        public readonly static Dictionary<Color, string> ColorToStringMapping = new Dictionary<Color, string>
-        {
-            [Color.red] = "Red",
-            [Color.blue] = "Blue",
-            [Color.green] = "Green",
-            [Color.yellow] = "Yellow",
-            [Color.magenta] = "Magenta",
+            [TulipColor.Red] = "Red",
+            [TulipColor.White] = "White",
+            [TulipColor.Blue] = "Blue",
+            [TulipColor.Pink] = "Pink",
+            [TulipColor.Yellow] = "Yellow",
+            [TulipColor.Purple] = "Purple",
+            [TulipColor.PurpleWhite] = "PurpleWhite",
+            [TulipColor.Sunshine] = "Sunshine",
+            [TulipColor.Tangerine] = "Tangerine",
+            [TulipColor.Coral] = "Coral",
         };
         
         private static Dictionary<TulipKind, string> KindToStringMapping = new Dictionary<TulipKind, string>
@@ -84,11 +86,14 @@ namespace Plants
 
         public class TulipVarietal : Containable<TulipVarietal, TulipController>
         {
-            public Color Color;
+            public TulipColor Color;
             public TulipKind Kind;
 
-            //NOTE ::: This could generate a tulip that has never been seen before, and will add it to the economy
-            // use sparingly
+            public Color UnityColor;
+
+            private TulipArtServer ArtServer;
+
+            [YarnFunction("random_tulip_type")]
             public static string GetRandomTulipKind()
             {
                 var rnd = new System.Random();
@@ -98,10 +103,12 @@ namespace Plants
                 return kinds[randIdx];
             }
 
+            //NOTE ::: This could generate a tulip that has never been seen before, and will add it to the economy
+            // use sparingly
             public static string GetRandomTulipColor()
             {
                 TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
-                return $"{KindToStringMapping[random.Kind]} {ColorToStringMapping[random.Color]}";
+                return $"{KindToStringMapping[random.Varietal.Kind]} {ColorToStringMapping[random.Varietal.Color]}";
             }
             
             public static string GetRandomSeenTulip()
@@ -114,7 +121,7 @@ namespace Plants
             public static string GetRandomUnseenTulip()
             {
                 List<TulipVarietal> varietals = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
-                List<Color> seenColors = varietals.Select((varietal) => { return varietal.Color; }).ToList();
+                List<TulipColor> seenColors = varietals.Select((varietal) => { return varietal.Color; }).ToList();
                 List<TulipKind> seenKinds = varietals.Select((varietal) => { return varietal.Kind; }).ToList();
 
                 var kind = GetUnseenKind(seenKinds);
@@ -122,7 +129,7 @@ namespace Plants
                 return $"{KindToStringMapping[kind]} {ColorToStringMapping[color]}";
             }
 
-            static Color GetUnseenColor(List<Color> seen)
+            static TulipColor GetUnseenColor(List<TulipColor> seen)
             {
                 System.Random rand = new System.Random();
 
@@ -158,14 +165,10 @@ namespace Plants
 
             public TulipVarietal(TulipColor color, TulipKind kind)
             {
+                ServiceLocator.TryGetService(out ArtServer);
                 Color = AssignColor(color);
-                Kind = kind;
-            }
-            
-            public TulipVarietal(Color color, TulipKind kind)
-            {
-                Color = color;
-                Kind = kind;
+                Kind = AssignKind(kind);
+                UnityColor = ArtServer.GetTulipColorData(this).Key1;
             }
 
             public override bool Equals(object o)
@@ -190,7 +193,8 @@ namespace Plants
             }
         }
         
-        public Color Color { get; }
+        public TulipColor Color { get; }
+        public Color UnityColor;
         public TulipKind Kind { get; }
         public TulipStage Stage { get; private set; }
         
@@ -231,10 +235,12 @@ namespace Plants
             InitYarnFunctions(dialogueRunner);
         }
 
-        public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop) : this()
-        { 
+        public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
+        {
+            ServiceLocator.TryGetService(out ArtServer);
             Color = AssignColor(color);
-            Kind = kind;
+            Kind = AssignKind(kind);
+            UnityColor = ArtServer.GetTulipColorData(Varietal).Key1;
             Stage = stage;
             Owner = owner;
 
@@ -247,8 +253,10 @@ namespace Plants
 
         public TulipData(TulipVarietal ofKind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop) : this()
         {
-            Color = ofKind.Color;
-            Kind = ofKind.Kind;
+            ServiceLocator.TryGetService(out ArtServer);
+            Color = AssignColor(ofKind.Color);
+            Kind = AssignKind(ofKind.Kind);
+            UnityColor = ofKind.UnityColor;
             Stage = stage;
             Owner = owner;
             
@@ -291,15 +299,13 @@ namespace Plants
             TulipInventory.AddItem(this);
         }
 
-        protected static Color AssignColor(TulipColor color)
+        protected static TulipColor AssignColor(TulipColor color)
         {
-            if (color == TulipColor.Random)
-            {
-                System.Random rnd = new ();
-                int randIndex = rnd.Next(TulipColorToColorMapping.Values.Count);
-                return TulipColorToColorMapping.Values.ToList()[randIndex];
-            }
-            return TulipColorToColorMapping[color];
+            if (color != TulipColor.Random)
+                return color;
+            System.Random rnd = new ();
+            int randIndex = rnd.Next(ColorToStringMapping.Values.Count - 1);
+            return (TulipColor) Enum.GetValues(typeof(TulipColor)).GetValue(randIndex);
         }
         
         protected static TulipKind AssignKind(TulipKind kind)
@@ -307,7 +313,7 @@ namespace Plants
             if (kind != TulipKind.Random)
                 return kind;
             System.Random rnd = new ();
-            int randIndex = rnd.Next(TulipColorToColorMapping.Values.Count - 1);
+            int randIndex = rnd.Next(ColorToStringMapping.Values.Count - 1);
             return (TulipKind) Enum.GetValues(typeof(TulipKind)).GetValue(randIndex);
         }
 

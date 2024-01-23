@@ -36,7 +36,7 @@ namespace UI.Stonks
 
         private void AddNewLine(TulipData.TulipVarietal varietal)
         {
-            StonkLines.Add(varietal, AddChild(new TulipEconomyLineController(Template, (RectTransform) View.transform, varietal.Color)));
+            StonkLines.Add(varietal, AddChild(new TulipEconomyLineController(Template, (RectTransform) View.transform, varietal.UnityColor)));
             UpdateLineRenderers();
         }
 

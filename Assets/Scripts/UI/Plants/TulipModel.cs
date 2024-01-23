@@ -7,6 +7,5 @@ namespace UI.Plants
     {
         public Vector3 ScreenPos;
         public Sprite IconSprite;
-        public Color Color;
     }
 }

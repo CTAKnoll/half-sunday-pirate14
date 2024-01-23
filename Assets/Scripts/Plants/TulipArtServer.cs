@@ -23,10 +23,7 @@ namespace Plants
             public Sprite Bulb;
             public Sprite Picked;
 
-            public Color Key1;
-            public Color Key2;
-            public Color Key3;
-            public Color Key4;
+           
 
             public Sprite Serve(TulipStage stage)
             {
@@ -45,26 +42,42 @@ namespace Plants
                     case TulipStage.Picked : return Picked;
                 }
                 return null;
-            }
-
-            public Color[] GetKeyValues()
-            {
-                return new Color[4] { Key1, Key2, Key3, Key4 };
-            }
-            
+            } 
         }
+        
+        [Serializable]
+        public struct ColorBlob
+        {
+             public Color Key1;
+             public Color Key2;
+             public Color Key3;
+             public Color Key4;
+             
+             public Color[] GetKeyValues()
+             {
+                 return new Color[4] { Key1, Key2, Key3, Key4 };
+             }
+        }
+        
 
         public TulipArtBlob Plain;
         public TulipArtBlob Fancy;
         public TulipArtBlob Spotted;
         public TulipArtBlob Striped;
 
-        public Dictionary<TulipVarietal, TulipArtBlob> Cache;
+        public ColorBlob DefaultRed;
+        public ColorBlob White;
+        public ColorBlob Blue;
+        public ColorBlob Pink;
+        public ColorBlob Yellow;
+        public ColorBlob Purple;
+        public ColorBlob PurpleWhite;
+        public ColorBlob Sunshine;
+        public ColorBlob Tangerine;
+        public ColorBlob Coral;
+        
 
-        public Color ChromaKey1;
-        public Color ChromaKey2;
-        public Color ChromaKey3;
-        public Color ChromaKey4;
+        public Dictionary<(TulipVarietal, TulipStage), Sprite> Cache;
 
 
         protected void Awake()
@@ -74,11 +87,36 @@ namespace Plants
             
         }
 
-        public Sprite GetBaseSprite(TulipVarietal varietal, TulipStage stage)
+        public ColorBlob GetTulipColorData(TulipVarietal varietal)
         {
-            if (Cache.ContainsKey(varietal))
-                return Cache[varietal].Serve(stage);
-            
+            ColorBlob color = DefaultRed;
+            switch (varietal.Color)
+            {
+                case TulipColor.White: color = White;
+                    break;
+                case TulipColor.Blue: color = Blue;
+                    break;
+                case TulipColor.Yellow: color = Yellow;
+                    break;
+                case TulipColor.Pink: color = Pink;
+                    break;
+                case TulipColor.Purple: color = Purple;
+                    break;
+                case TulipColor.PurpleWhite: color = PurpleWhite;
+                    break;
+                case TulipColor.Sunshine: color = Sunshine;
+                    break;
+                case TulipColor.Tangerine: color = Tangerine;
+                    break;
+                case TulipColor.Coral: color = Coral;
+                    break;
+            }
+
+            return color;
+        }
+
+        public TulipArtBlob GetTulipArtData(TulipVarietal varietal)
+        {
             TulipArtBlob blob = Plain;
             switch (varietal.Kind)
             {
@@ -90,19 +128,30 @@ namespace Plants
                     break;
             }
 
+            return blob;
+        }
+
+        public Sprite GetBaseSprite(TulipVarietal varietal, TulipStage stage)
+        {
+            if (Cache.ContainsKey((varietal, stage)))
+                return Cache[(varietal, stage)];
+            
+            ColorBlob color = GetTulipColorData(varietal);
+            TulipArtBlob blob = GetTulipArtData(varietal);
+
             Sprite image = blob.Serve(stage);
             if (image == null)
             {
                 Debug.LogWarning("TulipArtServer :: Returned a null sprite! I hope the plain fallback works...");
                 image = Plain.Serve(stage);
             }
-
-            return ServiceLocator.GetService<ChromaKeyer>().ChromaKey(image, GetKeyValues(), blob.GetKeyValues());
+            
+            Texture2D newImage = ServiceLocator.GetService<ChromaKeyer>().ChromaCopy(new Texture2D(image.texture.width, image.texture.height), 
+                image.texture, DefaultRed.GetKeyValues(), color.GetKeyValues());
+            Sprite newSprite = Sprite.Create(newImage, image.rect, image.pivot);
+            Cache.Add((varietal, stage), newSprite);
+            return newSprite;
         }
         
-        public Color[] GetKeyValues()
-        {
-            return new Color[4] { ChromaKey1, ChromaKey2, ChromaKey3, ChromaKey4 };
-        }
     }
 }

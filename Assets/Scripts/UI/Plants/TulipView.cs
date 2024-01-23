@@ -15,7 +15,6 @@ namespace UI.Plants
         {
             transform.position = model.ScreenPos;
             TulipIcon.sprite = model.IconSprite;
-            TulipIcon.color = model.Color;
         }
 
         public string ToString(TulipModel model)

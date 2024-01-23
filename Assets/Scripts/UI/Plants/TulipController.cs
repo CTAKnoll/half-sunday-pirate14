@@ -8,7 +8,6 @@ using UI.Model.Templates;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Scripting;
 
 namespace UI.Plants
 {
@@ -28,7 +27,6 @@ namespace UI.Plants
         {
             Data = data;
             Model.ScreenPos = parent.transform.position;
-            Model.Color = data.Color;
             Model.IconSprite = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(data.Varietal, data.Stage);
             UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
             UpdateViewAtEndOfFrame();
