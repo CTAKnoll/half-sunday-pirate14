@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 640, y: 70}
+  m_SizeDelta: {x: 640, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5651449941049406649
 CanvasRenderer:
@@ -132,6 +132,7 @@ MonoBehaviour:
   SellTulipButton: {fileID: 1348546499055989364}
   SendToGardenButton: {fileID: 6082141338605414527}
   SendToCompetitionButton: {fileID: 7521178919905877596}
+  GardenFeverModifier: 0.02
 --- !u!1001 &68191895267174181
 PrefabInstance:
   m_ObjectHideFlags: 0

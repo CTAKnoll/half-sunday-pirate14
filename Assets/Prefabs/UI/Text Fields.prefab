@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -269.45, y: 193.9}
+  m_AnchoredPosition: {x: -261.6, y: 186.3}
   m_SizeDelta: {x: 93.7258, y: 37.7988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1690614111202507340
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -198,6 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d0f8678aa8481d9fffc95f9fd067ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
   Priority: 2
   DateText: {fileID: 1461095287451091074}
   FundsText: {fileID: 388915171240571803}
@@ -235,7 +237,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -219.44812, y: 275.3}
+  m_AnchoredPosition: {x: -211.96, y: 266.3}
   m_SizeDelta: {x: 94.4473, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3448916787156332113
