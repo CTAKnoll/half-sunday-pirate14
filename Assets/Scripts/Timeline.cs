@@ -24,7 +24,7 @@ public class Timeline : IService
     private Ticker Ticker;
     private Action DayBreaks;
     
-    public Timeline()
+    public Timeline()   
     {
         Now = START_DATE;
         DayBreaks = MoveToNextDay;

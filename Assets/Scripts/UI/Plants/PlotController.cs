@@ -215,7 +215,7 @@ namespace UI.Plants
         private void PlantAndSpread()
         {
             if(SpreadDirection != PlotSpreadDirection.NotSpreading)
-                DirectionalPlots[SpreadDirection].PlantWeed(new WeedData());
+                DirectionalPlots[SpreadDirection]?.PlantWeed(new WeedData());
             SpreadWeeds();
         }
     }

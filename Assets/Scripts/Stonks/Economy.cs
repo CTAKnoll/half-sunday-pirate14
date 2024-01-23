@@ -35,7 +35,6 @@ namespace Stonks
                 
             Funds = StartingFunds;
             TulipEconomyData = new();
-            ServiceLocator.RegisterAsService(this);
             ServiceLocator.GetService<Timeline>().MarketCrashed += CrashTheMarket;
         }
 
