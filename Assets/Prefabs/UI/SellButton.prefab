@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9c527ca50b47ac9cc4ec9b2dfe13ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
   Priority: 2
 --- !u!1 &4224655009355474640
 GameObject:
@@ -218,7 +220,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 55.236496, y: 0, z: 58.964035, w: 7.1163607}
+  m_margin: {x: 57.81279, y: 0, z: 61.110947, w: 7.1163607}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
