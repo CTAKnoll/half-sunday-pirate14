@@ -32,7 +32,7 @@ namespace Plants
             Random
         }
 
-        private static Dictionary<TulipColor, string> ColorToStringMapping = new Dictionary<TulipColor, string>
+        public static Dictionary<TulipColor, string> ColorToStringMapping = new Dictionary<TulipColor, string>
         {
             [TulipColor.Red] = "Red",
             [TulipColor.White] = "White",
@@ -46,7 +46,7 @@ namespace Plants
             [TulipColor.Coral] = "Coral",
         };
         
-        private static Dictionary<TulipKind, string> KindToStringMapping = new Dictionary<TulipKind, string>
+        public static Dictionary<TulipKind, string> KindToStringMapping = new Dictionary<TulipKind, string>
         {
             [TulipKind.Plain] = "Plain",
             [TulipKind.Fancy] = "Fancy",

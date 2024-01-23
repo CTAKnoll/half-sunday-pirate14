@@ -64,7 +64,7 @@ namespace Stonks
             var economy = ServiceLocator.GetService<Economy>();
 
             TulipKind kind = Enum.Parse<TulipKind>(kindName);
-            Color color = ColorToStringMapping
+            TulipColor color = ColorToStringMapping
                 .First
                 ((kvp) => { return kvp.Value.ToLower().Equals(colorName.ToLower()); })
                 .Key;
