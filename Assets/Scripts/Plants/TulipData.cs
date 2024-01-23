@@ -93,7 +93,6 @@ namespace Plants
 
             private TulipArtServer ArtServer;
 
-            [YarnFunction("random_tulip_type")]
             public static string GetRandomTulipKind()
             {
                 var rnd = new System.Random();
@@ -270,17 +269,112 @@ namespace Plants
         public void InitYarnFunctions(DialogueRunner dialogueRunner)
         {
 
-            dialogueRunner.AddFunction("random_tulip", TulipVarietal.GetRandomSeenTulip);
-            dialogueRunner.AddFunction("random_tulip_kind", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[0]; });
-            dialogueRunner.AddFunction("random_tulip_color", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[1]; });
+            //dialogueRunner.AddFunction("random_tulip", () => TulipVarietal.GetRandomSeenTulip());
+            //dialogueRunner.AddFunction("random_tulip_kind", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[0]; });
+            //dialogueRunner.AddFunction("random_tulip_color", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[1]; });
 
-            dialogueRunner.AddFunction("new_random_tulip", TulipVarietal.GetRandomUnseenTulip);
-            dialogueRunner.AddFunction("new_random_tulip_kind", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[0]; });
-            dialogueRunner.AddFunction("new_random_tulip_color", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[1]; });
+            //dialogueRunner.AddFunction("new_random_tulip", TulipVarietal.GetRandomUnseenTulip);
+            //dialogueRunner.AddFunction("new_random_tulip_kind", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[0]; });
+            //dialogueRunner.AddFunction("new_random_tulip_color", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[1]; });
 
             _yarnInitialized = true;
         }
-        
+        public static string GetRandomTulipKind()
+        {
+            var rnd = new System.Random();
+            var kinds = Enum.GetNames(typeof(TulipKind));
+            int randIdx = rnd.Next(1, kinds.Length);
+
+            return kinds[randIdx];
+        }
+
+        //NOTE ::: This could generate a tulip that has never been seen before, and will add it to the economy
+        // use sparingly
+        public static string GetRandomTulipColor()
+        {
+            TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
+            return $"{KindToStringMapping[random.Varietal.Kind]} {ColorToStringMapping[random.Varietal.Color]}";
+        }
+
+        [YarnFunction("random_tulip")]
+        public static string GetRandomSeenTulip()
+        {
+            var keys = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
+            TulipVarietal randomSeen = keys[new System.Random().Next(keys.Count)];
+            return $"{KindToStringMapping[randomSeen.Kind]} {ColorToStringMapping[randomSeen.Color]}";
+        }
+
+        [YarnFunction("random_tulip_kind")]
+        public static string GetRandomSeenTulipKind()
+        {
+            return GetRandomSeenTulip().Split(" ")[0];
+        }
+
+        [YarnFunction("random_tulip_color")]
+        public static string GetRandomSeenTulipColor()
+        {
+            return GetRandomSeenTulip().Split(" ")[1];
+        }
+
+        [YarnFunction("new_random_tulip")]
+        public static string GetRandomUnseenTulip()
+        {
+            List<TulipVarietal> varietals = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
+            List<TulipColor> seenColors = varietals.Select((varietal) => { return varietal.Color; }).ToList();
+            List<TulipKind> seenKinds = varietals.Select((varietal) => { return varietal.Kind; }).ToList();
+
+            var kind = GetUnseenKind(seenKinds);
+            var color = GetUnseenColor(seenColors);
+            return $"{KindToStringMapping[kind]} {ColorToStringMapping[color]}";
+        }
+
+        static TulipColor GetUnseenColor(List<TulipColor> seen)
+        {
+            System.Random rand = new System.Random();
+
+            var allColors = ColorToStringMapping.Keys.ToList();
+            var unseenColors = allColors.FindAll((color) => { return !seen.Contains(color); });
+
+            if (unseenColors.Count == 0)
+            {
+                Debug.Log("No unseen colors remain. Returning seen color...");
+                return seen[rand.Next(seen.Count)];
+            }
+
+            return unseenColors[rand.Next(unseenColors.Count)];
+        }
+
+        static TulipKind GetUnseenKind(List<TulipKind> seen)
+        {
+            System.Random rand = new System.Random();
+            var allKinds = Enum.GetValues(typeof(TulipKind)).Cast<TulipKind>();
+
+            var unseenKinds = allKinds.Where
+                ((kind) => { return !seen.Contains(kind); })
+                .ToList();
+
+            if (unseenKinds.Count == 0)
+            {
+                Debug.Log("No unseen kinds remain. Returning seen kind...");
+                return seen[rand.Next(seen.Count)];
+            }
+
+            return unseenKinds[rand.Next(unseenKinds.Count)];
+        }
+
+        [YarnFunction("new_random_tulip_kind")]
+        public static string GetRandomUnseenTulipKind()
+        {
+            return GetRandomUnseenTulip().Split(" ")[0];
+        }
+
+        [YarnFunction("new_random_tulip_color")]
+        public static string GetRandomUnseenTulipColor()
+        {
+            return GetRandomUnseenTulip().Split(" ")[1];
+        }
+
+
         public void Plant()
         {
             // The bloom is planted

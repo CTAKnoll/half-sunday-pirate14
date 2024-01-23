@@ -33,15 +33,16 @@ public class IncidentsBar : MonoBehaviour
         {
             controller.Hide();
         }
+        gameObject.SetActive(false);
     }
 
     private void OnIncidentComplete(IncidentWidgetController inc)
     {
+        gameObject.SetActive(true);
         foreach (var controller in _controllers)
         {
             controller.Show();
         }
-        
         inc.started -= OnIncidentOpen;
         _controllers.Remove(inc);
     }
