@@ -299,5 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f725163ee484469be0de908281c2a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
   Priority: 2
   StackNumber: {fileID: 1366985242819087809}
