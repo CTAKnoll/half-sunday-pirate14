@@ -255,7 +255,8 @@ title: NewsTickerNSync
 <<declare $current_fever_meter = 0>>
 <<set $current_fever_meter = fever_meter()>>
 Dutch investors are all in sync and suggest you buy, buy, buy! // Fever meter at {$current_fever_meter}!
-    //-> Catchy // I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
+    Catchy // I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
+        // technically you can but it disappears very quickly, could probably tweak given more time
     <<set $current_fever_meter += $current_fever_meter * 0.05>>
 // {fever_meter()} += 5%
 ===
