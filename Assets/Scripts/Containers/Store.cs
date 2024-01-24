@@ -6,15 +6,13 @@ using Plants;
 using Services;
 using UI.Model;
 using UI.Plants;
-using UnityEngine;
 
 namespace UI.Containers
 {
     public class Store : IService, ContainerServer<TulipData, TulipController>
     {
-        private TulipData[] Elements;
-        private TulipController[] Controllers;
-        private Transform[] Owners;
+        private Inventory.InventoryStack[] Elements;
+        private InventorySlotController[] Owners;
 
         public virtual int MaxSize => 3;
         
@@ -25,15 +23,15 @@ namespace UI.Containers
                 int total = 0;
                 for (int i = 0; i < MaxSize; i++)
                 {
-                    if (Elements[i] != null)
+                    if (Elements[i].Varietal != null)
                     {
-                        if (Controllers[i] == null)
+                        if (Owners[i].IsEmpty)
                             throw new Exception("ContainerServer out of sync!");
                         total++;
                     }
                     else
                     {
-                        if (Controllers[i] != null)
+                        if (!Owners[i].IsEmpty)
                             throw new Exception("ContainerServer out of sync!");
                     }
                 }
@@ -42,17 +40,15 @@ namespace UI.Containers
         }
         
         
-        public Store(List<UIInteractable> owners)
+        public Store(List<InventorySlotController> owners)
         {
-            Elements = new TulipData[MaxSize];
-            Controllers = new TulipController[MaxSize];
+            Elements = new Inventory.InventoryStack[MaxSize];
+            Owners = new InventorySlotController[MaxSize];
             
-            Owners = new Transform[MaxSize];
             for (int i = 0; i < MaxSize; i++)
             {
-                Elements[i] = null;
-                Controllers[i] = null;
-                Owners[i] = owners[i].transform;
+                Elements[i] = new Inventory.InventoryStack(null, 0);
+                Owners[i] = owners[i];
             }
         }
 
@@ -60,12 +56,11 @@ namespace UI.Containers
         {
             for (int i = 0; i < MaxSize; i++)
             {
-                if (Elements[i] == null)
+                if (Elements[i].IsEmpty())
                 {
-                    Elements[i] = toAdd;
-                    Controllers[i] = toAdd.Serve(Owners[i]);
-                    Controllers[i].Consumed += onConsumed;
-                    added = Controllers[i];
+                    Elements[i] = new Inventory.InventoryStack(toAdd.Varietal, 1);
+                    Owners[i].UpdateSlot(Elements[i]);
+                    added = Owners[i].Tulip;
                     return true;
                 }
             }
@@ -74,7 +69,7 @@ namespace UI.Containers
             return false;
         }
 
-        public TulipController GetItem(int index) => Controllers[index];
+        public TulipController GetItem(int index) => Owners[index].Tulip;
         
         public bool HasItem(TulipData variety)
         {
@@ -83,20 +78,20 @@ namespace UI.Containers
 
         public void RemoveItem(int index)
         {
-            Elements[index] = null;
-            Controllers[index] = null;
+            Elements[index] = new Inventory.InventoryStack(null, 0);
+            Owners[index].UpdateSlot(Elements[index]);
         }
         
         public bool RemoveItem(TulipData item, int amount = 1)
         {
-            int index = Array.IndexOf(Controllers.Select(controller => controller?.Data).ToArray(), item);
+            int index = Array.IndexOf(Owners.Select(controller => controller?.Tulip.Data).ToArray(), item);
             if (index == -1) return false;
-            Elements[index] = null;
-            Controllers[index] = null;
+            Elements[index] = new Inventory.InventoryStack(null, 0);
+            Owners[index].UpdateSlot(Elements[index]);
             return true;
         }
         
-        public bool IsEmpty(int index) => Elements[index] == null;
-        public bool HasEmpty() => Elements.Contains(null);
+        public bool IsEmpty(int index) => Elements[index].IsEmpty();
+        public bool HasEmpty() => Elements.Any(t => t.IsEmpty());
     }
 }

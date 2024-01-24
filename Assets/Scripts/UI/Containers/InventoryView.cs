@@ -19,6 +19,7 @@ namespace UI.Containers
         {
             SlotControllers = InventorySlots.Select(view => new InventorySlotController(view, Stage, AllowStacking)).ToList();
         }
+        
         public override void UpdateViewWithModel(InventoryModel model)
         {
             

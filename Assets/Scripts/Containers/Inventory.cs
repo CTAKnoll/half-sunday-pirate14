@@ -60,7 +60,6 @@ namespace UI.Containers
             
             Elements = new InventoryStack[MaxSize];
             Owners = new InventorySlotController[MaxSize];
-            Debug.Log(Elements.Length + " " + Owners.Length + " " + owners.Count);
 
             for (int i = 0; i < MaxSize; i++)
             {

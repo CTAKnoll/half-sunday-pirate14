@@ -7,8 +7,11 @@ namespace UI.Containers
         public TextMeshProUGUI StackNumber;
         public override void UpdateViewWithModel(InventorySlotModel model)
         {
-            StackNumber.gameObject.SetActive(model.AllowStacking && model.Stacks > 0);
-            StackNumber.text = "x" + model.Stacks;
+            if (StackNumber != null)
+            {
+                StackNumber.gameObject.SetActive(model.AllowStacking && model.Stacks > 0);
+                StackNumber.text = "x" + model.Stacks;
+            }
         }
     }
 }

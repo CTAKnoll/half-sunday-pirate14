@@ -44,7 +44,7 @@ namespace UI.Containers
 
         public StoreController(StoreView view, StoreModel model) : base(view, model)
         {
-            Server = new Store(View.StoreSlots);
+            Server = new Store(View.SlotControllers);
             Timeline.AddRecurring(this, RefreshStore, TimeSpan.FromDays(120));
             Timeline.AddRecurring(this, ChangeMerchant, TimeSpan.FromDays(180));
             UiDriver.RegisterForFocus(View, CreateTooltip, DestroyTooltip);
