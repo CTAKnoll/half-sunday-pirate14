@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_text
-      value: Buy Tulip Futures (Long Term)
+      value: Buy Tulip Futures    (Long Term)
       objectReference: {fileID: 0}
     - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_fontSize
@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_text
-      value: Buy Tulip Futures (Short Term)
+      value: Buy Tulip Futures   (Short Term)
       objectReference: {fileID: 0}
     - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_fontSize
@@ -646,11 +646,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_fontSize
-      value: 15
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_margin.w
+      value: 2.522336
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_margin.x
+      value: -1.0343246
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_margin.y
+      value: 0.12414551
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_margin.z
+      value: -1.9138489
       objectReference: {fileID: 0}
     - target: {fileID: 4066040169221964885, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_fontSizeBase
-      value: 15
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932788207124786835, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 135.6921
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932788207124786835, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 47.2501
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932788207124786835, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.2155
+      objectReference: {fileID: 0}
+    - target: {fileID: 4932788207124786835, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.1557
       objectReference: {fileID: 0}
     - target: {fileID: 7000881428959629297, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_Sprite
