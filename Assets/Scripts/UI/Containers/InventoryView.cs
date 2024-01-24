@@ -2,6 +2,7 @@
 using System.Linq;
 using Plants;
 using UI.Plants;
+using UnityEngine;
 
 namespace UI.Containers
 {
@@ -14,7 +15,7 @@ namespace UI.Containers
         public bool AllowStacking;
         public TulipData.TulipStage Stage;
 
-        public void Start()
+        public void Awake()
         {
             SlotControllers = InventorySlots.Select(view => new InventorySlotController(view, Stage, AllowStacking)).ToList();
         }

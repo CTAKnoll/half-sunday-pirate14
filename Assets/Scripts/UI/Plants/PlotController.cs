@@ -40,6 +40,7 @@ namespace UI.Plants
         private WeedArtServer WeedArtServer;
         private TulipArtServer TulipArtServer;
         private Plots Plots;
+        private AlertText AlertText;
         
         public PlotController(PlotView view) : base(view)
         {
@@ -52,6 +53,8 @@ namespace UI.Plants
 
             ServiceLocator.TryGetService(out WeedArtServer);
             ServiceLocator.TryGetService(out TulipArtServer);
+            ServiceLocator.TryGetService(out AlertText);
+            
             Debug.Log(WeedArtServer == null);
             if (WeedArtServer != null)
             {
@@ -95,7 +98,7 @@ namespace UI.Plants
                 }
                 else
                 {
-                    // we need to shake here and alert player
+                    AlertText.Alert("You cannot harvest into a full inventory!", 5f);
                 }
             }
             else if (IsPlanted && Tulip.Stage == TulipData.TulipStage.Dead)

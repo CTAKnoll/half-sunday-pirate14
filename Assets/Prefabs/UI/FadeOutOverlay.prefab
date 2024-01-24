@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6352645781438042391}
   - component: {fileID: 857932317757612931}
   - component: {fileID: 5832247642793024116}
+  - component: {fileID: 8908290394210083946}
   m_Layer: 5
   m_Name: AlertText
   m_TagString: Untagged
@@ -67,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
+  m_sharedMaterial: {fileID: 2357010416258886945, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -134,6 +135,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8908290394210083946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3040618554473698988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47112e702f5a40a4c9fbe8245b2d168a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlertTextBox: {fileID: 5832247642793024116}
 --- !u!1 &6101863358419573630
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,8 +447,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The Dutch Have Become Aware...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
+  m_sharedMaterial: {fileID: 2357010416258886945, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

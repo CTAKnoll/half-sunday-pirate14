@@ -6,6 +6,7 @@ using System.Linq;
 using UI.Dialogue;
 using UI.Model;
 using UI.Plants;
+using UnityEngine;
 using Yarn.Unity;
 using static UI.Containers.Inventory;
 
@@ -20,6 +21,7 @@ namespace UI.Containers
         public TulipInventoryController(InventoryView view) : base(view)
         {
             ServiceLocator.RegisterAsService(this);
+            Debug.Log(View.SlotControllers == null);
             Inventory = new Inventory(View.SlotControllers);
             _audio = ServiceLocator.GetService<AudioService>();
             var inc = ServiceLocator.GetService<IncidentsManager>();

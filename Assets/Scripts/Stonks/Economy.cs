@@ -13,8 +13,6 @@ namespace Stonks
 {
     public class Economy : IService
     {
-
-        public static Economy Main { get; private set; }
         private float StartingFunds = 100;
         public float Funds { get; private set; }
 
@@ -29,12 +27,6 @@ namespace Stonks
         
         public Economy()
         {
-            if (Main == null)
-            {
-                Main = this;
-                InitYarnFunctions(Main);
-            }
-                
             Funds = StartingFunds;
             TulipEconomyData = new();
             ServiceLocator.GetService<Timeline>().MarketCrashed += CrashTheMarket;
@@ -45,13 +37,6 @@ namespace Stonks
             return new SortedList<DateTime, TulipEconomy.PriceSnapshot>(TulipEconomyData[varietal].PriceHistory
                 .Where(elem => elem.Key >= start && elem.Key <= end)
                 .ToDictionary(kv => kv.Key, kv => kv.Value));
-        }
-
-        private static void InitYarnFunctions(Economy economy)
-        {
-            ServiceLocator.TryGetService(out incManager);
-            incManager.Dialogue.AddFunction("avg_tulip_price", () => economy.GetAveragePrice());
-            //dialogueRunner.AddFunction<string, string, float>("get_market_price", (kind,color) => economy.GetCurrentPriceFromName(kind,color));
         }
 
         public float GetCurrentPrice(TulipVarietal varietal)

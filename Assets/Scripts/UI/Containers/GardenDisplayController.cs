@@ -15,7 +15,7 @@ namespace UI.Containers
         public GardenDisplayController(InventoryView view) : base(view)
         {
             ServiceLocator.RegisterAsService(this);
-            Server = new Inventory(View.SlotControllers, 20);
+            Server = new Inventory(View.SlotControllers);
             _audio = ServiceLocator.GetService<AudioService>();
             ServiceLocator.GetService<Economy>().SentToGarden += (varietal) => AddItem(varietal);
         }
