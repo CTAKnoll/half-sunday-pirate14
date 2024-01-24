@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5810475614050918783}
   - component: {fileID: 2050763879558700263}
   - component: {fileID: 828923871046906033}
-  - component: {fileID: 4407340657460978533}
   m_Layer: 5
   m_Name: IncdientButton
   m_TagString: Untagged
@@ -38,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 15}
+  m_SizeDelta: {x: 300, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5810475614050918783
 CanvasRenderer:
@@ -96,22 +95,6 @@ MonoBehaviour:
   text: {fileID: 7774715744611827035}
   showCharacterName: 0
   palette: {fileID: 0}
---- !u!114 &4407340657460978533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2599795707525550454}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42604f0b949256142ad1f626a1b6c171, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _view: {fileID: 828923871046906033}
-  OnClicked:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8634362004007450232
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +130,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 240, y: 13}
+  m_SizeDelta: {x: 290, y: 13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8503732620190000845
 CanvasRenderer:
