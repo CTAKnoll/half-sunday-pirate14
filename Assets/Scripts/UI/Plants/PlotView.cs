@@ -11,6 +11,14 @@ namespace UI.Plants
     [Serializable]
     public class PlotView : UIView<PlotModel>, Bucket
     {
+        [Header("SFX")]
+        public AudioEvent sfx_planted;
+        public AudioEvent sfx_harvested;
+        public AudioEvent sfx_damageWeed;
+        public AudioEvent sfx_killWeed;
+
+        [Space]
+
         public PlotView AboveLinkedPlot;
         public PlotView BelowLinkedPlot;
         public PlotView LeftLinkedPlot;
@@ -27,7 +35,6 @@ namespace UI.Plants
         public Image WeedImage;
         public Image PickedTulipImage;
         
-        public AudioEvent sfx_planted;
 
         public override void UpdateViewWithModel(PlotModel model)
         {

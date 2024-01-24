@@ -17,13 +17,11 @@ namespace UI.Containers
         public Inventory Inventory { get; }
         public ContainerServer<TulipData.TulipVarietal, TulipController> Server => Inventory;
 
-        private AudioService _audio;
         public TulipInventoryController(InventoryView view) : base(view)
         {
             ServiceLocator.RegisterAsService(this);
             Debug.Log(View.SlotControllers == null);
             Inventory = new Inventory(View.SlotControllers);
-            ServiceLocator.TryGetService(out _audio);
             var inc = ServiceLocator.LazyLoad<IncidentsManager>();
             InitYarnFunctions(inc.Dialogue);
         }
@@ -31,8 +29,10 @@ namespace UI.Containers
         public bool AddItem(TulipData data)
         {
             bool completed = Server.AddItem(data.Varietal, OnStoreItemConsumed, out _);
-            if(completed)
-                _audio.PlayOneShot(View.sfx_place_item);
+            if (completed)
+                Audio.PlayOneShot(View.sfx_place_item);
+            else
+                Audio.PlayOneShot(View.sfx_rejectItem);
             return completed;
         }
 

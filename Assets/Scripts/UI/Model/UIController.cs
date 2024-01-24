@@ -17,7 +17,7 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     
     protected UIDriver UiDriver;
     protected ControllerDatabase ControllerDb;
-    protected AudioService _audio;
+    protected AudioService Audio;
     protected TStaticView View { get; private set; }
 
     public bool IsActiveUI => ActivityMutex != null || LogicalParent is { IsActiveUI: true };
@@ -43,7 +43,7 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
             Debug.LogError($"InputService not found when instantiating {GetType()}");
         
         ControllerDb = ServiceLocator.LazyLoad<ControllerDatabase>();
-        ServiceLocator.TryGetService(out _audio);
+        ServiceLocator.TryGetService(out Audio);
     }
     
     public virtual void Show()
@@ -109,7 +109,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     protected Ticker Ticker;
     protected Timeline Timeline;
     protected Economy Economy;
-    protected AudioService _audio;
+    protected AudioService Audio;
     protected TView View { get; private set; }
     [SerializeField]
     protected TModel Model;
@@ -147,8 +147,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         Ticker = ServiceLocator.LazyLoad<Ticker>();
         Timeline = ServiceLocator.LazyLoad<Timeline>();
         Economy = ServiceLocator.LazyLoad<Economy>();
-        ServiceLocator.TryGetService(out _audio);
-        //RegisterDefaultSFX(UiDriver, Audio);
+        ServiceLocator.TryGetService(out Audio);
     }
 
     protected virtual void RegisterDefaultSFX(UIDriver driver, AudioService audio)

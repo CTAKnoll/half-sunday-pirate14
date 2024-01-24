@@ -8,7 +8,12 @@ namespace UI.Core
     {
         public MoveToIconController(MoveToIconView view, GameStateManager.GameState goTo, float time) : base(view)
         {
-            UiDriver.RegisterForTap(View, () => ServiceLocator.LazyLoad<GameStateManager>().PanToState(goTo, time));
+            void OnTap()
+            {
+                ServiceLocator.LazyLoad<GameStateManager>().PanToState(goTo, time);
+                Audio.PlayOneShot(View.sfx_onClick);
+            }
+            UiDriver.RegisterForTap(View, OnTap );
         }
     }
 }

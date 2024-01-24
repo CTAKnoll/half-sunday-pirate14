@@ -88,6 +88,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f01d2e9c19a46d78031b00b7cbab687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
+  sfx_onClick: {fileID: 0}
+  sfx_onRelease: {fileID: 0}
   Priority: 2
   InventorySlots:
   - {fileID: 503217961503288622}
@@ -97,6 +101,7 @@ MonoBehaviour:
   - {fileID: 1898421095621012527}
   - {fileID: 8263615914595904355}
   sfx_place_item: {fileID: 11400000, guid: 1b9affc7b541b5c40b550bcc32ce75b7, type: 2}
+  sfx_rejectItem: {fileID: 11400000, guid: b7c5d7384f3724f44883197676ae44aa, type: 2}
   AllowStacking: 1
   Stage: 0
 --- !u!1 &9180551309988138453

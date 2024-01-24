@@ -136,7 +136,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   TooltipText: 
+  sfx_onClick: {fileID: 11400000, guid: 4d55f3abbfdb0a445af932a8805ad7b5, type: 2}
+  sfx_onRelease: {fileID: 0}
   Priority: 2
+  sfx_planted: {fileID: 11400000, guid: 97928e31ddd42c646808c394ecfae3bd, type: 2}
+  sfx_harvested: {fileID: 11400000, guid: 4d55f3abbfdb0a445af932a8805ad7b5, type: 2}
+  sfx_damageWeed: {fileID: 11400000, guid: 17738e29c877b9e46b6e91c70cc0e884, type: 2}
+  sfx_killWeed: {fileID: 11400000, guid: 859d9d03c46b9af4a9b2e22a851bcb2c, type: 2}
   AboveLinkedPlot: {fileID: 0}
   BelowLinkedPlot: {fileID: 0}
   LeftLinkedPlot: {fileID: 0}
@@ -149,7 +155,6 @@ MonoBehaviour:
   TulipImage: {fileID: 4336615252851220890}
   WeedImage: {fileID: 8466192999029786239}
   PickedTulipImage: {fileID: 654802817304447074}
-  sfx_planted: {fileID: 11400000, guid: 97928e31ddd42c646808c394ecfae3bd, type: 2}
 --- !u!222 &1498577487999892385
 CanvasRenderer:
   m_ObjectHideFlags: 0

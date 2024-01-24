@@ -88,12 +88,14 @@ namespace UI.Plants
             if (IsWeeded)
             {
                 Weed.Damage();
+                Audio.PlayOneShot(View.sfx_damageWeed);
             }
             else if (IsPlanted && Tulip.CanHarvest && !IsWeeded)
             {
                 bool success = Tulip.Harvest();
                 if (success)
                 {
+                    Audio.PlayOneShot(View.sfx_harvested);
                     TulipTween();
                 }
                 else
@@ -145,6 +147,7 @@ namespace UI.Plants
                 Model.WeedAlertLeft = false;
                 Model.WeedAlertRight = false;
                 
+                Audio.PlayOneShot(View.sfx_killWeed);
                 UpdateViewAtEndOfFrame();
             };
             
@@ -199,6 +202,7 @@ namespace UI.Plants
         }
         
         // Note: This is ass
+        // RE: No, this is patrick
         private void SpreadWeeds()
         {
             System.Random gen = new System.Random();

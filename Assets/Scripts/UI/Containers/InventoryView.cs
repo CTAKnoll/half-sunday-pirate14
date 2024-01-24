@@ -11,6 +11,7 @@ namespace UI.Containers
         public List<InventorySlotView> InventorySlots;
         public List<InventorySlotController> SlotControllers;
         public AudioEvent sfx_place_item;
+        public AudioEvent sfx_rejectItem;
         
         public bool AllowStacking;
         public TulipData.TulipStage Stage;

@@ -133,6 +133,9 @@ MonoBehaviour:
   SellTulipButton: {fileID: 1348546499055989364}
   SendToGardenButton: {fileID: 6082141338605414527}
   SendToCompetitionButton: {fileID: 7521178919905877596}
+  sfx_sellTulip: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
+  sfx_toGarden: {fileID: 11400000, guid: d7426e310bebfc041bff78a32dac3774, type: 2}
+  sfx_toCompetition: {fileID: 0}
   GardenFeverModifier: 0.02
 --- !u!1001 &68191895267174181
 PrefabInstance:
@@ -270,8 +273,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   TooltipText: 
+  sfx_onClick: {fileID: 0}
+  sfx_onRelease: {fileID: 0}
   Priority: 2
   NumYears: 10
+  sfx_futurePurchased: {fileID: 0}
+  sfx_futurePayout: {fileID: 0}
 --- !u!224 &8243662010548454420 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
@@ -671,8 +678,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   TooltipText: 
+  sfx_onClick: {fileID: 0}
+  sfx_onRelease: {fileID: 0}
   Priority: 2
   NumYears: 2
+  sfx_futurePurchased: {fileID: 0}
+  sfx_futurePayout: {fileID: 0}
 --- !u!224 &5572179422333410872 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}

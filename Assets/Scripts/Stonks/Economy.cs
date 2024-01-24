@@ -94,6 +94,27 @@ namespace Stonks
             Timeline.AddTimelineEvent(this, PayoutFuture, payoutDate);
         }
 
+        public void BuyFuture(DateTime payoutDate, Action onPayoutCallback)
+        {
+            ServiceLocator.TryGetService(out AlertText);
+            if (Funds <= GetAveragePrice())
+            {
+                AlertText.Alert($"Too poor to spend ${GetAveragePrice()} on a Tulip Future!", 5f);
+                return;
+            }
+
+            Funds -= GetAveragePrice();
+            FundsChanged.Invoke(Funds);
+            AlertText.Alert($"Bought a future for ${GetAveragePrice()}, pays out {payoutDate.ToString("MMMM yyyy")}", 5f);
+
+            Timeline.AddTimelineEvent(
+                this, 
+                () => { PayoutFuture(); 
+                        onPayoutCallback(); 
+                }, 
+                payoutDate);
+        }
+
         private void PayoutFuture()
         {
             AlertText.Alert($"Your future is due! Paid out ${GetAveragePrice()}", 5f);
