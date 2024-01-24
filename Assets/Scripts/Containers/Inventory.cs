@@ -24,7 +24,7 @@ namespace UI.Containers
             public bool IsEmpty() => Count == 0;
         }
         
-        private InventoryStack[] Elements;
+        public readonly InventoryStack[] Elements;
         private InventorySlotController[] Owners;
 
         private int _maxSize = 6;

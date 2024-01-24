@@ -73,6 +73,20 @@ namespace Stonks
             return economy.TulipEconomyData[new TulipVarietal(color, kind)].Price;
         }
 
+        [YarnFunction("get_avg_price")]
+        public static float Average()
+        {
+            ServiceLocator.TryGetService(out Economy economy);
+            return economy.TulipEconomyData.Average(data => data.Value.Price);
+        }
+
+        [YarnFunction("bank_balance")]
+        public static float GetBankBalance()
+        {
+            ServiceLocator.TryGetService(out Economy economy);
+            return economy.Funds;
+        }
+
         public float GetAveragePrice()
         {
             return TulipEconomyData.Average(data => data.Value.Price);
