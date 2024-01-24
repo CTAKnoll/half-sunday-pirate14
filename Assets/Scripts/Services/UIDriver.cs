@@ -171,7 +171,7 @@ namespace Services
         {
             List<RaycastResult> results = new();
             UIInteractable castTarget = null;
-            View.raycaster.Raycast(pointerData, results);
+            EventSystem.current.RaycastAll(pointerData, results);
             foreach (RaycastResult result in results)
             {
                 // this should be done with a layer, but then I would need a physics raycaster?
