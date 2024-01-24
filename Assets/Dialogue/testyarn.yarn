@@ -49,7 +49,7 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
         Musician: Thanks! (Market price for {$random_tulip_mambo} increases by 25%)
         // fairly certain this will work math / percentage-wise but well want to double check, stackoverflow suggets: https://stackoverflow.com/questions/24655474/how-to-compute-a-percentage-increase-decrease-multiplier-in-python-without-if-st
         //<<set $mambo_market_price += get_market_price({$random_tulip_mambo}) * .25>> -- uncomment once get_market_price implemented
-    -> That's a dumb name for a song. You'll never get any tulips out of me.
+    -> That's a dumb name for a song. // You'll never get any tulips out of me.
         Musician: Darn, at least I've still got Monica by my side.
 ===
 
@@ -243,7 +243,7 @@ title: TulipBandit
 <<set $random_kind = random_tulip_kind()>>
 //<<set $random_kind_price = get_market_price("{$random_kind} tulip")>>
 The town's tulip bandit goes on a stealing spree, taking {$random_kind} tulips from all the farmers
-    -> Curse you tulip bandit! (Market price of {$random_kind} tulips increases by 15%)
+    -> Curse you tulip bandit! {$random_kind} price increase 15%// (Market price of {$random_kind} tulips increases by 15%)
     // {random_tulip_kind_market_price()} += 15%
     //<<set $random_kind_price = get_market_price("{$random_kind} tulip") * 0.15>>
 ===
@@ -253,7 +253,7 @@ title: NewsTickerNSync
 // Needs: $fever_meter
 <<declare $current_fever_meter = 0>>
 <<set $current_fever_meter = fever_meter()>>
-Dutch investors are all in sync and suggest you buy, buy, buy Fever meter at {$current_fever_meter}!
+Dutch investors are all in sync and suggest you buy, buy, buy! // Fever meter at {$current_fever_meter}!
     -> Catchy
     <<set $current_fever_meter += $current_fever_meter * 0.05>>
 // {fever_meter()} += 5%
