@@ -30,7 +30,7 @@ namespace Stonks
         {
             Funds = StartingFunds;
             TulipEconomyData = new();
-            Timeline = ServiceLocator.GetService<Timeline>();
+            Timeline = ServiceLocator.LazyLoad<Timeline>();
             Timeline.MarketCrashed += CrashTheMarket;
         }
 
@@ -49,7 +49,7 @@ namespace Stonks
         [YarnFunction("get_market_price")]
         public static float GetCurrentPriceFromName(string kindName, string colorName)
         {
-            var economy = ServiceLocator.GetService<Economy>();
+            var economy = ServiceLocator.LazyLoad<Economy>();
 
             TulipKind kind = Enum.Parse<TulipKind>(kindName);
             TulipColor color = ColorToStringMapping
@@ -122,7 +122,7 @@ namespace Stonks
         {
             var price =GetCurrentPrice(data.Varietal);
             var normalized = price / GetAveragePrice();
-            ServiceLocator.GetService<FeverMode>().Awareness.Value += normalized * mod;
+            ServiceLocator.LazyLoad<FeverMode>().Awareness.Value += normalized * mod;
             SentToGarden?.Invoke(data.Varietal);
             return true;
         }

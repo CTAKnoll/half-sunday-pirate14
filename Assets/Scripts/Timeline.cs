@@ -29,7 +29,7 @@ public class Timeline : IService
         Now = START_DATE;
         DayBreaks = MoveToNextDay;
         TimelineEvents = new();
-        Ticker = ServiceLocator.GetService<Ticker>();
+        Ticker = ServiceLocator.LazyLoad<Ticker>();
         AddTimelineEvent(this, CrashTheMarket, FromNow(20, 0));
         
         StartTheWorld(); // TODO: Move this to clicking the start button

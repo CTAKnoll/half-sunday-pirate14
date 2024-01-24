@@ -17,7 +17,7 @@ public class IncidentWidgetController : UIController<IncidentWidgetView, Inciden
         Model.yarnNodeName = yarnNode;
         UiDriver.RegisterForTap(View, OnClick);
 
-        inc = ServiceLocator.GetService<IncidentsManager>();
+        inc = ServiceLocator.LazyLoad<IncidentsManager>();
         View.UpdateViewWithModel(Model);
     }
 

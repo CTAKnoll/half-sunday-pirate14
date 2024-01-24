@@ -112,14 +112,14 @@ namespace Plants
             
             public static string GetRandomSeenTulip()
             {
-                var keys = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
+                var keys = ServiceLocator.LazyLoad<Economy>().TulipEconomyData.Keys.ToList();
                 TulipVarietal randomSeen = keys[new System.Random().Next(keys.Count)];
                 return $"{KindToStringMapping[randomSeen.Kind]} {ColorToStringMapping[randomSeen.Color]}";
             }
 
             public static string GetRandomUnseenTulip()
             {
-                List<TulipVarietal> varietals = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
+                List<TulipVarietal> varietals = ServiceLocator.LazyLoad<Economy>().TulipEconomyData.Keys.ToList();
                 List<TulipColor> seenColors = varietals.Select((varietal) => { return varietal.Color; }).ToList();
                 List<TulipKind> seenKinds = varietals.Select((varietal) => { return varietal.Kind; }).ToList();
 
@@ -230,7 +230,7 @@ namespace Plants
             if(_yarnInitialized) 
                 return;
 
-            var dialogueRunner = ServiceLocator.GetService<IncidentsManager>().Dialogue;
+            var dialogueRunner = ServiceLocator.LazyLoad<IncidentsManager>().Dialogue;
             InitYarnFunctions(dialogueRunner);
         }
 
@@ -243,10 +243,10 @@ namespace Plants
             Stage = stage;
             Owner = owner;
 
-            Economy = ServiceLocator.GetService<Economy>();
+            Economy = ServiceLocator.LazyLoad<Economy>();
             Economy.EnsureVarietal(this);
 
-            Timeline = ServiceLocator.GetService<Timeline>();
+            Timeline = ServiceLocator.LazyLoad<Timeline>();
             ServiceLocator.TryGetService(out TulipInventory);
         }
 
@@ -259,10 +259,10 @@ namespace Plants
             Stage = stage;
             Owner = owner;
             
-            Economy = ServiceLocator.GetService<Economy>();
+            Economy = ServiceLocator.LazyLoad<Economy>();
             Economy.EnsureVarietal(this);
             
-            Timeline = ServiceLocator.GetService<Timeline>();
+            Timeline = ServiceLocator.LazyLoad<Timeline>();
             ServiceLocator.TryGetService(out TulipInventory);
         }
 
@@ -299,7 +299,7 @@ namespace Plants
         [YarnFunction("random_tulip")]
         public static string GetRandomSeenTulip()
         {
-            var keys = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
+            var keys = ServiceLocator.LazyLoad<Economy>().TulipEconomyData.Keys.ToList();
             TulipVarietal randomSeen = keys[new System.Random().Next(keys.Count)];
             return $"{KindToStringMapping[randomSeen.Kind]} {ColorToStringMapping[randomSeen.Color]}";
         }
@@ -319,7 +319,7 @@ namespace Plants
         [YarnFunction("new_random_tulip")]
         public static string GetRandomUnseenTulip()
         {
-            List<TulipVarietal> varietals = ServiceLocator.GetService<Economy>().TulipEconomyData.Keys.ToList();
+            List<TulipVarietal> varietals = ServiceLocator.LazyLoad<Economy>().TulipEconomyData.Keys.ToList();
             List<TulipColor> seenColors = varietals.Select((varietal) => { return varietal.Color; }).ToList();
             List<TulipKind> seenKinds = varietals.Select((varietal) => { return varietal.Kind; }).ToList();
 
@@ -459,7 +459,7 @@ namespace Plants
 
         public TulipController Serve(Transform parent)
         {
-            return new TulipController(ServiceLocator.GetService<TemplateServer>().Tulip, parent, this);
+            return new TulipController(ServiceLocator.LazyLoad<TemplateServer>().Tulip, parent, this);
         }
 
         public override string ToString()

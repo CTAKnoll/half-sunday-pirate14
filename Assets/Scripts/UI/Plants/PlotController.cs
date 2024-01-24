@@ -49,7 +49,7 @@ namespace UI.Plants
             UiDriver.RegisterForTap(View, OnClick);
             Model.DebugText = "UNPLANTED\nUNWEEDED";
             Ticker.AddTickable(ModifyDisplay, 0.1f);
-            _audio = ServiceLocator.GetService<AudioService>();
+            ServiceLocator.TryGetService(out _audio);
 
             ServiceLocator.TryGetService(out WeedArtServer);
             ServiceLocator.TryGetService(out TulipArtServer);

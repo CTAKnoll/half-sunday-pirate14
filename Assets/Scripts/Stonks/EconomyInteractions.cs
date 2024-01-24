@@ -24,7 +24,7 @@ public class EconomyInteractions : MonoBehaviour
         _ = new TulipInteractionController(SendToGardenButton, SendTulipToGarden);
         _ = new TulipInteractionController(SendToCompetitionButton, SendTulipToCompetition);
 
-        Economy = ServiceLocator.GetService<Economy>();
+        Economy = ServiceLocator.LazyLoad<Economy>();
         ServiceLocator.TryGetService(out FeverMode);
     }
 

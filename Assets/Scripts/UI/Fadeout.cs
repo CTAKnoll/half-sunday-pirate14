@@ -24,14 +24,14 @@ public class Fadeout : MonoBehaviour, IService
     void Start()
     {
         ServiceLocator.RegisterAsService(this);
-        Timeline = ServiceLocator.GetService<Timeline>();
+        Timeline = ServiceLocator.LazyLoad<Timeline>();
         ChangeAlpha(Overlay, 0);
         ChangeAlpha(DutchFlag, 0);
         ChangeAlpha(DutchText, 0);
 
         ServiceLocator.TryGetService(out FeverMode);
         FeverMode.FeverLevel.OnChanged += (_, _) => StartCoroutine(DutchFlash());
-        ServiceLocator.GetService<Timeline>().MarketCrashed += StartFadeOut;
+        ServiceLocator.LazyLoad<Timeline>().MarketCrashed += StartFadeOut;
     }
     
     private static void ChangeAlpha(Image g, float newAlpha)
@@ -77,7 +77,7 @@ public class Fadeout : MonoBehaviour, IService
             Timeline.StopTheWorld();
             
             EndTheWorld?.Invoke();
-            ServiceLocator.GetService<GameStateManager>().PanToState(GameStateManager.GameState.Credits);
+            ServiceLocator.LazyLoad<GameStateManager>().PanToState(GameStateManager.GameState.Credits);
             ChangeAlpha(Overlay, 0);
         }
         else

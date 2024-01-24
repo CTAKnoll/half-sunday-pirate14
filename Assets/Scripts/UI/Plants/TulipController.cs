@@ -27,10 +27,10 @@ namespace UI.Plants
         {
             Data = data;
             Model.ScreenPos = parent.transform.position;
-            Model.IconSprite = ServiceLocator.GetService<TulipArtServer>().GetBaseSprite(data.Varietal, data.Stage);
+            Model.IconSprite = ServiceLocator.LazyLoad<TulipArtServer>().GetBaseSprite(data.Varietal, data.Stage);
             UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
             UpdateViewAtEndOfFrame();
-            _audio = ServiceLocator.GetService<AudioService>();
+            ServiceLocator.TryGetService(out _audio);
         }
         
         private void OnHoldStarted()

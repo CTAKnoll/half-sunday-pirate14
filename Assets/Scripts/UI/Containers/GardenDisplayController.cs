@@ -16,8 +16,8 @@ namespace UI.Containers
         {
             ServiceLocator.RegisterAsService(this);
             Server = new Inventory(View.SlotControllers);
-            _audio = ServiceLocator.GetService<AudioService>();
-            ServiceLocator.GetService<Economy>().SentToGarden += (varietal) => AddItem(varietal);
+            ServiceLocator.TryGetService(out _audio);
+            ServiceLocator.LazyLoad<Economy>().SentToGarden += (varietal) => AddItem(varietal);
         }
 
         public bool AddItem(TulipData.TulipVarietal data)

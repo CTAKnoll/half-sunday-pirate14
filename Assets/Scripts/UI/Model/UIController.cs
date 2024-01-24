@@ -17,6 +17,7 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     
     protected UIDriver UiDriver;
     protected ControllerDatabase ControllerDb;
+    protected AudioService _audio;
     protected TStaticView View { get; private set; }
 
     public bool IsActiveUI => ActivityMutex != null || LogicalParent is { IsActiveUI: true };
@@ -41,7 +42,8 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
         if (GetType() != typeof(UIDriver) && !ServiceLocator.TryGetService(out UiDriver))
             Debug.LogError($"InputService not found when instantiating {GetType()}");
         
-        ControllerDb = ServiceLocator.GetService<ControllerDatabase>();
+        ControllerDb = ServiceLocator.LazyLoad<ControllerDatabase>();
+        ServiceLocator.TryGetService(out _audio);
     }
     
     public virtual void Show()
@@ -107,6 +109,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     protected Ticker Ticker;
     protected Timeline Timeline;
     protected Economy Economy;
+    protected AudioService _audio;
     protected TView View { get; private set; }
     [SerializeField]
     protected TModel Model;
@@ -140,10 +143,20 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         if (!ServiceLocator.TryGetService(out UiDriver))
             Debug.LogError($"InputService not found when instantiating {GetType()}");
 
-        ControllerDb = ServiceLocator.GetService<ControllerDatabase>();
-        Ticker = ServiceLocator.GetService<Ticker>();
-        Timeline = ServiceLocator.GetService<Timeline>();
-        Economy = ServiceLocator.GetService<Economy>();
+        ControllerDb = ServiceLocator.LazyLoad<ControllerDatabase>();
+        Ticker = ServiceLocator.LazyLoad<Ticker>();
+        Timeline = ServiceLocator.LazyLoad<Timeline>();
+        Economy = ServiceLocator.LazyLoad<Economy>();
+        ServiceLocator.TryGetService(out _audio);
+        //RegisterDefaultSFX(UiDriver, Audio);
+    }
+
+    protected virtual void RegisterDefaultSFX(UIDriver driver, AudioService audio)
+    {
+        driver.RegisterForHold(View, 
+            () => audio.PlayOneShot(View.sfx_onClick), 
+            () => audio.PlayOneShot(View.sfx_onRelease), 
+            ()=> { });
     }
 
     protected void UpdateViewAtEndOfFrame()

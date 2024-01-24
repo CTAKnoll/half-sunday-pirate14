@@ -8,7 +8,7 @@ namespace UI.Containers
     public class StoreView : UIView<StoreModel>
     {
         public List<InventorySlotView> StoreSlots;
-        public List<InventorySlotController> SlotControllers;
+        public List<InventorySlotController> SlotControllers = new();
         public Image StoreShip;
 
         public void Awake()

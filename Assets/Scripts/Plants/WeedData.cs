@@ -21,7 +21,7 @@ namespace Plants
         private Timeline Timeline;
         public WeedData()
         {
-            Timeline = ServiceLocator.GetService<Timeline>();
+            Timeline = ServiceLocator.LazyLoad<Timeline>();
             Health = 3;
             Stage = WeedStage.Sprout;
         }

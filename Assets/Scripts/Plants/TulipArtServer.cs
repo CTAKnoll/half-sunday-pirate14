@@ -146,7 +146,7 @@ namespace Plants
                 image = Plain.Serve(stage);
             }
             
-            Texture2D newImage = ServiceLocator.GetService<ChromaKeyer>().ChromaCopy(new Texture2D(image.texture.width, image.texture.height), 
+            Texture2D newImage = ServiceLocator.LazyLoad<ChromaKeyer>().ChromaCopy(new Texture2D(image.texture.width, image.texture.height), 
                 image.texture, DefaultRed.GetKeyValues(), color.GetKeyValues());
             Sprite newSprite = Sprite.Create(newImage, image.rect, image.pivot);
             Cache.Add((varietal, stage), newSprite);

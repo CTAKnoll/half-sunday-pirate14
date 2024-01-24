@@ -23,7 +23,7 @@ namespace UI.Stonks
         public StonkGraphController(StonkGraphView view) : base(view)
         {
             StonkLines = new();
-            Template = ServiceLocator.GetService<TemplateServer>().TulipEconomyLine;
+            Template = ServiceLocator.LazyLoad<TemplateServer>().TulipEconomyLine;
 
             foreach (var varietal in Economy.TulipEconomyData)
             {

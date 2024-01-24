@@ -15,7 +15,7 @@ namespace Utils
         public Ticker()
         {
             Timers = new Dictionary<Action, Timer>();
-            MainThread = ServiceLocator.GetService<MainThreadScheduler>();
+            MainThread = ServiceLocator.LazyLoad<MainThreadScheduler>();
         }
 
         public void AddTickable(Action func, float rateInSeconds, bool executeInMainThread = true)

@@ -8,7 +8,7 @@ namespace Services
     {
         private static Dictionary<Type, IService> ServiceCache = new Dictionary<Type, IService>();
         
-        public static T GetService<T>() where T : class, IService, new()
+        public static T LazyLoad<T>() where T : class, IService, new()
         {
             if (typeof(T) == typeof(MonoBehaviour))
             {

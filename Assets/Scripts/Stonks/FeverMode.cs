@@ -36,7 +36,7 @@ namespace Core
 
         protected void Start()
         {
-            timeline = ServiceLocator.GetService<Timeline>();
+            timeline = ServiceLocator.LazyLoad<Timeline>();
             ServiceLocator.TryGetService(out incManager);
 
             timeline.AddRecurring(this, Tick, TimeSpan.FromDays(1));

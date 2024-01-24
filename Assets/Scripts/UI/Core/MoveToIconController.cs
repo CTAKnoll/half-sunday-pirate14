@@ -8,7 +8,7 @@ namespace UI.Core
     {
         public MoveToIconController(MoveToIconView view, GameStateManager.GameState goTo, float time) : base(view)
         {
-            UiDriver.RegisterForTap(View, () => ServiceLocator.GetService<GameStateManager>().PanToState(goTo, time));
+            UiDriver.RegisterForTap(View, () => ServiceLocator.LazyLoad<GameStateManager>().PanToState(goTo, time));
         }
     }
 }

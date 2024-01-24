@@ -73,7 +73,7 @@ namespace Stonks
 
         public TulipEconomy(TulipData.TulipVarietal varietal)
         {
-            Timeline = ServiceLocator.GetService<Timeline>();
+            Timeline = ServiceLocator.LazyLoad<Timeline>();
             ServiceLocator.TryGetService(out FeverMode);
             
             PriceHistory = new();

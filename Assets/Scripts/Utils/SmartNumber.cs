@@ -35,7 +35,7 @@ namespace Utils
             Triggers.AddRange(triggers ?? new List<(float, TriggerDefinition)>());
             Value = value;
 
-            MainThread = ServiceLocator.GetService<MainThreadScheduler>();
+            MainThread = ServiceLocator.LazyLoad<MainThreadScheduler>();
         }
 
         public static SmartNumber operator +(SmartNumber a, SmartNumber b)
@@ -75,7 +75,7 @@ namespace Utils
         
         private void CheckTriggers(float prev, float curr)
         {
-            MainThread = ServiceLocator.GetService<MainThreadScheduler>(); //TODO: I shouldnt need this line
+            MainThread = ServiceLocator.LazyLoad<MainThreadScheduler>(); //TODO: I shouldnt need this line
             
             foreach ((float, TriggerDefinition) tuple in Triggers)
             {

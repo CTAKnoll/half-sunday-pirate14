@@ -18,8 +18,8 @@ namespace UI.Containers
             ServiceLocator.RegisterAsService(this);
             
             Server = new Inventory(View.SlotControllers);
-            _audio = ServiceLocator.GetService<AudioService>();
-            var inc = ServiceLocator.GetService<IncidentsManager>();
+            ServiceLocator.TryGetService(out _audio);
+            var inc = ServiceLocator.LazyLoad<IncidentsManager>();
             InitYarnFunctions(inc.Dialogue);
         }
 

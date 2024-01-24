@@ -21,7 +21,7 @@ public class IncidentsManager : MonoBehaviour, IService
     void Awake()
     {
         ServiceLocator.RegisterAsService(this);
-        _timeline = ServiceLocator.GetService<Timeline>();
+        _timeline = ServiceLocator.LazyLoad<Timeline>();
     }
 
     private void Start()

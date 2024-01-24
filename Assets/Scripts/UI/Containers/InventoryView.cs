@@ -15,7 +15,7 @@ namespace UI.Containers
         public bool AllowStacking;
         public TulipData.TulipStage Stage;
 
-        public void Awake()
+        public void Start()
         {
             SlotControllers = InventorySlots.Select(view => new InventorySlotController(view, Stage, AllowStacking)).ToList();
         }

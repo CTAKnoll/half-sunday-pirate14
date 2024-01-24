@@ -24,6 +24,6 @@ public class TulipFilterCheckbox : UIInteractable
     {
         IsChecked = !IsChecked;
         BoxImage.sprite = IsChecked ? CheckedBox : UncheckedBox;
-        ServiceLocator.GetService<Economy>().FilterToOwnedTulips(IsChecked);
+        ServiceLocator.LazyLoad<Economy>().FilterToOwnedTulips(IsChecked);
     }
 }

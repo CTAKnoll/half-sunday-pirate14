@@ -11,7 +11,7 @@ public class BuyFuture : UIInteractable
     // Start is called before the first frame update
     void Start()
     {
-        Economy = ServiceLocator.GetService<Economy>();
+        Economy = ServiceLocator.LazyLoad<Economy>();
         ServiceLocator.TryGetService(out UiDriver);
         
         UiDriver.RegisterForTap(this, PurchaseFuture);
