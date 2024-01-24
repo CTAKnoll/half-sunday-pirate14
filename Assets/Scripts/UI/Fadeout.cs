@@ -3,14 +3,15 @@ using System.Collections;
 using Core;
 using DefaultNamespace;
 using Services;
+using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Fadeout : MonoBehaviour, IService
 {
     public Image Overlay;
     public Image DutchFlag;
+    public TextMeshProUGUI DutchText;
     public AnimationCurve FeverFlashAlpha;
     public float FlashNumSec = 2.5f;
     public event Action EndTheWorld;
@@ -26,6 +27,7 @@ public class Fadeout : MonoBehaviour, IService
         Timeline = ServiceLocator.GetService<Timeline>();
         ChangeAlpha(Overlay, 0);
         ChangeAlpha(DutchFlag, 0);
+        ChangeAlpha(DutchText, 0);
 
         ServiceLocator.TryGetService(out FeverMode);
         FeverMode.FeverLevel.OnChanged += (_, _) => StartCoroutine(DutchFlash());
@@ -38,18 +40,26 @@ public class Fadeout : MonoBehaviour, IService
         color.a = newAlpha;
         g.color = color;
     }
+    
+    private static void ChangeAlpha(TextMeshProUGUI g, float newAlpha)
+    {
+        var color = g.color;
+        color.a = newAlpha;
+        g.color = color;
+    }
 
     private IEnumerator DutchFlash()
     {
-        Debug.Log("Flashing");
         float progress = 0;
         while (progress <= 1)
         {
             progress += 1 / (FlashNumSec * 30);
             ChangeAlpha(DutchFlag, FeverFlashAlpha.Evaluate(progress));
+            ChangeAlpha(DutchText, FeverFlashAlpha.Evaluate(progress));
             yield return new WaitForSeconds(0.03f);
         }
         ChangeAlpha(DutchFlag, 0);
+        ChangeAlpha(DutchText, 0);
     }
 
     private void StartFadeOut()
