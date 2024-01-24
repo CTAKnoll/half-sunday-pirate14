@@ -17,14 +17,19 @@ namespace UI.Containers
             ServiceLocator.RegisterAsService(this);
             Server = new Inventory(View.SlotControllers, 20);
             _audio = ServiceLocator.GetService<AudioService>();
-            ServiceLocator.GetService<Economy>().SentToGarden += AddItem;
+            ServiceLocator.GetService<Economy>().SentToGarden += (varietal) => AddItem(varietal);
         }
 
-        public void AddItem(TulipData.TulipVarietal data)
+        public bool AddItem(TulipData.TulipVarietal data)
         {
-            var tulip = Server.AddItem(data, null);
-            tulip.interactable.Active = false; // these tulips cannot be played with
-            _audio.PlayOneShot(View.sfx_place_item);
+            bool success = Server.AddItem(data, null, out TulipController tulip);
+            if (success)
+            {
+                tulip.interactable.Active = false; // these tulips cannot be played with
+                _audio.PlayOneShot(View.sfx_place_item);
+            }
+
+            return success;
         }
 
         private void OnInventoryItemConsumed(TulipController tulip, IUIController consumer)

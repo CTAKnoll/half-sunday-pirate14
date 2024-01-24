@@ -133,9 +133,17 @@ namespace UI.Plants
                 ReturnToOrigin();
                 return false;
             }
-            bulbInventory.AddItem(Data);
-            Consumed?.Invoke(this, bulbInventory);
-            return true;
+            bool success = bulbInventory.AddItem(Data);
+            if (success)
+            {
+                Consumed?.Invoke(this, bulbInventory);
+                return true;
+            }
+            else
+            {
+                // we need to alter the player that this doesnt work
+                return false;
+            }
         }
 
         private bool ConsumedByTulipInventory(TulipInventoryController tulipInventory)

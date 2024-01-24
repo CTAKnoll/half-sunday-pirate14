@@ -68,7 +68,7 @@ namespace UI.Containers
             }
         }
         
-        public TulipController AddItem(TulipVarietal toAdd, Action<TulipController, IUIController> onConsumed)
+        public bool AddItem(TulipVarietal toAdd, Action<TulipController, IUIController> onConsumed, out TulipController added)
         {
             for (int i = 0; i < MaxSize; i++) // look for stack first
             {
@@ -77,7 +77,8 @@ namespace UI.Containers
                     Owners[i].ConsumeFunction = onConsumed;
                     Elements[i] = new InventoryStack(toAdd, Owners[i].Stacks + 1);
                     Owners[i].UpdateSlot(Elements[i]);
-                    return Owners[i].Tulip;
+                    added = Owners[i].Tulip;
+                    return true;
                 }
             }
             for (int i = 0; i < MaxSize; i++) // look for first empty
@@ -87,11 +88,13 @@ namespace UI.Containers
                     Elements[i] = new InventoryStack(toAdd, 1);
                     Owners[i].ConsumeFunction = onConsumed;
                     Owners[i].UpdateSlot(Elements[i]);
-                    return Owners[i].Tulip;
+                    added = Owners[i].Tulip;
+                    return true;
                 }
             }
 
-            throw new IndexOutOfRangeException("All elements of Inventory are already full!");
+            added = null;
+            return false;
         }
         
         public TulipController GetItem(int index) => Owners[index].Tulip;

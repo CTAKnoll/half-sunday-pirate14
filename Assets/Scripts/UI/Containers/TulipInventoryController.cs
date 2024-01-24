@@ -26,10 +26,12 @@ namespace UI.Containers
             InitYarnFunctions(inc.Dialogue);
         }
 
-        public void AddItem(TulipData data)
+        public bool AddItem(TulipData data)
         {
-            Server.AddItem(data.Varietal, OnStoreItemConsumed);
-            _audio.PlayOneShot(View.sfx_place_item);
+            bool completed = Server.AddItem(data.Varietal, OnStoreItemConsumed, out _);
+            if(completed)
+                _audio.PlayOneShot(View.sfx_place_item);
+            return completed;
         }
 
         public bool HasItem(TulipData.TulipVarietal varietal)

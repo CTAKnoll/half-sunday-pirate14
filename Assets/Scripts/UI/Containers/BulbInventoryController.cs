@@ -25,10 +25,12 @@ namespace UI.Containers
 
 
 
-        public void AddItem(TulipData data)
+        public bool AddItem(TulipData data)
         {
-            Server.AddItem(data.Varietal, OnInventoryItemConsumed);
-            _audio.PlayOneShot(View.sfx_place_item);
+            bool completed = Server.AddItem(data.Varietal, OnInventoryItemConsumed, out _);
+            if(completed)
+                _audio.PlayOneShot(View.sfx_place_item);
+            return completed;
         }
 
         private void OnInventoryItemConsumed(TulipController tulip, IUIController consumer)

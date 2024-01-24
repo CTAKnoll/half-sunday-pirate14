@@ -10,7 +10,7 @@ namespace UI.Containers
     {
         int MaxSize { get; }
         int Count { get; }
-        TServedUI AddItem(TContainable toAdd, Action<TServedUI, IUIController> consumeCallback);
+        bool AddItem(TContainable toAdd, Action<TServedUI, IUIController> consumeCallback, out TServedUI added);
         TServedUI GetItem(int index);
         bool HasItem(TContainable item);
         void RemoveItem(int index);

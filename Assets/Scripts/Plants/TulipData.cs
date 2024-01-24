@@ -384,13 +384,18 @@ namespace Plants
             Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(30)); //schedule growing
         }
 
-        public void Harvest()
+        public bool Harvest()
         {
             ServiceLocator.TryGetService(out TulipInventory);
 
-            Stage = TulipStage.Picked;
-            Timeline.RemoveAllEvents(this);
-            TulipInventory.AddItem(this);
+            bool success = TulipInventory.AddItem(this);
+            if (success)
+            {
+                Stage = TulipStage.Picked;
+                Timeline.RemoveAllEvents(this);
+            }
+
+            return success;
         }
 
         protected static TulipColor AssignColor(TulipColor color)

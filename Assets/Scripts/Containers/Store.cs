@@ -56,7 +56,7 @@ namespace UI.Containers
             }
         }
 
-        public TulipController AddItem(TulipData toAdd, [CanBeNull] Action<TulipController, IUIController> onConsumed)
+        public bool AddItem(TulipData toAdd, [CanBeNull] Action<TulipController, IUIController> onConsumed, out TulipController added)
         {
             for (int i = 0; i < MaxSize; i++)
             {
@@ -65,11 +65,13 @@ namespace UI.Containers
                     Elements[i] = toAdd;
                     Controllers[i] = toAdd.Serve(Owners[i]);
                     Controllers[i].Consumed += onConsumed;
-                    return Controllers[i];
+                    added = Controllers[i];
+                    return true;
                 }
             }
 
-            throw new IndexOutOfRangeException("All elements of Store are already full!");
+            added = null;
+            return false;
         }
 
         public TulipController GetItem(int index) => Controllers[index];

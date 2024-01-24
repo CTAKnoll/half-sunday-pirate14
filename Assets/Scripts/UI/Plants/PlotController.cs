@@ -88,9 +88,20 @@ namespace UI.Plants
             }
             else if (IsPlanted && Tulip.CanHarvest && !IsWeeded)
             {
-                Tulip.Harvest();
-                TulipTween();
-                //View.StartCoroutine(FlyAwayTulip());
+                bool success = Tulip.Harvest();
+                if (success)
+                {
+                    TulipTween();
+                }
+                else
+                {
+                    // we need to shake here and alert player
+                }
+            }
+            else if (IsPlanted && Tulip.Stage == TulipData.TulipStage.Dead)
+            {
+                Tulip = null;
+                UpdateTulipVisual();
             }
         }
 
@@ -153,25 +164,6 @@ namespace UI.Plants
             }
 
             View.TweenToInventory(Model, endPos, OnTweenComplete);
-        }
-
-        private IEnumerator FlyAwayTulip()
-        {
-            FlyCompletion = 0f;
-            Model.TulipShowing = false;
-            Model.PickedIconVisible = true;
-            Model.PickedIconImage = TulipArtServer.GetBaseSprite(Tulip.Varietal, Tulip.Stage);
-            while (FlyCompletion <= 1f)
-            {
-                FlyCompletion += .02f;
-                Model.PickedIconPos = Vector3.Lerp(PickedInitialPos,
-                    Plots.PickedInventoryTarget.gameObject.transform.position, FlyCompletion);
-                yield return null;
-            }
-            FlyCompletion = 0;
-            Model.PickedIconPos = PickedInitialPos;
-            Model.PickedIconVisible = false;
-            Tulip = null;
         }
 
         private void UpdateTulipVisual()

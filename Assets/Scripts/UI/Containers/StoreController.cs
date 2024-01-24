@@ -87,7 +87,7 @@ namespace UI.Containers
             while (Server.HasEmpty())
             {
                 TulipData data = GenerateTulipOfMerchantType();
-                Server.AddItem(data, OnStoreItemConsumed);
+                Server.AddItem(data, OnStoreItemConsumed, out _);
             }
         }
 
