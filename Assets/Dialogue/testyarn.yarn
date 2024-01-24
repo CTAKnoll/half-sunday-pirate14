@@ -243,7 +243,8 @@ title: TulipBandit
 <<set $random_kind = random_tulip_kind()>>
 //<<set $random_kind_price = get_market_price("{$random_kind} tulip")>>
 The town's tulip bandit goes on a stealing spree, taking {$random_kind} tulips from all the farmers
-    -> Curse you tulip bandit! {$random_kind} tulips increase 15%// (Market price of {$random_kind} tulips increases by 15%)
+    -> Curse you tulip bandit! ({$random_kind} tulips increase 15%)// (Market price of {$random_kind} tulips increases by 15%)
+        // in a pinch we can move the X tulip decreases by Y% for some although then it's inconsistent because sometimes their choice affects what percentage something increases or decreases by
     // {random_tulip_kind_market_price()} += 15%
     //<<set $random_kind_price = get_market_price("{$random_kind} tulip") * 0.15>>
 ===
@@ -254,7 +255,7 @@ title: NewsTickerNSync
 <<declare $current_fever_meter = 0>>
 <<set $current_fever_meter = fever_meter()>>
 Dutch investors are all in sync and suggest you buy, buy, buy! // Fever meter at {$current_fever_meter}!
-    -> Catchy
+    //-> Catchy // I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
     <<set $current_fever_meter += $current_fever_meter * 0.05>>
 // {fever_meter()} += 5%
 ===
