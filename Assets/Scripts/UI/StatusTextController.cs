@@ -20,7 +20,7 @@ namespace UI
 
         private void UpdateFunds(float newFunds)
         {
-            Model.FundsText = "$" + newFunds;
+            Model.FundsText = "$" +  newFunds.ToString("F2");
             UpdateViewAtEndOfFrame();
         }
     }
