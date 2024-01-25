@@ -166,8 +166,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  TooltipText: This is the store, where you can purchase tulip bulbs. You can drag
-    them to your inventory, or straight to a plot!
+  TooltipText: You can purchase tulip bulbs here. You can drag them to your inventory,
+    or straight to a plot!
+  sfx_onClick: {fileID: 0}
+  sfx_onRelease: {fileID: 0}
   Priority: 2
   StoreSlots:
   - {fileID: 7906850590124886904}

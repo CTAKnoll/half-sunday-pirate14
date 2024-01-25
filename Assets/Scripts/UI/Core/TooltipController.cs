@@ -8,9 +8,9 @@ namespace UI.Core
     public class TooltipController : UIController<TooltipView, TooltipModel>
     {
         private Coroutine FollowingMouse;
-        public TooltipController(TooltipTemplate template, Transform parent, UIInteractable target) : base(template, parent)
+        public TooltipController(TooltipTemplate template, Transform parent, string text) : base(template, parent)
         {
-            Model.TooltipText = target.TooltipText;
+            Model.TooltipText = text;
             FollowingMouse = View.StartCoroutine(FollowMouse());
         }
 
@@ -18,7 +18,7 @@ namespace UI.Core
         {
             while (!View.IsDestroyed)
             {
-                Model.ScreenPos = MainCamera.ScreenToWorldPoint(Pointer.current.position.value);
+                Model.ScreenPos = Pointer.current.position.value + new Vector2(120, 120);
                 UpdateViewAtEndOfFrame();
                 yield return null;
             }

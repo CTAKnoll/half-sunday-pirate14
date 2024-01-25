@@ -15,8 +15,7 @@ namespace UI.Containers
     {
         public ContainerServer<TulipData, TulipController> Server { get; }
 
-        private TemplateServer TemplateServer;
-        private TooltipController Tooltip;
+        private TooltipServer TooltipServer;
 
         public enum MerchantOrigin
         {
@@ -58,16 +57,15 @@ namespace UI.Containers
 
         private void CreateTooltip()
         {
-            if (TemplateServer == null)
-                ServiceLocator.TryGetService(out TemplateServer);
-
-            Tooltip = AddChild(new TooltipController(TemplateServer.Tooltip, View.transform, View));
+            if (TooltipServer == null)
+                ServiceLocator.TryGetService(out TooltipServer);
+            
+            TooltipServer.SpawnTooltip(View.TooltipText);
         }
 
         private void DestroyTooltip()
         {
-            Tooltip.Close();
-            Tooltip = null;
+            TooltipServer.DisposeTooltip();
         }
 
         public void ChangeMerchant()

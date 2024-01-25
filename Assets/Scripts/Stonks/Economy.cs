@@ -128,7 +128,6 @@ namespace Stonks
 
         public bool BuyTulip(TulipData data)
         {
-            Debug.Log("Buying!");
             var buyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.25f, 0.5f);
             if (buyPrice > Funds)
                 return false;
@@ -172,7 +171,6 @@ namespace Stonks
             Funds += result.PlayerPayout;
             FundsChanged?.Invoke(Funds);
         }
-        
 
         private void CrashTheMarket()
         {
