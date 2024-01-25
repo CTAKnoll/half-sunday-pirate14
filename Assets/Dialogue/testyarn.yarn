@@ -600,7 +600,7 @@ title: RareTulipType
 <<declare $new_tulip_rare = "test">>
 <<set $new_tulip_rare = new_random_tulip()>>
 A different tulip type, {$new_tulip_rare} than the one you planted has sprouted from one of your tulips. Theories behind this phenomena include divine intervention, magic, a virus spread by rodents, and by soaking the bulbs in red wine. 
-    -> Strange
+    -> Strange (New tulip enters the market)
     //<<create_new_random_tulip $new_tulip_rare>> -- uncomment once create_new_random_tulip exists
 // add this too the merchant inventory and/or the economy market idk 
 // create_new_random_tulip
@@ -612,16 +612,16 @@ title: Doping
 <<declare $doping_tulip = "test">>
 <<declare $doping_tulip_price = 1>>
 <<set $doping_tulip = random_tulip()>>
-The local authorities discover that you have been using steroids. Your famous {$doping_tulip} decreases in value due to your reputational damage.
+The local authorities discover that you have been using steroids. Your famous {$doping_tulip} tulips decreases in value due to your reputational damage.
     -> Whoopsie
     //<<set $doping_tulip_price -= (get_market_price($doping_tulip) * 0.10)>>
     // {random_tulip_market_price()} -= 10%
 ===
 
-title: NotEnoughTulips
----
-You do not have enough tulips.
-===
+//title: NotEnoughTulips
+//---
+//You do not have enough tulips.
+//===
 
 // Set Historical Events - figure out gameplay impact, certain tulips no longer available for the time being 
 
@@ -640,10 +640,11 @@ date: May 23 1618
 // Needs: $all_tulips_market_price
 <<declare $all_tulips_price = 1000>>
 <<set $all_tulips_price = all_tulips_market_price()>>
-Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate. (Price for all tulips has decreased by 2%)
-    -> That does not sound good. 
+Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate. 
+    -> That does not sound good. (Price for all tulips has decreased by 2%)
     // all_tulips_market_price -= 2%
     // <<set_all_tulips_market_price -2>>
+    // TKTK modify 
     <<set $all_tulips_price -= ($all_tulips_price * 0.02)>>
 ===
 
@@ -653,9 +654,10 @@ date: February 01 1637
 ---
 <<declare $all_tulips_price_prepop = 1000>>
 <<set $all_tulips_prepop_price = all_tulips_market_price()>>
-During a recent tulip bulb auction at a pub, no one bid on one of the tulips. (Market price tulips decrease 3%) 
-    -> I'm sure prices will bounce back. 
-    <<set $all_tulips_prepop_price -= ($all_tulips_prepop_price * 0.03)>>
+During a recent tulip bulb auction at a pub, no one bid on one of the tulips. 
+    -> I'm sure prices will bounce back. (Market price tulips decrease 3%) 
+    // <<set $all_tulips_prepop_price -= ($all_tulips_prepop_price * 0.03)>>
+    // TKTK modify 
 // {all_tulips_market_price()} -= 3%
 ===
 
@@ -665,10 +667,11 @@ date: March 03 1637
 ---
 <<declare $all_tulips_price_monkeys = 1000>>
 <<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
-Artists have drawn paintings depicting tulip farmers and traders as monkeys. (Market price tulips decrease 5%)
-    -> I'm sure prices will bounce back
+Artists have drawn paintings depicting tulip farmers and traders as monkeys. 
+    -> I'm sure prices will bounce back (Market price tulips decrease 5%)
+    // TKTK modify, remember empty string
 // {all_tulips_market_price()} -= 3%
-<<set $all_tulips_price_monkeys_price -= ($all_tulips_price_monkeys_price * 0.03)>>
+// <<set $all_tulips_price_monkeys_price -= ($all_tulips_price_monkeys_price * 0.03)>>
 <<if $supersecretclownending == true>>
     <<jump SuperSecretClownEnding>>
 <<else>>
