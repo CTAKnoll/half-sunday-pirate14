@@ -1,5 +1,6 @@
 ﻿using Plants;
 using Services;
+using Utils;
 using Yarn.Unity;
 using static Plants.TulipData;
 
@@ -24,12 +25,78 @@ namespace Stonks
             Economy = ServiceLocator.LazyLoad<Economy>();
         }
 
-        public void RunCompetition(bool competitorsCanBringNew)
+        public void RunCompetition(TulipVarietal playerSubmission, bool competitorsCanBringNew)
         {
-            LastCompetitionResults = new CompetitionResults
+            LastCompetitionResults = new CompetitionResults();
+            
+            TulipVarietal randomOne = TulipVarietal.GetRandomTulipVarietal(competitorsCanBringNew);
+            TulipVarietal randomTwo = TulipVarietal.GetRandomTulipVarietal(competitorsCanBringNew);
+
+            float priceOne = Economy.GetCurrentPrice(playerSubmission);
+            float priceTwo = Economy.GetCurrentPrice(randomOne);
+            float priceThree = Economy.GetCurrentPrice(randomTwo);
+            float normalized = priceOne + priceTwo + priceThree;
+
+            float chanceOne = priceOne / normalized;
+            float chanceTwo = priceTwo / normalized;
+            float chanceThree = priceThree / normalized;
+            
+            float winner = FloatExtensions.RandomBetween(0f, 1f);
+            float second = FloatExtensions.RandomBetween(0f, 1f);
+            if (winner < chanceOne)
             {
-                
-            };
+                LastCompetitionResults.FirstPlace = playerSubmission;
+                if (second < chanceTwo / (chanceTwo + chanceThree))
+                {
+                    LastCompetitionResults.SecondPlace = randomOne;
+                    LastCompetitionResults.ThirdPlace = randomTwo;
+                    LastCompetitionResults.PlayerPlacement = 1;
+                    LastCompetitionResults.PlayerPayout = 4 * Economy.GetAveragePrice();
+                }
+                else
+                {
+                    LastCompetitionResults.SecondPlace = randomTwo;
+                    LastCompetitionResults.ThirdPlace = randomOne;
+                    LastCompetitionResults.PlayerPlacement = 1;
+                    LastCompetitionResults.PlayerPayout = 4 * Economy.GetAveragePrice();
+                }
+            }
+            else if (winner < chanceOne + chanceTwo)
+            {
+                LastCompetitionResults.FirstPlace = randomOne;
+                if (second < chanceOne / (chanceOne + chanceThree))
+                {
+                    LastCompetitionResults.SecondPlace = playerSubmission;
+                    LastCompetitionResults.ThirdPlace = randomTwo;
+                    LastCompetitionResults.PlayerPlacement = 2;
+                    LastCompetitionResults.PlayerPayout = Economy.GetAveragePrice();
+                }
+                else
+                {
+                    LastCompetitionResults.SecondPlace = randomTwo;
+                    LastCompetitionResults.ThirdPlace = playerSubmission;
+                    LastCompetitionResults.PlayerPlacement = 3;
+                    LastCompetitionResults.PlayerPayout = 0;
+                }
+            }
+            else
+            {
+                LastCompetitionResults.FirstPlace = randomTwo;
+                if (second < chanceOne / (chanceOne + chanceTwo))
+                {
+                    LastCompetitionResults.SecondPlace = playerSubmission;
+                    LastCompetitionResults.ThirdPlace = randomOne;
+                    LastCompetitionResults.PlayerPlacement = 2;
+                    LastCompetitionResults.PlayerPayout = Economy.GetAveragePrice();
+                }
+                else
+                {
+                    LastCompetitionResults.SecondPlace = randomOne;
+                    LastCompetitionResults.ThirdPlace = playerSubmission;
+                    LastCompetitionResults.PlayerPlacement = 3;
+                    LastCompetitionResults.PlayerPayout = 0;
+                }
+            }
         }
 
         [YarnFunction("first_place_tulip")]

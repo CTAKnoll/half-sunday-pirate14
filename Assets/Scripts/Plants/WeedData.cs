@@ -57,6 +57,7 @@ namespace Plants
                 Stage = (WeedStage)((int) Stage + 1);
             if (Stage == WeedStage.Spreading)
                 OnSpreading?.Invoke();
+            Health = (int)Stage + 1;
             OnStageChanged?.Invoke();
         }
 
