@@ -41,8 +41,10 @@ title: MamboConcert
 // $random_tulip_mambo = random_tulip()
 // example from docs: <<set $numberOfSidesInASquare = $numberOfSidesInATriangle + 1>>
 <<declare $random_tulip_mambo = "test">>
+<<declare $random_tulip_mambo_nah = "test">>
 <<declare $mambo_market_price = 1>>
 <<set $random_tulip_mambo = random_tulip()>>
+<<set $random_tulip_mambo_nah = random_tulip()>>
 // <<set $mambo_market_price = get_market_price({$random_tulip_mambo})>> -- uncomment once get_market_price implemented
 // striped red
 // red
@@ -63,7 +65,8 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
         <<modify_price $random_tulip_mambo 1.25 "5 months">>
         //<<set $mambo_market_price += get_market_price({$random_tulip_mambo}) * .25>> -- uncomment once get_market_price implemented
     -> That's a dumb name for a song. // You'll never get any tulips out of me.
-        Musician: Darn, at least I've still got Monica by my side.
+        Musician: At least I've still got Monica by my side. (Market price for {$random_tulip_mambo_nah} increases by 25%)
+        <<modify_price $random_tulip_mambo_nah 1.25 "5 months">>
 ===
 
 title: DanceBall
@@ -85,22 +88,23 @@ title: DanceBall
 <<set $random_tulip_dance_ball_rival = random_tulip()>>
 //<<set $rival_tulip_price = get_market_price({$random_tulip_dance_ball_price})>> -- uncomment once get_market_price implemented
 You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {$random_tulip_dance_ball} tulip on the lapel of your broadbrimmed black hat. 
-    -> Jump into middle of the circle and wow the onlookers with your dance moves
-        The entire crowd is quite impressed with your mastery of the art of dance. This p0roved to be excellent advertising (Price of {$random_tulip_dance_ball} increases by 20%)
+    -> Dance! (Price of {$random_tulip_dance_ball} increases by 20%)
+        The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising 
         // <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>> -- uncomment once get_market_price implemented
         <<modify_price $random_tulip_dance_ball 1.20 "3 months">>
-    -> Trash talk the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
-        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of {$random_tulip_dance_ball_rival} decreases by 20%)
+    -> Trash talk another man's tulips (Price of {$random_tulip_dance_ball_rival} decreases by 20%)
+    // the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
+        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. 
         // <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>> -- uncomment once get_market_price implemented
         <<modify_price $random_tulip_dance_ball .80 "6 months">>
-            -> Double down
-                You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of {$random_tulip_dance_ball_rival} decreases by 5%)
-                  <<modify_price $random_tulip_dance_ball .95 "6 months">>
+            //-> Double down
+            //    You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of {$random_tulip_dance_ball_rival} decreases by 5%)
+            //      <<modify_price $random_tulip_dance_ball .95 "6 months">>
                 // tempting to add a triple down option but probably best to not 
                 //<<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .05>> -- uncomment once get_market_price implemented
-            -> Apologize
-                You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of {$random_tulip_dance_ball_rival} increases by 5%)
-                <<modify_price $random_tulip_dance_ball 1.05 "6 months">>
+            //-> Apologize
+                //You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of {$random_tulip_dance_ball_rival} increases by 5%)
+                //<<modify_price $random_tulip_dance_ball 1.05 "6 months">>
                 //<<set $rival_tulip_price += get_market_price({$random_tulip_dance_ball_rival}) * .05>> -- uncomment once get_market_price implemented
 ===
 
@@ -143,10 +147,11 @@ title: TravelingCalvinists
 <<declare $calvin_price = 1>>
 <<set $calvin_tulip = random_tulip()>>
 // <<set $calvin_price = get_market_price({$calvin_tulip})>> -- uncomment once get_market_price implemented
-A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy.
-    -> Sure, here you go (Market price for {$calvin_tulip} increases by 10%)
+A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy. They like what you have and the price of your {$calvin_tulip} tulips goes up by 10%!
+    //-> Sure, here you go (Market price for {$calvin_tulip} increases by 10%)
+    -> Nice!
     //<<set $calvin_price += (get_market_price({$calvin_tulip}) * .10)>> -- uncomment once get_market_price implemented
-    -> Nope, I got nothing for you
+    // -> Nope, I got nothing for you
 ===
 
 title: RivalTulipFarmerMerchantEtc
@@ -186,38 +191,40 @@ title: WinterSnap
 // Needs: $all_tulips_market_price
 // TKTK need updated function
 // <<set $all_tulips_price = all_tulips_market_price()>>
-An unexpectedly cold winter freeze kills many farmers tulip crops. Since you have a greenhouse, none of your inventory is affected. The price of all tulips has increased by 3%
-    -> Finally someting separating the poor tulip farmers from the smart tulip farmers (All tulips market price increases by 3%)
+An unexpectedly cold winter freeze kills many farmers' tulip crops. Since you have a greenhouse, none of your inventory is affected. The price of all tulips has increased by 3%
+    -> This separates the poor farmers from the smart ones //  (All tulips market price increases by 3%)
+    // TKTK add modify
     // <<set $new_tulip_price += (all_tulips_market_price()) * .03)>>
     // <<set_all_tulips_market_price 3>>
 ===
 
 
 
-title: PotentiallyCrazyGuy
----
+// title: PotentiallyCrazyGuy
+// ---
 // Need: $red_tulips, $red_tulips_market_price
-<<declare $red_tulips = "test">>
-<<declare $red_tulip_price = 10>>
+//<<declare $red_tulips = "test">>
+//<<declare $red_tulip_price = 10>>
 // <<set $red_tulips = get_num_bulbs(solid, red)>> -- uncomment once get_num_bulbs implemented
 // <<set $red_tulip_price = get_market_price("red tulip")>> -- uncomment once get_market_price implemented
-Off in the distance you see a crazed man frantically running out you and yelling.
-    -> Run away
-    -> Wait and see what he wants 
-        Potentially Crazy Man: I am a tango dancer and I lost the rose I hold in my teeth while dancing. I am about to compete and I need a red tulip!
-            // <<if {red_tulips()} >= 1>> -- uncomment once red_tulips implemented
-                -> Give him one red tulip 
-                    THANK YOU!!!!! (Red tulip price increases by 5% due to the publicity)
+//Off in the distance you see a crazed man frantically running at you and yelling.
+    //-> Run away (What was his deal?)
+    //-> Wait and see what he wants 
+        //Potentially Crazy Man: I am a tango dancer and I lost the rose I hold in my teeth while dancing. I am about to compete and I need a red tulip!
+            //<<if {red_tulips()} >= 1>> -- uncomment once red_tulips implemented
+            // TKTK in the works function-wise for logic check
+                //-> Give him one red tulip 
+                    //THANK YOU!!!!! (Red tulip price increases by 5% due to the publicity)
                     // {red_tulips_market_price()} += 5%
                     // idk if it is *= .05 or += 5% 
                     // <<set $red_tulip_price += (get_market_price({$new_tulip}) * .05)>> -- uncomment once get_market_price implemented
                     // unsure about the sytanx for this because all previous instances have been passing the type in variables to other functions, so I don't know the format offhad: "red tulip"
-                -> Don't sell him a red tulip
-                    I'm doomed, my life is over
+                //-> Don't sell him a red tulip
+                    //I'm doomed, my life is over
             //<<else>>
-                <<jump NotEnoughTulips>>
+                //<<jump NotEnoughTulips>>
             //<<endif>>
-===
+//===
 
 
 
@@ -274,7 +281,7 @@ title: NewsTickerNSync
 <<declare $current_fever_meter = 0>>
 <<set $current_fever_meter = fever_meter()>>
 Dutch investors are all in sync and suggest you buy, buy, buy! // Fever meter at {$current_fever_meter}!
-    Catchy // I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
+    -> Catchy // I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
         // technically you can but it disappears very quickly, could probably tweak given more time
     //<<set $current_fever_meter += $current_fever_meter * 0.05>>
     //{fever_meter()} += 5%
