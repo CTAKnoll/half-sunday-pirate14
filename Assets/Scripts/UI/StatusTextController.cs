@@ -6,7 +6,7 @@ namespace UI
         
         public StatusTextController(StatusTextView view) : base(view)
         {
-            Model.DateText = Timeline.Now.ToString("MMMM yyyy");
+            Model.DateText = Timeline.Now.ToString("dd MMMM, yyyy");
             Model.FundsText = "$" + Economy.Funds;
             Timeline.DateChanged += UpdateDate;
             Economy.FundsChanged += UpdateFunds;
@@ -14,7 +14,7 @@ namespace UI
 
         private void UpdateDate(DateTime newDate)
         {
-            Model.DateText = newDate.ToString("MMMM yyyy");
+            Model.DateText = newDate.ToString("dd MMMM, yyyy");
             UpdateViewAtEndOfFrame();
         }
 

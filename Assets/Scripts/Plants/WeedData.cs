@@ -22,7 +22,7 @@ namespace Plants
         public WeedData()
         {
             Timeline = ServiceLocator.LazyLoad<Timeline>();
-            Health = 3;
+            Health = 1;
             Stage = WeedStage.Sprout;
         }
 
