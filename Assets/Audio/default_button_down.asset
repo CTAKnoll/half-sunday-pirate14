@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cfa732fe789b047bd323430ac7552b, type: 3}
   m_Name: default_button_down
   m_EditorClassIdentifier: 
-  _clip: {fileID: 0}
+  _clip: {fileID: 8300000, guid: 877713e2151767247b5f53cbd94b6c1d, type: 3}
   loop: 0
   volume: 1
   mixerGroup: {fileID: 0}
-  channel: 0
+  channel: 1
   randomizePitch: 0
   pitchVariance: 0

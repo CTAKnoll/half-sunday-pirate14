@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cfa732fe789b047bd323430ac7552b, type: 3}
   m_Name: tulip_compete
   m_EditorClassIdentifier: 
-  _clip: {fileID: 0}
-  loop: 0
+  _clip: {fileID: 8300000, guid: 25e8555cafe6a0d4b9c384544a832634, type: 3}
+  loop: 1
   volume: 1
   mixerGroup: {fileID: 0}
   channel: 0
