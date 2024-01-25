@@ -510,7 +510,7 @@ title: LocalBoy
 // Needs: $random_tulip_color, $random_tulip_color_market_price
 Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his parents said. "Mark has always been a very dull and thick boy" said his father, "I am very disappointed in him." he continued. "Mark is gifted in other areas" claims his mother but she did not provide any actual examples. Stay tuned for further updates. 
 
-Mark is notorious for eating $dumb_boy_flower_color tulips and some believe this to be the cause of his stupidity. 
+Mark is notorious for eating {$dumb_boy_flower_color} tulips and some believe this to be the cause of his stupidity. 
 
 Market price of {$dumb_boy_flower_color} decreases by 10%
 //<<set $dumb_boy_flower_color_price -= (get_market_price("{$dumb_boy_flower_color} tulip") * 0.10)>>
@@ -528,11 +528,6 @@ Market price of {$dumb_boy_flower_color} decreases by 10%
 
 
 
-// idk if I want the limerick to be a news ticker or event, leaning towards event because lends itself for readibility, would be too long on ticker
-title: TravelingRick
----
-    
-===
 
 // would be cool to do colored text, bold, shaking text, rainbow colored text, other visual gags or ways to make the text visually interesting
 
