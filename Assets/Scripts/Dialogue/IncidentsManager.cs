@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Services;
 using Yarn.Unity;
 using UI.Dialogue;
+using Utils;
 
 public class IncidentsManager : MonoBehaviour, IService
 {
@@ -12,8 +15,7 @@ public class IncidentsManager : MonoBehaviour, IService
     [field: SerializeField]
     public DialogueRunner Dialogue { get; set; }
 
-    [SerializeField]
-    private IncidentTimeline[] _incidents;
+    private List<string> RandomIncidents;
 
     public event System.Action<string> spawnedIncident;
 
@@ -26,14 +28,29 @@ public class IncidentsManager : MonoBehaviour, IService
 
     private void Start()
     {
-        foreach(var inc in _incidents)
+        List<string> nodes = new List<string>(Dialogue.lineProvider.YarnProject.NodeNames.ToList());
+        foreach (string nodeName in new List<string>(nodes))
         {
-            _timeline.AddTimelineEvent(this, () => SpawnIncident(inc.nodeName), Timeline.FromStart(0, inc.monthsAfterStart));
+            List<string> tags = Dialogue.GetTagsForNode(nodeName).ToList();
+            if (tags.Count > 0)
+            {
+                _timeline.AddTimelineEvent(this, () => SpawnIncident(nodeName), DateTime.Parse(tags.First()));
+                nodes.Remove(nodeName);
+            }
         }
+        RandomIncidents = nodes;
+        _timeline.AddTimelineEvent(this, PullRandomIncident, Timeline.FromNow(0, (int) FloatExtensions.RandomBetween(14, 22)));
+    }
+
+    private void PullRandomIncident()
+    { 
+        SpawnIncident(RandomIncidents[(int)FloatExtensions.RandomBetween(0, RandomIncidents.Count)]);
+        _timeline.AddTimelineEvent(this, PullRandomIncident, Timeline.FromNow(0, (int) FloatExtensions.RandomBetween(14, 22)));
     }
 
     void SpawnIncident(string incYarnNode)
     {
+        // TODO: We need to check for dependencies
         spawnedIncident?.Invoke(incYarnNode);
     }
 

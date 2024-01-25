@@ -5,6 +5,7 @@ using Core;
 using Plants;
 using Services;
 using Utils;
+using Yarn.Unity;
 using Random = System.Random;
 
 namespace Stonks
@@ -84,9 +85,52 @@ namespace Stonks
             Timeline.AddTimelineEvent(this, ModifyPrice, Timeline.FromNow(0, 0, 3));
         }
 
-        public void AddIncidentModifier(float mult, DateTime expiration)
+        [YarnCommand("modify_price")]
+        public static void AddIncidentModifier(string tulipInfo, float mult, string dur)
         {
-            PriceHistory.Last().Value.IncidentModifiers.Add(new IncidentModifier(mult, expiration));
+            TimeSpan duration = TimeSpan.Parse(dur);
+            string[] tulipSplit = tulipInfo.Split(" ");
+            if (tulipSplit.Length == 0)
+            {
+                foreach (TulipData.TulipKind eachKind in Enum.GetValues(typeof(TulipData.TulipKind)))
+                {
+                    foreach (TulipData.TulipColor eachColor in Enum.GetValues(typeof(TulipData.TulipColor)))
+                    {
+                        AddIncidentModifier(new TulipData.TulipVarietal(eachColor, eachKind), mult, duration);
+                    }
+                }
+            }
+            if (tulipSplit.Length == 1)
+            {
+                bool maybeColor = Enum.TryParse(tulipSplit[0], out TulipData.TulipColor color);
+                bool maybeKind = Enum.TryParse(tulipSplit[0], out TulipData.TulipKind kind);
+                if (maybeColor)
+                {
+                    foreach (TulipData.TulipKind eachKind in Enum.GetValues(typeof(TulipData.TulipKind)))
+                    {
+                        AddIncidentModifier(new TulipData.TulipVarietal(color, eachKind), mult, duration);
+                    }
+                }
+                if (maybeKind)
+                {
+                    foreach (TulipData.TulipColor eachColor in Enum.GetValues(typeof(TulipData.TulipColor)))
+                    {
+                        AddIncidentModifier(new TulipData.TulipVarietal(eachColor, kind), mult, duration);
+                    }
+                }  
+            }
+            else
+            {
+                AddIncidentModifier(new TulipData.TulipVarietal(Enum.Parse<TulipData.TulipColor>(tulipSplit[0]), 
+                    Enum.Parse<TulipData.TulipKind>(tulipSplit[1])), mult, duration);
+            }
+        }
+
+        public static void AddIncidentModifier(TulipData.TulipVarietal varietal, float mult, TimeSpan duration)
+        {
+            ServiceLocator.TryGetService(out Economy economy);
+            economy.TulipEconomyData[varietal].PriceHistory.Last().Value.
+                IncidentModifiers.Add(new IncidentModifier(mult, Timeline.Now + duration));
         }
 
         private void ModifyPrice()

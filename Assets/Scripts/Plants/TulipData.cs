@@ -4,7 +4,6 @@ using System.Linq;
 using Services;
 using Stonks;
 using UI.Containers;
-using UI.Dialogue;
 using UI.Plants;
 using UnityEngine;
 using Utils;
@@ -12,7 +11,7 @@ using Yarn.Unity;
 
 namespace Plants
 {
-    public class TulipData : Plantable, Containable<TulipData, TulipController>, IYarnFunctionProvider
+    public class TulipData : Plantable, Containable<TulipData, TulipController>
     {
         private Timeline Timeline;
         private TulipArtServer ArtServer;
@@ -108,6 +107,29 @@ namespace Plants
             {
                 TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
                 return $"{KindToStringMapping[random.Varietal.Kind]} {ColorToStringMapping[random.Varietal.Color]}";
+            }
+
+            public static TulipVarietal GetRandomTulipVarietal(bool seenOnly)
+            {
+                TulipVarietal varietal;
+                float random = FloatExtensions.RandomBetween(0f, 1f);
+                if (seenOnly || random > 0.5f)
+                {
+                    var keys = ServiceLocator.LazyLoad<Economy>().TulipEconomyData.Keys.ToList();
+                    varietal = keys[new System.Random().Next(keys.Count)];
+                }
+                else
+                {
+                    List<TulipVarietal> varietals = ServiceLocator.LazyLoad<Economy>().TulipEconomyData.Keys.ToList();
+                    List<TulipColor> seenColors = varietals.Select((varietal) => { return varietal.Color; }).ToList();
+                    List<TulipKind> seenKinds = varietals.Select((varietal) => { return varietal.Kind; }).ToList();
+
+                    var kind = GetUnseenKind(seenKinds);
+                    var color = GetUnseenColor(seenColors);
+                    varietal = new TulipVarietal(color, kind);
+                }
+
+                return varietal;
             }
             
             public static string GetRandomSeenTulip()
@@ -225,7 +247,7 @@ namespace Plants
 
         private static bool _yarnInitialized;
         
-        protected TulipData()
+        static TulipData()
         {            
             if(_yarnInitialized) 
                 return;
@@ -250,7 +272,7 @@ namespace Plants
             ServiceLocator.TryGetService(out TulipInventory);
         }
 
-        public TulipData(TulipVarietal ofKind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop) : this()
+        public TulipData(TulipVarietal ofKind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
         {
             ServiceLocator.TryGetService(out ArtServer);
             Color = AssignColor(ofKind.Color);
@@ -266,9 +288,8 @@ namespace Plants
             ServiceLocator.TryGetService(out TulipInventory);
         }
 
-        public void InitYarnFunctions(DialogueRunner dialogueRunner)
+        public static void InitYarnFunctions(DialogueRunner dialogueRunner)
         {
-
             //dialogueRunner.AddFunction("random_tulip", () => TulipVarietal.GetRandomSeenTulip());
             //dialogueRunner.AddFunction("random_tulip_kind", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[0]; });
             //dialogueRunner.AddFunction("random_tulip_color", () => { return TulipVarietal.GetRandomSeenTulip().Split(" ")[1]; });
@@ -277,7 +298,7 @@ namespace Plants
             //dialogueRunner.AddFunction("new_random_tulip_kind", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[0]; });
             //dialogueRunner.AddFunction("new_random_tulip_color", () => { return TulipVarietal.GetRandomUnseenTulip().Split(" ")[1]; });
 
-            _yarnInitialized = true;
+            //_yarnInitialized = true;
         }
         public static string GetRandomTulipKind()
         {

@@ -166,6 +166,12 @@ namespace Stonks
             }
         }
 
+        public void WinCompetition(Competitions.CompetitionResults result)
+        {
+            Funds += result.PlayerPayout;
+            FundsChanged?.Invoke(Funds);
+        }
+
         private void CrashTheMarket()
         {
             TulipEconomy.TickMinimum = 0.9f;

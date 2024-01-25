@@ -55,7 +55,6 @@ namespace UI.Plants
             ServiceLocator.TryGetService(out TulipArtServer);
             ServiceLocator.TryGetService(out AlertText);
             
-            Debug.Log(WeedArtServer == null);
             if (WeedArtServer != null)
             {
                 Model.WeedAlertUpImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Up);
