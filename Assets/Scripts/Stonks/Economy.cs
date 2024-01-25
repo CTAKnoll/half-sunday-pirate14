@@ -128,7 +128,7 @@ namespace Stonks
         public bool BuyTulip(TulipData data)
         {
             Debug.Log("Buying!");
-            var buyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.5f, 1f);
+            var buyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.25f, 0.5f);
             if (buyPrice > Funds)
                 return false;
             Funds -= buyPrice;
