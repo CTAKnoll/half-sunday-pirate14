@@ -371,11 +371,11 @@ An older strange looking gentleman spent 2,000 guilders on {$dril_tulip} tulips 
 // incidents are mostly a means of market changing
 
 
-title: TravelingClownFirstMeeting
+title: TravelingJesterFirstMeeting
 ---
 // I would like wacky colors and text effects if possible for his dialogue - especially the HELLO
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
-<<if visited("TravelingClownFirstMeeting") == true>>
+<<if visited("TravelingJesterFirstMeeting") == true>>
     <<jump TravelingClownSecondMeeting>>
 <<endif>>
 <<declare $clown_tulip1 = "">>
