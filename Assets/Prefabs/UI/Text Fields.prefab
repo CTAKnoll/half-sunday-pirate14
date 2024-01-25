@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Date
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
+  m_sharedMaterial: {fileID: 2357010416258886945, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -200,6 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   TooltipText: 
+  sfx_onClick: {fileID: 0}
+  sfx_onRelease: {fileID: 0}
   Priority: 2
   DateText: {fileID: 1461095287451091074}
   FundsText: {fileID: 388915171240571803}
@@ -270,8 +272,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Funds
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
+  m_sharedMaterial: {fileID: 2357010416258886945, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -295,8 +297,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -13,6 +13,7 @@ namespace Stonks
 {
     public class Economy : IService
     {
+        private static readonly float DEFAULT_TULIP_PRICE = 10;
         private float StartingFunds = 100;
         public float Funds { get; private set; }
 
@@ -76,6 +77,8 @@ namespace Stonks
 
         public float GetAveragePrice()
         {
+            if (TulipEconomyData.Count == 0)
+                return DEFAULT_TULIP_PRICE;
             return TulipEconomyData.Average(data => data.Value.Price).RoundToDecimalPlaces(2);
         }
 
@@ -124,7 +127,8 @@ namespace Stonks
 
         public bool BuyTulip(TulipData data)
         {
-            var buyPrice = 5;
+            Debug.Log("Buying!");
+            var buyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.5f, 1f);
             if (buyPrice > Funds)
                 return false;
             Funds -= buyPrice;

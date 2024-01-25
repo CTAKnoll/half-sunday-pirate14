@@ -59,14 +59,13 @@ namespace Stonks
             public float Price => BasePrice * InflationMult * MarketMult *
                                   IncidentModifiers.Aggregate(1f, (current, next) => current * next.ModifierAmt);
         }
-
-
-        public static readonly float BASE_TULIP_PRICE = 10f;
+        
         public SortedList<DateTime, PriceSnapshot> PriceHistory;
         public float Price => PriceHistory.Last().Value.Price;
         public TulipData.TulipVarietal Varietal;
         
         private Timeline Timeline;
+        private Economy Economy;
         private FeverMode FeverMode;
 
         private bool FeverModeActive = false;
@@ -74,12 +73,13 @@ namespace Stonks
         public TulipEconomy(TulipData.TulipVarietal varietal)
         {
             Timeline = ServiceLocator.LazyLoad<Timeline>();
+            Economy = ServiceLocator.LazyLoad<Economy>();
             ServiceLocator.TryGetService(out FeverMode);
             
             PriceHistory = new();
             Varietal = varietal;
             
-            PriceHistory.Add(Timeline.Now, new PriceSnapshot(BASE_TULIP_PRICE));
+            PriceHistory.Add(Timeline.Now, new PriceSnapshot(Economy.GetAveragePrice() * 0.9f));
             FeverMode.FeverLevel.OnChanged += (_, _) => FeverModeOn();
             Timeline.AddTimelineEvent(this, ModifyPrice, Timeline.FromNow(0, 0, 3));
         }

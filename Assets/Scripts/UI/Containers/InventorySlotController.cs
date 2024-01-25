@@ -10,15 +10,17 @@ namespace UI.Containers
         public bool IsEmpty => Tulip == null;
         public TulipController Tulip;
         private bool AllowStacking;
+        private TulipData.TulipOwner Owner;
         public int Stacks;
 
         public Action<TulipController, IUIController> ConsumeFunction;
         private TulipData.TulipStage GeneratedStage;
 
-        public InventorySlotController(InventorySlotView view, TulipData.TulipStage stage, bool allowStacking) : base(view)
+        public InventorySlotController(InventorySlotView view, TulipData.TulipStage stage, bool allowStacking, bool ownedByPlayer) : base(view)
         {
             AllowStacking = allowStacking;
             GeneratedStage = stage;
+            Owner = ownedByPlayer ? TulipData.TulipOwner.Player : TulipData.TulipOwner.Shop;
         }
 
         public void UpdateSlot(Inventory.InventoryStack invStack)
@@ -29,7 +31,7 @@ namespace UI.Containers
             Tulip?.Close();
             if (invStack.Varietal != null)
             {
-                Tulip = AddChild(new TulipData(invStack.Varietal, GeneratedStage, TulipData.TulipOwner.Player).Serve(View.transform));
+                Tulip = AddChild(new TulipData(invStack.Varietal, GeneratedStage, Owner).Serve(View.transform));
                 Tulip.Consumed += ConsumeFunction;
             }
             UpdateViewAtEndOfFrame();

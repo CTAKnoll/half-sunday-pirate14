@@ -13,7 +13,7 @@ namespace UI.Containers
 
         public void Awake()
         {
-            SlotControllers = StoreSlots.Select(view => new InventorySlotController(view, TulipData.TulipStage.Bulb, false)).ToList();
+            SlotControllers = StoreSlots.Select(view => new InventorySlotController(view, TulipData.TulipStage.Bulb, false, false)).ToList();
         }
         
         public override void UpdateViewWithModel(StoreModel model)

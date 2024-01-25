@@ -105,6 +105,7 @@ namespace UI.Plants
 
         private bool ShopCheck()
         {
+            Debug.Log("Here either?");
             if (Data.OwnedByPlayer) return true;
             return Purchase();
         }
@@ -172,6 +173,7 @@ namespace UI.Plants
 
         private bool Purchase()
         {
+            Debug.Log("Here?");
             if (!Economy.BuyTulip(Data))
                 return false;
             Data.Owner = TulipData.TulipOwner.Player;
