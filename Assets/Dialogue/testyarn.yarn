@@ -88,15 +88,19 @@ You are attending a local ball when a dance circle forms on the dance floor. You
     -> Jump into middle of the circle and wow the onlookers with your dance moves
         The entire crowd is quite impressed with your mastery of the art of dance. This p0roved to be excellent advertising (Price of {$random_tulip_dance_ball} increases by 20%)
         // <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>> -- uncomment once get_market_price implemented
+        <<modify_price $random_tulip_dance_ball 1.20 "3 months">>
     -> Trash talk the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
         A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. (Price of {$random_tulip_dance_ball_rival} decreases by 20%)
         // <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>> -- uncomment once get_market_price implemented
+        <<modify_price $random_tulip_dance_ball .80 "6 months">>
             -> Double down
                 You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of {$random_tulip_dance_ball_rival} decreases by 5%)
+                  <<modify_price $random_tulip_dance_ball .95 "6 months">>
                 // tempting to add a triple down option but probably best to not 
                 //<<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .05>> -- uncomment once get_market_price implemented
             -> Apologize
                 You profusely apologize for your sudden outburst and claim to have had too much to drink. (Price of {$random_tulip_dance_ball_rival} increases by 5%)
+                <<modify_price $random_tulip_dance_ball 1.05 "6 months">>
                 //<<set $rival_tulip_price += get_market_price({$random_tulip_dance_ball_rival}) * .05>> -- uncomment once get_market_price implemented
 ===
 
@@ -493,7 +497,7 @@ title: LocalBoy
 // Needs: $random_tulip_color, $random_tulip_color_market_price
 Local boy Mark Jones voted dumbest child in all of Amsterdam. Here's what his partents said. "Mark has always been a very dull and thick boy" said his father, "I am very disappointed in him." he continued. "Mark is gifted in other areas" claims his mother but she did not provide any actual examples. Stay tuned for further updates. 
 
-Mark is notorious for eating $random_tulip_color tulips and some believe this to be the cause of his stupidity. 
+Mark is notorious for eating $dumb_boy_flower_color tulips and some believe this to be the cause of his stupidity. 
 
 Market price of {$dumb_boy_flower_color} decreases by 10%
 //<<set $dumb_boy_flower_color_price -= (get_market_price("{$dumb_boy_flower_color} tulip") * 0.10)>>
