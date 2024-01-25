@@ -395,12 +395,12 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
         //<<set $clown_price1 -= (get_market_price($clown_tulip1) * 0.05)>>
         // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
         // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
-        Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around!
+        Lester/: "Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around!"
         // set clownspray1 to true
         // in the meantime set this to reputational damage on the type of tulip you were holding when you got sprayed, news travels fast of this extremely embarrassing encounter
         <<set $clownspray1 to true>>
     -> Don't smell his flower
-        Awww, you're no fun.
+        Lester/: "Awww, you're no fun."
         // $clownsadness = true // jk might not need to tbh 
 ===
 
@@ -434,7 +434,7 @@ title: TravelingClownSecondMeeting
 //<<set $clown_price2 = get_market_price($clown_tulip2)>>
 // I would like wacky colors and text effects if possible for his dialogue
     <<if $clownspray1 == true>>
-        Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?
+        Lester/: "Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?"
             -> Smell flower
                 You get sprayed by water and news spreads. (Price of {$clown_tulip2} tulips decrease 3%)
                 <<set $clownspray2 to true>>
@@ -443,13 +443,13 @@ title: TravelingClownSecondMeeting
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
                 <<modify_price $clown_tulip2 0.97 "6 months">>
             -> Don't smell flower
-                Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
+                Lester/: "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
     <<else>>
         Alright surely this time you will smell my rose, right?
             -> Yes
                 You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
             -> No
-                Well you stick to your convinctions, I'll give you that. 
+                Lester/: "Well you stick to your convinctions, I'll give you that."
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
     <<endif>>
 
@@ -484,13 +484,13 @@ title: TravelingClownThirdMeeting
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
                 <<modify_price $clown_tulip3 0.97 "6 months">>
             -> Don't smell flower
-                Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
+                Lester/: "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
     <<else>>
         Alright surely this time you will smell my rose, right?
             -> Yes
                 You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
             -> No
-                Well you stick to your convinctions, I'll give you that. 
+                Lester/: "Well you stick to your convinctions, I'll give you that."
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
     <<endif>>
     
@@ -498,7 +498,7 @@ title: TravelingClownThirdMeeting
 
 title: TravelingClownConclusionOrIsIt
 ---
-Hey sorry, I'm busy right now, maybe I'll see you later if you are lucky.
+Lester/: "Hey sorry, I'm busy right now, maybe I'll see you later if you are lucky."
 ===
 
 title: LocalBoy
@@ -689,7 +689,7 @@ title: SuperSecretClownEnding
 // Needs: bank_balance() and total_owned_tulips_market_price() 
 While the quiet murmurs of the market crashing are slowly growing in volume, you sit in a fine leatherchair contemplating your options. Suddenly you hear a knock at the door. 
     -> Answer the door
-        HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value.
+        Lester/: "HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value."
             -> Alright, thank you
                 // bank_balance() += total_owned_tulips_market_price() 
                 // <<clown_buys_all>>
