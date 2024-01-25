@@ -23,9 +23,12 @@ public class ResolutionButton : UIInteractable
             gameObject.SetActive(false);
             return;
         }
-
-        ResolutionMultiplier = Resolution.x / 640;
-        UiDriver.RegisterForTap(this, () => Screen.SetResolution(Resolution.x, Resolution.y, false));
+        
+        UiDriver.RegisterForTap(this, () =>
+        {
+            Screen.SetResolution(Resolution.x, Resolution.y, false);
+            ResolutionMultiplier = Resolution.x / 640;
+        });
     }
     
     
