@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using Plants;
 using Services;
-using UI.Core;
 using UI.Model;
 using UI.Plants;
 using UnityEngine;
-using Yarn.Compiler;
 using Random = System.Random;
 
 namespace UI.Containers

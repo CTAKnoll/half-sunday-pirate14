@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using System.Text;
+using Services;
 using UnityEngine;
 
 namespace Utils
@@ -25,14 +26,16 @@ namespace Utils
             return ParsedRumours[(int)FloatExtensions.RandomBetween(0, ParsedRumours.Length)];
         }
 
-        public string DeliverMarquee()
+        public string DeliverMarquee(int start, int window)
         {
-            return "";
+            return ParsedMarquee.Substring(start, window);
         }
 
         private void Parse()
         {
             ParsedRumours = Rumours.text.Split('\n');
+            var longSpace = new string(' ', 100);
+            ParsedMarquee = MarqueeText.text.Replace("\n", longSpace);
         }
     }
 }

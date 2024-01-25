@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1303028183763259958}
   - component: {fileID: 7502164856593462571}
   - component: {fileID: 7190273871728626704}
+  - component: {fileID: 6956876319410908637}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -61,3 +62,17 @@ MonoBehaviour:
   Tulip: {fileID: 11400000, guid: fe73de5f7d5e41740828b164a440eebb, type: 2}
   TulipEconomyLine: {fileID: 11400000, guid: 62b4b3811b3de79479756abb7a83b9f6, type: 2}
   Tooltip: {fileID: 11400000, guid: 532a9b21cdccf9142ae0234850bb2ec1, type: 2}
+--- !u!114 &6956876319410908637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247576464803227961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285f973a77f241d98dea033e09c8111d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rumours: {fileID: 4900000, guid: df249eadad3985048af5e6da85af8ee0, type: 3}
+  MarqueeText: {fileID: 4900000, guid: 7a66d11a71d150f4aa0c4b019aad4e0e, type: 3}

@@ -8,6 +8,7 @@ using UnityEngine;
 public class ResolutionButton : UIInteractable
 {
     public int2 Resolution;
+    public static int ResolutionMultiplier;
     private UIDriver UiDriver;
 
     void Start()
@@ -23,6 +24,7 @@ public class ResolutionButton : UIInteractable
             return;
         }
 
+        ResolutionMultiplier = Resolution.x / 640;
         UiDriver.RegisterForTap(this, () => Screen.SetResolution(Resolution.x, Resolution.y, false));
     }
     

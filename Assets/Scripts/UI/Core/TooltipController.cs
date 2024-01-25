@@ -8,6 +8,7 @@ namespace UI.Core
     public class TooltipController : UIController<TooltipView, TooltipModel>
     {
         private Coroutine FollowingMouse;
+        
         public TooltipController(TooltipTemplate template, Transform parent, string text) : base(template, parent)
         {
             Model.TooltipText = text;
@@ -18,7 +19,8 @@ namespace UI.Core
         {
             while (!View.IsDestroyed)
             {
-                Model.ScreenPos = Pointer.current.position.value + new Vector2(120, 120);
+                Model.ScreenPos = Pointer.current.position.value + new Vector2(120 * ResolutionButton.ResolutionMultiplier, 
+                     120 * ResolutionButton.ResolutionMultiplier);
                 UpdateViewAtEndOfFrame();
                 yield return null;
             }
