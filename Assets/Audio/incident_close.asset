@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clip: {fileID: 8300000, guid: 7da45728ba154d14f8f23853a349cd91, type: 3}
   loop: 0
-  volume: 1
+  volume: 0.449
   mixerGroup: {fileID: 0}
   channel: 0
   randomizePitch: 0
