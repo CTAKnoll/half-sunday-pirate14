@@ -661,6 +661,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8246059679829228153, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -290
+      objectReference: {fileID: 0}
     - target: {fileID: 9005541255856507632, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
