@@ -273,7 +273,7 @@ MonoBehaviour:
   sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
   sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
-  NumYears: 10
+  NumYears: 20
   sfx_futurePurchased: {fileID: 11400000, guid: 62781b7aa80de4046acd08867a3b8444, type: 2}
   sfx_futurePayout: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
 --- !u!224 &8243662010548454420 stripped
@@ -686,7 +686,7 @@ MonoBehaviour:
   sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
   sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
-  NumYears: 2
+  NumYears: 5
   sfx_futurePurchased: {fileID: 11400000, guid: 62781b7aa80de4046acd08867a3b8444, type: 2}
   sfx_futurePayout: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
 --- !u!224 &5572179422333410872 stripped
