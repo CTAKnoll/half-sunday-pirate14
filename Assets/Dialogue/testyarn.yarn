@@ -22,13 +22,13 @@ title: TulipCompetition
 ---
 // Needs: $player_tulip_type (what they submitted by dragging into box), $competitor_tulip_type1 (can be literally anything, does not have to have ever been in market), $competitor_tulip_type2
 
-Congratulations! Your tulip finished in {get_player_place()} place!
+Congratulations! Your tulip finished in {get_player_place()} place! 
 
 {first_place_tulip()} finished first
 {second_place_tulip()} finished second
 {third_place_tulip()} finished third
 
-
+    -> You made {get_player_payout()} guilders!
 ===
 
 // incident thematically and gameplay wise - not personal 
@@ -43,7 +43,19 @@ title: MamboConcert
 <<declare $random_tulip_mambo = "test">>
 <<declare $mambo_market_price = 1>>
 <<set $random_tulip_mambo = random_tulip()>>
-//<<set $mambo_market_price = get_market_price({$random_tulip_mambo})>> -- uncomment once get_market_price implemented
+// <<set $mambo_market_price = get_market_price({$random_tulip_mambo})>> -- uncomment once get_market_price implemented
+// striped red
+// red
+// striped
+
+// modify_price_type(striped red)
+// modify_price_kind(striped)
+// modify_price_color(red)
+
+// <<modify_tulip_price(tulip type or tulip kind or tulip color, (-)5, 2 months or 2 years)>> -- TKTK
+
+// 1.25 for 25% and and .75 for decrease by 25% -- TKTK
+
 A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide {$random_tulip_mambo} tulips to the event?
     -> Provide tulips
         Musician: Thanks! (Market price for {$random_tulip_mambo} increases by 25%)
@@ -160,6 +172,7 @@ One Dutch unit of rain expected this upcoming April
 // One Dutch unit of liquid measures worth of rain?
     -> Ok (All tulips increase in market price by 3%)
     // {all_tulips_market_price()} += 3%
+    // <<set_all_tulips_market_price 3>>
     // <<set $new_tulip_price += (all_tulips_market_price()) * .03)>>
 ===
 
@@ -171,6 +184,7 @@ title: WinterSnap
 An unexpectedly cold winter freeze kills many farmers tulip crops. Since you have a greenhouse, none of your inventory is affected. The price of all tulips has increased by 3%
     -> Finally someting separating the poor tulip farmers from the smart tulip farmers (All tulips market price increases by 3%)
     // <<set $new_tulip_price += (all_tulips_market_price()) * .03)>>
+    // <<set_all_tulips_market_price 3>>
 ===
 
 
@@ -257,8 +271,9 @@ title: NewsTickerNSync
 Dutch investors are all in sync and suggest you buy, buy, buy! // Fever meter at {$current_fever_meter}!
     Catchy // I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
         // technically you can but it disappears very quickly, could probably tweak given more time
-    <<set $current_fever_meter += $current_fever_meter * 0.05>>
-// {fever_meter()} += 5%
+    //<<set $current_fever_meter += $current_fever_meter * 0.05>>
+    //{fever_meter()} += 5%
+    //<<set_fever_meter 5>> -- uncomment once set_fever_meter implemented
 ===
 
 
@@ -350,6 +365,9 @@ title: TravelingClownFirstMeeting
 ---
 // I would like wacky colors and text effects if possible for his dialogue - especially the HELLO
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
+<<if visited("TravelingClownFirstMeeting") == true>>
+    <<jump TravelingClownSecondMeeting>>
+<<endif>>
 <<declare $clown_tulip1 = "">>
 <<declare $clownspray1 = false>>
 <<declare $clown_price1 = 10>>
@@ -395,6 +413,9 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
 
 title: TravelingClownSecondMeeting
 ---
+<<if visited("TravelingClownSecondMeeting") == true>>
+    <<jump TravelingClownThirdMeeting>>
+<<endif>>
 <<declare $clown_tulip2 = "">>
 <<declare $clown_price2 = 10>>
 <<declare $clownspray2 = false>>
@@ -428,6 +449,9 @@ title: TravelingClownSecondMeeting
 
 title: TravelingClownThirdMeeting
 ---
+<<if visited("TravelingClownThirdMeeting") == true>>
+    <<jump TravelingClownThirdMeeting>>
+<<endif>>
 <<declare $clown_tulip3 = "">>
 <<declare $clown_price3 = 10>>
 <<declare $clownspray3 = false>>
@@ -556,10 +580,13 @@ You comission a local artist to render one of your tulips, likely increasing its
 title: RareTulipType
 ---
 // Needs: new_random_tulip
-A different tulip type, {new_random_tulip()} than the one you planted has sprouted from one of your tulips. Theories behind this phenomena include divine intervention, magic, a virus spread by rodents, and by soaking the bulbs in red wine. 
+<<declare $new_tulip_rare = "test">>
+<<set $new_tulip_rare = new_random_tulip()>>
+A different tulip type, {$new_tulip_rare} than the one you planted has sprouted from one of your tulips. Theories behind this phenomena include divine intervention, magic, a virus spread by rodents, and by soaking the bulbs in red wine. 
     -> Strange
+    //<<create_new_random_tulip $new_tulip_rare>> -- uncomment once create_new_random_tulip exists
 // add this too the merchant inventory and/or the economy market idk 
-// create new_random_tulip
+// create_new_random_tulip
 ===
 
 title: Doping
@@ -587,7 +614,11 @@ You do not have enough tulips.
 
 
 title: 30YearsWar
----
+date: May 23 1618
+--- 
+// #clown:
+// #frequency - normal non-historic and non-clown
+// TKTK - visited tag?
 // Date: May 23 1618
 // Needs: $all_tulips_market_price
 <<declare $all_tulips_price = 1000>>
@@ -595,10 +626,12 @@ title: 30YearsWar
 Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate. (Price for all tulips has decreased by 2%)
     -> That does not sound good. 
     // all_tulips_market_price -= 2%
+    // <<set_all_tulips_market_price -2>>
     <<set $all_tulips_price -= ($all_tulips_price * 0.02)>>
 ===
 
 title: BubbleAboutToBurst
+date: February 01 1637
 // Date: February 1637
 ---
 <<declare $all_tulips_price_prepop = 1000>>
@@ -611,6 +644,7 @@ During a recent tulip bulb auction at a pub, no one bid on one of the tulips. (M
 
 title: BubbleIsBurstingAndPeopleAreTicked
 // Date: Sometime around / after February 1637
+date: March 15 1637
 ---
 <<declare $all_tulips_price_monkeys = 1000>>
 <<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
@@ -633,6 +667,7 @@ While the quiet murmurs of the market crashing are slowly growing in volume, you
         HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value.
             -> Alright, thank you
                 // bank_balance() += total_owned_tulips_market_price() 
+                // <<clown_buys_all>>
             -> Nah, I'm good
     -> Ignore them, you have more presssing matters at hand
 ===
