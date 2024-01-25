@@ -16,6 +16,8 @@ public class EconomyInteractions : MonoBehaviour
 
     private Economy Economy;
     private FeverMode FeverMode;
+    private Competitions Competitions;
+    private IncidentsManager IncidentsManager;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class EconomyInteractions : MonoBehaviour
         _ = new TulipInteractionController(SendToCompetitionButton, SendTulipToCompetition);
 
         Economy = ServiceLocator.LazyLoad<Economy>();
+        Competitions = ServiceLocator.LazyLoad<Competitions>();
         ServiceLocator.TryGetService(out FeverMode);
     }
 
@@ -40,6 +43,9 @@ public class EconomyInteractions : MonoBehaviour
     
     private bool SendTulipToCompetition(TulipData tulipData)
     {
-        throw new NotImplementedException();
+        ServiceLocator.TryGetService(out IncidentsManager);
+        Competitions.RunCompetition(tulipData.Varietal, true);
+        IncidentsManager.Dialogue.StartDialogue("TulipCompetition");
+        return true;
     }
 }
