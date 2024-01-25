@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Plants;
 using Stonks;
 using UI.Model.Templates;
 using UnityEngine;
@@ -11,11 +12,20 @@ namespace UI.Stonks
         private Vector3 upperLeftBound;
         private Vector3 upperRightBound;
         private Vector3 lowerLeftBound;
+
+        private TulipData.TulipVarietal Varietal;
             
-        public TulipEconomyLineController(TulipEconomyLineTemplate template, RectTransform parent, Color color) : base(template, parent)
+        public TulipEconomyLineController(TulipEconomyLineTemplate template, RectTransform parent, TulipData.TulipVarietal varietal) : base(template, parent)
         {
             Model.RecentPrices = new();
-            Model.LineColor = color;
+            if (varietal.UnityColor.r + varietal.UnityColor.g + varietal.UnityColor.b >= 2.9)
+            {
+                Model.LineColor = new(1 - varietal.UnityColor.r, 1 - varietal.UnityColor.g, 1 - varietal.UnityColor.b);
+            }
+            else Model.LineColor = varietal.UnityColor;
+            
+
+            Varietal = varietal;
             
             var bounds = new Vector3[4];
             parent.GetWorldCorners(bounds);
@@ -34,6 +44,10 @@ namespace UI.Stonks
             var minY = lowerLeftBound.y;
             var maxY = upperLeftBound.y;
             var currX = upperLeftBound.x;
+
+            if (Economy.Focused == null)
+                Model.LineWidth = 1;
+            else Model.LineWidth = Economy.Focused.Equals(Varietal) ? 3 : 1;
             
             List<Vector3> points = new();
             foreach (var snapshot in snapshots)

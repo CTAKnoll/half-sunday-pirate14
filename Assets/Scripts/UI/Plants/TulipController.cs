@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Plants;
 using Services;
+using Stonks;
 using UI.Containers;
 using UI.Model;
 using UI.Model.Templates;
@@ -23,14 +24,20 @@ namespace UI.Plants
         private Vector3 InitialPosition;
 
         private AudioService _audio;
+        private Economy Economy;
         public TulipController(TulipTemplate template, Transform parent, TulipData data) : base(template, parent)
         {
             Data = data;
             Model.ScreenPos = parent.transform.position;
             Model.IconSprite = ServiceLocator.LazyLoad<TulipArtServer>().GetBaseSprite(data.Varietal, data.Stage);
             UiDriver.RegisterForHold(View, OnHoldStarted, OnHoldEnded, OnDrag, 0f);
-            UpdateViewAtEndOfFrame();
+            UiDriver.RegisterForFocus(View, OnHoverStart, OnHoverEnd);
+            
+            Economy = ServiceLocator.LazyLoad<Economy>();
             ServiceLocator.TryGetService(out _audio);
+            
+            UpdateViewAtEndOfFrame();
+           
         }
         
         private void OnHoldStarted()
@@ -78,6 +85,16 @@ namespace UI.Plants
             {
                 ReturnToOrigin();
             }
+        }
+
+        private void OnHoverStart()
+        {
+            Economy.Focused = Data.Varietal;
+        }
+
+        private void OnHoverEnd()
+        {
+            Economy.Focused = null;
         }
         
         public bool IsOverBucket(out Bucket consumer)

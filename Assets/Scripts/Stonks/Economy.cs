@@ -20,6 +20,7 @@ namespace Stonks
         public Dictionary<TulipVarietal, TulipEconomy> TulipEconomyData;
 
         public bool FilterToOwned = false;
+        public TulipVarietal Focused;
         public event Action<float> FundsChanged;
         public event Action<TulipVarietal> VarietalAdded;
         public event Action<TulipVarietal> SentToGarden;
@@ -171,6 +172,7 @@ namespace Stonks
             Funds += result.PlayerPayout;
             FundsChanged?.Invoke(Funds);
         }
+        
 
         private void CrashTheMarket()
         {
