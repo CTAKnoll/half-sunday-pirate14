@@ -54,9 +54,9 @@ title: MamboConcert
 // modify_price_kind(striped)
 // modify_price_color(red)
 
-// <<modify_tulip_price(tulip type or tulip kind or tulip color, (-)5, 2 months or 2 years)>> -- TKTK
+// <<modify_tulip_price(tulip type or tulip kind or tulip color, (-)5, 2 months or 2 years)>> -- reference
 
-// 1.25 for 25% and and .75 for decrease by 25% -- TKTK
+// 1.25 for 25% and and .75 for decrease by 25% -- reference
 
 A local musician is hosting a concert to debut their new song "Mambo No. 1" and would like some flowers to spruce it up. Would you like to provide {$random_tulip_mambo} tulips to the event?
     -> Provide tulips
@@ -149,6 +149,7 @@ title: TravelingCalvinists
 // <<set $calvin_price = get_market_price({$calvin_tulip})>> -- uncomment once get_market_price implemented
 A group of Calvinists looking to decorate their church ask if you have any beautiful but modest tulips, they don't want anything too flashy. They like what you have and the price of your {$calvin_tulip} tulips goes up by 10%!
     //-> Sure, here you go (Market price for {$calvin_tulip} increases by 10%)
+    <<modify_price $calvin_tulip 1.10 "6 months">>
     -> Nice!
     //<<set $calvin_price += (get_market_price({$calvin_tulip}) * .10)>> -- uncomment once get_market_price implemented
     // -> Nope, I got nothing for you
@@ -166,6 +167,7 @@ title: RivalTulipFarmerMerchantEtc
 //<<set $new_tulip_price = get_market_price({$new_tulip})>> -- uncomment once get_market_price implemented
 A rival tulip merchant debuts his new tulip breed at the pub, sparking an increase in demand for it.
     -> What a jerk ({$new_tulip} market price increases by 20%)
+    <<modify_price $new_tulip 1.10 "1 year">>
     //<<set $new_tulip_price += (get_market_price({$new_tulip}) * .20)>> -- uncomment once get_market_price implemented
 // ideally this should be weighted to show up on the market soon after this incident
 // $new_random_tulip_market_price += 20%
@@ -176,11 +178,11 @@ title: RainForecast
 ---
 // Needs: all_tulips_market_price
 
-// TKTK need updated function
 // <<set $all_tulips_price = all_tulips_market_price()>>
 One Dutch unit of rain expected this upcoming April
 // One Dutch unit of liquid measures worth of rain?
     -> Ok (All tulips increase in market price by 3%)
+    <<modify_price "" 1.03 "8 months">>
     // {all_tulips_market_price()} += 3%
     // <<set_all_tulips_market_price 3>>
     // <<set $new_tulip_price += (all_tulips_market_price()) * .03)>>
@@ -189,11 +191,10 @@ One Dutch unit of rain expected this upcoming April
 title: WinterSnap
 ---
 // Needs: $all_tulips_market_price
-// TKTK need updated function
 // <<set $all_tulips_price = all_tulips_market_price()>>
 An unexpectedly cold winter freeze kills many farmers' tulip crops. Since you have a greenhouse, none of your inventory is affected. The price of all tulips has increased by 3%
     -> This separates the poor farmers from the smart ones //  (All tulips market price increases by 3%)
-    // TKTK add modify
+    <<modify_price "" 1.03 "2 years">>
     // <<set $new_tulip_price += (all_tulips_market_price()) * .03)>>
     // <<set_all_tulips_market_price 3>>
 ===
@@ -212,7 +213,7 @@ An unexpectedly cold winter freeze kills many farmers' tulip crops. Since you ha
     //-> Wait and see what he wants 
         //Potentially Crazy Man: I am a tango dancer and I lost the rose I hold in my teeth while dancing. I am about to compete and I need a red tulip!
             //<<if {red_tulips()} >= 1>> -- uncomment once red_tulips implemented
-            // TKTK in the works function-wise for logic check
+            //  in the works function-wise for logic check
                 //-> Give him one red tulip 
                     //THANK YOU!!!!! (Red tulip price increases by 5% due to the publicity)
                     // {red_tulips_market_price()} += 5%
@@ -243,8 +244,8 @@ title: NewTulipDrops1
 // <<declare $new_tulip_price = 10>>
 // <<set $new_tulip_science_price = get_market_price({$new_tulip_science_price})>> -- uncomment once get_market_price implemented
 The Netherlands top tulipologists have created a new type of tulip/: {$new_tulip_science}
+    <<modify_price $new_tulip_science 1.30 "1 year">>
     -> I gotta get in on this ({$new_tulip_science} market price increases by 30%)
-    // TKTK modify price 
     //<<set $new_tulip_science_price += (get_market_price({$new_tulip_science}) * .30)>> -- uncomment once get_market_price implemented
 // ideally this should be weighted to show up on the market soon after this incident
 // {new_random_tulip_market_price()} += 30%
@@ -259,7 +260,7 @@ title: TulipTony
 //<<set $random_tulip_color_price = get_market_price("{$random_tulip_color} tulip")>> -- uncomment once get_market_price implemented
 Tulip Tony who lives a stone throwy from the town crony says all {random_tulip_color()} tulips are phony. 
     -> I hate Tulip Tony (Price of {random_tulip_color()} tulips decreases by 30%)
-    // TKTK modify price
+    <<modify_price $random_color 0.70 "1 year">>
     //<<set $random_tulip_color_price -= (get_market_price("{$random_tulip_color} tulip") * 0.30)>> -- uncomment once get_market_price implemented
     // {random_tulip_color_market_price()} -= 30%
 ===
@@ -273,7 +274,7 @@ title: TulipBandit
 //<<set $random_kind_price = get_market_price("{$random_kind} tulip")>>
 The town's tulip bandit goes on a stealing spree, taking {$random_kind} tulips from all the farmers, except for you!
     -> Lucky me! ({$random_kind} tulips increase 15%)// (Market price of {$random_kind} tulips increases by 15%)
-    // TKTK modify price
+    <<modify_price $random_color 1.15 "1 year">>
         // in a pinch we can move the X tulip decreases by Y% for some although then it's inconsistent because sometimes their choice affects what percentage something increases or decreases by
     // {random_tulip_kind_market_price()} += 15%
     //<<set $random_kind_price = get_market_price("{$random_kind} tulip") * 0.15>>
@@ -289,13 +290,8 @@ Dutch investors are all in sync and suggest you buy, buy, buy! // Fever meter at
         // technically you can but it disappears very quickly, could probably tweak given more time
     //<<set $current_fever_meter += $current_fever_meter * 0.05>>
     //{fever_meter()} += 5%
-    //<<set_fever_meter 5>> -- uncomment once set_fever_meter implemented
+    //<<set_fever_meter() 5>> -- uncomment once implemented, confirm format 1.05 or 5? TKTK
 ===
-
-
-
-// TKTK - introduce a new tulip maybe?
-
 
 // dance option - show off X tulip, diss Y tulip, 
 
@@ -320,7 +316,7 @@ A weary Spanish sailor approaches you.
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
     //<<if {random_tulip_kind()} >=0>>
         -> Provide {random_tulip_kind()} ({$random_kind} tulips increase by 15%)
-        // TKTK modify price
+        <<modify_price $random_kind_ship 1.15 "10 months">>
 
         // {random_tulip_kind_market_price()} += 15%
         //<<set $random_kind_ship_price = get_market_price("{$random_kind_ship} tulip") * 0.15>>
@@ -347,6 +343,7 @@ title: ThisIsNotADril
 // An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
 An older strange looking gentleman spent 2,000 guilders on {$dril_tulip} tulips last month. Many speculate he will spend as much, if not more, next month.
     -> That's a lot of tulips! ({random_tulip()} tulips increase by 20%)
+    <<modify_price $dril_tulip 1.20 "3 months">>
     //<<set $dril_price += (get_market_price($dril_tulip) * 0.20)>>
     // {random_tulip_market_price()} += 20%
 // 
@@ -392,6 +389,7 @@ title: TravelingClownFirstMeeting
 HELLO! I am Lester the Jester! You seem like an enterprising and learned type of individual. It is important in life to stop and smell the roses sometimes. Would you like to smell the rose on my jacket?
     -> Smell his flower
         You get sprayed by water and news spreads. (Price of {$clown_tulip1} tulips decrease 5%)
+        <<modify_price $clown_tulip1 0.95 "6 months">>
         //In an astonishing turn of events, his rose erupts in a torrent of water. You do not know by what means of sorecery he has summoned a flowing spring of water. In your amazement you stumble back and fall onto a pile of your {$clown_tulip1} tulips, crushing them. 
         // random_tulip_market_price -= 5%
         //<<set $clown_price1 -= (get_market_price($clown_tulip1) * 0.05)>>
@@ -399,7 +397,7 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
         // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
         Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around!
         // set clownspray1 to true
-        // TKTK in the meantime set this to reputational damage on the type of tulip you were holding when you got sprayed, news travels fast of this extremely embarrassing encounter
+        // in the meantime set this to reputational damage on the type of tulip you were holding when you got sprayed, news travels fast of this extremely embarrassing encounter
         <<set $clownspray1 to true>>
     -> Don't smell his flower
         Awww, you're no fun.
@@ -443,6 +441,7 @@ title: TravelingClownSecondMeeting
                 // Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {$clown_tulip2} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 3%.
                 //random_tulip_market_price -= 5%
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
+                <<modify_price $clown_tulip2 0.97 "6 months">>
             -> Don't smell flower
                 Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
     <<else>>
@@ -454,7 +453,7 @@ title: TravelingClownSecondMeeting
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
     <<endif>>
 
-// if else depending on if you let him spray you or not; clownspray1 == true; make sure to set earlier, check space adventure thing for example I believe TKTK
+// if else depending on if you let him spray you or not; clownspray1 == true; make sure to set earlier, check space adventure thing for example I believe 
 
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
 
@@ -483,6 +482,7 @@ title: TravelingClownThirdMeeting
                 You get sprayed by water and news spreads. (Price of {$clown_tulip3} tulips decrease 3%)
                 // Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {$clown_tulip3} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 3%.
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
+                <<modify_price $clown_tulip3 0.97 "6 months">>
             -> Don't smell flower
                 Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose. 
     <<else>>
@@ -516,6 +516,7 @@ Market price of {$dumb_boy_flower_color} decreases by 10%
 //<<set $dumb_boy_flower_color_price -= (get_market_price("{$dumb_boy_flower_color} tulip") * 0.10)>>
 // {random_tulip_color_market_price()} -= 10%
     -> Wait a strange fellow 
+    <<modify_price $dumb_boy_flower_color 0.90 "8 months">>
     //-> Wait, what?
         //Oh yeah Amsterdam conducts an annual census to determine who the dumbest child in the city. 
         //-> Oh, ok
@@ -555,6 +556,7 @@ title: MostTulipyTulip
 Your {$most_tulipy} tulip wins the coveted "Most Tulipy Tulip" award. It increases in market price by 10%
     -> Yes!
     -> Wait, what?
+    <<modify_price $most_tulipy 1.10 "2 years">>
     //    Don't look a gift horse in the mouth, tulip person 
     // <<set $mambo_market_price -= get_market_price({$most_tulipy}) * 0.10>>
     // {random_tulip_market_price()} += 10%
@@ -570,20 +572,23 @@ title: ComissionArtistTulipBook
 <<set $random_tulip1 = random_tulip()>>
 <<declare $random_tulip2_type = "test">>
 <<declare $random_tulip2_type_price = 1>>
-<<set $random_tulip2 = random_tulip()>>
+<<set $random_tulip2_type = random_tulip()>>
 // Need: $random_tulip, $random_tulip2, $random_tulip3,
 You comission a local artist to render one of your tulips.
     -> {$random_tulip} tulip (Price of {$random_tulip} has increased by 15%)
         // $random_tulip += 15%
+        <<modify_price $random_tulip 1.15 "10 months">>
         //<<set $random_tulip_price += (get_market_price($random_tulip) * 0.15)>>
     -> {$random_tulip1} tulip (Price of {$random_tulip1} has increased by 15%)
         //The market price of $random_tulip2 has increased by 15%
         //<<set $random_tulip_price1 += (get_market_price($random_tulip1) * 0.15)>>
         // $random_tulip2 += 15%
+        <<modify_price $random_tulip1 1.15 "10 months">>
     -> {$random_tulip2_type} tulip (Price of {$random_tulip2_type} has increased by 15%)
         //The market price of $random_tulip3 has increased by 15%
         //<<set $random_tulip_price2 += (get_market_price($random_tulip2) * 0.15)>>
         // $random_tulip3 += 15%
+        <<modify_price $random_tulip2_type 1.15 "10 months">>
 ===
 
 // other threats/incidents: voles, aphids, virus causes rare tulip type to bloom
@@ -614,6 +619,7 @@ title: Doping
 <<set $doping_tulip = random_tulip()>>
 The local authorities discover that you have been using steroids. Your famous {$doping_tulip} tulips decreases in value due to your reputational damage.
     -> Whoopsie
+    <<modify_price $doping_tulip 0.90 "6 months">>
     //<<set $doping_tulip_price -= (get_market_price($doping_tulip) * 0.10)>>
     // {random_tulip_market_price()} -= 10%
 ===
@@ -635,7 +641,6 @@ date: May 23 1618
 --- 
 // #clown:
 // #frequency - normal non-historic and non-clown
-// TKTK - visited tag?
 // Date: May 23 1618
 // Needs: $all_tulips_market_price
 <<declare $all_tulips_price = 1000>>
@@ -644,7 +649,7 @@ Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced b
     -> That does not sound good. (Price for all tulips has decreased by 2%)
     // all_tulips_market_price -= 2%
     // <<set_all_tulips_market_price -2>>
-    // TKTK modify 
+    <<modify_price "" 0.98 "2 years">>
     <<set $all_tulips_price -= ($all_tulips_price * 0.02)>>
 ===
 
@@ -656,8 +661,8 @@ date: February 01 1637
 <<set $all_tulips_prepop_price = all_tulips_market_price()>>
 During a recent tulip bulb auction at a pub, no one bid on one of the tulips. 
     -> I'm sure prices will bounce back. (Market price tulips decrease 3%) 
+    <<modify_price "" 0.97 "2 years">>
     // <<set $all_tulips_prepop_price -= ($all_tulips_prepop_price * 0.03)>>
-    // TKTK modify 
 // {all_tulips_market_price()} -= 3%
 ===
 
@@ -669,7 +674,7 @@ date: March 03 1637
 <<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
 Artists have drawn paintings depicting tulip farmers and traders as monkeys. 
     -> I'm sure prices will bounce back (Market price tulips decrease 5%)
-    // TKTK modify, remember empty string
+    <<modify_price "" 0.97 "2 years">>
 // {all_tulips_market_price()} -= 3%
 // <<set $all_tulips_price_monkeys_price -= ($all_tulips_price_monkeys_price * 0.03)>>
 <<if $supersecretclownending == true>>
@@ -1108,7 +1113,7 @@ title: ProgrammaticRumor
 // events - depends on how many unique (20-30 across both categories), may need more if not all seen within a given run 
 
 
-// TKTK Marquees to write
+// Marquees to write
 // Johan Windmill 
 
 // Misc phrases to go somewhere
