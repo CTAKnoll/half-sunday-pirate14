@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01033ff89fde649498ede1224db1cc6c, type: 3}
+  m_Name: tulip_plant
+  m_EditorClassIdentifier: 
+  _clip: {fileID: 8300000, guid: 337814583f72fcc4dbf977a54a86d1c2, type: 3}
+  loop: 0
+  volume: 0.68
+  mixerGroup: {fileID: 0}
+  channel: 0
+  randomizePitch: 1
+  pitchVariance: 0.010862129
+  AudioClips:
+  - {fileID: 8300000, guid: bf2af58a7ddf38d4fa8535c5c8f2e525, type: 3}
+  - {fileID: 8300000, guid: 3d37b130b31ec5343a8f762a673e7def, type: 3}
+  - {fileID: 8300000, guid: a6e1e9b2827223c418f0cea701c650da, type: 3}
+  _mode: 0
