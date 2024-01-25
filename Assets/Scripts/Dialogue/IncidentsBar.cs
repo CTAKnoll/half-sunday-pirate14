@@ -10,10 +10,16 @@ public class IncidentsBar : MonoBehaviour
     private IncidentWidgetView _incidentWidgetPrefab;
     private List<IncidentWidgetController> _controllers = new();
     private IncidentsManager incManager;
+    private AudioService _audio;
+
+    public AudioEvent sfx_openIncident;
+    public AudioEvent sfx_closeIncident;
+
 
     private void Start()
     {
         ServiceLocator.TryGetService(out incManager);
+        ServiceLocator.TryGetService(out _audio);
 
         incManager.spawnedIncident += OnSpawnIncident;
     }
@@ -34,12 +40,14 @@ public class IncidentsBar : MonoBehaviour
         {
             controller.Hide();
         }
+        _audio.PlayOneShot(sfx_openIncident);
         gameObject.SetActive(false);
     }
 
     private void OnIncidentComplete(IncidentWidgetController inc)
     {
         gameObject.SetActive(true);
+        _audio.PlayOneShot(sfx_closeIncident);
         foreach (var controller in _controllers)
         {
             controller.Show();

@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _incidentWidgetPrefab: {fileID: 1982854145816328121, guid: 20cd7186c0b07a141b17bb3c1bd17592, type: 3}
+  sfx_openIncident: {fileID: 11400000, guid: 0cf883bac1bd91d4d8f54d81f8ec14af, type: 2}
+  sfx_closeIncident: {fileID: 11400000, guid: 97aea359e3eb8524c920efafc3a18cb0, type: 2}
 --- !u!222 &8410339419982177613
 CanvasRenderer:
   m_ObjectHideFlags: 0

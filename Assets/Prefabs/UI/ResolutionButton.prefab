@@ -223,3 +223,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a876aacb7e74634ebb1989834ebce3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
+  sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
+  sfx_onRelease: {fileID: 0}
+  Priority: 2
+  Resolution:
+    x: 0
+    y: 0

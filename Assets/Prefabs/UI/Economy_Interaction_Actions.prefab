@@ -133,9 +133,6 @@ MonoBehaviour:
   SellTulipButton: {fileID: 1348546499055989364}
   SendToGardenButton: {fileID: 6082141338605414527}
   SendToCompetitionButton: {fileID: 7521178919905877596}
-  sfx_sellTulip: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
-  sfx_toGarden: {fileID: 11400000, guid: d7426e310bebfc041bff78a32dac3774, type: 2}
-  sfx_toCompetition: {fileID: 0}
   GardenFeverModifier: 0.02
 --- !u!1001 &68191895267174181
 PrefabInstance:
@@ -273,12 +270,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   TooltipText: 
-  sfx_onClick: {fileID: 0}
-  sfx_onRelease: {fileID: 0}
+  sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
+  sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
   NumYears: 10
-  sfx_futurePurchased: {fileID: 0}
-  sfx_futurePayout: {fileID: 0}
+  sfx_futurePurchased: {fileID: 11400000, guid: 62781b7aa80de4046acd08867a3b8444, type: 2}
+  sfx_futurePayout: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
 --- !u!224 &8243662010548454420 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
@@ -392,6 +389,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: sfx_onClick
+      value: 
+      objectReference: {fileID: 11400000, guid: e0f6ee2ce2fb03c45b54c169f763d65f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -521,6 +522,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: sfx_onClick
+      value: 
+      objectReference: {fileID: 11400000, guid: d7426e310bebfc041bff78a32dac3774, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -678,12 +683,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   TooltipText: 
-  sfx_onClick: {fileID: 0}
-  sfx_onRelease: {fileID: 0}
+  sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
+  sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
   NumYears: 2
-  sfx_futurePurchased: {fileID: 0}
-  sfx_futurePayout: {fileID: 0}
+  sfx_futurePurchased: {fileID: 11400000, guid: 62781b7aa80de4046acd08867a3b8444, type: 2}
+  sfx_futurePayout: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
 --- !u!224 &5572179422333410872 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
@@ -829,6 +834,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: sfx_onClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: sfx_onRelease
+      value: 
+      objectReference: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -943,6 +956,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: sfx_onClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

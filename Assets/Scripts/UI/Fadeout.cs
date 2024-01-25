@@ -6,6 +6,7 @@ using Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 public class Fadeout : MonoBehaviour, IService
 {
@@ -18,6 +19,10 @@ public class Fadeout : MonoBehaviour, IService
     public int DaysUntilAlphaStart;
     public float AlphaIncreasePerDay;
 
+    [Header("SFX")]
+    public AudioEvent sfx_dutchAware;
+
+    private AudioService Audio;
     private Timeline Timeline;
     private FeverMode FeverMode;
     
@@ -30,8 +35,9 @@ public class Fadeout : MonoBehaviour, IService
         ChangeAlpha(DutchText, 0);
 
         ServiceLocator.TryGetService(out FeverMode);
-        FeverMode.FeverLevel.OnChanged += (_, _) => StartCoroutine(DutchFlash());
+        FeverMode.FeverLevel.OnChanged += OnFeverLevelChanged;
         ServiceLocator.LazyLoad<Timeline>().MarketCrashed += StartFadeOut;
+        ServiceLocator.TryGetService(out Audio);
     }
     
     private static void ChangeAlpha(Image g, float newAlpha)
@@ -46,6 +52,12 @@ public class Fadeout : MonoBehaviour, IService
         var color = g.color;
         color.a = newAlpha;
         g.color = color;
+    }
+
+    private void OnFeverLevelChanged(SmartNumber prevLevel, SmartNumber currLevel)
+    {
+        Audio.PlayOneShot(sfx_dutchAware);
+        StartCoroutine(DutchFlash());
     }
 
     private IEnumerator DutchFlash()

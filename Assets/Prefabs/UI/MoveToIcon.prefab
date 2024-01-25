@@ -89,6 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7d027479f04e438f762fb26d53e75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
+  sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
+  sfx_onRelease: {fileID: 0}
   Priority: 2
 --- !u!114 &3786945268730858565
 MonoBehaviour:

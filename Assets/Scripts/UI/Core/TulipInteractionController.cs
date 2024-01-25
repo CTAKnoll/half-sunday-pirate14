@@ -18,6 +18,7 @@ namespace UI.Plants
 
         public bool FireInteraction(TulipData data)
         {
+            Audio.PlayOneShot(View.sfx_onClick);
             return InteractionFunction(data);
         }
     }

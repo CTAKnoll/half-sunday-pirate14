@@ -305,6 +305,7 @@ MonoBehaviour:
   FlashNumSec: 2.5
   DaysUntilAlphaStart: 45
   AlphaIncreasePerDay: 0.007
+  sfx_dutchAware: {fileID: 11400000, guid: 05e08845b8534c6488a2eaac2a00c3c6, type: 2}
 --- !u!1 &6644624765413643087
 GameObject:
   m_ObjectHideFlags: 0
