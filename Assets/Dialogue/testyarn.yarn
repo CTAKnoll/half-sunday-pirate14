@@ -60,6 +60,7 @@ A local musician is hosting a concert to debut their new song "Mambo No. 1" and 
     -> Provide tulips
         Musician: Thanks! (Market price for {$random_tulip_mambo} increases by 25%)
         // fairly certain this will work math / percentage-wise but well want to double check, stackoverflow suggets: https://stackoverflow.com/questions/24655474/how-to-compute-a-percentage-increase-decrease-multiplier-in-python-without-if-st
+        <<modify_price $random_tulip_mambo 1.25 "5 months">>
         //<<set $mambo_market_price += get_market_price({$random_tulip_mambo}) * .25>> -- uncomment once get_market_price implemented
     -> That's a dumb name for a song. // You'll never get any tulips out of me.
         Musician: Darn, at least I've still got Monica by my side.
