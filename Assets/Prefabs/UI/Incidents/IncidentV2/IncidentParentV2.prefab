@@ -52,13 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Dialogue>k__BackingField: {fileID: 2496214383219710327}
-  _incidents:
-  - nodeName: MamboConcert
-    monthsAfterStart: 1
-  - nodeName: NewsTickerNSync
-    monthsAfterStart: 3
-  - nodeName: TulipBandit
-    monthsAfterStart: 5
 --- !u!114 &2496214383219710327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +188,10 @@ PrefabInstance:
     - target: {fileID: 3982148452690231155, guid: da5b8384b7508a34491ef6a5ac47c65b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4942511350663113030, guid: da5b8384b7508a34491ef6a5ac47c65b, type: 3}
+      propertyPath: continueButton
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4942511350663113030, guid: da5b8384b7508a34491ef6a5ac47c65b, type: 3}
       propertyPath: optionsListView
