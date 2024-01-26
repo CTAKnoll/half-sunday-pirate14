@@ -90,7 +90,7 @@ You are attending a local ball when a dance circle forms on the dance floor. You
         The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising 
         // <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>> -- uncomment once get_market_price implemented
         <<modify_price $random_tulip_dance_ball 1.20 "91">>
-    -> Trash talk another man's tulips (Price of {$random_tulip_dance_ball_rival} decreases by 20%)
+    -> Trash talk a guy's tulips ({$random_tulip_dance_ball_rival} price decrease by 20%)
     // the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
         A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. 
         // <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>> -- uncomment once get_market_price implemented
@@ -236,14 +236,14 @@ title: NewTulipDrops1
 // Need: $new_random_tulip, $new_random_tulip_market_price
 <<declare $new_tulip_science = "test">>
 <<declare $new_tulip_science_price = 10>>
-<<set $new_tulip_science = "$new_random_tulip()">>
+<<set $new_tulip_science = "new_random_tulip()">>
 // <<set $new_tulip_science = new_random_tulip()>> -- uncomment once new_random_tulip implemented
 // theoretically it won't have a price yet so we may need to hardcode a default price
 // <<declare $new_tulip_price = 10>>
 // <<set $new_tulip_science_price = get_market_price({$new_tulip_science_price})>> -- uncomment once get_market_price implemented
-The Netherlands top tulipologists have created a new type of tulip/: {$new_tulip_science}
+The Netherlands top tulipologists have created a new type of tulip - {$new_tulip_science}
     <<modify_price $new_tulip_science 1.30 "365">>
-    -> I gotta get in on this ({$new_tulip_science} market price increases by 30%)
+    -> Neat ({$new_tulip_science} price increases by 30%)
     //<<set $new_tulip_science_price += (get_market_price({$new_tulip_science}) * .30)>> -- uncomment once get_market_price implemented
 // ideally this should be weighted to show up on the market soon after this incident
 // {new_random_tulip_market_price()} += 30%
@@ -257,7 +257,7 @@ title: TulipTony
 <<set $random_color = random_tulip_color()>>
 //<<set $random_tulip_color_price = get_market_price("{$random_tulip_color} tulip")>> -- uncomment once get_market_price implemented
 Tulip Tony who lives a stone throwy from the town crony says all {random_tulip_color()} tulips are phony. 
-    -> I hate Tulip Tony (Price of {random_tulip_color()} tulips decreases by 30%)
+    -> I hate Tulip Tony (Price of {random_tulip_color()} drops 30%)
     <<modify_price $random_color 0.70 "365">>
     //<<set $random_tulip_color_price -= (get_market_price("{$random_tulip_color} tulip") * 0.30)>> -- uncomment once get_market_price implemented
     // {random_tulip_color_market_price()} -= 30%
@@ -313,12 +313,12 @@ A weary Spanish sailor approaches you.
 // programming wise we may not want to hard code these and just have the two asking prices tulip_color_rate * 1.5 and by 3 multiplied by the amount of tulips they ask for 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
     //<<if {random_tulip_kind()} >=0>>
-        -> Provide {random_tulip_kind()} ({$random_kind} tulips increase by 15%)
+        -> Provide {$random_kind_ship} ({$random_kind_ship} tulips increase by 15%)
         <<modify_price $random_kind_ship 1.15 "304">>
 
         // {random_tulip_kind_market_price()} += 15%
         //<<set $random_kind_ship_price = get_market_price("{$random_kind_ship} tulip") * 0.15>>
-        -> Cause an international incident (Dutch Awareness Meter increases)
+        -> Cause an international incident (Dutch Awareness rises)
         // TKTK <<set_fever_meter 5>> -- uncomment once set_fever_meter implemented
     //<<else>>
     //<<jump NotEnoughTulips>>
@@ -393,12 +393,12 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
         //<<set $clown_price1 -= (get_market_price($clown_tulip1) * 0.05)>>
         // I'm not sure if <<tulips -= 10>> works or if we just need to link that here somehow; player loses 10 tulips if they choose this
         // stretch goal would be a friendship mechanic with the clown and/or a secret clown ending where if you let the clown spray you three (or five - time pending) times in a row in one game, he buys all your tulips right before the crash and you get the super secret ending
-        Lester/: "Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around!"
+        Lester - "Hey you're a real sport you know that! Hey, maybe next time something good will happen. Well, see ya around!"
         // set clownspray1 to true
         // in the meantime set this to reputational damage on the type of tulip you were holding when you got sprayed, news travels fast of this extremely embarrassing encounter
         <<set $clownspray1 to true>>
     -> Don't smell his flower
-        Lester/: "Awww, you're no fun."
+        Lester - "Awww, you're no fun."
         // $clownsadness = true // jk might not need to tbh 
 ===
 
@@ -432,7 +432,7 @@ title: TravelingClownSecondMeeting
 //<<set $clown_price2 = get_market_price($clown_tulip2)>>
 // I would like wacky colors and text effects if possible for his dialogue
     <<if $clownspray1 == true>>
-        Lester/: "Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?"
+        Lester - "Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?"
             -> Smell flower
                 You get sprayed by water and news spreads. (Price of {$clown_tulip2} tulips decrease 3%)
                 <<set $clownspray2 to true>>
@@ -441,13 +441,13 @@ title: TravelingClownSecondMeeting
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
                 <<modify_price $clown_tulip2 0.97 "182">>
             -> Don't smell flower
-                Lester/: "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
+                Lester - "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
     <<else>>
         Alright surely this time you will smell my rose, right?
             -> Yes
                 You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
             -> No
-                Lester/: "Well you stick to your convinctions, I'll give you that."
+                Lester - "Well you stick to your convinctions, I'll give you that."
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
     <<endif>>
 
@@ -482,13 +482,13 @@ title: TravelingClownThirdMeeting
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
                 <<modify_price $clown_tulip3 0.97 "182">>
             -> Don't smell flower
-                Lester/: "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
+                Lester - "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
     <<else>>
         Alright surely this time you will smell my rose, right?
             -> Yes
                 You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
             -> No
-                Lester/: "Well you stick to your convinctions, I'll give you that."
+                Lester - "Well you stick to your convinctions, I'll give you that."
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
     <<endif>>
     
@@ -496,7 +496,7 @@ title: TravelingClownThirdMeeting
 
 title: TravelingClownConclusionOrIsIt
 ---
-Lester/: "Hey sorry, I'm busy right now, maybe I'll see you later if you are lucky."
+Lester - "Hey sorry, I'm busy right now, maybe I'll see you later if you are lucky."
 ===
 
 title: LocalBoy
@@ -639,7 +639,7 @@ date: May 23 1618
 // <<declare $all_tulips_price = 1000>>
 // <<set $all_tulips_price = all_tulips_market_price()>>
 Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate. 
-    -> That does not sound good. (Price for all tulips has decreased by 2%)
+    -> That does not sound good (All tulips decrease by 2%)
     // all_tulips_market_price -= 2%
     // <<set_all_tulips_market_price -2>>
     <<modify_price "" 0.98 "182">>
@@ -682,7 +682,7 @@ title: SuperSecretClownEnding
 // Needs: bank_balance() and total_owned_tulips_market_price() 
 While the quiet murmurs of the market crashing are slowly growing in volume, you sit in a fine leatherchair contemplating your options. Suddenly you hear a knock at the door. 
     -> Answer the door
-        Lester/: "HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value."
+        Lester - "HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value."
             -> Alright, thank you
                 // bank_balance() += total_owned_tulips_market_price() 
                 // <<clown_buys_all>>
