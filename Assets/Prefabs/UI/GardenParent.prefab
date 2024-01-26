@@ -439,6 +439,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 723964614350410632}
     m_Modifications:
     - target: {fileID: 1108760172617447780, guid: e55ce63f4beb2a145ae08813a81b9102, type: 3}
+      propertyPath: MaxTimeWithWeeds
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1108760172617447780, guid: e55ce63f4beb2a145ae08813a81b9102, type: 3}
+      propertyPath: MinTimeWithWeeds
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1108760172617447780, guid: e55ce63f4beb2a145ae08813a81b9102, type: 3}
       propertyPath: TulipsTEST.Array.size
       value: 1
       objectReference: {fileID: 0}

@@ -8,7 +8,7 @@ public class Timeline : IService
     public const int START_YEAR = 1600;
     public const int START_MONTH = 1;
     public const int START_DAY = 1;
-    public const float DAY_IN_REALTIME = 0.1f;
+    public const float DAY_IN_REALTIME = 0.075f;
 
     public static readonly DateTime START_DATE = new (START_YEAR, START_MONTH, START_DAY);
     

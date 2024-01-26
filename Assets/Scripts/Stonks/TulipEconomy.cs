@@ -80,7 +80,7 @@ namespace Stonks
             PriceHistory = new();
             Varietal = varietal;
             
-            PriceHistory.Add(Timeline.Now, new PriceSnapshot(Economy.GetAveragePrice() * 1.3f)); // new Tulips are always more expensive
+            PriceHistory.Add(Timeline.Now, new PriceSnapshot(Economy.GetAveragePrice()));
             FeverMode.FeverLevel.OnChanged += (_, _) => FeverModeOn();
             Timeline.AddTimelineEvent(this, ModifyPrice, Timeline.FromNow(0, 0, 3));
         }
