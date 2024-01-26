@@ -4,10 +4,8 @@ using System.Linq;
 using Core;
 using Plants;
 using Services;
-using UnityEngine;
 using Utils;
 using Yarn.Unity;
-using Random = System.Random;
 
 namespace Stonks
 {
@@ -19,8 +17,8 @@ namespace Stonks
         public static float FeverVolatileMin = 0.97f;
         public static float FeverVolatileMax = 1.03f;
 
-        public static float FeverMinLevelUp = 0.99f;
-        public static float FeverMaxLevelUp = 1.01f;
+        public static float FeverMinLevelUp = 0.994f;
+        public static float FeverMaxLevelUp = 1.007f;
         
         public struct IncidentModifier
         {

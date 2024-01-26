@@ -9,11 +9,13 @@ public class BuyDukeTitle : UIInteractable
     private UIDriver UiDriver;
     private Economy Economy;
     private TooltipServer TooltipServer;
+    private AlertText AlertText;
 
     // Start is called before the first frame update
     void Start()
     {
         ServiceLocator.TryGetService(out UiDriver);
+        ServiceLocator.TryGetService(out AlertText);
         Economy = ServiceLocator.LazyLoad<Economy>();
         UiDriver.RegisterForTap(this, TryPurchaseDukedom);
 
@@ -22,7 +24,8 @@ public class BuyDukeTitle : UIInteractable
 
     private void TryPurchaseDukedom()
     {
-        Economy.BuyDukeTitle();
+        if(!Economy.BuyDukeTitle())
+            AlertText.Alert("You come to bargain for a Dukedom without funds?!", 5f);
     }
     private void CreateTooltip()
     {
