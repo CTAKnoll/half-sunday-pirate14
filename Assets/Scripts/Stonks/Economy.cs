@@ -36,7 +36,6 @@ namespace Stonks
         {
             Funds = StartingFunds;
             TulipEconomyData = new();
-            ServiceLocator.TryGetService(out FeverMode);
             
             Timeline = ServiceLocator.LazyLoad<Timeline>();
             Timeline.MarketCrashed += CrashTheMarket;
@@ -211,6 +210,8 @@ namespace Stonks
 
         private void CrashTheMarket()
         {
+            ServiceLocator.TryGetService(out FeverMode);
+
             TulipEconomy.TickMinimum = 0.90f * (float) Math.Pow(.995f, FeverMode.FeverLevel.Value);
             TulipEconomy.TickMaximum = 0.98f * (float) Math.Pow(.995f, FeverMode.FeverLevel.Value);
             foreach (var varietal in TulipEconomyData)
