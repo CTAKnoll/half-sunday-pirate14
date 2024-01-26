@@ -236,7 +236,7 @@ title: NewTulipDrops1
 // Need: $new_random_tulip, $new_random_tulip_market_price
 <<declare $new_tulip_science = "test">>
 <<declare $new_tulip_science_price = 10>>
-<<set $new_tulip_science = "new_random_tulip()">>
+<<set $new_tulip_science = new_random_tulip()>>
 // <<set $new_tulip_science = new_random_tulip()>> -- uncomment once new_random_tulip implemented
 // theoretically it won't have a price yet so we may need to hardcode a default price
 // <<declare $new_tulip_price = 10>>
@@ -666,7 +666,7 @@ date: March 03 1637
 // /<<declare $all_tulips_price_monkeys = 1000>>
 // <<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
 Artists have drawn paintings depicting tulip farmers and traders as monkeys. 
-    -> I'm sure prices will bounce back (Market price tulips decrease 5%)
+    -> Prices will bounce back (All tulips drops 5%)
     <<modify_price "" 0.97 "730">>
 // {all_tulips_market_price()} -= 3%
 // <<set $all_tulips_price_monkeys_price -= ($all_tulips_price_monkeys_price * 0.03)>>
