@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4193499935064538429}
   - component: {fileID: 3962620364783655136}
+  - component: {fileID: 3904668471914762694}
   m_Layer: 0
   m_Name: AudioService
   m_TagString: Untagged
@@ -50,6 +51,22 @@ MonoBehaviour:
   _sFXSource: {fileID: 6655394893626237337}
   _musicSource: {fileID: 5930422554188549039}
   _ambianceSource: {fileID: 2408996108526575486}
+--- !u!114 &3904668471914762694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146345236288106099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f090458c79bbd3f4b8528554ddb2c100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMusicIntro: {fileID: 0}
+  mainMusicLoop: {fileID: 11400000, guid: a692b2e4ea464e244be361dcfcc34758, type: 2}
+  endTimeMusic: {fileID: 11400000, guid: e40c45a8356e9b446bacf6a3aa31843e, type: 2}
+  EndTimeOffset: -18
 --- !u!1 &4493820887114665066
 GameObject:
   m_ObjectHideFlags: 0

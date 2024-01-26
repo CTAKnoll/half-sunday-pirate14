@@ -28,7 +28,7 @@ public class Timeline : IService
         TimelineEvents = new();
         Ticker = ServiceLocator.LazyLoad<Ticker>();
 
-        CRASH_DATE = FromNow(37, 2);
+        CRASH_DATE = FromNow(5, 2);
 
         AddTimelineEvent(this, CrashTheMarket, CRASH_DATE);
     }
@@ -42,7 +42,7 @@ public class Timeline : IService
     public TimeSpan GetTimespanFromSeconds(float realtimeSeconds)
     {
         var daysPerSecond = 1 / DAY_IN_REALTIME;
-        return TimeSpan.FromSeconds(daysPerSecond * realtimeSeconds);
+        return TimeSpan.FromDays(daysPerSecond * realtimeSeconds);
     }
 
     public void StartTheWorld()

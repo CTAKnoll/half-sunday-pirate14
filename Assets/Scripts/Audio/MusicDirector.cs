@@ -26,6 +26,8 @@ public class MusicDirector : MonoBehaviour
         var musicStartDate = _timeline.GetDateBeforeInRealtime(
             endTimeMusic.GetClip().length + EndTimeOffset, 
             Timeline.CRASH_DATE);
+        Debug.Log($"Timespan {_timeline.GetTimespanFromSeconds(endTimeMusic.GetClip().length + EndTimeOffset)}");
+        Debug.Log($"Enqueuing endtime music [{endTimeMusic.GetClip().name}] for {musicStartDate}");
 
         _timeline.AddTimelineEvent(this, () => _audio.Play(endTimeMusic), musicStartDate);
     }
