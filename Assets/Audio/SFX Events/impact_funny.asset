@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cfa732fe789b047bd323430ac7552b, type: 3}
   m_Name: impact_funny
   m_EditorClassIdentifier: 
-  _clip: {fileID: 8300000, guid: dc0039ceef22bc6469803e12e4f37be7, type: 3}
+  _clip: {fileID: 8300000, guid: d0998231307d4cd4c8958447d7222999, type: 3}
   loop: 0
-  volume: 0.789
+  volume: 0.453
   mixerGroup: {fileID: -8495460110376878485, guid: ff509222aa5776c4faf796a0c768bcf7, type: 2}
   channel: 0
   randomizePitch: 0

@@ -28,7 +28,7 @@ public class Timeline : IService
         TimelineEvents = new();
         Ticker = ServiceLocator.LazyLoad<Ticker>();
 
-        CRASH_DATE = FromNow(5, 2);
+        CRASH_DATE = FromNow(37, 2);
 
         AddTimelineEvent(this, CrashTheMarket, CRASH_DATE);
     }

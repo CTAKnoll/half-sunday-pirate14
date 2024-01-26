@@ -34,11 +34,35 @@ namespace Services
             
         }
 
+        private void Play (AudioEvent sound, AudioSource source)
+        {
+            if (sound == null)
+                return;
+
+            source.clip = sound.GetClip();
+            source.volume = sound.volume;
+            source.loop = sound.loop;
+            if (sound.randomizePitch)
+            {
+                source.pitch += UnityEngine.Random.Range(-1 * sound.pitchVariance, sound.pitchVariance);
+            }
+            source.Play();
+        }
+
         public void Play(AudioEvent sound)
         {
             if (sound == null)
                 return;
             
+            if(sound.channel == Channel.Music)
+            {
+                if (_audioSources[(int)Channel.Music].isPlaying)
+                {
+                    Play(sound, _musicBackup);
+                    return;
+                }
+            }
+
             var source = _audioSources[(int)sound.channel];
 
             source.clip = sound.GetClip();

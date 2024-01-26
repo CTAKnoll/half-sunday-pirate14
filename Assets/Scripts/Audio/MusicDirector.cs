@@ -38,15 +38,15 @@ public class MusicDirector : MonoBehaviour
 
         _timeline.AddTimelineEvent(this, TransitionToEnd, musicStartDate);
     }
+    void StartEndTimeSong()
+    {
+        _audio.Play(endTimeMusic);
+    }
 
     private void TransitionToEnd()
     {
         _endTimesSnapshot.TransitionTo(2.5f);
-        void StartSong()
-        {
-            _audio.Play(endTimeMusic);
-        }
-        Invoke("StartSong", 1);
+        Invoke(nameof(StartEndTimeSong), 1);
     }
 
 }
