@@ -26,14 +26,17 @@ public class Fadeout : MonoBehaviour, IService
     private Timeline Timeline;
     private FeverMode FeverMode;
     
-    void Start()
+    void Awake()
     {
         ServiceLocator.RegisterAsService(this);
         Timeline = ServiceLocator.LazyLoad<Timeline>();
         ChangeAlpha(Overlay, 0);
         ChangeAlpha(DutchFlag, 0);
         ChangeAlpha(DutchText, 0);
+    }
 
+    void Start()
+    {
         ServiceLocator.TryGetService(out FeverMode);
         FeverMode.FeverLevel.OnChanged += OnFeverLevelChanged;
         ServiceLocator.LazyLoad<Timeline>().MarketCrashed += StartFadeOut;

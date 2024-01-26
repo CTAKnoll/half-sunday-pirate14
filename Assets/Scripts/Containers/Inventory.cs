@@ -99,6 +99,8 @@ namespace UI.Containers
         
         public TulipController GetItem(int index) => Owners[index].Tulip;
 
+        public InventoryStack GetElement(int index) => Elements[index];
+
         public bool HasItem(TulipVarietal variety)
         {
             return Elements.Any(elem => elem.Varietal?.Equals(variety) ?? false);

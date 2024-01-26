@@ -42,7 +42,7 @@ namespace UI.Plants
            
         }
 
-        private void CreateBespokeTooltip()
+        private void CreateBespokeTooltip() 
         {
             View.TooltipText = Data.ToString();
 

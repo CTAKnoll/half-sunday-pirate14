@@ -34,6 +34,11 @@ public class IncidentsManager : MonoBehaviour, IService
             List<string> tags = Dialogue.GetTagsForNode(nodeName).ToList();
             if (tags.Count > 0)
             {
+                if (tags[0] == "competition") // explicitly do not want competitions in our pool
+                {
+                    nodes.Remove(nodeName);
+                    continue;
+                }
                 _timeline.AddTimelineEvent(this, () => SpawnIncident(nodeName), DateTime.Parse(tags.First()));
                 nodes.Remove(nodeName);
             }

@@ -212,6 +212,11 @@ namespace Plants
             {
                 return new TulipData(this).Serve(parent);
             }
+            
+            public override string ToString()
+            {
+                return $"{ColorToStringMapping[Color]} {Enum.GetName(typeof(TulipKind), Kind)}";
+            }
         }
         
         public TulipColor Color { get; }

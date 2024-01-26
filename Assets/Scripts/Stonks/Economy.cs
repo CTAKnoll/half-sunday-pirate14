@@ -18,6 +18,8 @@ namespace Stonks
         public static float DukeTitleCost = 10000;
         public float Funds { get; private set; }
 
+        public bool IsDuke = false;
+
         public Dictionary<TulipVarietal, TulipEconomy> TulipEconomyData;
 
         public bool FilterToOwned = false;
@@ -194,6 +196,7 @@ namespace Stonks
                 Funds -= DukeTitleCost;
                 FundsChanged?.Invoke(Funds);
                 Timeline.CrashTheMarket();
+                IsDuke = true;
                 return true;
             }
             return false;
