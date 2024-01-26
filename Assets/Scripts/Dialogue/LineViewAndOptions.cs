@@ -328,6 +328,7 @@ namespace UI.Dialogue
         {
             canvasGroup.alpha = 1;
             canvasGroup.blocksRaycasts = true;
+            continueButton.SetActive(false);
         }
 
         /// <inheritdoc/>
