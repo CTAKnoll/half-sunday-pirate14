@@ -402,7 +402,7 @@ namespace Plants
             AdvanceStage();
             
             // schedule the next few stages
-            Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(30)); //schedule growing
+            Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(60)); //schedule growing
         }
 
         public bool Harvest()
@@ -447,7 +447,7 @@ namespace Plants
             if (Stage == TulipStage.Dead)
             {
                 Timeline.RemoveAllEvents(this);
-                Timeline.AddTimelineEvent(this, Cleanup, Timeline.FromNow(0, 1)); // remove self
+                Timeline.AddTimelineEvent(this, Cleanup, Timeline.FromNow(0, 0, 90)); // remove self when dead
             }
             
 
@@ -465,10 +465,10 @@ namespace Plants
                 
                 Timeline.RemoveAllEvents(this);
                 Stage = currStage;
-                Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(30));
+                Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(60)); // Go back to not choking rate. This should be the same value as schedule in Plant
             };
             Stage =  TulipStage.Choking;
-            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 1));
+            Timeline.AddTimelineEvent(this, AdvanceStage, Timeline.FromNow(0, 0, 90)); //How long it takes to choke the plant out and transition to being dead.
             StageChanged?.Invoke();
         }
 

@@ -673,6 +673,14 @@ PrefabInstance:
       propertyPath: PickedInventoryTarget
       value: 
       objectReference: {fileID: 1748431948}
+    - target: {fileID: 6155337694420269634, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: Active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155337694420269634, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
+      propertyPath: TooltipText
+      value: Tulip bulbs storage! Click on a tulip and drag to a plot to plant.
+      objectReference: {fileID: 0}
     - target: {fileID: 6230302839287094082, guid: b17166b5423e99a4b8f2069e8712a104, type: 3}
       propertyPath: m_Camera
       value: 

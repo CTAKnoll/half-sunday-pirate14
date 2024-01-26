@@ -12,14 +12,14 @@ namespace Stonks
 {
     public class TulipEconomy
     {
-        public static float TickMinimum = 0.99f;
-        public static float TickMaximum = 1.01f;
+        public static float TickMinimum = 0.985f;
+        public static float TickMaximum = 1.015f;
 
-        public static float FeverVolatileMin = 0.96f;
-        public static float FeverVolatileMax = 1.05f;
+        public static float FeverVolatileMin = 0.97f;
+        public static float FeverVolatileMax = 1.03f;
 
-        public static float FeverMinLevelUp = .99f;
-        public static float FeverMaxLevelUp = 1.01f;
+        public static float FeverMinLevelUp = .985f;
+        public static float FeverMaxLevelUp = 1.015f;
         
         public struct IncidentModifier
         {

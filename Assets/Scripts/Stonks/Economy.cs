@@ -14,7 +14,7 @@ namespace Stonks
     public class Economy : IService
     {
         private static readonly float DEFAULT_TULIP_PRICE = 10;
-        private float StartingFunds = 10000;
+        private float StartingFunds = 100;
         public static float DukeTitleCost = 10000;
         public float Funds { get; private set; }
 

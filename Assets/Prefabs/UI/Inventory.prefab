@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  TooltipText: 
+  TooltipText: Tulip bulbs storage! Click on a tulip and drag to a plot to plant.
   sfx_onClick: {fileID: 0}
   sfx_onRelease: {fileID: 0}
   Priority: 2

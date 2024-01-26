@@ -19,8 +19,8 @@ namespace UI.Core
         {
             while (!View.IsDestroyed)
             {
-                Model.ScreenPos = Pointer.current.position.value + new Vector2(120 * ResolutionButton.RESOLUTION_MULT, 
-                     120 * ResolutionButton.RESOLUTION_MULT);
+                Model.ScreenPos = Pointer.current.position.value + new Vector2(60 * ResolutionButton.RESOLUTION_MULT, 
+                     60 * ResolutionButton.RESOLUTION_MULT);
                 UpdateViewAtEndOfFrame();
                 yield return null;
             }

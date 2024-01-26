@@ -14,8 +14,6 @@ public class BuyFuture : UIInteractable
     public AudioEvent sfx_futurePurchased;
     public AudioEvent sfx_futurePayout;
 
-    private TooltipServer TooltipServer;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +23,6 @@ public class BuyFuture : UIInteractable
 
         
         UiDriver.RegisterForTap(this, PurchaseFuture);
-        UiDriver.RegisterForFocus(this, CreateTooltip, DestroyTooltip);
     }
 
     private void PurchaseFuture()
@@ -33,19 +30,6 @@ public class BuyFuture : UIInteractable
         DateTime DecemberOfFuture = new DateTime(Timeline.Now.Year + NumYears, 12, 1);
         Audio.PlayOneShot(sfx_futurePurchased);
         Economy.BuyFuture(DecemberOfFuture, () => Audio.PlayOneShot(sfx_futurePayout));
-    }
-
-    private void CreateTooltip()
-    {
-        if (TooltipServer == null)
-            ServiceLocator.TryGetService(out TooltipServer);
-
-        TooltipServer.SpawnTooltip(this.TooltipText);
-    }
-
-    private void DestroyTooltip()
-    {
-        TooltipServer.DisposeTooltip();
     }
 
 }
