@@ -17,6 +17,12 @@ namespace Services
         private AudioSource _ambianceSource;
 
         private AudioSource[] _audioSources = null;
+
+        public enum Channel
+        {
+            SFX, Music, Ambiance
+        }
+
         private void Awake()
         {
             ServiceLocator.RegisterAsService(this);
@@ -54,9 +60,5 @@ namespace Services
             source.PlayOneShot(sound.GetClip(), sound.volume);
         }
 
-        public enum Channel
-        {
-            SFX, Music, Ambiance
-        }
     }
 }
