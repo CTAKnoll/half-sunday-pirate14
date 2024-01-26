@@ -211,8 +211,8 @@ namespace Stonks
 
         private void CrashTheMarket()
         {
-            TulipEconomy.TickMinimum = 0.90f * (float) Math.Pow(.99f, FeverMode.FeverLevel.Value);
-            TulipEconomy.TickMaximum = 0.98f * (float) Math.Pow(.99f, FeverMode.FeverLevel.Value);
+            TulipEconomy.TickMinimum = 0.90f * (float) Math.Pow(.995f, FeverMode.FeverLevel.Value);
+            TulipEconomy.TickMaximum = 0.98f * (float) Math.Pow(.995f, FeverMode.FeverLevel.Value);
             foreach (var varietal in TulipEconomyData)
             {
                 varietal.Value.AddColdStreak(TimeSpan.FromDays(10000)); // also cold streak forever
