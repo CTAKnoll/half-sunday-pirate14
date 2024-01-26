@@ -246,6 +246,8 @@ namespace Plants
         private Economy Economy;
 
         private static bool _yarnInitialized;
+
+        public float BuyPrice = -1;
         
         static TulipData()
         {            
@@ -485,7 +487,7 @@ namespace Plants
 
         public override string ToString()
         {
-            return $"{ColorToStringMapping[Color]}\n{Enum.GetName(typeof(TulipStage), Stage)}\n{Enum.GetName(typeof(TulipKind), Kind)}";
+            return $"{ColorToStringMapping[Color]} {Enum.GetName(typeof(TulipKind), Kind)}";
         }
     }
 }

@@ -35,13 +35,30 @@ namespace UI.Plants
             
             Economy = ServiceLocator.LazyLoad<Economy>();
             ServiceLocator.TryGetService(out _audio);
-            
+            CreateBespokeTooltip();
+
             UpdateViewAtEndOfFrame();
            
+        }
+
+        private void CreateBespokeTooltip()
+        {
+            View.TooltipText = Data.ToString();
+
+            if (Data.Stage == TulipData.TulipStage.Picked)
+                View.TooltipText += $"\nCurrent: {Economy.GetCurrentPrice(Data.Varietal)}";
+
+            if (!Data.OwnedByPlayer)
+                View.TooltipText += $"\nPrice: {Economy.QueryTulipPrice(Data)}";
+            
+            RegisterForTooltips();
         }
         
         private void OnHoldStarted()
         {
+            View.TooltipText = null;
+            RegisterForTooltips();
+
             InitialPosition = View.transform.position;
             DragOffset = InitialPosition - MainCamera.ScreenToWorldPoint(UiDriver.PointerPosition);
 
@@ -85,6 +102,7 @@ namespace UI.Plants
             {
                 ReturnToOrigin();
             }
+            CreateBespokeTooltip();
         }
 
         private void OnHoverStart()

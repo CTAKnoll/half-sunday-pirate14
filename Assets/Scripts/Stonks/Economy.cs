@@ -129,12 +129,26 @@ namespace Stonks
 
         public bool BuyTulip(TulipData data)
         {
-            var buyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.25f, 0.5f);
-            if (buyPrice > Funds)
+            SetPriceIfUnset(data);
+            if (data.BuyPrice > Funds)
                 return false;
-            Funds -= buyPrice;
+            Funds -= data.BuyPrice;
             FundsChanged?.Invoke(Funds);
             return true;
+        }
+
+        public float QueryTulipPrice(TulipData data)
+        {
+            SetPriceIfUnset(data);
+            return data.BuyPrice;
+        }
+
+        private void SetPriceIfUnset(TulipData data)
+        {
+            if (data.BuyPrice < 0)
+            {
+                data.BuyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.25f, 0.5f);
+            }
         }
 
         public bool SellTulip(TulipData data)

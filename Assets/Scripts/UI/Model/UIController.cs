@@ -190,6 +190,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
 
     protected void RegisterForTooltips()
     {
+        UiDriver.UnregisterForFocus(View);
         if (!string.IsNullOrEmpty(View.TooltipText))
         {
             UiDriver.RegisterForFocus(View, CreateTooltip, DestroyTooltip);
