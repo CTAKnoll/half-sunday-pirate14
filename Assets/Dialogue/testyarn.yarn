@@ -24,9 +24,7 @@ title: TulipCompetition
 
 Congratulations! Your tulip finished in {get_player_place()} place! 
 
-{first_place_tulip()} finished first
-{second_place_tulip()} finished second
-{third_place_tulip()} finished third
+{first_place_tulip()} finished first {second_place_tulip()} finished second {third_place_tulip()} finished third
 
     -> You made {get_player_payout()} guilders!
 ===
@@ -638,22 +636,22 @@ date: May 23 1618
 // #frequency - normal non-historic and non-clown
 // Date: May 23 1618
 // Needs: $all_tulips_market_price
-<<declare $all_tulips_price = 1000>>
-<<set $all_tulips_price = all_tulips_market_price()>>
+// <<declare $all_tulips_price = 1000>>
+// <<set $all_tulips_price = all_tulips_market_price()>>
 Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced by Fererick V of the Palatinate. 
     -> That does not sound good. (Price for all tulips has decreased by 2%)
     // all_tulips_market_price -= 2%
     // <<set_all_tulips_market_price -2>>
     <<modify_price "" 0.98 "2 years">>
-    <<set $all_tulips_price -= ($all_tulips_price * 0.02)>>
+    // <<set $all_tulips_price -= ($all_tulips_price * 0.02)>>
 ===
 
 title: BubbleAboutToBurst
 date: February 01 1637
 // Date: February 1637
 ---
-<<declare $all_tulips_price_prepop = 1000>>
-<<set $all_tulips_prepop_price = all_tulips_market_price()>>
+// <<declare $all_tulips_price_prepop = 1000>>
+// <<set $all_tulips_prepop_price = all_tulips_market_price()>>
 During a recent tulip bulb auction at a pub, no one bid on one of the tulips. 
     -> I'm sure prices will bounce back. (Market price tulips decrease 3%) 
     <<modify_price "" 0.97 "2 years">>
@@ -665,8 +663,8 @@ title: BubbleIsBurstingAndPeopleAreTicked
 // Date: Sometime around / after February 1637
 date: March 03 1637
 ---
-<<declare $all_tulips_price_monkeys = 1000>>
-<<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
+// /<<declare $all_tulips_price_monkeys = 1000>>
+// <<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
 Artists have drawn paintings depicting tulip farmers and traders as monkeys. 
     -> I'm sure prices will bounce back (Market price tulips decrease 5%)
     <<modify_price "" 0.97 "2 years">>
@@ -711,20 +709,20 @@ While the quiet murmurs of the market crashing are slowly growing in volume, you
 // [first_name] [last_name] has named their new tulip after their [random_noun], how [random adjective]!
 
 
-title: ProgrammaticRumor
----
-<<declare $first_name = "test">>
-<<declare $last_name = "test">>
-<<declare $random_noun = "test">>
-<<declare $random_adjective = "test">>
+//title: ProgrammaticRumor
+//---
+//<<declare $first_name = "test">>
+//<<declare $last_name = "test">>
+//<<declare $random_noun = "test">>
+//<<declare $random_adjective = "test">>
 
-<<set $first_name = first_name()>>
-<<set $last_name = last_name()>>
-<<set $random_noun = random_noun()>>
-<<set $random_adjective = random_adjective()>>
+//<<set $first_name = first_name()>>
+//<<set $last_name = last_name()>>
+//<<set $random_noun = random_noun()>>
+//<<set $random_adjective = random_adjective()>>
 
-{$first_name} {$last_name} has named their new tulip after their {$random_noun}, how {$random_adjective}!
-===
+//{$first_name} {$last_name} has named their new tulip after their {$random_noun}, how {$random_adjective}!
+//===
 
 
 
