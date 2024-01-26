@@ -15,6 +15,9 @@ public class ResolutionButton : UIInteractable
 
     void Start()
     {
+#if UNITY_WEBGL
+        gameObject.SetActive(false);
+#else
         ServiceLocator.TryGetService(out UiDriver);
         int maxSupportedWidth = Screen.resolutions.Max(res => res.width);
         int maxSupportedHeight = Screen.resolutions.Max(res => res.height);
@@ -31,6 +34,7 @@ public class ResolutionButton : UIInteractable
             Screen.SetResolution(Resolution.x, Resolution.y, false);
             RESOLUTION_MULT = ResolutionMultiplier;
         });
+#endif
     }
     
     
