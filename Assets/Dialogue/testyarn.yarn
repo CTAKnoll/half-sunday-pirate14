@@ -149,7 +149,7 @@ title: RivalTulipFarmerMerchantEtc
 // Needs: $new_random_tulip, $new_random_tulip_market_price
 <<declare $new_tulip = "test">>
 <<declare $new_tulip_price = 10>>
-
+<<set $new_tulip = random_tulip()>>
 // <<set $new_tulip = new_random_tulip()>> -- uncomment once new_random_tulip implemented
 // theoretically it won't have a price yet so we may need to hardcode a default price
 // <<declare $new_tulip_price = 10>>
@@ -248,7 +248,7 @@ title: TulipTony
 <<set $random_color = random_tulip_color()>>
 //<<set $random_tulip_color_price = get_market_price("{$random_tulip_color} tulip")>> -- uncomment once get_market_price implemented
 Tulip Tony who lives a stone throwy from the town crony says all {random_tulip_color()} tulips are phony. 
-    -> I hate Tulip Tony (Price of {random_tulip_color()} drops 30%)
+    -> I hate Tulip Tony (Price of {$random_color} drops 30%)
     <<modify_price $random_color 0.70 "365">>
     //<<set $random_tulip_color_price -= (get_market_price("{$random_tulip_color} tulip") * 0.30)>> -- uncomment once get_market_price implemented
     // {random_tulip_color_market_price()} -= 30%
