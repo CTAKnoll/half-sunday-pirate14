@@ -210,6 +210,10 @@ namespace Stonks
         {
             TulipEconomy.TickMinimum = 0.9f;
             TulipEconomy.TickMaximum = 0.98f;
+            foreach (var varietal in TulipEconomyData)
+            {
+                varietal.Value.AddColdStreak(TimeSpan.FromDays(10000)); // also cold streak forever
+            }
         }
         
     }
