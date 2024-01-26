@@ -152,7 +152,10 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         MainCamera = Camera.main;
 
         ControllerDb.Register(View, this);
-        RegisterForTooltips();
+        if (!string.IsNullOrEmpty(View.TooltipText))
+        {
+            RegisterForTooltips();
+        }
       
         Model = model;
         View.UpdateViewWithModel(Model);
@@ -163,7 +166,12 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         View = GameObject.Instantiate(template.Prefab, parent == null ? UiDriver.Root.transform : parent);
         MainCamera = Camera.main;
         ControllerDb.Register(View, this);
-        RegisterForTooltips();
+        
+        if (!string.IsNullOrEmpty(View.TooltipText))
+        {
+            RegisterForTooltips();
+        }
+        
         Model = model;
     }
 
@@ -188,7 +196,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
             ()=> { });
     }
 
-    protected void RegisterForTooltips()
+    protected virtual void RegisterForTooltips()
     {
         UiDriver.UnregisterForFocus(View);
         if (!string.IsNullOrEmpty(View.TooltipText))

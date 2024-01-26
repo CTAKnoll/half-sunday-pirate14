@@ -28,7 +28,11 @@ public class TooltipServer : MonoBehaviour, IService
     
     public void DisposeTooltip()
     {
+        if (Tooltip == null)
+            return;
         Tooltip.Close();
+        if (Tooltip.interactable.gameObject != null)
+            Destroy(Tooltip.interactable);
         Tooltip = null;
     }
 }

@@ -39,13 +39,12 @@ namespace UI.Plants
             
             Economy = ServiceLocator.LazyLoad<Economy>();
             ServiceLocator.TryGetService(out _audio);
-            CreateBespokeTooltip();
 
             UpdateViewAtEndOfFrame();
            
         }
 
-        private void CreateBespokeTooltip() 
+        protected void CreateBespokeTooltip() 
         {
             View.TooltipText = Data.ToString();
 
@@ -55,14 +54,15 @@ namespace UI.Plants
             if (!Data.OwnedByPlayer)
                 View.TooltipText += $"\nPrice: {Economy.QueryTulipPrice(Data).RoundToDecimalPlaces(2)}";
             
-            RegisterForTooltips();
+            if (TooltipServer == null)
+                ServiceLocator.TryGetService(out TooltipServer);
+            
+            TooltipServer.SpawnTooltip(View.TooltipText);
         }
         
         private void OnHoldStarted()
         {
             IsHeld = true;
-            View.TooltipText = null;
-            RegisterForTooltips();
 
             InitialPosition = View.transform.position;
             DragOffset = InitialPosition - MainCamera.ScreenToWorldPoint(UiDriver.PointerPosition);
@@ -73,7 +73,6 @@ namespace UI.Plants
         private void OnDrag()
         {
             Model.ScreenPos = MainCamera.ScreenToWorldPoint(UiDriver.PointerPosition) + DragOffset;
-            Debug.Log($"{UiDriver.PointerPosition} {DragOffset} {Model.ScreenPos} {View.transform.position}");
             UpdateViewAtEndOfFrame();
         }
 
@@ -108,17 +107,18 @@ namespace UI.Plants
             {
                 ReturnToOrigin();
             }
-            CreateBespokeTooltip();
         }
 
         private void OnHoverStart()
         {
             Economy.Focused = Data.Varietal;
+            CreateBespokeTooltip();
         }
 
         private void OnHoverEnd()
         {
             Economy.Focused = null;
+            TooltipServer.DisposeTooltip();
         }
         
         public bool IsOverBucket(out Bucket consumer)
@@ -219,6 +219,12 @@ namespace UI.Plants
                 return false;
             Data.Owner = TulipData.TulipOwner.Player;
             return true;
+        }
+
+        public override void Close()
+        {
+            base.Close();
+            TooltipServer.DisposeTooltip();
         }
     }
 }
