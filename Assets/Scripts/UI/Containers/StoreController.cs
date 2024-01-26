@@ -56,7 +56,7 @@ namespace UI.Containers
         {
             for (int i = 0; i < Server.MaxSize; i++)
             {
-                if(!Server.GetItem(i).IsHeld)
+                if(Server.GetItem(i) != null && !Server.GetItem(i).IsHeld)
                     Server.RemoveItem(i);
             }
             ShopOrigin = (MerchantOrigin) new Random().Next(Enum.GetNames(typeof(MerchantOrigin)).Length);
