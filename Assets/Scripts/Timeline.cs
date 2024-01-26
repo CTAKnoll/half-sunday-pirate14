@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Services;
+using UnityEngine;
 using Utils;
 
 public class Timeline : IService
@@ -9,6 +11,8 @@ public class Timeline : IService
     public const int START_MONTH = 1;
     public const int START_DAY = 1;
     public const float DAY_IN_REALTIME = 0.075f;
+
+    private WaitForSeconds DayPasses;
 
     public static readonly DateTime START_DATE = new (START_YEAR, START_MONTH, START_DAY);
     public static DateTime CRASH_DATE {  get; private set; }
@@ -19,16 +23,19 @@ public class Timeline : IService
     public event Action MarketCrashed;
 
     private Ticker Ticker;
-    private Action DayBreaks;
+    
+    private MainThreadScheduler MainThread;
+    private Coroutine ZaWarudo;
     
     public Timeline()   
     {
         Now = START_DATE;
-        DayBreaks = MoveToNextDay;
         TimelineEvents = new();
         Ticker = ServiceLocator.LazyLoad<Ticker>();
+        ServiceLocator.TryGetService(out MainThread);
 
         CRASH_DATE = FromNow(37, 2);
+        DayPasses = new WaitForSeconds(DAY_IN_REALTIME);
 
         AddTimelineEvent(this, CrashTheMarket, CRASH_DATE);
     }
@@ -47,12 +54,21 @@ public class Timeline : IService
 
     public void StartTheWorld()
     {
-        Ticker.AddTickable(DayBreaks, DAY_IN_REALTIME);
+        ZaWarudo = MainThread.StartCoroutine(TheWorld());
     }
 
     public void StopTheWorld()
     {
-        Ticker.RemoveTickable(DayBreaks);
+        MainThread.StopCoroutine(ZaWarudo);
+    }
+
+    public IEnumerator TheWorld()
+    {
+        while (true)
+        {
+            yield return DayPasses;
+            MoveToNextDay();
+        }
     }
 
     public void AddTimelineEvent(object owner, Action callback, DateTime eventTime) => TimelineEvents.Enqueue((owner, callback), eventTime);

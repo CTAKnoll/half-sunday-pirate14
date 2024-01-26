@@ -35,5 +35,15 @@ namespace Services
         {
             thread.ExecuteInLateUpdate(action);
         }
+
+        public Coroutine StartCoroutine(IEnumerator coroutine)
+        {
+            return thread.StartCoroutine(coroutine);
+        }
+        
+        public void StopCoroutine(Coroutine coroutine)
+        {
+            thread.StopCoroutine(coroutine);
+        }
     }
 }

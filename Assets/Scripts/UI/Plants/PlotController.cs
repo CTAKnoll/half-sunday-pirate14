@@ -41,20 +41,22 @@ namespace UI.Plants
         private TulipArtServer TulipArtServer;
         private Plots Plots;
         private AlertText AlertText;
+        private MainThreadScheduler MainThread;
         
         public PlotController(PlotView view) : base(view)
         {
             ServiceLocator.TryGetService(out Plots);
-            Ticker.AddTrigger(GetPlotConnections, 0.1f);
-            UiDriver.RegisterForTap(View, OnClick);
-            Model.DebugText = "UNPLANTED\nUNWEEDED";
-            Ticker.AddTickable(ModifyDisplay, 0.1f);
+            ServiceLocator.TryGetService(out MainThread);
             ServiceLocator.TryGetService(out _audio);
-
             ServiceLocator.TryGetService(out WeedArtServer);
             ServiceLocator.TryGetService(out TulipArtServer);
             ServiceLocator.TryGetService(out AlertText);
             
+            MainThread.ExecuteInLateUpdate(GetPlotConnections);
+            
+            UiDriver.RegisterForTap(View, OnClick);
+            Model.DebugText = "UNPLANTED\nUNWEEDED";
+
             if (WeedArtServer != null)
             {
                 Model.WeedAlertUpImage = WeedArtServer.GetSpreadSprite(PlotSpreadDirection.Up);
