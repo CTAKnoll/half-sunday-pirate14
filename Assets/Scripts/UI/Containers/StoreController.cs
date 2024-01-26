@@ -5,6 +5,7 @@ using Services;
 using UI.Model;
 using UI.Plants;
 using UnityEngine;
+using Utils;
 using Random = System.Random;
 
 namespace UI.Containers
@@ -91,7 +92,8 @@ namespace UI.Containers
                 color = ColorPreferences[ShopOrigin][(int)(ColorPreferences.Count * checkVal)];
             }
             else
-                color = TulipData.TulipColor.Random;
+                color = (TulipData.TulipColor)(int)FloatExtensions.RandomBetween(0,
+                    Enum.GetValues(typeof(TulipData.TulipColor)).Length);
 
             return new TulipData(color, kind);
         }

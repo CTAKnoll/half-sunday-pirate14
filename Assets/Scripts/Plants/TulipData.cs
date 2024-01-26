@@ -28,7 +28,6 @@ namespace Plants
             Sunshine,
             Tangerine, 
             Coral,
-            Random
         }
 
         public static Dictionary<TulipColor, string> ColorToStringMapping = new Dictionary<TulipColor, string>
@@ -59,7 +58,6 @@ namespace Plants
             //Fancy,
             //Spotted,
             //Striped,
-            Random
         }
 
         public enum TulipStage
@@ -105,7 +103,7 @@ namespace Plants
             // use sparingly
             public static string GetRandomTulipColor()
             {
-                TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
+                TulipData random = new TulipData(GetRandomTulipVarietal(false));
                 return $"{KindToStringMapping[random.Varietal.Kind]} {ColorToStringMapping[random.Varietal.Color]}";
             }
 
@@ -187,8 +185,8 @@ namespace Plants
             public TulipVarietal(TulipColor color, TulipKind kind)
             {
                 ServiceLocator.TryGetService(out ArtServer);
-                Color = AssignColor(color);
-                Kind = AssignKind(kind);
+                Color = color;
+                Kind = kind;
                 UnityColor = ArtServer.GetTulipColorData(this).Key1;
             }
 
@@ -266,8 +264,8 @@ namespace Plants
         public TulipData(TulipColor color, TulipKind kind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
         {
             ServiceLocator.TryGetService(out ArtServer);
-            Color = AssignColor(color);
-            Kind = AssignKind(kind);
+            Color = color;
+            Kind = kind;
             UnityColor = ArtServer.GetTulipColorData(Varietal).Key1;
             Stage = stage;
             Owner = owner;
@@ -282,8 +280,8 @@ namespace Plants
         public TulipData(TulipVarietal ofKind, TulipStage stage = TulipStage.Bulb, TulipOwner owner = TulipOwner.Shop)
         {
             ServiceLocator.TryGetService(out ArtServer);
-            Color = AssignColor(ofKind.Color);
-            Kind = AssignKind(ofKind.Kind);
+            Color = ofKind.Color;
+            Kind = ofKind.Kind;
             UnityColor = ofKind.UnityColor;
             Stage = stage;
             Owner = owner;
@@ -320,7 +318,7 @@ namespace Plants
         // use sparingly
         public static string GetRandomTulipColor()
         {
-            TulipData random = new TulipData(TulipColor.Random, TulipKind.Random);
+            TulipData random = new TulipData(TulipVarietal.GetRandomTulipVarietal(false));
             return $"{KindToStringMapping[random.Varietal.Kind]} {ColorToStringMapping[random.Varietal.Color]}";
         }
 
@@ -425,24 +423,7 @@ namespace Plants
 
             return success;
         }
-
-        protected static TulipColor AssignColor(TulipColor color)
-        {
-            if (color != TulipColor.Random)
-                return color;
-            System.Random rnd = new ();
-            int randIndex = rnd.Next(ColorToStringMapping.Values.Count - 1);
-            return (TulipColor) Enum.GetValues(typeof(TulipColor)).GetValue(randIndex);
-        }
         
-        protected static TulipKind AssignKind(TulipKind kind)
-        {
-            if (kind != TulipKind.Random)
-                return kind;
-            System.Random rnd = new ();
-            int randIndex = rnd.Next(ColorToStringMapping.Values.Count - 1);
-            return (TulipKind) Enum.GetValues(typeof(TulipKind)).GetValue(randIndex);
-        }
 
         private void AdvanceStage()
         {
