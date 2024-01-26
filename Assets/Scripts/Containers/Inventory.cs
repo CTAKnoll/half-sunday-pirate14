@@ -70,15 +70,18 @@ namespace UI.Containers
         
         public bool AddItem(TulipVarietal toAdd, Action<TulipController, IUIController> onConsumed, out TulipController added)
         {
-            for (int i = 0; i < MaxSize; i++) // look for stack first
+            if (Owners[0].AllowStacking)
             {
-                if (Elements[i].Varietal?.Equals(toAdd) ?? false)
+                for (int i = 0; i < MaxSize; i++) // look for stack first
                 {
-                    Owners[i].ConsumeFunction = onConsumed;
-                    Elements[i] = new InventoryStack(toAdd, Owners[i].Stacks + 1);
-                    Owners[i].UpdateSlot(Elements[i]);
-                    added = Owners[i].Tulip;
-                    return true;
+                    if (Elements[i].Varietal?.Equals(toAdd) ?? false)
+                    {
+                        Owners[i].ConsumeFunction = onConsumed;
+                        Elements[i] = new InventoryStack(toAdd, Owners[i].Stacks + 1);
+                        Owners[i].UpdateSlot(Elements[i]);
+                        added = Owners[i].Tulip;
+                        return true;
+                    }
                 }
             }
             for (int i = 0; i < MaxSize; i++) // look for first empty

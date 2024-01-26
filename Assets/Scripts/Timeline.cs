@@ -27,8 +27,6 @@ public class Timeline : IService
         TimelineEvents = new();
         Ticker = ServiceLocator.LazyLoad<Ticker>();
         AddTimelineEvent(this, CrashTheMarket, FromNow(37, 2));
-        
-        StartTheWorld(); // TODO: Move this to clicking the start button
     }
 
     public void StartTheWorld()

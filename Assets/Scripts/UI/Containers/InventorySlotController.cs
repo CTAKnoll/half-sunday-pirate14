@@ -9,7 +9,7 @@ namespace UI.Containers
     {
         public bool IsEmpty => Tulip == null;
         public TulipController Tulip;
-        private bool AllowStacking;
+        public bool AllowStacking;
         private TulipData.TulipOwner Owner;
         public int Stacks;
 

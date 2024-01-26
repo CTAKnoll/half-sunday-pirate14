@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Services;
 using Yarn.Unity;
-using UI.Dialogue;
 using Utils;
 
 public class IncidentsManager : MonoBehaviour, IService
@@ -57,12 +55,5 @@ public class IncidentsManager : MonoBehaviour, IService
     {
         // TODO: We need to check for dependencies
         spawnedIncident?.Invoke(incYarnNode);
-    }
-
-    [System.Serializable]
-    public struct IncidentTimeline
-    {
-        public string nodeName;
-        public int monthsAfterStart;
     }
 }

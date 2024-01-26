@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80733c5f0e540239415a2958578d9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartTheWorld: 1
   MoveToView: {fileID: 7292080546570544227}
   GoTo: 1
   TransitionTime: 0.25

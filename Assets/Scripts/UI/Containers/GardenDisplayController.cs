@@ -31,10 +31,5 @@ namespace UI.Containers
 
             return success;
         }
-
-        private void OnInventoryItemConsumed(TulipController tulip, IUIController consumer)
-        {
-            Server.RemoveItem(tulip.Data.Varietal);
-        }
     }
 }
