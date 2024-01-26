@@ -51,7 +51,7 @@ public class EndScreen : MonoBehaviour
             Tulip2.Initialize(1);
         
         if(Tulip3 != null)
-            Tulip4.Initialize(2);
+            Tulip3.Initialize(2);
         
         if(Tulip4 != null)
             Tulip4.Initialize(3);
