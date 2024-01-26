@@ -203,5 +203,5 @@ MonoBehaviour:
   ReturnToValue: 0.2
   ReturnNumSeconds: 1.5
   ProgressBarImage: {fileID: 2336476308501352559}
-  DailyMaxNaturalIncrease: 0.005
+  DailyMaxNaturalIncrease: 0.0038
   DailyMaxNaturalDecrease: -0.003

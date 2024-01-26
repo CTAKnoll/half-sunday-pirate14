@@ -133,7 +133,7 @@ MonoBehaviour:
   SellTulipButton: {fileID: 1348546499055989364}
   SendToGardenButton: {fileID: 6082141338605414527}
   SendToCompetitionButton: {fileID: 7521178919905877596}
-  GardenFeverModifier: 0.02
+  GardenFeverModifier: 0.05
 --- !u!1001 &68191895267174181
 PrefabInstance:
   m_ObjectHideFlags: 0

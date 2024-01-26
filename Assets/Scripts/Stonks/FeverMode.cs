@@ -23,7 +23,7 @@ namespace Core
         private Timeline timeline;
         private IncidentsManager incManager;    
 
-        public float DailyMaxNaturalIncrease = 0.005f;
+        public float DailyMaxNaturalIncrease = 0.004f;
         public float DailyMaxNaturalDecrease = -0.003f;
         
         public void Awake()

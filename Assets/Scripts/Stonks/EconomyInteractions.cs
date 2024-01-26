@@ -12,7 +12,7 @@ public class EconomyInteractions : MonoBehaviour
     public SimpleBucketView SendToGardenButton;
     public SimpleBucketView SendToCompetitionButton;
 
-    public float GardenFeverModifier = 0.02f;
+    public float GardenFeverModifier = 0.05f;
 
     private Economy Economy;
     private FeverMode FeverMode;
