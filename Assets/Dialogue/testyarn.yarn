@@ -12,10 +12,14 @@ title: TulipCompetition
 ---
 competition: competition
 // Needs: $player_tulip_type (what they submitted by dragging into box), $competitor_tulip_type1 (can be literally anything, does not have to have ever been in market), $competitor_tulip_type2
+<<declare $player_place = "">>
+<<set $player_place = get_player_place()>>
 
-Congratulations! Your tulip finished in {get_player_place()} place! 
+Congratulations! Your tulip finished in {$player_place} place! [ordinal value={$player_place} one="%st" two="%nd" few="%rd"
+// Runner: The race is over! I came in [ordinal value={$race_position} one="%st" two="%nd" few="%rd" other="%th" /] place!
 
 {first_place_tulip()} finished first {second_place_tulip()} finished second {third_place_tulip()} finished third
+// Runner: The race is over! I came in [ordinal value={$race_position} one="%st" two="%nd" few="%rd" other="%th" /] place!
 
     -> You made {get_player_payout()} guilders!
 ===
