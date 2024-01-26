@@ -298,8 +298,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 68.54621, y: 405.3}
-  m_SizeDelta: {x: 350.0769, y: 17.2354}
+  m_AnchoredPosition: {x: 58, y: 405}
+  m_SizeDelta: {x: 335.719, y: 16.4797}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7421969139368105573
 CanvasRenderer:
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"Oh no, a Rumour!"'
+  m_text: Wow a rumor!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
   m_sharedMaterial: {fileID: 2357010416258886945, guid: 9fb61f06957f57249ae94685829eb12d, type: 2}
@@ -372,9 +372,9 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0.35888672, w: 0}
+  m_margin: {x: 0, y: 0, z: 1.114502, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
