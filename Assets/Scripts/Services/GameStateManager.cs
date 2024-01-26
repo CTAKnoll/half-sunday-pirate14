@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Services;
 using UnityEngine;
 
@@ -47,7 +48,11 @@ namespace DefaultNamespace
             Vector3 endStateLoc = FocusPoints[state].transform.position;
             Vector2 startPos = new Vector2(Camera.transform.position.x, Camera.transform.position.y);
             Vector2 endPos = new Vector2(endStateLoc.x, endStateLoc.y);
-            StartCoroutine(LerpToState(startPos, endPos, seconds));
+
+            Camera.transform.position = new Vector3(startPos.x, startPos.y, CameraZ);
+            Camera.transform.DOMove(new Vector3(endPos.x, endPos.y, CameraZ), seconds)
+                .SetEase(Ease.InOutCirc);
+            //StartCoroutine(LerpToState(startPos, endPos, seconds));
         }
 
         private IEnumerator LerpToState(Vector2 startPos, Vector2 endPos, float seconds)
