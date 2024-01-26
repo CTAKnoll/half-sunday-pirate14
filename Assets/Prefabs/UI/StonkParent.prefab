@@ -359,6 +359,11 @@ PrefabInstance:
       propertyPath: Stage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8454020501857209650, guid: 9a9a2744fe53237459b7135c5a5b77a4, type: 3}
+      propertyPath: TooltipText
+      value: Picked tulip storage! Click on a tulip and drag to an action to perform
+        it.
+      objectReference: {fileID: 0}
     - target: {fileID: 9180551309988138453, guid: 9a9a2744fe53237459b7135c5a5b77a4, type: 3}
       propertyPath: m_Name
       value: Inventory
