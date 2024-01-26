@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Services
 {
@@ -12,11 +13,14 @@ namespace Services
 
         [SerializeField]
         private AudioSource _musicSource;
+        [SerializeField]
+        private AudioSource _musicBackup;
 
         [SerializeField]
         private AudioSource _ambianceSource;
 
         private AudioSource[] _audioSources = null;
+        
 
         public enum Channel
         {
@@ -27,6 +31,7 @@ namespace Services
         {
             ServiceLocator.RegisterAsService(this);
             _audioSources = new AudioSource[] { _sFXSource, _musicSource, _ambianceSource };
+            
         }
 
         public void Play(AudioEvent sound)
@@ -44,6 +49,13 @@ namespace Services
                 source.pitch += UnityEngine.Random.Range(-1 * sound.pitchVariance, sound.pitchVariance);
             }
             source.Play();
+        }
+
+        public void Stop(Channel channel)
+        {
+            var source = _audioSources[(int)channel];
+
+            source.Stop();
         }
 
         public void PlayOneShot(AudioEvent sound)

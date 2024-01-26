@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cfa732fe789b047bd323430ac7552b, type: 3}
   m_Name: end_times
   m_EditorClassIdentifier: 
-  _clip: {fileID: 8300000, guid: 30cff779d89cf504eaaed10a2ccba803, type: 3}
-  loop: 1
+  _clip: {fileID: 8300000, guid: c90f4dcdb8234d3469648e884ef4c222, type: 3}
+  loop: 0
   volume: 0.25
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: -760414098988907644, guid: ff509222aa5776c4faf796a0c768bcf7, type: 2}
   channel: 1
   randomizePitch: 0
   pitchVariance: 0

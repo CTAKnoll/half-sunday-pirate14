@@ -15,7 +15,7 @@ MonoBehaviour:
   _clip: {fileID: 8300000, guid: aab5b6646bc17784bba2729968410d03, type: 3}
   loop: 0
   volume: 1
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: -8495460110376878485, guid: ff509222aa5776c4faf796a0c768bcf7, type: 2}
   channel: 0
   randomizePitch: 1
   pitchVariance: 0.036

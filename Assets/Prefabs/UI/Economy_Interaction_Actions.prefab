@@ -889,6 +889,8 @@ MonoBehaviour:
   sfx_onClick: {fileID: 11400000, guid: f4157e2ed5945794abb8b2af297de1b7, type: 2}
   sfx_onRelease: {fileID: 0}
   Priority: 2
+  sfx_success: {fileID: 11400000, guid: f4157e2ed5945794abb8b2af297de1b7, type: 2}
+  sfx_reject: {fileID: 11400000, guid: 5dbe8804ac6771849899cf4f5a570575, type: 2}
 --- !u!1001 &7222519768149520048
 PrefabInstance:
   m_ObjectHideFlags: 0

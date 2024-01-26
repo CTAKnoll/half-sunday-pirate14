@@ -2,6 +2,7 @@ using Services;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicDirector : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class MusicDirector : MonoBehaviour
     public AudioEvent mainMusicLoop;
     public AudioEvent endTimeMusic;
 
-    public float EndTimeOffset = 5;
+    [Space]
+    [SerializeField]
+    private AudioMixerSnapshot _mainSnapshot;
+    [SerializeField]
+    private AudioMixerSnapshot _endTimesSnapshot;
+
+    public float EndTimeOffset = -15;
     private Timeline _timeline;
     private AudioService _audio;
 
@@ -29,7 +36,17 @@ public class MusicDirector : MonoBehaviour
         Debug.Log($"Timespan {_timeline.GetTimespanFromSeconds(endTimeMusic.GetClip().length + EndTimeOffset)}");
         Debug.Log($"Enqueuing endtime music [{endTimeMusic.GetClip().name}] for {musicStartDate}");
 
-        _timeline.AddTimelineEvent(this, () => _audio.Play(endTimeMusic), musicStartDate);
+        _timeline.AddTimelineEvent(this, TransitionToEnd, musicStartDate);
+    }
+
+    private void TransitionToEnd()
+    {
+        _endTimesSnapshot.TransitionTo(2.5f);
+        void StartSong()
+        {
+            _audio.Play(endTimeMusic);
+        }
+        Invoke("StartSong", 1);
     }
 
 }
