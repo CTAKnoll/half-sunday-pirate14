@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  TooltipText: 
+  TooltipText: Click me!
   sfx_onClick: {fileID: 0}
   sfx_onRelease: {fileID: 0}
   Priority: 2

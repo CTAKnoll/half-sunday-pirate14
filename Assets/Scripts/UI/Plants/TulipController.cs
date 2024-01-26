@@ -146,7 +146,6 @@ namespace UI.Plants
 
         private bool ShopCheck()
         {
-            Debug.Log("Here either?");
             if (Data.OwnedByPlayer) return true;
             return Purchase();
         }
