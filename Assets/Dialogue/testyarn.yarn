@@ -662,8 +662,8 @@ Artists have drawn paintings depicting tulip farmers and traders as monkeys.
 // <<set $all_tulips_price_monkeys_price -= ($all_tulips_price_monkeys_price * 0.03)>>
 <<if $supersecretclownending == true>>
     <<jump SuperSecretClownEnding>>
-<<else>>
-    <<jump Conclusion>>
+//<<else>>
+    //<<jump Conclusion>>
 <<endif>>
 ===
 
@@ -737,14 +737,14 @@ While the quiet murmurs of the market crashing are slowly growing in volume, you
 
 
 
-title: Conclusion
----
-THE END
+//title: Conclusion
+//---
+//THE END
 
-Also this is based on a real events. Like this really happened. No really.
+//Also this is based on a real events. Like this really happened. No really.
 // potential for Ferris Bueller end reference here but I think it's probably better without it
 
 // if garden not empty
-But at least your garden looks nice
+//But at least your garden looks nice
 
-===
+//===
