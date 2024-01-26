@@ -885,7 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  TooltipText: Spend a hefty sum of $10000 to become a real Duke!
+  TooltipText: Spend a hefty sum of $100,000 to become a real Duke!
   sfx_onClick: {fileID: 11400000, guid: f4157e2ed5945794abb8b2af297de1b7, type: 2}
   sfx_onRelease: {fileID: 0}
   Priority: 2

@@ -15,7 +15,7 @@ namespace Stonks
     {
         private static readonly float DEFAULT_TULIP_PRICE = 10;
         private float StartingFunds = 100;
-        public static float DukeTitleCost = 10000;
+        public static float DukeTitleCost = 100000;
         public float Funds { get; private set; }
 
         public bool IsDuke = false;
