@@ -74,7 +74,7 @@ MonoBehaviour:
       m_Calls: []
   typewriterEffectSpeed: 120
   continueButton: {fileID: 5646692086762921811}
-  holdTime: 1
+  holdTime: 2
   autoAdvance: 1
   palette: {fileID: 0}
 --- !u!225 &2010302344473072143
