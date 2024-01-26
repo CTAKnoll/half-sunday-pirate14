@@ -1,14 +1,4 @@
-﻿title: Start
----
-
-// set scene, rich royal guy who hears rumors of the rising tulip craze and decide to try your hand at it and make a greenhouse
-
-
-// terminology: pop up -> incident; news marquee ticker thing -> marquee
-
-===
-
-// Variables:
+﻿// Variables:
 // $bank_balance
 // $total_tulips
 
@@ -316,10 +306,9 @@ A weary Spanish sailor approaches you.
     //<<if {random_tulip_kind()} >=0>>
         -> Provide {$random_kind_ship} ({$random_kind_ship} tulips increase by 15%)
         <<modify_price $random_kind_ship 1.15 "304">>
-
         // {random_tulip_kind_market_price()} += 15%
         //<<set $random_kind_ship_price = get_market_price("{$random_kind_ship} tulip") * 0.15>>
-        -> Cause an international incident (Dutch Awareness rises)
+        -> Cause an international incident (Awareness rises)
         // TKTK <<set_fever_meter 5>> -- uncomment once set_fever_meter implemented
     //<<else>>
     //<<jump NotEnoughTulips>>
