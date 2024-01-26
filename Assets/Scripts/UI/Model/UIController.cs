@@ -18,6 +18,7 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     protected UIDriver UiDriver;
     protected ControllerDatabase ControllerDb;
     protected AudioService Audio;
+    protected TooltipServer TooltipServer;
     protected TStaticView View { get; private set; }
 
     public bool IsActiveUI => ActivityMutex != null || LogicalParent is { IsActiveUI: true };
@@ -34,7 +35,9 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     {
         GetServices();
         View = GameObject.Instantiate(template.Prefab, parent == null ? UiDriver.Root.transform : parent);
+        
         ControllerDb.Register(View, this);
+        RegisterForTooltips();
     }
     
     private void GetServices()
@@ -44,6 +47,7 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
         
         ControllerDb = ServiceLocator.LazyLoad<ControllerDatabase>();
         ServiceLocator.TryGetService(out Audio);
+        ServiceLocator.TryGetService(out TooltipServer);
     }
     
     public virtual void Show()
@@ -92,6 +96,27 @@ public abstract class UIController<TStaticView> : IUIController where TStaticVie
     {
         return Children.Remove(childController);
     }
+    
+    protected void RegisterForTooltips()
+    {
+        if (!string.IsNullOrEmpty(View.TooltipText))
+        {
+            UiDriver.RegisterForFocus(View, CreateTooltip, DestroyTooltip);
+        }
+    }
+    
+    private void CreateTooltip()
+    {
+        if (TooltipServer == null)
+            ServiceLocator.TryGetService(out TooltipServer);
+            
+        TooltipServer.SpawnTooltip(View.TooltipText);
+    }
+
+    private void DestroyTooltip()
+    {
+        TooltipServer.DisposeTooltip();
+    }
 }
 
 [System.Serializable]
@@ -110,6 +135,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     protected Timeline Timeline;
     protected Economy Economy;
     protected AudioService Audio;
+    protected TooltipServer TooltipServer;
+    
     protected TView View { get; private set; }
     [SerializeField]
     protected TModel Model;
@@ -125,6 +152,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         MainCamera = Camera.main;
 
         ControllerDb.Register(View, this);
+        RegisterForTooltips();
+      
         Model = model;
         View.UpdateViewWithModel(Model);
     }
@@ -133,8 +162,8 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         GetServices();
         View = GameObject.Instantiate(template.Prefab, parent == null ? UiDriver.Root.transform : parent);
         MainCamera = Camera.main;
-
         ControllerDb.Register(View, this);
+        RegisterForTooltips();
         Model = model;
     }
 
@@ -148,6 +177,7 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
         Timeline = ServiceLocator.LazyLoad<Timeline>();
         Economy = ServiceLocator.LazyLoad<Economy>();
         ServiceLocator.TryGetService(out Audio);
+        ServiceLocator.TryGetService(out TooltipServer);
     }
 
     protected virtual void RegisterDefaultSFX(UIDriver driver, AudioService audio)
@@ -156,6 +186,14 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
             () => audio.PlayOneShot(View.sfx_onClick), 
             () => audio.PlayOneShot(View.sfx_onRelease), 
             ()=> { });
+    }
+
+    protected void RegisterForTooltips()
+    {
+        if (!string.IsNullOrEmpty(View.TooltipText))
+        {
+            UiDriver.RegisterForFocus(View, CreateTooltip, DestroyTooltip);
+        }
     }
 
     protected void UpdateViewAtEndOfFrame()
@@ -224,5 +262,18 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     public bool RemoveChild(IUIController childController)
     {
         return Children.Remove(childController);
+    }
+    
+    private void CreateTooltip()
+    {
+        if (TooltipServer == null)
+            ServiceLocator.TryGetService(out TooltipServer);
+            
+        TooltipServer.SpawnTooltip(View.TooltipText);
+    }
+
+    private void DestroyTooltip()
+    {
+        TooltipServer.DisposeTooltip();
     }
 }

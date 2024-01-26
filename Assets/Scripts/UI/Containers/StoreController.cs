@@ -44,26 +44,12 @@ namespace UI.Containers
             Server = new Store(View.SlotControllers);
             Timeline.AddRecurring(this, RefreshStore, TimeSpan.FromDays(120));
             Timeline.AddRecurring(this, ChangeMerchant, TimeSpan.FromDays(180));
-            UiDriver.RegisterForFocus(View, CreateTooltip, DestroyTooltip);
         }
 
         public void InsertMerchantImages(Dictionary<MerchantOrigin, Sprite> sprites)
         {
             ShipSprites = sprites;
             ChangeMerchant();
-        }
-
-        private void CreateTooltip()
-        {
-            if (TooltipServer == null)
-                ServiceLocator.TryGetService(out TooltipServer);
-            
-            TooltipServer.SpawnTooltip(View.TooltipText);
-        }
-
-        private void DestroyTooltip()
-        {
-            TooltipServer.DisposeTooltip();
         }
 
         public void ChangeMerchant()
