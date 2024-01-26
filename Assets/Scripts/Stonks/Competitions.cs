@@ -69,14 +69,14 @@ namespace Stonks
                     LastCompetitionResults.SecondPlace = playerSubmission;
                     LastCompetitionResults.ThirdPlace = randomTwo;
                     LastCompetitionResults.PlayerPlacement = 2;
-                    LastCompetitionResults.PlayerPayout = Economy.GetAveragePrice();
+                    LastCompetitionResults.PlayerPayout = 2 * Economy.GetAveragePrice();
                 }
                 else
                 {
                     LastCompetitionResults.SecondPlace = randomTwo;
                     LastCompetitionResults.ThirdPlace = playerSubmission;
                     LastCompetitionResults.PlayerPlacement = 3;
-                    LastCompetitionResults.PlayerPayout = 0;
+                    LastCompetitionResults.PlayerPayout = Economy.GetAveragePrice();
                 }
             }
             else
@@ -87,14 +87,14 @@ namespace Stonks
                     LastCompetitionResults.SecondPlace = playerSubmission;
                     LastCompetitionResults.ThirdPlace = randomOne;
                     LastCompetitionResults.PlayerPlacement = 2;
-                    LastCompetitionResults.PlayerPayout = Economy.GetAveragePrice();
+                    LastCompetitionResults.PlayerPayout = 2 * Economy.GetAveragePrice();
                 }
                 else
                 {
                     LastCompetitionResults.SecondPlace = randomOne;
                     LastCompetitionResults.ThirdPlace = playerSubmission;
                     LastCompetitionResults.PlayerPlacement = 3;
-                    LastCompetitionResults.PlayerPayout = 0;
+                    LastCompetitionResults.PlayerPayout = Economy.GetAveragePrice();
                 }
             }
         }

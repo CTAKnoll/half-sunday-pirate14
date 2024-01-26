@@ -269,7 +269,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  TooltipText: Test
+  TooltipText: Speculate on future tulip prices. The higher the value the greater
+    the return!
   sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
   sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
@@ -388,6 +389,10 @@ PrefabInstance:
     - target: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: TooltipText
+      value: Submit your tulip to a competition for cash prizes!
       objectReference: {fileID: 0}
     - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: sfx_onClick
@@ -521,6 +526,11 @@ PrefabInstance:
     - target: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: TooltipText
+      value: Display a tulip in your garden! Raises the Awareness Meter and value
+        of tulip type.
       objectReference: {fileID: 0}
     - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: sfx_onClick
@@ -682,7 +692,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Active: 1
-  TooltipText: Test
+  TooltipText: Speculate on future tulip prices. The higher the value the greater
+    the return!
   sfx_onClick: {fileID: 11400000, guid: 7a5f2c109c31ef14e972883ffd04837f, type: 2}
   sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
@@ -873,6 +884,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07467b83cb52bd4408facab07732fca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: Spend a hefty sum of $10000 to become a real Duke!
+  sfx_onClick: {fileID: 0}
+  sfx_onRelease: {fileID: 0}
+  Priority: 2
 --- !u!1001 &7222519768149520048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -976,6 +992,10 @@ PrefabInstance:
     - target: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
+      propertyPath: TooltipText
+      value: Drag a tulip in here to sell.
       objectReference: {fileID: 0}
     - target: {fileID: 8542612243783474372, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
       propertyPath: sfx_onClick
