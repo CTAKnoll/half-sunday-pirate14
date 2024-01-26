@@ -15,13 +15,15 @@ tags: competition
 <<declare $player_place = "">>
 <<set $player_place = get_player_place()>>
 
-Congratulations! Your tulip finished in [ordinal value={$player_place} 1="%st" 2="%nd" 3="%rd" /] place!
-// Runner: The race is over! I came in [ordinal value={$race_position} one="%st" two="%nd" few="%rd" other="%th" /] place!
+Congratulations! Your tulip finished in [ordinal value={$player_place} one="%st" two="%nd" few="%rd" /] place!
+// Runner: The race is over! I came in [ordinal value={$race_position} one="%st" two="%nd" few="%rd" /] place!
 
 {first_place_tulip()} finished first {second_place_tulip()} finished second {third_place_tulip()} finished third
-// Runner: The race is over! I came in [ordinal value={$race_position} one="%st" two="%nd" few="%rd" other="%th" /] place!
+// Runner: The race is over! I came in [ordinal value={$race_position} one="%st" two="%nd" few="%rd"  /] place!
 
     -> You made {get_player_payout()} guilders!
+	<<pay_the_player>>
+
 ===
 
 // incident thematically and gameplay wise - not personal 

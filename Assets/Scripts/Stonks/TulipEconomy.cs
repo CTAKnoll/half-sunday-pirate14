@@ -4,6 +4,7 @@ using System.Linq;
 using Core;
 using Plants;
 using Services;
+using UnityEngine;
 using Utils;
 using Yarn.Unity;
 using Random = System.Random;
@@ -70,6 +71,8 @@ namespace Stonks
         private FeverMode FeverMode;
 
         private bool FeverModeActive = false;
+        private bool IsHotStreaking = false;
+        private bool IsColdStreaking = false;
 
         public TulipEconomy(TulipData.TulipVarietal varietal)
         {
@@ -133,16 +136,43 @@ namespace Stonks
                 IncidentModifiers.Add(new IncidentModifier(mult, Timeline.Now + duration));
         }
 
+        public void AddHotStreak(TimeSpan duration)
+        {
+            IsHotStreaking = true;
+            Timeline.AddTimelineEvent(this, () => IsHotStreaking = false, Timeline.Now + duration);
+        }
+
+        public void AddColdStreak(TimeSpan duration)
+        {
+            IsColdStreaking = true;
+            Timeline.AddTimelineEvent(this, () => IsColdStreaking = false, Timeline.Now + duration);
+        }
+
         private void ModifyPrice()
         {
+            if (!IsHotStreaking && !IsColdStreaking)
+            {
+                var random = FloatExtensions.RandomBetween(0f, 1f);
+                if (random > 0.995)
+                {
+                    AddHotStreak(TimeSpan.FromDays(60));
+                }
+                if (random < 0.005)
+                {
+                    AddColdStreak(TimeSpan.FromDays(60));
+                }
+            }
+            
             float feverLevelMin = (float)Math.Pow(FeverMinLevelUp, FeverMode.FeverLevel.Value);
             float feverLevelMax = (float)Math.Pow(FeverMaxLevelUp, FeverMode.FeverLevel.Value);
             float minVolatility = FeverModeActive ? FeverVolatileMin : 1;
             float maxVolatility = FeverModeActive ? FeverVolatileMax : 1;
+            float isHotStreaking = IsHotStreaking ? 0.01f * FeverMode.FeverLevel.Value : 0f;
+            float isColdStreaking = IsColdStreaking ? -0.01f * FeverMode.FeverLevel.Value : 0f;
             
             PriceHistory.Add(Timeline.Now, new PriceSnapshot(PriceHistory.Last().Value, 
-                FloatExtensions.RandomBetween(TickMinimum * feverLevelMin * minVolatility, 
-                    TickMaximum * feverLevelMax * maxVolatility)));
+                FloatExtensions.RandomBetween(TickMinimum * feverLevelMin * minVolatility + isHotStreaking + isColdStreaking, 
+                    TickMaximum * feverLevelMax * maxVolatility + isHotStreaking + isColdStreaking)));
             Timeline.AddTimelineEvent(this, ModifyPrice, Timeline.FromNow(0, 0, 3));
         }
 
