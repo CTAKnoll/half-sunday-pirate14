@@ -9,8 +9,8 @@
 
 
 title: TulipCompetition
+tags: competition
 ---
-competition: competition
 // Needs: $player_tulip_type (what they submitted by dragging into box), $competitor_tulip_type1 (can be literally anything, does not have to have ever been in market), $competitor_tulip_type2
 <<declare $player_place = "">>
 <<set $player_place = get_player_place()>>
