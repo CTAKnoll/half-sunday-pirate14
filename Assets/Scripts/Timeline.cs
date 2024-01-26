@@ -90,7 +90,7 @@ public class Timeline : IService
         }
     }
 
-    private void CrashTheMarket()
+    public void CrashTheMarket()
     {
         MarketCrashed?.Invoke();
     }

@@ -14,7 +14,8 @@ namespace Stonks
     public class Economy : IService
     {
         private static readonly float DEFAULT_TULIP_PRICE = 10;
-        private float StartingFunds = 100;
+        private float StartingFunds = 10000;
+        public static float DukeTitleCost = 10000;
         public float Funds { get; private set; }
 
         public Dictionary<TulipVarietal, TulipEconomy> TulipEconomyData;
@@ -170,6 +171,18 @@ namespace Stonks
         {
             Funds += result.PlayerPayout;
             FundsChanged?.Invoke(Funds);
+        }
+
+        public bool BuyDukeTitle()
+        {
+            if (Funds >= DukeTitleCost)
+            {
+                Funds -= DukeTitleCost;
+                FundsChanged?.Invoke(Funds);
+                Timeline.CrashTheMarket();
+                return true;
+            }
+            return false;
         }
 
         private void CrashTheMarket()
