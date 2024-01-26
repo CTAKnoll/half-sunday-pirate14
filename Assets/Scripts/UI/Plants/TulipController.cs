@@ -144,11 +144,7 @@ namespace UI.Plants
             _audio.PlayOneShot(View.sfx_plant_failed);
         }
 
-        private bool ShopCheck()
-        {
-            if (Data.OwnedByPlayer) return true;
-            return Purchase();
-        }
+        private bool ShopCheck() => (!Data.OwnedByPlayer && Economy.Funds >= Data.BuyPrice) || Data.OwnedByPlayer;
 
         private bool ConsumedByPlot(PlotController plot)
         {
@@ -156,7 +152,7 @@ namespace UI.Plants
             {
                 throw new Exception("How did you do this?!");
             }
-            if (plot.IsPlanted || plot.IsWeeded || !ShopCheck()) // you cant grow there, or you cant purchase
+            if (plot.IsPlanted || plot.IsWeeded || !ShopCheck() || !Purchase()) // you cant grow there, or you cant purchase
             {
                 ReturnToOrigin();
                 return false;
@@ -169,7 +165,7 @@ namespace UI.Plants
 
         private bool ConsumedByBulbInventory(BulbInventoryController bulbInventory)
         {
-            if (!bulbInventory.Server.HasEmpty() || !ShopCheck()) 
+            if (!ShopCheck()) 
             {
                 ReturnToOrigin();
                 return false;
@@ -177,26 +173,28 @@ namespace UI.Plants
             bool success = bulbInventory.AddItem(Data);
             if (success)
             {
-                Consumed?.Invoke(this, bulbInventory);
-                return true;
+                if (Purchase())
+                {
+                    Consumed?.Invoke(this, bulbInventory);
+                    return true;
+                }
+                else
+                {
+                    ReturnToOrigin();
+                    return false;
+                }
             }
             else
             {
-                // we need to alter the player that this doesnt work
+                ReturnToOrigin();
                 return false;
             }
         }
 
         private bool ConsumedByTulipInventory(TulipInventoryController tulipInventory)
         {
-            if (!tulipInventory.Server.HasEmpty() || !ShopCheck()) 
-            {
-                ReturnToOrigin();
-                return false;
-            }
-            tulipInventory.AddItem(Data);
-            Consumed?.Invoke(this, tulipInventory);
-            return true;
+            ReturnToOrigin();
+            return false;
         }
 
         private bool ConsumedByTulipInteraction(TulipInteractionController interaction)
@@ -213,7 +211,8 @@ namespace UI.Plants
 
         private bool Purchase()
         {
-            Debug.Log("Here?");
+            if (Data.OwnedByPlayer)
+                return true;
             if (!Economy.BuyTulip(Data))
                 return false;
             Data.Owner = TulipData.TulipOwner.Player;
