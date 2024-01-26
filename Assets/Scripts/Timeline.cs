@@ -11,6 +11,7 @@ public class Timeline : IService
     public const float DAY_IN_REALTIME = 0.075f;
 
     public static readonly DateTime START_DATE = new (START_YEAR, START_MONTH, START_DAY);
+    public static DateTime CRASH_DATE {  get; private set; }
     
     public static DateTime Now;
     private PriorityQueue<(object, Action), DateTime> TimelineEvents;
@@ -26,7 +27,22 @@ public class Timeline : IService
         DayBreaks = MoveToNextDay;
         TimelineEvents = new();
         Ticker = ServiceLocator.LazyLoad<Ticker>();
-        AddTimelineEvent(this, CrashTheMarket, FromNow(37, 2));
+
+        CRASH_DATE = FromNow(37, 2);
+
+        AddTimelineEvent(this, CrashTheMarket, CRASH_DATE);
+    }
+
+    public DateTime GetDateBeforeInRealtime(float realtimeSeconds, DateTime date)
+    {
+        var timespan = GetTimespanFromSeconds(realtimeSeconds);
+        return date.Subtract(timespan);
+    }
+
+    public TimeSpan GetTimespanFromSeconds(float realtimeSeconds)
+    {
+        var daysPerSecond = 1 / DAY_IN_REALTIME;
+        return TimeSpan.FromSeconds(daysPerSecond * realtimeSeconds);
     }
 
     public void StartTheWorld()
