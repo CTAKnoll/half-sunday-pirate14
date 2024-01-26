@@ -88,10 +88,12 @@ You are attending a local ball when a dance circle forms on the dance floor. You
         // <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>> -- uncomment once get_market_price implemented
         <<modify_price $random_tulip_dance_ball 1.20 "91">>
     -> Diss a guy's tulips ({$random_tulip_dance_ball_rival} drop 20%) // anachronistic but we need to reduce the number of characters (letters not people) used in responses
-    // the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
-        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. 
-        // <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>> -- uncomment once get_market_price implemented
+        A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead.
         <<modify_price $random_tulip_dance_ball .80 "91">>
+    // the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
+        
+        // <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>> -- uncomment once get_market_price implemented
+        
             //-> Double down
             //    You invite everyone at the ball to leave and come with you to the cemetery where your grandmother is buried. (Price of {$random_tulip_dance_ball_rival} decreases by 5%)
             //      <<modify_price $random_tulip_dance_ball .95 "6 months">>
