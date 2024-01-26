@@ -157,7 +157,7 @@ namespace UI.Plants
             {
                 throw new Exception("How did you do this?!");
             }
-            if (plot.IsPlanted || !ShopCheck()) // you cant grow there, or you cant purchase
+            if (plot.IsPlanted || plot.IsWeeded || !ShopCheck()) // you cant grow there, or you cant purchase
             {
                 ReturnToOrigin();
                 return false;
