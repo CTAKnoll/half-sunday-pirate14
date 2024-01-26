@@ -83,11 +83,11 @@ title: DanceBall
 <<set $random_tulip_dance_ball_rival = random_tulip()>>
 //<<set $rival_tulip_price = get_market_price({$random_tulip_dance_ball_price})>> -- uncomment once get_market_price implemented
 You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {$random_tulip_dance_ball} tulip on the lapel of your broad brimmed black hat. 
-    -> Dance! (Price of {$random_tulip_dance_ball} increases by 20%)
+    -> Dance! (Price of {$random_tulip_dance_ball} rises 20%)
         The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising 
         // <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>> -- uncomment once get_market_price implemented
         <<modify_price $random_tulip_dance_ball 1.20 "91">>
-    -> Trash talk a guy's tulips ({$random_tulip_dance_ball_rival} drop 20%)
+    -> Diss a guy's tulips ({$random_tulip_dance_ball_rival} drop 20%) // anachronistic but we need to reduce the number of characters (letters not people) used in responses
     // the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
         A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. 
         // <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>> -- uncomment once get_market_price implemented
@@ -161,7 +161,7 @@ title: RivalTulipFarmerMerchantEtc
 // <<declare $new_tulip_price = 10>>
 //<<set $new_tulip_price = get_market_price({$new_tulip})>> -- uncomment once get_market_price implemented
 A rival tulip merchant debuts his new tulip breed at the pub, sparking an increase in demand for it.
-    -> What a jerk ({$new_tulip} market price increases by 20%)
+    -> What a jerk ({$new_tulip} tulips rise 20%)
     <<modify_price $new_tulip 1.10 "365">>
     //<<set $new_tulip_price += (get_market_price({$new_tulip}) * .20)>> -- uncomment once get_market_price implemented
 // ideally this should be weighted to show up on the market soon after this incident
@@ -240,7 +240,7 @@ title: NewTulipDrops1
 // <<set $new_tulip_science_price = get_market_price({$new_tulip_science_price})>> -- uncomment once get_market_price implemented
 The Netherlands top tulipologists have created a new type of tulip - {$new_tulip_science}
     <<modify_price $new_tulip_science 1.30 "365">>
-    -> Neat ({$new_tulip_science} price increases by 30%)
+    -> Neat ({$new_tulip_science} tulips rise 30%)
     //<<set $new_tulip_science_price += (get_market_price({$new_tulip_science}) * .30)>> -- uncomment once get_market_price implemented
 // ideally this should be weighted to show up on the market soon after this incident
 // {new_random_tulip_market_price()} += 30%
@@ -253,7 +253,7 @@ title: TulipTony
 <<declare $random_tulip_color_price = 10>>
 <<set $random_color = random_tulip_color()>>
 //<<set $random_tulip_color_price = get_market_price("{$random_tulip_color} tulip")>> -- uncomment once get_market_price implemented
-Tulip Tony who lives a stone throwy from the town crony says all {random_tulip_color()} tulips are phony. 
+Tulip Tony who lives a stone throwy from the town crony says all {$random_color} tulips are phony. 
     -> I hate Tulip Tony (Price of {$random_color} drops 30%)
     <<modify_price $random_color 0.70 "365">>
     //<<set $random_tulip_color_price -= (get_market_price("{$random_tulip_color} tulip") * 0.30)>> -- uncomment once get_market_price implemented
@@ -268,7 +268,7 @@ title: TulipBandit
 <<set $random_kind = random_tulip_kind()>>
 //<<set $random_kind_price = get_market_price("{$random_kind} tulip")>>
 The town's tulip bandit goes on a stealing spree, taking {$random_kind} tulips from all the farmers, except for you!
-    -> Lucky me! ({$random_kind} tulips increase 15%)// (Market price of {$random_kind} tulips increases by 15%)
+    -> Lucky me! ({$random_kind} tulips rise 15%)// (Market price of {$random_kind} tulips increases by 15%)
     <<modify_price $random_color 1.15 "365">>
         // in a pinch we can move the X tulip decreases by Y% for some although then it's inconsistent because sometimes their choice affects what percentage something increases or decreases by
     // {random_tulip_kind_market_price()} += 15%
@@ -281,11 +281,13 @@ title: NewsTickerNSync
 <<declare $current_fever_meter = 0>>
 <<set $current_fever_meter = fever_meter()>>
 Dutch investors are all in sync and suggest you buy, buy, buy!  // Fever meter at {$current_fever_meter}!
-    -> Catchy (Dutch Awareness Meter rises)// I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
+    -> Catchy (Prices increase 10%)// (Dutch Awareness Meter rises)// I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
+        <<modify_price "" 1.10 "90">>
+        // suppossed to be fever meter but cut for time, just adjusting to affect all tulips
         // technically you can but it disappears very quickly, could probably tweak given more time
     //<<set $current_fever_meter += $current_fever_meter * 0.05>>
     //{fever_meter()} += 5%
-    //<<set_fever_meter() 5>> -- uncomment once implemented, confirm format 1.05 or 5? TKTK
+    //<<set_fever_meter() 5>> -- uncomment once implemented, confirm format 1.05 or 5? 
 ===
 
 // dance option - show off X tulip, diss Y tulip, 
@@ -310,12 +312,13 @@ A weary Spanish sailor approaches you.
 // programming wise we may not want to hard code these and just have the two asking prices tulip_color_rate * 1.5 and by 3 multiplied by the amount of tulips they ask for 
 // could meet in the middle and do hard coded tulip ask (50 tulips) and programmatically calculate the two price suggestions at runtime
     //<<if {random_tulip_kind()} >=0>>
-        -> Provide {$random_kind_ship} ({$random_kind_ship} tulips increase by 15%)
+        -> Provide {$random_kind_ship} ({$random_kind_ship} rise 15%)
             <<modify_price $random_kind_ship 1.15 "304">>
         // {random_tulip_kind_market_price()} += 15%
         //<<set $random_kind_ship_price = get_market_price("{$random_kind_ship} tulip") * 0.15>>
-        -> Cause an international incident (Awareness rises)
-        // TKTK <<set_fever_meter 5>> -- uncomment once set_fever_meter implemented
+        -> Cause an international incident (Prices drop)
+            <<modify_price "" 0.85 "90">>
+        // <<set_fever_meter 5>> -- uncomment once set_fever_meter implemented 
     //<<else>>
     //<<jump NotEnoughTulips>>
     //<<endif>>
@@ -509,7 +512,7 @@ Mark is notorious for eating {$dumb_boy_flower_color} tulips and some believe th
 Market price of {$dumb_boy_flower_color} decreases by 10%
 //<<set $dumb_boy_flower_color_price -= (get_market_price("{$dumb_boy_flower_color} tulip") * 0.10)>>
 // {random_tulip_color_market_price()} -= 10%
-    -> Wait a strange fellow 
+    -> What a strange fellow 
     <<modify_price $dumb_boy_flower_color 0.90 "243">>
     //-> Wait, what?
         //Oh yeah Amsterdam conducts an annual census to determine who the dumbest child in the city. 
