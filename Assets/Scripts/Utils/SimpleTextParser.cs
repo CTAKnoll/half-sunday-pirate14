@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Services;
+﻿using Services;
 using UnityEngine;
 
 namespace Utils
@@ -14,10 +13,6 @@ namespace Utils
         protected void Awake()
         {
             ServiceLocator.RegisterAsService(this);
-        }
-
-        protected void Start()
-        {
             Parse();
         }
 
@@ -28,14 +23,16 @@ namespace Utils
 
         public string DeliverMarquee(int start, int window)
         {
-            return ParsedMarquee.Substring(start, window);
+            return ParsedMarquee.Substring(start % ParsedMarquee.Length, window % ParsedMarquee.Length);
         }
 
         private void Parse()
         {
             ParsedRumours = Rumours.text.Split('\n');
+            Debug.Log(ParsedRumours == null);
             var longSpace = new string(' ', 100);
             ParsedMarquee = MarqueeText.text.Replace("\n", longSpace);
+            ParsedMarquee = ParsedMarquee + " " + ParsedMarquee;
         }
     }
 }
