@@ -23,11 +23,18 @@ public class EndScreen : MonoBehaviour
     public GameOverTulip Tulip5;
     public GameOverTulip Tulip6;
 
+    [Header("SFX")]
+    public AudioEvent sfx_smallImpact;
+    public AudioEvent sfx_bigImpact;
+    public AudioEvent sfx_funnyImpact;
+
     private Fadeout Fadeout;
+    private AudioService Audio;
     private WaitForSeconds WaitYield;
 
     void Start()
     {
+        ServiceLocator.TryGetService(out Audio);
         ServiceLocator.TryGetService(out Fadeout);
         WaitYield = new WaitForSeconds(WaitPeriod);
         Fadeout.EndTheWorld += StartEndScreen;
@@ -71,44 +78,52 @@ public class EndScreen : MonoBehaviour
         if (Tulip1 != null && Tulip1.HasElement)
         {
             Tulip1.gameObject.SetActive(true);
+            Audio.PlayOneShot(sfx_smallImpact);
             yield return WaitYield;
         }
         
         if (Tulip2 != null && Tulip2.HasElement)
         {
             Tulip2.gameObject.SetActive(true);
+            Audio.PlayOneShot(sfx_smallImpact);
             yield return WaitYield;
         }
         
         if (Tulip3 != null && Tulip3.HasElement)
         {
             Tulip3.gameObject.SetActive(true);
+            Audio.PlayOneShot(sfx_smallImpact);
             yield return WaitYield;
         }
         
         if (Tulip4 != null && Tulip4.HasElement)
         {
             Tulip4.gameObject.SetActive(true);
+            Audio.PlayOneShot(sfx_smallImpact);
             yield return WaitYield;
         }
         
         if (Tulip5 != null && Tulip5.HasElement)
         {
             Tulip5.gameObject.SetActive(true);
+            Audio.PlayOneShot(sfx_smallImpact);
             yield return WaitYield;
         }
         
         if (Tulip6 != null && Tulip6.HasElement)
         {
             Tulip6.gameObject.SetActive(true);
+            Audio.PlayOneShot(sfx_smallImpact);
             yield return WaitYield;
         }
 
         DukeOrGardenText.text = ServiceLocator.LazyLoad<Economy>().IsDuke ? DukeText : NotDukeText;
         DukeOrGardenText.gameObject.SetActive(true);
+        Audio.PlayOneShot(sfx_bigImpact);
         yield return WaitYield;
         
         ThanksForPlayingText.gameObject.SetActive(true);
+        Audio.PlayOneShot(sfx_funnyImpact);
     }
 
  

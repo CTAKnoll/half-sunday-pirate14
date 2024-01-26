@@ -412,6 +412,9 @@ MonoBehaviour:
   Tulip4: {fileID: 6809849469375073176}
   Tulip5: {fileID: 3560288913051579130}
   Tulip6: {fileID: 1150482325854989119}
+  sfx_smallImpact: {fileID: 11400000, guid: bd450ae4db651cf41bf6f410e10c46f4, type: 2}
+  sfx_bigImpact: {fileID: 11400000, guid: 59a898efc36702d489b3ee4cd5059872, type: 2}
+  sfx_funnyImpact: {fileID: 11400000, guid: 669821bff40ce36499665a2edde05477, type: 2}
 --- !u!1 &7486914634829544413
 GameObject:
   m_ObjectHideFlags: 0
