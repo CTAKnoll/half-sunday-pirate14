@@ -28,6 +28,8 @@ namespace Plants
             Sunshine,
             Tangerine, 
             Coral,
+            Inflamed,
+            Pollened
         }
 
         public static Dictionary<TulipColor, string> ColorToStringMapping = new Dictionary<TulipColor, string>
@@ -42,6 +44,8 @@ namespace Plants
             [TulipColor.Sunshine] = "Sunshine",
             [TulipColor.Tangerine] = "Tangerine",
             [TulipColor.Coral] = "Coral",
+            [TulipColor.Inflamed] = "Inflamed",
+            [TulipColor.Pollened] = "Pollened",
         };
         
         public static Dictionary<TulipKind, string> KindToStringMapping = new Dictionary<TulipKind, string>

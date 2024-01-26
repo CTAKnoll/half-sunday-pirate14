@@ -75,6 +75,8 @@ namespace Plants
         public ColorBlob Sunshine;
         public ColorBlob Tangerine;
         public ColorBlob Coral;
+        public ColorBlob Inflamed;
+        public ColorBlob Pollened;
         
 
         public Dictionary<(TulipVarietal, TulipStage), Sprite> Cache;
@@ -109,6 +111,10 @@ namespace Plants
                 case TulipColor.Tangerine: color = Tangerine;
                     break;
                 case TulipColor.Coral: color = Coral;
+                    break;
+                case TulipColor.Inflamed: color = Inflamed;
+                    break;
+                case TulipColor.Pollened: color = Pollened;
                     break;
             }
 
