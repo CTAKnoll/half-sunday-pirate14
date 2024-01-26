@@ -118,7 +118,7 @@ namespace Plants
         public TulipArtBlob GetTulipArtData(TulipVarietal varietal)
         {
             TulipArtBlob blob = Plain;
-            switch (varietal.Kind)
+            /*switch (varietal.Kind)
             {
                 case TulipKind.Fancy: blob = Fancy;
                     break;
@@ -126,7 +126,7 @@ namespace Plants
                     break;
                 case TulipKind.Striped: blob = Striped;
                     break;
-            }
+            }*/
 
             return blob;
         }

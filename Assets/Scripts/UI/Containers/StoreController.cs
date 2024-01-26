@@ -22,13 +22,6 @@ namespace UI.Containers
             Morocco
         }
 
-        public Dictionary<MerchantOrigin, TulipData.TulipKind> KindPreferences = new()
-        {
-            [MerchantOrigin.Ottoman] = TulipData.TulipKind.Spotted,
-            [MerchantOrigin.Venice] = TulipData.TulipKind.Fancy,
-            [MerchantOrigin.Morocco] = TulipData.TulipKind.Striped,
-        };
-        
         public Dictionary<MerchantOrigin, TulipData.TulipColor[]> ColorPreferences = new()
         {
             [MerchantOrigin.Ottoman] = new [] { TulipData.TulipColor.Yellow, TulipData.TulipColor.Pink, TulipData.TulipColor.Tangerine, TulipData.TulipColor.Red },
@@ -79,17 +72,17 @@ namespace UI.Containers
         private TulipData GenerateTulipOfMerchantType()
         {
             TulipData.TulipColor color;
-            TulipData.TulipKind kind;
+            TulipData.TulipKind kind = TulipData.TulipKind.Plain;
             
             double checkVal = new Random().NextDouble();
-            if (checkVal > .45f)
+            /*if (checkVal > .45f)
                 kind = TulipData.TulipKind.Plain;
             else if (checkVal > .1f)
                 kind = KindPreferences[ShopOrigin];
             else if (checkVal > .05f)
                 kind = KindPreferences[(MerchantOrigin) mod((int)ShopOrigin - 1, KindPreferences.Count)];
             else
-                kind = KindPreferences[(MerchantOrigin) mod((int)ShopOrigin - 2, KindPreferences.Count)];
+                kind = KindPreferences[(MerchantOrigin) mod((int)ShopOrigin - 2, KindPreferences.Count)];*/
             
             checkVal = new Random().NextDouble();
             if (checkVal > .3f)

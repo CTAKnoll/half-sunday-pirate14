@@ -48,17 +48,17 @@ namespace Plants
         public static Dictionary<TulipKind, string> KindToStringMapping = new Dictionary<TulipKind, string>
         {
             [TulipKind.Plain] = "Plain",
-            [TulipKind.Fancy] = "Fancy",
-            [TulipKind.Spotted] = "Spotted",
-            [TulipKind.Striped] = "Striped",
+            //[TulipKind.Fancy] = "Fancy",
+            //[TulipKind.Spotted] = "Spotted",
+            //[TulipKind.Striped] = "Striped",
         };
         
         public enum TulipKind
         {
             Plain,
-            Fancy,
-            Spotted,
-            Striped,
+            //Fancy,
+            //Spotted,
+            //Striped,
             Random
         }
 
