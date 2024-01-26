@@ -643,7 +643,8 @@ Emperor Ferdinand II is no longer the king of Bohemia and he has been replaced b
 ===
 
 title: BubbleAboutToBurst
-date: February 01 1637
+tags: 02/01/1637
+// date: February 01 1637
 // Date: February 1637
 ---
 // <<declare $all_tulips_price_prepop = 1000>>
@@ -657,7 +658,8 @@ During a recent tulip bulb auction at a pub, no one bid on one of the tulips.
 
 title: BubbleIsBurstingAndPeopleAreTicked
 // Date: Sometime around / after February 1637
-date: March 03 1637
+tags: 03/03/1637
+// date: March 03 1637
 ---
 // /<<declare $all_tulips_price_monkeys = 1000>>
 // <<set $all_tulips_price_monkeys_price = all_tulips_market_price()>>
