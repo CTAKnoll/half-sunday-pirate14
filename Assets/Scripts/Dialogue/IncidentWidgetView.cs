@@ -10,6 +10,6 @@ public class IncidentWidgetView : UIView<IncidentWidgetModel>
     TMP_Text debugDisplayText;
     public override void UpdateViewWithModel(IncidentWidgetModel model)
     {
-        debugDisplayText.text = model.yarnNodeName;
+        ///debugDisplayText.text = model.yarnNodeName;
     }
 }
