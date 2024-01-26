@@ -26,6 +26,9 @@ namespace UI.Plants
 
         private AudioService _audio;
         private Economy Economy;
+
+        public bool IsHeld;
+        
         public TulipController(TulipTemplate template, Transform parent, TulipData data) : base(template, parent)
         {
             Data = data;
@@ -57,6 +60,7 @@ namespace UI.Plants
         
         private void OnHoldStarted()
         {
+            IsHeld = true;
             View.TooltipText = null;
             RegisterForTooltips();
 
@@ -75,6 +79,7 @@ namespace UI.Plants
 
         private void OnHoldEnded()
         {
+            IsHeld = false;
             if (IsOverBucket(out Bucket consumer) && ControllerDb.GetControllerFromView(consumer.interactable, out IUIController contr))
             {
                 if (contr is PlotController plot) // we're dropping on a plot
