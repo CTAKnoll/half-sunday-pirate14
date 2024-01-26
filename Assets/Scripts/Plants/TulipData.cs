@@ -457,7 +457,6 @@ namespace Plants
                 Timeline.AddTimelineEvent(this, Cleanup, Timeline.FromNow(0, 0, 90)); // remove self when dead
             }
             
-
             StageChanged?.Invoke();
         }
         
@@ -472,6 +471,7 @@ namespace Plants
                 
                 Timeline.RemoveAllEvents(this);
                 Stage = currStage;
+                StageChanged?.Invoke();
                 Timeline.AddRecurring(this, AdvanceStage, TimeSpan.FromDays(60)); // Go back to not choking rate. This should be the same value as schedule in Plant
             };
             Stage =  TulipStage.Choking;
