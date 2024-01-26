@@ -193,7 +193,7 @@ namespace UI.Plants
 
         private void HandleWeedStage()
         {
-            if ((int)Weed.Stage == (int)WeedData.WeedStage.Mature)
+            if (Weed != null && (int)Weed.Stage == (int)WeedData.WeedStage.Mature)
             {
                 Tulip?.ChokeWithWeed(Weed);
             }
