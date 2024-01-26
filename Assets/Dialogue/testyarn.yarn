@@ -330,7 +330,7 @@ title: ThisIsNotADril
 // Needs: $random_tulip, $random_tulip_market_price
 // An older strange looking gentleman approaches you. He is haggard in appearance and is dressed in a plain tan tunic. 
 An older strange looking gentleman spent 2,000 guilders on {$dril_tulip} tulips last month. Many speculate he will spend as much, if not more, next month.
-    -> That's a lot of tulips! ({random_tulip()} tulips increase by 20%)
+    -> That's a lot of tulips! ({random_tulip()} rise by 20%)
     <<modify_price $dril_tulip 1.20 "91">>
     //<<set $dril_price += (get_market_price($dril_tulip) * 0.20)>>
     // {random_tulip_market_price()} += 20%
