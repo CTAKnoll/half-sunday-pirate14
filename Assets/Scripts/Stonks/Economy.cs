@@ -189,7 +189,7 @@ namespace Stonks
         public void WinCompetition(Competitions.CompetitionResults result)
         {
             Funds += result.PlayerPayout;
-            ServiceLocator.LazyLoad<FeverMode>().Awareness.Value += 5f * (float) Math.Pow(2, -1 * (result.PlayerPlacement - 3));
+            ServiceLocator.LazyLoad<FeverMode>().Awareness.Value += .05f * (float) Math.Pow(2, -1 * (result.PlayerPlacement - 3));
             TulipEconomyData[result.FirstPlace].AddHotStreak(TimeSpan.FromDays(60));
             TulipEconomyData[result.ThirdPlace].AddColdStreak(TimeSpan.FromDays(60));
             FundsChanged?.Invoke(Funds);
