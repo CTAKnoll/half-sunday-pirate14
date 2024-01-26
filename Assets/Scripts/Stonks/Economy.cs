@@ -30,11 +30,14 @@ namespace Stonks
 
         private AlertText AlertText;
         private Timeline Timeline;
+        private FeverMode FeverMode;
 
         public Economy()
         {
             Funds = StartingFunds;
             TulipEconomyData = new();
+            ServiceLocator.TryGetService(out FeverMode);
+            
             Timeline = ServiceLocator.LazyLoad<Timeline>();
             Timeline.MarketCrashed += CrashTheMarket;
         }
@@ -208,8 +211,8 @@ namespace Stonks
 
         private void CrashTheMarket()
         {
-            TulipEconomy.TickMinimum = 0.9f;
-            TulipEconomy.TickMaximum = 0.98f;
+            TulipEconomy.TickMinimum = 0.90f * (float) Math.Pow(.99f, FeverMode.FeverLevel.Value);
+            TulipEconomy.TickMaximum = 0.98f * (float) Math.Pow(.99f, FeverMode.FeverLevel.Value);
             foreach (var varietal in TulipEconomyData)
             {
                 varietal.Value.AddColdStreak(TimeSpan.FromDays(10000)); // also cold streak forever

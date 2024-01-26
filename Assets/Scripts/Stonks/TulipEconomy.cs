@@ -17,8 +17,8 @@ namespace Stonks
         public static float FeverVolatileMin = 0.97f;
         public static float FeverVolatileMax = 1.03f;
 
-        public static float FeverMinLevelUp = 0.994f;
-        public static float FeverMaxLevelUp = 1.007f;
+        public static float FeverMinLevelUp = 0.995f;
+        public static float FeverMaxLevelUp = 1.005f;
         
         public struct IncidentModifier
         {
