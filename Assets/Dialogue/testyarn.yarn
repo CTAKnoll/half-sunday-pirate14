@@ -90,7 +90,7 @@ You are attending a local ball when a dance circle forms on the dance floor. You
         The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising 
         // <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>> -- uncomment once get_market_price implemented
         <<modify_price $random_tulip_dance_ball 1.20 "91">>
-    -> Trash talk a guy's tulips ({$random_tulip_dance_ball_rival} price decrease by 20%)
+    -> Trash talk a guy's tulips ({$random_tulip_dance_ball_rival} drop 20%)
     // the man with a {$random_tulip_dance_ball_rival} on their lapel currently in the middle of the dance circle who is doing an adequate but by no means impressive dance.
         A hush falls over the crowd after you yelled that your grandmother could dance better than them and she is dead. 
         // <<set $rival_tulip_price -= get_market_price({$random_tulip_dance_ball_rival}) * .20>> -- uncomment once get_market_price implemented
@@ -283,8 +283,8 @@ title: NewsTickerNSync
 // Needs: $fever_meter
 <<declare $current_fever_meter = 0>>
 <<set $current_fever_meter = fever_meter()>>
-Dutch investors are all in sync and suggest you buy, buy, buy! // Fever meter at {$current_fever_meter}!
-    -> Catchy // I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
+Dutch investors are all in sync and suggest you buy, buy, buy!  // Fever meter at {$current_fever_meter}!
+    -> Catchy (Dutch Awareness Meter rises)// I am seeing if we can just have a pop up without response options, doesn't make sense to have a box with Ok in it if there is already a continue button
         // technically you can but it disappears very quickly, could probably tweak given more time
     //<<set $current_fever_meter += $current_fever_meter * 0.05>>
     //{fever_meter()} += 5%
@@ -568,16 +568,16 @@ title: ComissionArtistTulipBook
 <<set $random_tulip2_type = random_tulip()>>
 // Need: $random_tulip, $random_tulip2, $random_tulip3,
 You comission a local artist to render one of your tulips.
-    -> {$random_tulip} tulip (Price of {$random_tulip} has increased by 15%)
+    -> {$random_tulip} tulip ({$random_tulip} rise 15%)
         // $random_tulip += 15%
         <<modify_price $random_tulip 1.15 "304">>
         //<<set $random_tulip_price += (get_market_price($random_tulip) * 0.15)>>
-    -> {$random_tulip1} tulip (Price of {$random_tulip1} has increased by 15%)
+    -> {$random_tulip1} tulip ({$random_tulip1} rise 15%)
         //The market price of $random_tulip2 has increased by 15%
         //<<set $random_tulip_price1 += (get_market_price($random_tulip1) * 0.15)>>
         // $random_tulip2 += 15%
         <<modify_price $random_tulip1 1.15 "304">>
-    -> {$random_tulip2_type} tulip (Price of {$random_tulip2_type} has increased by 15%)
+    -> {$random_tulip2_type} tulip ({$random_tulip2_type} rise 15%)
         //The market price of $random_tulip3 has increased by 15%
         //<<set $random_tulip_price2 += (get_market_price($random_tulip2) * 0.15)>>
         // $random_tulip3 += 15%
@@ -653,7 +653,7 @@ date: February 01 1637
 // <<declare $all_tulips_price_prepop = 1000>>
 // <<set $all_tulips_prepop_price = all_tulips_market_price()>>
 During a recent tulip bulb auction at a pub, no one bid on one of the tulips. 
-    -> I'm sure prices will bounce back. (Market price tulips decrease 3%) 
+    -> Prices will bounce back (Tulips drop 3%) 
     <<modify_price "" 0.97 "182">>
     // <<set $all_tulips_prepop_price -= ($all_tulips_prepop_price * 0.03)>>
 // {all_tulips_market_price()} -= 3%
