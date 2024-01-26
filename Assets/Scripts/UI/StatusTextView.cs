@@ -6,6 +6,10 @@ namespace UI
     {
         public TextMeshProUGUI DateText;
         public TextMeshProUGUI FundsText;
+
+        public AudioEvent sfx_gained;
+        public AudioEvent sfx_lost;
+
         public override void UpdateViewWithModel(StatusTextModel model)
         {
             DateText.text = model.DateText;

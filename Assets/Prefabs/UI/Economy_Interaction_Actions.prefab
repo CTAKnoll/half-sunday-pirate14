@@ -275,8 +275,8 @@ MonoBehaviour:
   sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
   NumYears: 20
-  sfx_futurePurchased: {fileID: 11400000, guid: 62781b7aa80de4046acd08867a3b8444, type: 2}
-  sfx_futurePayout: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
+  sfx_futurePurchased: {fileID: 0}
+  sfx_futurePayout: {fileID: 0}
 --- !u!224 &8243662010548454420 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
@@ -698,8 +698,8 @@ MonoBehaviour:
   sfx_onRelease: {fileID: 11400000, guid: 1179ca0f8e571a44dacc8e1b758c5505, type: 2}
   Priority: 2
   NumYears: 5
-  sfx_futurePurchased: {fileID: 11400000, guid: 62781b7aa80de4046acd08867a3b8444, type: 2}
-  sfx_futurePayout: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
+  sfx_futurePurchased: {fileID: 0}
+  sfx_futurePayout: {fileID: 0}
 --- !u!224 &5572179422333410872 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8256534908737577777, guid: 32d3751aa4a1bc948b4dbc0b92be6a1d, type: 3}
@@ -886,7 +886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   TooltipText: Spend a hefty sum of $10000 to become a real Duke!
-  sfx_onClick: {fileID: 0}
+  sfx_onClick: {fileID: 11400000, guid: f4157e2ed5945794abb8b2af297de1b7, type: 2}
   sfx_onRelease: {fileID: 0}
   Priority: 2
 --- !u!1001 &7222519768149520048

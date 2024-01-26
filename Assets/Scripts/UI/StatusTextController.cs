@@ -20,7 +20,16 @@ namespace UI
 
         private void UpdateFunds(float newFunds)
         {
-            Model.FundsText = "$" +  newFunds.ToString("F2");
+            float.TryParse(Model.FundsText.Substring(1), out float oldFunds);
+            if(newFunds > oldFunds)
+                Audio.PlayOneShot(View.sfx_gained);
+
+            if(oldFunds > newFunds)
+                Audio.PlayOneShot(View.sfx_lost);
+
+
+            Model.FundsText = "$" +  newFunds.ToString("N2");
+
             UpdateViewAtEndOfFrame();
         }
     }

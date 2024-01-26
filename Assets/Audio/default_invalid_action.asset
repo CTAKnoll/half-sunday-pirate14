@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77cfa732fe789b047bd323430ac7552b, type: 3}
-  m_Name: money_lost
+  m_Name: default_invalid_action
   m_EditorClassIdentifier: 
-  _clip: {fileID: 8300000, guid: 09a540a7e285ace41ada4d6fdacf27cc, type: 3}
+  _clip: {fileID: 8300000, guid: 5a10b462e29f6e0439932244d691c11f, type: 3}
   loop: 0
   volume: 1
   mixerGroup: {fileID: 0}

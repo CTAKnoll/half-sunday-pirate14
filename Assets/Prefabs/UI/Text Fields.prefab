@@ -205,6 +205,8 @@ MonoBehaviour:
   Priority: 2
   DateText: {fileID: 1461095287451091074}
   FundsText: {fileID: 388915171240571803}
+  sfx_gained: {fileID: 11400000, guid: 45d0e65a27e6e1c478a2d0256a5b491d, type: 2}
+  sfx_lost: {fileID: 11400000, guid: 62781b7aa80de4046acd08867a3b8444, type: 2}
 --- !u!1 &7298496463322192409
 GameObject:
   m_ObjectHideFlags: 0
