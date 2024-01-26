@@ -20,6 +20,7 @@
 
 title: TulipCompetition
 ---
+competition: competition
 // Needs: $player_tulip_type (what they submitted by dragging into box), $competitor_tulip_type1 (can be literally anything, does not have to have ever been in market), $competitor_tulip_type2
 
 Congratulations! Your tulip finished in {get_player_place()} place! 
@@ -85,7 +86,7 @@ title: DanceBall
 // <<set $random_tulip_dance_ball_price = get_market_price({$random_tulip_player_dance})>> -- uncomment once get_market_price implemented
 <<set $random_tulip_dance_ball_rival = random_tulip()>>
 //<<set $rival_tulip_price = get_market_price({$random_tulip_dance_ball_price})>> -- uncomment once get_market_price implemented
-You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {$random_tulip_dance_ball} tulip on the lapel of your broadbrimmed black hat. 
+You are attending a local ball when a dance circle forms on the dance floor. You are sporting your finest {$random_tulip_dance_ball} tulip on the lapel of your broad brimmed black hat. 
     -> Dance! (Price of {$random_tulip_dance_ball} increases by 20%)
         The entire crowd is quite impressed with your mastery of the art of dance. This proved to be excellent advertising 
         // <<set $random_tulip_dance_ball_price += get_market_price({$random_tulip_dance_ball_price}) * .20>> -- uncomment once get_market_price implemented
@@ -568,16 +569,16 @@ title: ComissionArtistTulipBook
 <<set $random_tulip2_type = random_tulip()>>
 // Need: $random_tulip, $random_tulip2, $random_tulip3,
 You comission a local artist to render one of your tulips.
-    -> {$random_tulip} tulip ({$random_tulip} rise 15%)
+    -> {$random_tulip} ({$random_tulip} rise 15%)
         // $random_tulip += 15%
         <<modify_price $random_tulip 1.15 "304">>
         //<<set $random_tulip_price += (get_market_price($random_tulip) * 0.15)>>
-    -> {$random_tulip1} tulip ({$random_tulip1} rise 15%)
+    -> {$random_tulip1} ({$random_tulip1} rise 15%)
         //The market price of $random_tulip2 has increased by 15%
         //<<set $random_tulip_price1 += (get_market_price($random_tulip1) * 0.15)>>
         // $random_tulip2 += 15%
         <<modify_price $random_tulip1 1.15 "304">>
-    -> {$random_tulip2_type} tulip ({$random_tulip2_type} rise 15%)
+    -> {$random_tulip2_type} ({$random_tulip2_type} rise 15%)
         //The market price of $random_tulip3 has increased by 15%
         //<<set $random_tulip_price2 += (get_market_price($random_tulip2) * 0.15)>>
         // $random_tulip3 += 15%
