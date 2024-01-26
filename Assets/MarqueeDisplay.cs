@@ -37,7 +37,7 @@ public class MarqueeDisplay : MonoBehaviour
         if (TextServer == null)
             ServiceLocator.TryGetService(out TextServer);
 
-        RumoursText.text = $"\"{TextServer.DeliverRumour()}\"";
+        RumoursText.text = $"{TextServer.DeliverRumour()}";
     }
     
     void FixedUpdate()

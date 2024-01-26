@@ -42,8 +42,8 @@ namespace UI.Containers
         public StoreController(StoreView view, StoreModel model) : base(view, model)
         {
             Server = new Store(View.SlotControllers);
-            Timeline.AddRecurring(this, RefreshStore, TimeSpan.FromDays(20));
-            Timeline.AddRecurring(this, ChangeMerchant, TimeSpan.FromDays(120));
+            Timeline.AddRecurring(this, RefreshStore, TimeSpan.FromDays(15));
+            Timeline.AddRecurring(this, ChangeMerchant, TimeSpan.FromDays(60));
         }
 
         public void InsertMerchantImages(Dictionary<MerchantOrigin, Sprite> sprites)
