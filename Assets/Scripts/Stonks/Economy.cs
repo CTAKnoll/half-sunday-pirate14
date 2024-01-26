@@ -147,7 +147,7 @@ namespace Stonks
         {
             if (data.BuyPrice < 0)
             {
-                data.BuyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.25f, 0.5f);
+                data.BuyPrice = TulipEconomyData[data.Varietal].Price * FloatExtensions.RandomBetween(0.2f, 0.4f);
             }
         }
 

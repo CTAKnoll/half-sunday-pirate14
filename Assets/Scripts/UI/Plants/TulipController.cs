@@ -9,6 +9,7 @@ using UI.Model.Templates;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Utils;
 
 namespace UI.Plants
 {
@@ -46,10 +47,10 @@ namespace UI.Plants
             View.TooltipText = Data.ToString();
 
             if (Data.Stage == TulipData.TulipStage.Picked)
-                View.TooltipText += $"\nCurrent: {Economy.GetCurrentPrice(Data.Varietal)}";
+                View.TooltipText += $"\nCurrent: {Economy.GetCurrentPrice(Data.Varietal).RoundToDecimalPlaces(2)}";
 
             if (!Data.OwnedByPlayer)
-                View.TooltipText += $"\nPrice: {Economy.QueryTulipPrice(Data)}";
+                View.TooltipText += $"\nPrice: {Economy.QueryTulipPrice(Data).RoundToDecimalPlaces(2)}";
             
             RegisterForTooltips();
         }
