@@ -142,7 +142,7 @@ public class Timeline : IService
         List<(object, Action)> toDequeue = new();
         foreach(var timeEvent in TimelineEvents.UnorderedItems)
         {
-            if(timeEvent.Element.Item1.Equals(owner))
+            if (timeEvent.Element.Item1 == null || timeEvent.Element.Item1.Equals(owner))
                 toDequeue.Add(timeEvent.Element);
         }
 

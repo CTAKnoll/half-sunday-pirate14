@@ -206,6 +206,9 @@ namespace UI.Plants
         // RE: No, this is patrick
         private void SpreadWeeds()
         {
+            if (Weed == null)
+                return;
+
             System.Random gen = new System.Random();
             Array directions = Enum.GetValues(typeof(PlotSpreadDirection));
             SpreadDirection = (PlotSpreadDirection) directions.GetValue(gen.Next(directions.Length));
