@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using Services;
 using UnityEngine;
 using Utils;
@@ -10,7 +11,31 @@ public class Timeline : IService
     public const int START_YEAR = 1600;
     public const int START_MONTH = 1;
     public const int START_DAY = 1;
-    public const float DAY_IN_REALTIME = 0.075f;
+
+    public enum GameSpeed
+    {
+        Paused,
+        VerySlow,
+        Slow,
+        Normal, 
+        Fast
+    }
+
+    private const float DAY_IN_REALTIME = 0.1f;
+    public float DayIntervalInRealTime => IsPaused ? -1 : DAY_IN_REALTIME / SpeedMultTable[Speed];
+    public bool IsPaused = false;
+    public GameSpeed Speed => IsPaused ? GameSpeed.Paused : SetSpeed;
+    
+    private GameSpeed SetSpeed = GameSpeed.Normal;
+    private readonly Dictionary<GameSpeed, float> SpeedMultTable = new()
+    {
+        [GameSpeed.Paused] = 0,
+        [GameSpeed.VerySlow] = 0.25f,
+        [GameSpeed.Slow] = 0.5f,
+        [GameSpeed.Normal] = 1f,
+        [GameSpeed.Fast] = 2f,
+    };
+    
 
     private WaitForSeconds DayPasses;
 
@@ -21,8 +46,9 @@ public class Timeline : IService
     private PriorityQueue<(object, Action), DateTime> TimelineEvents;
     public event Action<DateTime> DateChanged;
     public event Action MarketCrashed;
-
-    private Ticker Ticker;
+    public event Action GamePaused;
+    public event Action<GameSpeed> GameUnpaused;
+    public event Action<GameSpeed> SpeedChanged;
     
     private MainThreadScheduler MainThread;
     private Coroutine ZaWarudo;
@@ -31,13 +57,39 @@ public class Timeline : IService
     {
         Now = START_DATE;
         TimelineEvents = new();
-        Ticker = ServiceLocator.LazyLoad<Ticker>();
         ServiceLocator.TryGetService(out MainThread);
 
         CRASH_DATE = FromNow(37, 2);
-        DayPasses = new WaitForSeconds(DAY_IN_REALTIME);
+        DayPasses = new WaitForSeconds(DayIntervalInRealTime);
 
         AddTimelineEvent(this, CrashTheMarket, CRASH_DATE);
+    }
+
+    public void SetGameSpeed(GameSpeed speed)
+    {
+        if (speed == GameSpeed.Paused)
+        {
+            IsPaused = true;
+            GamePaused?.Invoke();
+            return;
+        }
+
+        if (IsPaused)
+            GameUnpaused?.Invoke(speed);
+        else
+            SpeedChanged?.Invoke(speed);
+        
+        IsPaused = false;
+        SetSpeed = speed;
+        DayPasses = new WaitForSeconds(DayIntervalInRealTime);
+    }
+
+    public void TogglePause()
+    {
+        if(IsPaused)
+            SetGameSpeed(SetSpeed);
+        else
+            SetGameSpeed(GameSpeed.Paused);
     }
 
     public DateTime GetDateBeforeInRealtime(float realtimeSeconds, DateTime date)
@@ -48,7 +100,7 @@ public class Timeline : IService
 
     public TimeSpan GetTimespanFromSeconds(float realtimeSeconds)
     {
-        var daysPerSecond = 1 / DAY_IN_REALTIME;
+        var daysPerSecond = 1 / DayIntervalInRealTime;
         return TimeSpan.FromDays(daysPerSecond * realtimeSeconds);
     }
 
@@ -66,8 +118,11 @@ public class Timeline : IService
     {
         while (true)
         {
-            yield return DayPasses;
-            MoveToNextDay();
+            if (!IsPaused)
+            {
+                yield return DayPasses;
+                MoveToNextDay();
+            }
         }
     }
 
