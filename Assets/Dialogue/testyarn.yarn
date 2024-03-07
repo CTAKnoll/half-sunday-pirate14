@@ -375,7 +375,7 @@ title: TravelingJesterFirstMeeting
 // I would like wacky colors and text effects if possible for his dialogue - especially the HELLO
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
 <<if visited("TravelingJesterFirstMeeting") == true>>
-    <<jump TravelingClownConclusionOrIsIt>>
+    <<jump TravelingClownSecondMeeting>>
 <<endif>>
 <<declare $clown_tulip1 = "">>
 <<declare $clownspray1 = false>>
@@ -421,79 +421,79 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
 //===
 
 
-//title: TravelingClownSecondMeeting
-//---
-//<<if visited("TravelingClownSecondMeeting") == true>>
-    //<<jump TravelingClownThirdMeeting>>
-//<<endif>>
-//<<declare $clown_tulip2 = "">>
-//<<declare $clown_price2 = 10>>
-//<<declare $clownspray2 = false>>
-//<<set $clown_tulip2 = random_tulip()>>
+title: TravelingClownSecondMeeting
+---
+<<if visited("TravelingClownSecondMeeting") == true>>
+    <<jump TravelingClownThirdMeeting>>
+<<endif>>
+<<declare $clown_tulip2 = "">>
+<<declare $clown_price2 = 10>>
+<<declare $clownspray2 = false>>
+<<set $clown_tulip2 = random_tulip()>>
 //<<set $clown_price2 = get_market_price($clown_tulip2)>>
 // I would like wacky colors and text effects if possible for his dialogue
-    //<<if $clownspray1 == true>>
-        //Lester - "Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?"
-            //-> Smell flower
-                //You get sprayed by water and news spreads. (Price of {$clown_tulip2} tulips decrease 3%)
-                //<<set $clownspray2 to true>>
+    <<if $clownspray1 == true>>
+        Lester - "Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?"
+            -> Smell flower
+                You get sprayed by water and news spreads. (Price of {$clown_tulip2} tulips decrease 3%)
+                <<set $clownspray2 to true>>
                 // Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {$clown_tulip2} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 3%.
                 //random_tulip_market_price -= 5%
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
-                //<<modify_price $clown_tulip2 0.97 "182">>
-            //-> Don't smell flower
-                //Lester - "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
-    //<<else>>
-        //Alright surely this time you will smell my rose, right?
-            //-> Yes
-                //You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
-            //-> No
-                //Lester - "Well you stick to your convinctions, I'll give you that."
+                <<modify_price $clown_tulip2 0.97 "182">>
+            -> Don't smell flower
+                Lester - "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
+    <<else>>
+        Alright surely this time you will smell my rose, right?
+            -> Yes
+                You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
+            -> No
+                Lester - "Well you stick to your convinctions, I'll give you that."
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
-    //<<endif>>
+    <<endif>>
 
 // if else depending on if you let him spray you or not; clownspray1 == true; make sure to set earlier, check space adventure thing for example I believe 
 
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
 
-//===
+===
 
-//title: TravelingClownThirdMeeting
-//---
-//<<if visited("TravelingClownThirdMeeting") == true>>
-    //<<jump TravelingClownConclusionOrIsIt>>
-//<<endif>>
-//<<declare $clown_tulip3 = "">>
-//<<declare $clown_price3 = 10>>
-//<<declare $clownspray3 = false>>
-//<<declare $supersecretclownending = false>>
+title: TravelingClownThirdMeeting
+---
+<<if visited("TravelingClownThirdMeeting") == true>>
+    <<jump TravelingClownConclusionOrIsIt>>
+<<endif>>
+<<declare $clown_tulip3 = "">>
+<<declare $clown_price3 = 10>>
+<<declare $clownspray3 = false>>
+<<declare $supersecretclownending = false>>
 // I would like wacky colors and text effects if possible for his dialogue
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
 // blimpy, blimby, some of these names seem familiar so may be a reference to something, I think blimby is from the Underdogs podcast where they improv movie trailers, pretty funny 
 // flumpy, boppy, bingy, winky, tinky, 
 // do we want a Team Rocket Rival tulip farmer that comes and taunts you?
 // I would like wacky colors and text effects if possible for his dialogue
-    //<<if $clownspray2 == true>>
-        //Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?
-            //-> Smell flower
-                //<<set $clownspray3 to true>>
-                //<<set $supersecretclownending to true>>
-                //You get sprayed by water and news spreads. (Price of {$clown_tulip3} tulips decrease 3%)
+    <<if $clownspray2 == true>>
+        Hey! Long time, no see buddy! How's the tulip biz? Business got you down? You know what always cheers me up? Taking a big whiff of this right here flower! Whaddya say?
+            -> Smell flower
+                <<set $clownspray3 to true>>
+                <<set $supersecretclownending to true>>
+                You get sprayed by water and news spreads. (Price of {$clown_tulip3} tulips decrease 3%)
                 // Slightly less surpirisingly this time, water shoots out of the rose and hits you in the face. You stomp on your {$clown_tulip3} tulips in anger at your own foolishness. Again word travels fast. Market price of those tulips decrease by 3%.
                 //<<set $clown_price2 -= (get_market_price($clown_tulip2) * 0.03)>>
-                //<<modify_price $clown_tulip3 0.97 "182">>
-            //-> Don't smell flower
-                //Lester - "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
-    //<<else>>
-        //Alright surely this time you will smell my rose, right?
-            //-> Yes
-                ///You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
-            //-> No
-                //Lester - "Well you stick to your convinctions, I'll give you that."
+                <<modify_price $clown_tulip3 0.97 "182">>
+            -> Don't smell flower
+                Lester - "Darn, I really thought you were the chosen one, ya know. The one to bring balance to the tulip and the rose."
+    <<else>>
+        Alright surely this time you will smell my rose, right?
+            -> Yes
+                You smell the rose, it does not smell like anything. "Huh that's weird, it's not working" Lester says wonderingly. Oh well, maybe next time.
+            -> No
+                Lester - "Well you stick to your convinctions, I'll give you that."
         // not sure how we want to handle this / what we want to do in this situation, they are locked out of the super secret clown ending (unless we want it to be three times in a row but that would require more clown encounters which we may not have time for)
-    //<<endif>>
+    <<endif>>
     
-//===
+===
 
 title: TravelingClownConclusionOrIsIt
 ---
@@ -680,18 +680,18 @@ Artists have drawn paintings depicting tulip farmers and traders as monkeys.
 //<<endif>>
 ===
 
-//title: SuperSecretClownEnding
-//---
+title: SuperSecretClownEnding
+---
 // Needs: bank_balance() and total_owned_tulips_market_price() 
-//While the quiet murmurs of the market crashing are slowly growing in volume, you sit in a fine leatherchair contemplating your options. Suddenly you hear a knock at the door. 
-    //-> Answer the door
-        //Lester - "HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value."
-            //-> Alright, thank you
+While the quiet murmurs of the market crashing are slowly growing in volume, you sit in a fine leatherchair contemplating your options. Suddenly you hear a knock at the door. 
+    -> Answer the door
+        Lester - "HELLO! HELLO! HELLO! It is I, the irreverant Lester the Jester! Word around the block is that those tulips might not be as valuable as everyone thought they would be. But since you've been such a pal to me, I figured I'd return the favor. Don't ask where the money came from, but I'd like to buy all of your tulips at current market value."
+            -> Alright, thank you
                 // bank_balance() += total_owned_tulips_market_price() 
                 // <<clown_buys_all>>
-            //-> Nah, I'm good
-    //-> Ignore them, you have more presssing matters at hand
-//===
+            -> Nah, I'm good
+    -> Ignore them, you have more presssing matters at hand
+===
 
 
 
