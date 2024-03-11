@@ -57,7 +57,8 @@ public class Timeline : IService
     {
         Now = START_DATE;
         TimelineEvents = new();
-        ServiceLocator.TryGetService(out MainThread);
+        //ServiceLocator.TryGetService(out MainThread);
+        MainThread = ServiceLocator.LazyLoad<MainThreadScheduler>();
 
         CRASH_DATE = FromNow(37, 2);
         DayPasses = new WaitForSeconds(DayIntervalInRealTime);
