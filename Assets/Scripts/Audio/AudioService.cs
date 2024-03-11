@@ -73,6 +73,8 @@ namespace Services
                 source.pitch += UnityEngine.Random.Range(-1 * sound.pitchVariance, sound.pitchVariance);
             }
             source.Play();
+
+            StartCoroutine(ResetSourceSettings(source, sound.GetClip().length));
         }
 
         public void Stop(Channel channel)
@@ -80,6 +82,12 @@ namespace Services
             var source = _audioSources[(int)channel];
 
             source.Stop();
+        }
+
+        IEnumerator ResetSourceSettings(AudioSource source, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            source.pitch = 1;
         }
 
         public void PlayOneShot(AudioEvent sound)
@@ -94,6 +102,8 @@ namespace Services
             }
 
             source.PlayOneShot(sound.GetClip(), sound.volume);
+
+            StartCoroutine(ResetSourceSettings(source, sound.GetClip().length));
         }
 
     }
