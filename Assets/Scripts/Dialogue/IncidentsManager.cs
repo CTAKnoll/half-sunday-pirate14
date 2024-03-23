@@ -5,6 +5,7 @@ using UnityEngine;
 using Services;
 using Yarn.Unity;
 using Utils;
+using System.Xml;
 
 public class IncidentsManager : MonoBehaviour, IService
 {
@@ -13,6 +14,13 @@ public class IncidentsManager : MonoBehaviour, IService
 
     [field: SerializeField]
     public DialogueRunner Dialogue { get; set; }
+    public string ClownIncidentNode = "TravelingJesterFirstMeeting";
+    [Range(0, 1)]
+    public float ClownEncounterChance = 0.1f;
+    public int minMonthsDelay = 14;
+    public int maxMonthsDelay = 22;
+
+
 
     private List<string> RandomIncidents;
 
@@ -34,12 +42,13 @@ public class IncidentsManager : MonoBehaviour, IService
     private void Start()
     {
         List<string> nodes = new List<string>(Dialogue.lineProvider.YarnProject.NodeNames.ToList());
+        List<string> clownNodes = new List<string>();
         foreach (string nodeName in new List<string>(nodes))
         {
             List<string> tags = Dialogue.GetTagsForNode(nodeName).ToList();
             if (tags.Count > 0)
             {
-                if (tags[0] == "competition") // explicitly do not want competitions in our pool
+                if (tags[0] == "competition" || tags.Contains("clown")) // explicitly do not want competitions or clown events in our pool
                 {
                     nodes.Remove(nodeName);
                     continue;
@@ -49,13 +58,17 @@ public class IncidentsManager : MonoBehaviour, IService
             }
         }
         RandomIncidents = nodes;
-        _timeline.AddTimelineEvent(this, PullRandomIncident, Timeline.FromNow(0, (int) FloatExtensions.RandomBetween(14, 22)));
+        _timeline.AddTimelineEvent(this, PullRandomIncident, Timeline.FromNow(0, (int) FloatExtensions.RandomBetween(minMonthsDelay, maxMonthsDelay)));
     }
 
     private void PullRandomIncident()
     { 
-        SpawnIncident(RandomIncidents[(int)FloatExtensions.RandomBetween(0, RandomIncidents.Count)]);
-        _timeline.AddTimelineEvent(this, PullRandomIncident, Timeline.FromNow(0, (int) FloatExtensions.RandomBetween(14, 22)));
+        if(FloatExtensions.RandomBetween(0,1) <= ClownEncounterChance)
+            SpawnIncident(ClownIncidentNode);
+        else
+            SpawnIncident(RandomIncidents[(int)FloatExtensions.RandomBetween(0, RandomIncidents.Count)]);
+
+        _timeline.AddTimelineEvent(this, PullRandomIncident, Timeline.FromNow(0, (int) FloatExtensions.RandomBetween(minMonthsDelay, maxMonthsDelay)));
     }
 
     void SpawnIncident(string incYarnNode)

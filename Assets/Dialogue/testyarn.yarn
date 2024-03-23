@@ -371,6 +371,7 @@ An older strange looking gentleman spent 2,000 guilders on {$dril_tulip} tulips 
 
 
 title: TravelingJesterFirstMeeting
+tags: clown
 ---
 // I would like wacky colors and text effects if possible for his dialogue - especially the HELLO
 // Also game design question, I'm assuming we want to tell the player the outcome as well like: text text text (outcome) so: blah blah blah (Lose 10 tulips)
@@ -422,6 +423,7 @@ HELLO! I am Lester the Jester! You seem like an enterprising and learned type of
 
 
 title: TravelingClownSecondMeeting
+tags: clown
 ---
 <<if visited("TravelingClownSecondMeeting") == true>>
     <<jump TravelingClownThirdMeeting>>
@@ -459,6 +461,7 @@ title: TravelingClownSecondMeeting
 ===
 
 title: TravelingClownThirdMeeting
+tags: clown
 ---
 <<if visited("TravelingClownThirdMeeting") == true>>
     <<jump TravelingClownConclusionOrIsIt>>
@@ -681,6 +684,7 @@ Artists have drawn paintings depicting tulip farmers and traders as monkeys.
 ===
 
 title: SuperSecretClownEnding
+tags: clown
 ---
 // Needs: bank_balance() and total_owned_tulips_market_price() 
 While the quiet murmurs of the market crashing are slowly growing in volume, you sit in a fine leatherchair contemplating your options. Suddenly you hear a knock at the door. 
