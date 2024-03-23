@@ -9,6 +9,7 @@ using Utils;
 public class IncidentsManager : MonoBehaviour, IService
 {
     private Timeline _timeline;
+    private AudioService _audio;
 
     [field: SerializeField]
     public DialogueRunner Dialogue { get; set; }
@@ -17,11 +18,17 @@ public class IncidentsManager : MonoBehaviour, IService
 
     public event System.Action<string> spawnedIncident;
 
+    [Header("SFX")]
+    public AudioEvent sfx_incidentOpen;
+    public AudioEvent sfx_incidentClose;
+
     // Start is called before the first frame update
     void Awake()
     {
         ServiceLocator.RegisterAsService(this);
         _timeline = ServiceLocator.LazyLoad<Timeline>();
+        ServiceLocator.TryGetService(out _audio);
+        Dialogue.onDialogueComplete.AddListener(OnIncidentComplete);
     }
 
     private void Start()
@@ -55,5 +62,14 @@ public class IncidentsManager : MonoBehaviour, IService
     {
         // TODO: We need to check for dependencies
         spawnedIncident?.Invoke(incYarnNode);
+        Dialogue.StartDialogue(incYarnNode);
+        _audio.PlayOneShot(sfx_incidentOpen);
+        _timeline.SetGameSpeed(Timeline.GameSpeed.Paused);
+    }
+
+    void OnIncidentComplete()
+    {
+        _timeline.RestorePrevSpeed();
+        _audio.PlayOneShot(sfx_incidentClose);
     }
 }

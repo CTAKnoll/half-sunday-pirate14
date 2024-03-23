@@ -25,6 +25,7 @@ public class Timeline : IService
     public float DayIntervalInRealTime => IsPaused ? -1 : DAY_IN_REALTIME / SpeedMultTable[Speed];
     public bool IsPaused = false;
     public GameSpeed Speed => IsPaused ? GameSpeed.Paused : SetSpeed;
+    private GameSpeed _prevSpeed = GameSpeed.Normal;
     
     private GameSpeed SetSpeed = GameSpeed.Normal;
     private readonly Dictionary<GameSpeed, float> SpeedMultTable = new()
@@ -81,8 +82,16 @@ public class Timeline : IService
             SpeedChanged?.Invoke(speed);
         
         IsPaused = false;
+        _prevSpeed = SetSpeed;
         SetSpeed = speed;
         DayPasses = new WaitForSeconds(DayIntervalInRealTime);
+    }
+    /// <summary>
+    /// Restores last *non-zero* gamespeed
+    /// </summary>
+    public void RestorePrevSpeed()
+    {
+        SetGameSpeed(_prevSpeed);
     }
 
     public void TogglePause()
@@ -123,6 +132,10 @@ public class Timeline : IService
             {
                 yield return DayPasses;
                 MoveToNextDay();
+            }
+            else
+            {
+                yield return null;
             }
         }
     }

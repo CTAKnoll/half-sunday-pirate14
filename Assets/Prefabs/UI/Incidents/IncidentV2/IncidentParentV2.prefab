@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Dialogue>k__BackingField: {fileID: 2496214383219710327}
+  sfx_incidentOpen: {fileID: 11400000, guid: 0cf883bac1bd91d4d8f54d81f8ec14af, type: 2}
+  sfx_incidentClose: {fileID: 11400000, guid: 97aea359e3eb8524c920efafc3a18cb0, type: 2}
 --- !u!114 &2496214383219710327
 MonoBehaviour:
   m_ObjectHideFlags: 0
