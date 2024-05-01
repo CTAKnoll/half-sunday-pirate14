@@ -69,6 +69,9 @@ namespace UI.Plants
             PickedInitialPos = View.PickedTulipImage.gameObject.transform.position;
             Model.PickedIconPos = PickedInitialPos;
 
+            Timeline.GamePaused += () => View.Active = false;
+            Timeline.GameUnpaused += (_) => View.Active = true;
+
             UpdateViewAtEndOfFrame();
         }
 
@@ -86,6 +89,9 @@ namespace UI.Plants
 
         public void OnClick()
         {
+            if (!View.Active)
+                return;
+            
             if (IsWeeded)
             {
                 Weed.Damage();

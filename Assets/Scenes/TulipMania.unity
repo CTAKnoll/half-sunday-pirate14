@@ -407,6 +407,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 1872936985744039426, guid: 913c4d788e077e543b72565c73cf1fff, type: 3}
+      propertyPath: maxMonthsDelay
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872936985744039426, guid: 913c4d788e077e543b72565c73cf1fff, type: 3}
+      propertyPath: minMonthsDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1872936985744039426, guid: 913c4d788e077e543b72565c73cf1fff, type: 3}
+      propertyPath: ClownEncounterChance
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5832247642793024116, guid: 913c4d788e077e543b72565c73cf1fff, type: 3}
       propertyPath: m_text
       value: 

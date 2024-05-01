@@ -28,7 +28,7 @@ public class EndScreen : MonoBehaviour
     public AudioEvent sfx_bigImpact;
     public AudioEvent sfx_funnyImpact;
 
-    private Fadeout Fadeout;
+    private Overlay Fadeout;
     private AudioService Audio;
     private WaitForSeconds WaitYield;
 
@@ -61,8 +61,6 @@ public class EndScreen : MonoBehaviour
         
         if(Tulip6 != null)
             Tulip6.Initialize(5);
-        
-        Debug.Log("HOI");
         
         StartCoroutine(EndScreenCoroutine());
     }

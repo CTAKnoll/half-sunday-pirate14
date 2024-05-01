@@ -149,6 +149,7 @@ namespace Services
         public void RegisterForBack(UIInteractable target, Action onBack)
         {
             backRegistrar.Add(target, onBack);
+            Debug.Log("added");
         }
 
         public void UnregisterForBack(UIInteractable target)
@@ -319,6 +320,7 @@ namespace Services
         {
             // the back callback is special, and fires regardless of active status
             // if activity needs to be handled, deal with it in the UI system
+            Debug.Log("back fired");
             var actions = new List<Action>(backRegistrar.Values);
             foreach(Action onBack in actions)
             {

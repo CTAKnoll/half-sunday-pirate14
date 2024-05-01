@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 699020921249368956}
   - component: {fileID: 2180944744819905878}
   - component: {fileID: 1775031871299123169}
+  - component: {fileID: 5532405911614467227}
   m_Layer: 5
   m_Name: FadeOutOverlay
   m_TagString: Untagged
@@ -268,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03016d095f4f9b54f9b4364bd2d71c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Overlay: {fileID: 9148202132539824962}
+  Fadeout: {fileID: 9148202132539824962}
   DutchFlag: {fileID: 1048656030896095711}
   DutchText: {fileID: 4336019168732796528}
   FeverFlashAlpha:
@@ -321,6 +322,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Offset: {x: 0, y: 0, z: 0}
+--- !u!114 &5532405911614467227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6101863358419573630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba02c7bd67e2744290a9bd674bb82e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  TooltipText: 
+  sfx_onClick: {fileID: 0}
+  sfx_onRelease: {fileID: 0}
+  Priority: 2
 --- !u!1 &6644624765413643087
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 
-public class Fadeout : MonoBehaviour, IService
+public class Overlay : MonoBehaviour, IService
 {
-    public Image Overlay;
+    public Image Fadeout;
     public Image DutchFlag;
     public TextMeshProUGUI DutchText;
     public AnimationCurve FeverFlashAlpha;
@@ -25,12 +25,12 @@ public class Fadeout : MonoBehaviour, IService
     private AudioService Audio;
     private Timeline Timeline;
     private FeverMode FeverMode;
-    
+
     void Awake()
     {
         ServiceLocator.RegisterAsService(this);
         Timeline = ServiceLocator.LazyLoad<Timeline>();
-        ChangeAlpha(Overlay, 0);
+        ChangeAlpha(Fadeout, 0);
         ChangeAlpha(DutchFlag, 0);
         ChangeAlpha(DutchText, 0);
     }
@@ -38,9 +38,13 @@ public class Fadeout : MonoBehaviour, IService
     void Start()
     {
         ServiceLocator.TryGetService(out FeverMode);
-        FeverMode.FeverLevel.OnChanged += OnFeverLevelChanged;
-        ServiceLocator.LazyLoad<Timeline>().MarketCrashed += StartFadeOut;
         ServiceLocator.TryGetService(out Audio);
+        FeverMode.FeverLevel.OnChanged += OnFeverLevelChanged;
+
+        Timeline timeline = ServiceLocator.LazyLoad<Timeline>();
+        timeline.MarketCrashed += StartFadeOut;
+        timeline.GamePaused += PauseOverlay;
+        timeline.GameUnpaused += UnpauseOverlay;
     }
     
     private static void ChangeAlpha(Image g, float newAlpha)
@@ -86,19 +90,28 @@ public class Fadeout : MonoBehaviour, IService
 
     private void IncreaseAlpha()
     {
-        if (Overlay.color.a >= .999f)
+        if (Fadeout.color.a >= .999f)
         {
             Timeline.RemoveAllEvents(this);
             Timeline.StopTheWorld();
             
             EndTheWorld?.Invoke();
             ServiceLocator.LazyLoad<GameStateManager>().PanToState(GameStateManager.GameState.Credits);
-            ChangeAlpha(Overlay, 0);
+            ChangeAlpha(Fadeout, 0);
         }
         else
         {
-            ChangeAlpha(Overlay, Overlay.color.a + AlphaIncreasePerDay);
+            ChangeAlpha(Fadeout, Fadeout.color.a + AlphaIncreasePerDay);
         }
-            
+    }
+
+    private void PauseOverlay()
+    {
+        
+    }
+
+    private void UnpauseOverlay(Timeline.GameSpeed _)
+    {
+        
     }
 }

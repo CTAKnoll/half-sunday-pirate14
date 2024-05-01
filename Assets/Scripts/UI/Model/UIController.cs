@@ -131,7 +131,6 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
     protected ControllerDatabase ControllerDb;
     protected UIDriver UiDriver;
     protected Camera MainCamera;
-    protected Ticker Ticker;
     protected Timeline Timeline;
     protected Economy Economy;
     protected AudioService Audio;
@@ -181,7 +180,6 @@ public abstract class UIController<TView, TModel> : IUIController where TView : 
             Debug.LogError($"InputService not found when instantiating {GetType()}");
 
         ControllerDb = ServiceLocator.LazyLoad<ControllerDatabase>();
-        Ticker = ServiceLocator.LazyLoad<Ticker>();
         Timeline = ServiceLocator.LazyLoad<Timeline>();
         Economy = ServiceLocator.LazyLoad<Economy>();
         ServiceLocator.TryGetService(out Audio);
