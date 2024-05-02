@@ -90,8 +90,11 @@ namespace UI.Plants
         public void OnClick()
         {
             if (!View.Active)
+            {
+                // TODO: Play a failed audio effect here
                 return;
-            
+            }
+
             if (IsWeeded)
             {
                 Weed.Damage();

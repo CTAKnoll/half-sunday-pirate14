@@ -12,7 +12,6 @@ public class PauseManager : UIInteractable
         Timeline timeline = ServiceLocator.LazyLoad<Timeline>();
         UiDriver.RegisterForBack(this, () =>
         {
-            Debug.Log("hoi");
             timeline.TogglePause();
         });
     }

@@ -74,7 +74,10 @@ namespace UI.Plants
         private void OnHoldStarted()
         {
             if (!View.Active)
-                return; 
+            {
+                _audio.PlayOneShot(View.sfx_plant_failed);
+                return;
+            }
             
             IsHeld = true;
 

@@ -337,7 +337,6 @@ namespace Services
         {
             // the back callback is special, and fires regardless of active status
             // if activity needs to be handled, deal with it in the UI system
-            Debug.Log("back fired");
             var actions = new List<Action>(backRegistrar.Values);
             foreach(Action onBack in actions)
             {
