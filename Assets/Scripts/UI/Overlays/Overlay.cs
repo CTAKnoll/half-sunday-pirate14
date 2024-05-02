@@ -11,7 +11,9 @@ using Utils;
 public class Overlay : MonoBehaviour, IService
 {
     public Image Fadeout;
+    public Image Pause;
     public Image DutchFlag;
+    
     public TextMeshProUGUI DutchText;
     public AnimationCurve FeverFlashAlpha;
     public float FlashNumSec = 2.5f;
@@ -31,6 +33,7 @@ public class Overlay : MonoBehaviour, IService
         ServiceLocator.RegisterAsService(this);
         Timeline = ServiceLocator.LazyLoad<Timeline>();
         ChangeAlpha(Fadeout, 0);
+        ChangeAlpha(Pause, 0);
         ChangeAlpha(DutchFlag, 0);
         ChangeAlpha(DutchText, 0);
     }
@@ -84,11 +87,11 @@ public class Overlay : MonoBehaviour, IService
     private void StartFadeOut()
     {
         Timeline.AddTimelineEvent(this, 
-            () => Timeline.AddRecurring(this, IncreaseAlpha, TimeSpan.FromDays(1)), 
+            () => Timeline.AddRecurring(this, FadeoutOverTime, TimeSpan.FromDays(1)), 
             Timeline.FromNow(TimeSpan.FromDays(DaysUntilAlphaStart)));
     }
 
-    private void IncreaseAlpha()
+    private void FadeoutOverTime()
     {
         if (Fadeout.color.a >= .999f)
         {
@@ -107,11 +110,11 @@ public class Overlay : MonoBehaviour, IService
 
     private void PauseOverlay()
     {
-        
+        ChangeAlpha(Pause, 0.5f);
     }
 
     private void UnpauseOverlay(Timeline.GameSpeed _)
     {
-        
+        ChangeAlpha(Pause, 0);
     }
 }
