@@ -21,6 +21,7 @@ namespace Services
         private PointerEventData pointerData;
 
         private bool holding = false;
+        private bool ignoreNextHold = false;
         
         private readonly Dictionary<UIInteractable, Action> tapRegistrar = new();
         private readonly Dictionary<UIInteractable, Action> altTapRegistrar = new();
@@ -168,7 +169,17 @@ namespace Services
             UnregisterForAltHold(target);
         }
 
-        public UIInteractable RayCastToFindObjectAtMouse()
+        // forcibly releases held object
+        public void ForceRelease()
+        {
+            if (holding)
+            {
+                ToggleHold(new InputAction.CallbackContext());
+                ignoreNextHold = true;
+            }
+        }
+
+        private UIInteractable RayCastToFindObjectAtMouse()
         {
             List<RaycastResult> results = new();
             UIInteractable castTarget = null;
@@ -186,7 +197,7 @@ namespace Services
             if (castTarget != null) return castTarget;
             return null;
         }
-        
+
         private bool RaycastResolutionFunction(UIInteractable a, UIInteractable b)
         {
             if (a == null) return false;
@@ -279,6 +290,12 @@ namespace Services
 
         private void ToggleHold(InputAction.CallbackContext context)
         {
+            if (ignoreNextHold) // handle the case where we were forced to release by some other action
+            {
+                ignoreNextHold = false;
+                return;
+            }
+            
             holding = !holding;
             if (holding)
             {

@@ -40,6 +40,17 @@ namespace UI.Plants
             Economy = ServiceLocator.LazyLoad<Economy>();
             ServiceLocator.TryGetService(out _audio);
 
+            View.Active = !Timeline.IsPaused;
+            Timeline.GamePaused += () =>
+            {
+                if (IsHeld) // force return to origin is hard because of timing; we could amke this a coroutine?
+                {
+                    UiDriver.ForceRelease();
+                }
+                View.Active = false;
+            };
+            Timeline.GameUnpaused += (_) => View.Active = true;
+
             UpdateViewAtEndOfFrame();
            
         }
@@ -62,6 +73,9 @@ namespace UI.Plants
         
         private void OnHoldStarted()
         {
+            if (!View.Active)
+                return; 
+            
             IsHeld = true;
 
             InitialPosition = View.transform.position;
