@@ -13,15 +13,7 @@ Shader "TulipMania/WhiteNoise"
 
         Pass
         {
-            Cull Off
-            Lighting Off
-            ZWrite Off
-            Fog { Mode Off }
-            Offset -1, -1
-            ColorMask RGB
-            AlphaTest Greater .01
             Blend SrcAlpha OneMinusSrcAlpha
-            ColorMaterial AmbientAndDiffuse
             
             CGPROGRAM
             #pragma vertex vert
