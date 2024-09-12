@@ -24,6 +24,7 @@ public class TooltipServer : MonoBehaviour, IService
     public void SpawnTooltip(string text)
     {
         Tooltip = new TooltipController(TemplateServer.Tooltip, transform, text);
+        Tooltip.FollowMouseFrame();
     }
     
     public void DisposeTooltip()
